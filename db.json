@@ -1,0 +1,98 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "username": "userid",
+      "password": "pw12345",
+      "nickname": "닉네임",
+      "email": "test@test.com",
+      "address": "서울시 멍친구",
+      "latitude": "위도",
+      "longitude": "경도",
+      "isAgree": true
+    },
+    {
+      "username": "test1",
+      "password": "test1234",
+      "nickname": "nickname1",
+      "email": "test@tes.com",
+      "address": "강원 원주시 라옹정길 1",
+      "isAgree": true,
+      "latitude": "37.3186533214793",
+      "longitude": "127.964873643679",
+      "id": 2
+    },
+    {
+      "username": "asdf",
+      "password": "asdf1111",
+      "nickname": "asdfasdf",
+      "email": "asdfs@an.co",
+      "address": "부산 해운대구 APEC로 17",
+      "isAgree": true,
+      "latitude": "35.1659324519479",
+      "longitude": "129.132411521392",
+      "id": 3
+    }
+  ],
+  "mypage": {
+    "nickname": "홍길동",
+    "email": "terxt132@naver.com",
+    "introduce": "",
+    "dogList": [
+      {
+        "id": 0,
+        "name": "노을",
+        "gender": "여",
+        "size": "소형",
+        "dogImageFiles": [
+          {
+            "id": 0,
+            "imageUrl": "https://ifh.cc/g/zBph8p.jpg"
+          }
+        ],
+        "isRepresentative": false
+      },
+      {
+        "id": 1,
+        "name": "구름",
+        "gender": "여",
+        "size": "소형",
+        "dogImageFiles": [
+          {
+            "id": 0,
+            "imageUrl": "https://ifh.cc/g/dBbqYO.jpg"
+          }
+        ],
+        "isRepresentative": true
+      }
+    ],
+    "myPostList": [
+      {
+        "id": 0,
+        "title": "강아지 산책시켜 주세요",
+        "modifiedAt": "게시글 수정일자",
+        "isComplete": true
+      },
+      {
+        "id": 1,
+        "title": "우리 노을이 산책 맡아주실분",
+        "modifiedAt": "게시글 수정일자",
+        "isComplete": false
+      }
+    ],
+    "reviewList": [
+      {
+        "id": 0,
+        "writer": "행배",
+        "comment": "재밌는 산책이였어요!",
+        "imagePath": "https://ifh.cc/g/gKSg6l.jpg"
+      },
+      {
+        "id": 1,
+        "writer": "민식이",
+        "comment": "똥을 주워먹더군요...ㅠㅠ",
+        "imagePath": "https://ifh.cc/g/6zoHz0.jpg"
+      }
+    ]
+  }
+}
