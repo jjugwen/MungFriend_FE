@@ -1,18 +1,15 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import DaumPostCode from "react-daum-postcode";
-import instance from "../redux/modules/instance";
-import { useNavigate } from "react-router-dom";
+// import instance from "../redux/modules/instance";
 
 function Signup() {
-  const navigate = useNavigate();
   // 아이디 제한 조건 : 3자리 이상 9자리 이하 영문소문자/숫자
-  const is_username = (username) => {
+  const is_userId = (userId) => {
     let _reg = /^(?=.*[a-z0-9])[a-z0-9]{3,9}$/;
-    return _reg.test(username);
+    return _reg.test(userId);
   };
 
-  // 비밀번호 제한 조건 : 8자리 이상 20자리 이하 영문대소문자, 특수문자 !@#$%^&.* 가능
+  // 비밀번호 제한 조건 : 8자리 이상 20자리 이하
   const is_password = (password) => {
     let _reg = /^[0-9a-zA-Z!@#$%^&.*]{8,20}$/;
     return _reg.test(password);
@@ -26,17 +23,17 @@ function Signup() {
 
   // 닉네임 제한 조건 : 3자리 이상 9자리 이하 한글(초성도x)/영문
   const is_nickname = (nickname) => {
-    let _reg = /^(?=.*[a-zA-Z0-9가-힣])[a-zA-Z0-9가-힣]{3,9}$/;
+    let _reg = /^(?=.*[a-zA-Z0-9ㄱ-ㅎ가-힣])[a-zA-Z0-9ㄱ-ㅎ가-힣]{3,9}$/;
     return _reg.test(nickname);
   };
 
   //제약 조건 통과 시 inputbox 아래 글씨 바꾸기 위한 useState 사용
-  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [pwcheck, setPwcheck] = useState("");
-  const [usernameCheck, setUsernameCheck] = useState(false);
+  const [userIdCheck, setUserIdCheck] = useState(false);
   const [emailcheck, setEmailCheck] = useState(false);
   const [nicknamecheck, setNicknameCheck] = useState(false);
 
@@ -57,14 +54,14 @@ function Signup() {
 
   //아이디 유효성 체크
   const IdCheck = (e) => {
-    if (!is_username(e.target.value)) {
-      setUsernameCheck(false);
+    if (!is_userId(e.target.value)) {
+      setUserIdCheck(false);
       return;
     } else {
-      setUsernameCheck(true);
+      setUserIdCheck(true);
     }
-    setUsername(e.target.value);
-    console.log(setUsername(e.target.value));
+    setUserId(e.target.value);
+    console.log(setUserId(e.target.value));
   };
 
   //email 유효성 체크
@@ -91,132 +88,42 @@ function Signup() {
     // console.log(setNickname(e.target.value));
   };
 
-  // 주소 찾기 모달 상태(opend-> 불리언)
-  const [opened, setOpened] = useState(false);
-  // 주소 모달창 여닫기
-  const modalClose = useCallback(() => {
-    setOpened(!opened);
-  }, [opened]);
-  // 주소 찾기 값 input에 전달
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [address, setAddress] = useState("");
-  const { daum } = window;
-  const onComplete = (data) => {
-    setAddress(data.address);
-    setOpened(false);
-    Promise.resolve(data)
-      .then((o) => {
-        const { address } = data;
-
-        return new Promise((resolve, reject) => {
-          const geocoder = new daum.maps.services.Geocoder();
-
-          geocoder.addressSearch(address, (result, status) => {
-            if (status === daum.maps.services.Status.OK) {
-              const { x, y } = result[0];
-
-              resolve({ lat: y, lon: x });
-            } else {
-              reject();
-            }
-          });
-        });
-      })
-      .then((result) => {
-        // console.log(result); // 위, 경도 결과 값
-        const lat = result.lat;
-        const lon = result.lon;
-        setLatitude(lat);
-        setLongitude(lon);
-      });
-  };
-
-  //약관 동의 (isAgree)
-  const [isAgree, setIsAgree] = useState(false);
-  const onChecked = (isAgree) => {
-    if (isAgree) {
-      setIsAgree(true);
-    } else {
-      setIsAgree(false);
-    }
-  };
-
-  const data = {
-    username,
-    password,
-    nickname,
-    email,
-    address,
-    isAgree,
-    latitude,
-    longitude,
-  };
-  // console.log(data);
-
   // 회원가입 버튼 클릭 시 유효성 검사와 가입 시키기
   const signup = () => {
-    if (
-      username === "" ||
-      password === "" ||
-      nickname === "" ||
-      email === "" ||
-      address === ""
-    ) {
-      alert("모두 입력해주세요");
+    if (userId === "" || email === "" || nickname === "" || password === "") {
+      alert("아이디, 닉네임, 비밀번호를 모두 입력해주세요");
       return;
     }
     if (!pwDubleCheck()) {
       alert("비밀번호를 확인해주세요.");
       return;
-    }
-    if (isAgree === false) {
-      alert("회원가입 약관에 동의해주세요.");
-      return;
     } else {
-      // console.log(data);
-      instance
-        .post("/member/signup", data)
-        .then((response) => {
-          console.log(response.data);
-          if (response.data.status === "true") {
-            window.alert(response.data.message);
-            navigate("/login");
-          } else if (response.data.status === "false") {
-            console.log(response.data.status);
-            window.alert(response.data.message);
-          }
-        })
-        .catch((err) => {
-          window.alert("에러가 발생했어요!");
-          console.log(err);
-        });
+      // console.log(userCREATE.payload);
+      // dispatch(userActions.signupDB({ userId, email, nickname, password }));
     }
   };
 
   return (
     <>
       <SignupBox>
-        {/* <form> */}
-        <div>
+        <form>
           <p>아이디</p>
           <input
-            naem="username"
             type="text"
             placeholder="아이디를 입력해주세요."
             onChange={IdCheck}
             required
           />
           <Check>
-            {usernameCheck
+            {userIdCheck
               ? ""
               : "*아이디는 3자리 이상 9자리 이하 영어 소문자 및 숫자입니다"}
           </Check>
-          <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
+          <Check2>{userIdCheck ? "사용가능한 형식입니다" : ""}</Check2>
 
           <p>비밀번호</p>
           <input
-            type="password"
+            // type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
@@ -225,37 +132,29 @@ function Signup() {
           />
           <p>비밀번호 확인</p>
           <input
-            type="password"
+            // type="password"
             onChange={(e) => {
               setPwcheck(e.target.value);
             }}
             placeholder="비밀번호를 한번 더 입력해주세요."
-            // required
+            required
           />
           <Check>{pwDubleCheck() ? "" : "*비밀번호를 확인해주세요"}</Check>
           <Check2>{pwDubleCheck() ? "비밀번호가 일치합니다" : ""}</Check2>
 
           <p>이메일</p>
           <div style={{ display: "flex" }}>
-            <input
-              name="email"
-              placeholder="이메일을 입력해주세요."
-              onChange={emailCheck}
-              required
-            />
-            {/* <select>
+            <input placeholder="이메일을 입력해주세요." required />
+            <select>
               <option value="직접선택">직접선택</option>
               <option value="gmail.com">gmail.com</option>
               <option value="naver.com">naver.com</option>
               <option value="hanmail.net">hanmail.net</option>
-            </select> */}
+            </select>
           </div>
-          <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check>
-          <Check2>{emailcheck ? "사용가능한 형식입니다" : ""}</Check2>
 
           <p>닉네임</p>
           <input
-            name="nickname"
             onChange={nickCheck}
             placeholder="닉네임을 입력해주세요."
             required
@@ -267,48 +166,25 @@ function Signup() {
 
           <p>주소</p>
           <div style={{ display: "flex" }}>
-            <input
-              placeholder="주소를 입력해주세요."
-              name="address"
-              onChange={(e) => e.current.value}
-              value={address}
-              required
-            ></input>
-            <button
-              onClick={() => {
-                modalClose();
-              }}
-            >
-              우편번호 찾기
-            </button>
+            <input placeholder="주소를 입력해주세요." required></input>
+            <button>우편번호 찾기</button>
           </div>
-          {opened ? (
-            <div>
-              <DaumPostCode style={postCodeStyle} onComplete={onComplete} />
-            </div>
-          ) : null}
           <div style={{ display: "flex" }}>
             <span>회원가입 약관 및 위치 동의</span>
-            <input
-              type="checkbox"
-              id="check"
-              onChange={(e) => onChecked(e.currentTarget.checked)}
-              checked={isAgree}
-              required
-            />
-            <label defaultValue="check" htmlFor="check">
+            <input type="checkbox" value id="defaultCheck" />
+            <label class="from-check-label" for="defaultCheck">
               동의함
             </label>
           </div>
-          <button
-            // type="submit"
-            // className="SignupButton"
-            onClick={signup}
-          >
-            회원가입
-          </button>
-          {/* </form> */}
-        </div>
+          <input
+            type="submit"
+            className="SignupButton"
+            onClick={() => {
+              // signup();
+            }}
+          />
+          {/* button? submit? */}
+        </form>
       </SignupBox>
     </>
   );
@@ -324,20 +200,8 @@ const Check = styled.p`
   font-size: 13px;
 `;
 const Check2 = styled.p`
-  color: green;
+  color: rgb(53, 100, 173);
   font-size: 13px;
 `;
-
-// 주소 찾기 스타일
-const postCodeStyle = {
-  padding: "30px",
-  background: "white",
-  width: "40%",
-  // maxWidth: "300px",
-  height: "500px",
-  border: "2px solid #d2d2d2",
-  position: "absolute",
-  // backgroundColor: "orange",
-};
 
 export default Signup;
