@@ -52,7 +52,7 @@ jobs:
             --regin ap-northeast-2 \
             dist s3://${{ secrets.BUCKET_NAME }}
       - name: Invalidate cache CloudFront
-        uses: chetan/invalidate-cloudfront-action@main
+        uses: chetan/invalidate-cloudfront-action@master
         env:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID }}
           PATHS: '/*'
