@@ -12,9 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ 14, 16 ]
     steps:
     # 소스를 가져옵니다.
       - name: Checkout source code
@@ -29,16 +26,10 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
-                        
-  # Node 14.x, 16.x를 사용합니다.
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with: 
-          node-version: ${{ matrix.node }}
           
    # 모듈을 설치합니다.
       - name: Install Dependencies
-        run: yarn
+        run: yarn install
   
    # 결과물을 만듭니다.
       - name: Build
