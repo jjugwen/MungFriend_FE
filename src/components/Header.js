@@ -2,6 +2,9 @@ import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeaderModal from "./HeaderModal";
+import noticeicon from "../assets/images/Header/noticeicon.svg";
+import mymenu from "../assets/images/Header/mymenu.svg";
+import openmenuarrow from "../assets/images/Header/openmenuarrow.svg";
 
 function Header() {
   const navigate = useNavigate();
@@ -17,6 +20,7 @@ function Header() {
 
   //   setActive = true
   // }
+  const [clickstyle, useClickstyle] = useState();
 
   return (
     <>
@@ -58,7 +62,7 @@ function Header() {
                 // navigate("/");
               }}
             >
-              알림
+              <img src={noticeicon} alt="noticeicon" />
             </HeadButton>
 
             <HeadButton
@@ -67,7 +71,10 @@ function Header() {
               }}
             >
               {opened ? <HeaderModal /> : null}
-              MY
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <img src={mymenu} alt="mymenu" />
+                <img src={openmenuarrow} alt="openmenuarrow" />
+              </div>
             </HeadButton>
           </div>
         )}
@@ -79,7 +86,7 @@ function Header() {
 const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0% 5%;
+  margin: 1% 5%;
 `;
 
 const HeadButton = styled.button`

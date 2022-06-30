@@ -180,8 +180,8 @@ function Signup() {
         .then((response) => {
           console.log(response.data);
           if (response.data.status === "true") {
-            window.alert(response.data.message);
-            navigate("/login");
+            console.log(response.data.message);
+            navigate("/signupsuccess");
           } else if (response.data.status === "false") {
             console.log(response.data.status);
             window.alert(response.data.message);

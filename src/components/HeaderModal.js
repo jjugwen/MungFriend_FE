@@ -1,22 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function HeaderModal() {
+  const navigate = useNavigate();
   const Logout = () => {
-    // localStorage.removeItem("token");
     localStorage.clear();
-    // window.location.reload();
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
 
   return (
     <>
       <HeaderModalbox>
         <UpperBox>
-          <h1>홍길동님</h1>
-          <span>email</span>
-          <button>마이페이지</button>
-          <button>작성한 게시글</button>
-          <button>후기 리스트</button>
+          <UserNameFont>홍길동님</UserNameFont>
+          <EmailFont>meongfriend@naver.com</EmailFont>
+          <span>마이페이지</span>
+          <span>작성한 게시글</span>
+          <span>내가 받은 후기</span>
           <hr />
         </UpperBox>
         <Logoutbtn
@@ -34,13 +37,17 @@ function HeaderModal() {
 
 const HeaderModalbox = styled.div`
   width: 100%;
-  max-width: 200px;
+  max-width: 240px;
   height: auto;
-  background-color: green;
   display: flex;
   flex-direction: column;
-  margin: 3% -11%;
+  margin: 3% -15%;
   position: fixed;
+
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
 `;
 
 const UpperBox = styled.div`
@@ -48,27 +55,55 @@ const UpperBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 85%;
-  margin: auto;
+  margin: 28px 20px 0px 20px;
 
   h1 {
     margin-bottom: 0;
   }
-  button {
+  /* button {
     border: none;
     background-color: transparent;
+  } */
+  span {
+    margin: 10px 0%;
+    /* font-weight: ${(props) => props.fontWeight || "600"}; */
+    font-weight: 600;
   }
   hr {
-    width: 85%;
+    width: 200px;
+    margin-top: 22px;
+    margin-bottom: 0px;
+    background: #e5e5e5;
   }
 `;
+const UserNameFont = styled.div`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  margin-bottom: 6px;
+`;
 
-const Logoutbtn = styled.button`
-  width: 85%;
+const EmailFont = styled.div`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  margin-bottom: 10px;
+  color: #747474;
+`;
+
+const Logoutbtn = styled.div`
   text-align: center;
-  margin: auto;
-  padding: 5%;
-  border: none;
-  background-color: transparent;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  margin: 16px 95px 16px 95px;
+  color: #747474;
 `;
 
 export default HeaderModal;
