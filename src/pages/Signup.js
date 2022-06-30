@@ -317,6 +317,7 @@ function Signup() {
 const SignupBox = styled.div`
   width: 95%;
   max-width: 500px;
+  margin: auto;
 `;
 
 const Check = styled.p`
