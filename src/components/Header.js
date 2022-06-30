@@ -25,7 +25,14 @@ function Header() {
   return (
     <>
       <HeaderBox>
-        <div className="logo">logo</div>
+        <div
+          className="HeaderLogo"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          logo
+        </div>
         <div
           style={{
             width: "100%",

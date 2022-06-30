@@ -196,11 +196,12 @@ function Signup() {
 
   return (
     <>
-      <SignupBox>
+      <div className="SignupOutterBox">
         {/* <form> */}
         <div>
-          <p>아이디</p>
+          <div className="SignupText">아이디</div>
           <input
+            className="LoginInputBox"
             naem="username"
             type="text"
             placeholder="아이디를 입력해주세요."
@@ -214,8 +215,9 @@ function Signup() {
           </Check>
           <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
 
-          <p>비밀번호</p>
+          <div className="SignupText">비밀번호</div>
           <input
+            className="LoginInputBox"
             type="password"
             onChange={(e) => {
               setPassword(e.target.value);
@@ -223,8 +225,9 @@ function Signup() {
             placeholder="비밀번호(8~20자리)를 입력하세요"
             required
           />
-          <p>비밀번호 확인</p>
+          <div className="SignupText">비밀번호 확인</div>
           <input
+            className="LoginInputBox"
             type="password"
             onChange={(e) => {
               setPwcheck(e.target.value);
@@ -235,9 +238,10 @@ function Signup() {
           <Check>{pwDubleCheck() ? "" : "*비밀번호를 확인해주세요"}</Check>
           <Check2>{pwDubleCheck() ? "비밀번호가 일치합니다" : ""}</Check2>
 
-          <p>이메일</p>
+          <div className="SignupText">이메일</div>
           <div style={{ display: "flex" }}>
             <input
+              className="LoginInputBox"
               name="email"
               placeholder="이메일을 입력해주세요."
               onChange={emailCheck}
@@ -253,8 +257,9 @@ function Signup() {
           <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check>
           <Check2>{emailcheck ? "사용가능한 형식입니다" : ""}</Check2>
 
-          <p>닉네임</p>
+          <div className="SignupText">닉네임</div>
           <input
+            className="LoginInputBox"
             name="nickname"
             onChange={nickCheck}
             placeholder="닉네임을 입력해주세요."
@@ -265,22 +270,39 @@ function Signup() {
           </Check>
           <Check2>{nicknamecheck ? "사용가능한 형식입니다" : ""}</Check2>
 
-          <p>주소</p>
-          <div style={{ display: "flex" }}>
+          <div className="SignupText">주소</div>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <input
+              className="LoginInputBox"
+              style={{ width: "280px" }}
               placeholder="주소를 입력해주세요."
               name="address"
               onChange={(e) => e.current.value}
               value={address}
               required
             ></input>
-            <button
+            <div
               onClick={() => {
                 modalClose();
               }}
+              style={{
+                border: "2px solid #EEEEEE",
+                width: "148px",
+                height: "52px",
+                borderRadius: "8px",
+                backgroundColor: "#FFF",
+              }}
             >
-              우편번호 찾기
-            </button>
+              <div
+                className="SignupText"
+                style={{
+                  textAlign: "center",
+                  margin: "17px",
+                }}
+              >
+                우편번호 찾기
+              </div>
+            </div>
           </div>
           {opened ? (
             <div>
@@ -288,7 +310,7 @@ function Signup() {
             </div>
           ) : null}
           <div style={{ display: "flex" }}>
-            <span>회원가입 약관 및 위치 동의</span>
+            <span>위치서비스 제공에 동의합니다.</span>
             <input
               type="checkbox"
               id="check"
@@ -300,31 +322,31 @@ function Signup() {
               동의함
             </label>
           </div>
-          <button
-            // type="submit"
-            // className="SignupButton"
-            onClick={signup}
-          >
-            회원가입
-          </button>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <button
+              className="SignupWhiteButton"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <div className="SignupButtonText">취소</div>
+            </button>
+            <button className="SignupGrayButton" onClick={signup}>
+              <div className="SignupButtonText">회원가입</div>
+            </button>
+          </div>
           {/* </form> */}
         </div>
-      </SignupBox>
+      </div>
     </>
   );
 }
 
-const SignupBox = styled.div`
-  width: 95%;
-  max-width: 500px;
-  margin: auto;
-`;
-
-const Check = styled.p`
+const Check = styled.div`
   color: red;
   font-size: 13px;
 `;
-const Check2 = styled.p`
+const Check2 = styled.div`
   color: green;
   font-size: 13px;
 `;

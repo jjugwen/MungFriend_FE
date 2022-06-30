@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import "../elements/LoginSignupStyle.css";
 import { loginDB } from "../redux/modules/userSlice";
 import kakaoLoginBtn from "../assets/images/login/kakao_login_medium_wide.png";
 import googleLoginBtn from "../assets/images/login/btn_google_signin_light_focus_web@2x.png";
@@ -27,18 +28,8 @@ function Login() {
 
   return (
     <>
-      <div
-        className="OutterBox"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          margin: "auto",
-          width: "100%",
-          maxWidth: "40vw",
-        }}
-      >
-        <div className="logo">logo</div>
+      <div className="SignupOutterBox">
+        <div className="LoginLogo">logo</div>
         <div
           style={{
             display: "flex",
@@ -46,28 +37,19 @@ function Login() {
           }}
         >
           <input
+            className="LoginInputBox"
             placeholder="아이디를 입력해주세요."
             ref={username}
             onChange={onChange}
           ></input>
           <input
+            className="LoginInputBox"
             // type="password"
             placeholder="비밀번호를 입력해주세요."
             ref={password}
             onChange={onChange}
           ></input>
 
-          <div>
-            <button>아이디 찾기</button>
-            <button>비밀번호 찾기</button>
-            <button
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              회원가입
-            </button>
-          </div>
           <LoginButton
             isActive={btnState}
             disabled={!btnState}
@@ -76,18 +58,40 @@ function Login() {
               dispatch(loginDB(username.current.value, password.current.value));
             }}
           >
-            로그인
+            <div className="SignupButtonText" style={{ color: "#fff" }}>
+              로그인
+            </div>
           </LoginButton>
         </div>
         <a href="http://13.125.232.116/oauth2/authorization/kakao">
-          <button style={kakao}>
+          <div style={kakao}>
             <img src={kakaoLoginBtn} alt="kakaologin" width="100%" />
-          </button>
+          </div>
+          {/* <button
+            className="SignupWhiteButton"
+            style={{
+              width: "440px",
+              margin: "6px",
+              backgroundColor: "#FEE500",
+            }}
+          >
+            <div className="SignupButtonText" style={{ color: "#000" }}>
+              카카오 아이디로 로그인 하기
+            </div>
+          </button> */}
         </a>
         <a href="http://ec2-13-125-232-116.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google">
-          <button style={google}>
-            <img src={googleLoginBtn} alt="googlelogin" width="100%" />
-          </button>
+          <GoogleImage>
+            <img src={googleLoginBtn} alt="googlelogin" />
+          </GoogleImage>
+          {/* <button
+            className="SignupWhiteButton"
+            style={{ width: "440px", margin: "6px" }}
+          >
+            <div className="SignupButtonText" style={{ color: "#000" }}>
+              구글 아이디로 로그인 하기
+            </div>
+          </button> */}
         </a>
       </div>
     </>
@@ -95,9 +99,12 @@ function Login() {
 }
 
 const LoginButton = styled.button`
+  margin-top: 12px;
+  height: 60px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
-  background-color: green;
+  background-color: #a4a4a4;
   ${(props) =>
     props.isActive
       ? `
@@ -110,15 +117,34 @@ const LoginButton = styled.button`
 `;
 
 const kakao = {
-  width: "100%",
-  border: "none",
+  width: "440px",
+  margin: "6px",
+  borderRadius: "8px",
   backgroundColor: "transparent",
+  position: "relative",
+  backgroundSize: "cover",
 };
 
-const google = {
-  width: "100%",
-  border: "none",
-  backgroundColor: "transparent",
-};
+const GoogleImage = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-width: 440px;
+  height: 60px;
+  border-radius: 8px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  img {
+    position: absolute;
+    width: 110%;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+  }
+`;
 
 export default Login;
