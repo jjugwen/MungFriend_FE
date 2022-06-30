@@ -34,7 +34,7 @@ function Header() {
           <HeadButton>산책</HeadButton>
           <HeadButton>커뮤니티</HeadButton>
         </div>
-        {!token ? (
+        {token ? (
           <div className="beforeLogin">
             <HeadButton
               onClick={() => {
@@ -53,22 +53,22 @@ function Header() {
           </div>
         ) : (
           <div className="AfterLogin">
-            <button
+            <HeadButton
               onClick={() => {
                 // navigate("/");
               }}
             >
               알림
-            </button>
+            </HeadButton>
 
-            <button
+            <HeadButton
               onClick={() => {
                 modalClose();
               }}
             >
               {opened ? <HeaderModal /> : null}
               MY
-            </button>
+            </HeadButton>
           </div>
         )}
       </HeaderBox>

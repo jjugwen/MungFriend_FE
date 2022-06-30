@@ -47,6 +47,8 @@ const UpperBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 85%;
+  margin: auto;
 
   h1 {
     margin-bottom: 0;
@@ -56,13 +58,17 @@ const UpperBox = styled.div`
     background-color: transparent;
   }
   hr {
-    width: 100%;
+    width: 85%;
   }
 `;
 
 const Logoutbtn = styled.button`
-  width: 100%;
+  width: 85%;
   text-align: center;
+  margin: auto;
+  padding: 5%;
+  border: none;
+  background-color: transparent;
 `;
 
 export default HeaderModal;

@@ -199,7 +199,7 @@ function Signup() {
       <SignupBox>
         {/* <form> */}
         <div>
-          <p>아이디</p>
+          <p>아이디♪(๑ᴖ◡ᴖ๑)①♪"as@"</p>
           <input
             naem="username"
             type="text"
@@ -317,6 +317,7 @@ function Signup() {
 const SignupBox = styled.div`
   width: 95%;
   max-width: 500px;
+  margin: auto;
 `;
 
 const Check = styled.p`
