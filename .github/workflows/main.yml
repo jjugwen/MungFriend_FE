@@ -50,7 +50,7 @@ jobs:
             aws s3 cp \
             --recursive \
             --regin ap-northeast-2 \
-            dist s3://${{ secrets.BUCKET_NAME }}
+            build s3://${{ secrets.BUCKET_NAME }}
       - name: Invalidate cache CloudFront
         uses: chetan/invalidate-cloudfront-action@master
         env:
