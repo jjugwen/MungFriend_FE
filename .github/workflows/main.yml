@@ -39,7 +39,7 @@ jobs:
   
    # 결과물을 만듭니다.
       - name: Build
-        run: yarn build
+        run: CI=false yarn build
             
    # S3에 결과물을 업로드합니다.
       - name: Deploy
