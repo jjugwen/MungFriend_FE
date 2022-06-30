@@ -19,17 +19,23 @@ jobs:
         
     # 실행 속도를 빠르게 하기 위해 설치된 Node 모듈을 캐시하도록 설정합니다.
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v1
         with:
           path: node_modules
           key: ${{ runner.OS }}-main-build-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
+            
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "REACT_APP_KAKAOMAP_KEY=$REACT_APP_KAKAOMAP_KEY" >> .env
+        env:
+          REACT_APP_KAKAOMAP_KEY: ${{ secrets.REACT_APP_KAKAOMAP_KEY }}
           
    # 모듈을 설치합니다.
       - name: Install Dependencies
-        run: yarn install
+        run: npm install
   
    # 결과물을 만듭니다.
       - name: Build
@@ -45,3 +51,9 @@ jobs:
             --recursive \
             --regin ap-northeast-2 \
             dist s3://${{ secrets.BUCKET_NAME }}
+      - name: Invalidate cache CloudFront
+        uses: chetan/invalidate-cloudfront-action@main
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID }}
+          PATHS: '/*'
+        continue-on-error: true
