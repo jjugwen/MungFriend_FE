@@ -199,7 +199,7 @@ function Signup() {
       <SignupBox>
         {/* <form> */}
         <div>
-          <p>아이디♪(๑ᴖ◡ᴖ๑)①♪"as@"</p>
+          <p>아이디</p>
           <input
             naem="username"
             type="text"
