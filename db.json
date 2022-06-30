@@ -1,43 +1,9 @@
 {
-  "user": [
-    {
-      "id": 1,
-      "username": "userid",
-      "password": "pw12345",
-      "nickname": "닉네임",
-      "email": "test@test.com",
-      "address": "서울시 멍친구",
-      "latitude": "위도",
-      "longitude": "경도",
-      "isAgree": true
-    },
-    {
-      "username": "test1",
-      "password": "test1234",
-      "nickname": "nickname1",
-      "email": "test@tes.com",
-      "address": "강원 원주시 라옹정길 1",
-      "isAgree": true,
-      "latitude": "37.3186533214793",
-      "longitude": "127.964873643679",
-      "id": 2
-    },
-    {
-      "username": "asdf",
-      "password": "asdf1111",
-      "nickname": "asdfasdf",
-      "email": "asdfs@an.co",
-      "address": "부산 해운대구 APEC로 17",
-      "isAgree": true,
-      "latitude": "35.1659324519479",
-      "longitude": "129.132411521392",
-      "id": 3
-    }
-  ],
   "mypage": {
     "nickname": "홍길동",
     "email": "terxt132@naver.com",
-    "introduce": "",
+    "introduce": "자기소개 등록",
+    "phoneNum": "011-0100-4444",
     "dogList": [
       {
         "id": 0,
@@ -94,5 +60,40 @@
         "imagePath": "https://ifh.cc/g/6zoHz0.jpg"
       }
     ]
-  }
+  },
+  "user": [
+    {
+      "id": 1,
+      "username": "userid",
+      "password": "pw12345",
+      "nickname": "닉네임",
+      "email": "test@test.com",
+      "address": "서울시 멍친구",
+      "latitude": "위도",
+      "longitude": "경도",
+      "isAgree": true
+    },
+    {
+      "username": "test1",
+      "password": "test1234",
+      "nickname": "nickname1",
+      "email": "test@tes.com",
+      "address": "강원 원주시 라옹정길 1",
+      "isAgree": true,
+      "latitude": "37.3186533214793",
+      "longitude": "127.964873643679",
+      "id": 2
+    },
+    {
+      "username": "asdf",
+      "password": "asdf1111",
+      "nickname": "asdfasdf",
+      "email": "asdfs@an.co",
+      "address": "부산 해운대구 APEC로 17",
+      "isAgree": true,
+      "latitude": "35.1659324519479",
+      "longitude": "129.132411521392",
+      "id": 3
+    }
+  ]
 }
