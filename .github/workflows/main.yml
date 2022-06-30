@@ -35,7 +35,7 @@ jobs:
           
    # 모듈을 설치합니다.
       - name: Install Dependencies
-        run: npm install
+        run: yarn install
   
    # 결과물을 만듭니다.
       - name: Build
