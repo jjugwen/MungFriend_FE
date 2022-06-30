@@ -124,7 +124,7 @@ function Signup() {
         });
       })
       .then((result) => {
-        // console.log(result); // 위, 경도 결과 값
+        console.log(result); // 위, 경도 결과 값
         const lat = result.lat;
         const lon = result.lon;
         setLatitude(lat);

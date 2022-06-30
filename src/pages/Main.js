@@ -3,7 +3,7 @@ import React from "react";
 function Main() {
   return (
     <>
-      <div>Main page 입니다.</div>
+      <div>Main page 입니다. CI/CD test</div>
     </>
   );
 }
