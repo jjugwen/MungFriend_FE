@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeaderModal from "./HeaderModal";
-import noticeicon from "../assets/images/Header/noticeicon.svg";
-import mymenu from "../assets/images/Header/mymenu.svg";
-import openmenuarrow from "../assets/images/Header/openmenuarrow.svg";
+import noticeicon from "../assets/images/header/noticeicon.svg";
+import mymenu from "../assets/images/header/mymenu.svg";
+import openmenuarrow from "../assets/images/header/openmenuarrow.svg";
 
 function Header() {
   const navigate = useNavigate();
@@ -15,12 +15,32 @@ function Header() {
     setOpened(!opened);
   }, [opened]);
 
-  // const [active, setActive] = useState(false);
-  // const HandleButton = (e) => {
-
-  //   setActive = true
-  // }
-  const [clickstyle, useClickstyle] = useState();
+  // 메뉴 버튼 클릭했을 때 클릭한 버튼 상태 변화 유지하기
+  const [currentClick, setCurrentClick] = useState(null);
+  const [prevClick, setPrevClick] = useState(null);
+  const GetClick = (e) => {
+    // console.log(e.target.id);
+    setCurrentClick(e.target.id);
+    navigate(`${e.target.id}`);
+  };
+  // 변한 상태 css 스타일
+  useEffect(
+    (e) => {
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.color = "black";
+        current.style.borderBottom = "2px solid";
+        current.style.fontWeight = "600";
+      }
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.fontWeight = "400";
+        prev.style.borderBottom = "none";
+      }
+      setPrevClick(currentClick);
+    },
+    [currentClick]
+  );
 
   return (
     <>
@@ -29,6 +49,9 @@ function Header() {
           className="HeaderLogo"
           onClick={() => {
             navigate("/");
+            setTimeout(() => {
+              window.location.reload();
+            }, 100);
           }}
         >
           logo
@@ -41,9 +64,30 @@ function Header() {
             justifyContent: "space-around",
           }}
         >
-          <HeadButton>서비스 소개</HeadButton>
-          <HeadButton>산책</HeadButton>
-          <HeadButton>커뮤니티</HeadButton>
+          <HeadButton
+            id="/"
+            onClick={(e) => {
+              GetClick(e);
+            }}
+          >
+            서비스 소개
+          </HeadButton>
+          <HeadButton
+            id="posts"
+            onClick={(e) => {
+              GetClick(e);
+            }}
+          >
+            산책
+          </HeadButton>
+          <HeadButton
+            id="community"
+            onClick={(e) => {
+              GetClick(e);
+            }}
+          >
+            커뮤니티
+          </HeadButton>
         </div>
         {token ? (
           <div className="beforeLogin">
@@ -99,11 +143,6 @@ const HeaderBox = styled.div`
 const HeadButton = styled.button`
   border: none;
   background-color: transparent;
-
-  &:active {
-    font-weight: 600;
-    text-decoration: underline;
-  }
 `;
 
 export default Header;

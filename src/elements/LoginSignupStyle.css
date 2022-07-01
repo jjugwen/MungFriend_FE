@@ -79,6 +79,7 @@
   border: 2px solid #eeeeee;
   border-radius: 8px;
   margin: 6px 0px;
+  padding-left: 1%;
 }
 
 /* signup page css 추가 */
@@ -90,4 +91,26 @@
   line-height: 19px;
   color: #121212;
   margin-top: 40px;
+  margin-left: 1.2%;
+}
+
+.CheckboxStyle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 1px solid #999;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.1s;
+  display: inline-block; /* 영역적용가능해짐 */
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 9%;
+}
+:checked {
+  background-image: url(https://cdn.icon-icons.com/icons2/2248/PNG/512/checkbox_marked_icon_138772.png);
+  background-size: 135%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
 }
