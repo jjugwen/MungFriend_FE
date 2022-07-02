@@ -8,53 +8,41 @@ import MyPostList from "../components/MyPostList";
 import MyReviewList from "../components/MyReviewList";
 
 const Mypage = () => {
-  let [mypage, setMypage] = useState(true);
-  let [postlist, setPostlist] = useState(false);
-  let [myreview, setMyreview] = useState(false);
+  let [change, setChange] = useState(<MyPostList />);
 
   return (
     <Container>
       <ListBar>
         <button
           onClick={() => {
-            setMypage(true);
-            setPostlist(false);
-            setMyreview(false);
+            setChange(<MyPostList />);
           }}
         >
           마이페이지
         </button>
         <button
           onClick={() => {
-            setMypage(false);
-            setPostlist(true);
-            setMyreview(false);
+            setChange(<MyPageComponent />);
           }}
         >
           작성한 게시글
         </button>
         <button
           onClick={() => {
-            setMypage(false);
-            setPostlist(false);
-            setMyreview(true);
+            setChange(<MyReviewList />);
           }}
         >
           후기 리스트
         </button>
       </ListBar>
-      <PageBox>
-        {postlist && <MyPostList />}
-        {mypage && <MyPageComponent />}
-        {myreview && <MyReviewList />}
-      </PageBox>
+      <PageBox>{change}</PageBox>
     </Container>
   );
 };
 const Container = styled.div`
-display: flex;
-flex-direction: row;
-margin-top: 200px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 200px;
 `;
 
 const ListBar = styled.div`

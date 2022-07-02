@@ -1,17 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import instance from './instance';
 
 //미들웨어
 //나중에 멤버 아이디값 받아와서 넘겨주기
 export const loadMyPageAX =()=>{
   return async function(dispatch){
     await axios.get(`http://localhost:5001/mypage`)
+    // await instance.get(`mypage/${id}`)
     .then((response) => dispatch(loadMyPage(response.data)))
 }}
 
 export const patchIntroduceAX = (introduce) => {
   return function (dispatch) {
       axios.patch(`http://localhost:5001/mypage`,introduce)
+      // instance.patch(`/mypage/introduce`,introduce)
     .then(() => dispatch(patchIntroduce(introduce)))
   }
 }
@@ -19,6 +22,7 @@ export const patchIntroduceAX = (introduce) => {
 export const patchPhoneNumAX = (phoneNum) => {
   return function (dispatch) {
       axios.patch(`http://localhost:5001/mypage`,phoneNum)
+      // instance.patch(`/mypage/phoneNum`,phoneNum)
     .then(() => dispatch(patchPhoneNum(phoneNum)))
   }
 }
