@@ -52,7 +52,7 @@ jobs:
             
    # CloudFront에 연결합니다.          
       - name: Invalidate cache CloudFront
-        uses: chetan/invalidate-cloudfront-action@v2
+        uses: chetan/invalidate-cloudfront-action@master
         env:
           DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID }}
           PATHS: '/*'
