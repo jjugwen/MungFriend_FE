@@ -28,7 +28,6 @@ function Header() {
     (e) => {
       if (currentClick !== null) {
         let current = document.getElementById(currentClick);
-        current.style.color = "black";
         current.style.borderBottom = "2px solid";
         current.style.fontWeight = "600";
       }
@@ -89,7 +88,7 @@ function Header() {
             커뮤니티
           </HeadButton>
         </div>
-        {token ? (
+        {!token ? (
           <div className="beforeLogin">
             <HeadButton
               onClick={() => {

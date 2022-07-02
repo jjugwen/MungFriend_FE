@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import instance from "./instance";
+import axios from "axios";
 
 //미들웨어
 export const loginDB = (username, password) => {
   // console.log(username, password);
   return function (dispatch) {
-    instance
+    axios
       .post(
-        `/member/login`,
+        `http://13.125.232.116:8080/member/login`,
         { username, password },
         {
           headers: {

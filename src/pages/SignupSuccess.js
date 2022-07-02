@@ -8,7 +8,7 @@ function SignupSuccess() {
     <>
       <div>
         <div className="SignupOutterBox">
-          <div className="SignupCircleImg" src="" alt="" />
+          <div className="SignupCircleImg" alt="SignupSuccessImg" />
           <div className="SignupSuccessText1">회원가입이 완료되었습니다.</div>
           <div className="SignupSuccessText2">
             멍친구의 회원이 되신 것을 환영합니다! <br />
