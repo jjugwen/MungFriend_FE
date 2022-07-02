@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import DaumPostCode from "react-daum-postcode";
 import instance from "../redux/modules/instance";
@@ -94,9 +94,9 @@ function Signup() {
   // 주소 찾기 모달 상태(opend-> 불리언)
   const [opened, setOpened] = useState(false);
   // 주소 모달창 여닫기
-  const modalClose = useCallback(() => {
+  const modalClose = () => {
     setOpened(!opened);
-  }, [opened]);
+  };
   // 주소 찾기 값 input에 전달
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -180,8 +180,8 @@ function Signup() {
         .then((response) => {
           console.log(response.data);
           if (response.data.status === "true") {
-            window.alert(response.data.message);
-            navigate("/login");
+            console.log(response.data.message);
+            navigate("/signupsuccess");
           } else if (response.data.status === "false") {
             console.log(response.data.status);
             window.alert(response.data.message);
@@ -193,14 +193,24 @@ function Signup() {
         });
     }
   };
+  // const [sel_email, setSel_email] = useState();
+  // const emailhandler = (e) => {
+  //   setSel_email(e.target.value);
+  // };
+  // console.log(`${email}@${sel_email}`);
+  // console.log(email);
 
   return (
     <>
-      <SignupBox>
-        {/* <form> */}
+      <div className="SignupOutterBox">
+        {/* <form  action="#"> */}
         <div>
-          <p>아이디</p>
+          <label htmlFor="id" className="SignupText">
+            아이디
+          </label>
+          <br />
           <input
+            className="LoginInputBox"
             naem="username"
             type="text"
             placeholder="아이디를 입력해주세요."
@@ -213,9 +223,13 @@ function Signup() {
               : "*아이디는 3자리 이상 9자리 이하 영어 소문자 및 숫자입니다"}
           </Check>
           <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
-
-          <p>비밀번호</p>
+          <br />
+          <label htmlFor="password" className="SignupText">
+            비밀번호
+          </label>
+          <br />
           <input
+            className="LoginInputBox"
             type="password"
             onChange={(e) => {
               setPassword(e.target.value);
@@ -223,8 +237,14 @@ function Signup() {
             placeholder="비밀번호(8~20자리)를 입력하세요"
             required
           />
-          <p>비밀번호 확인</p>
+          <br />
+          <br />
+          <label htmlFor="passwordCheck" className="SignupText">
+            비밀번호 확인
+          </label>
+          <br />
           <input
+            className="LoginInputBox"
             type="password"
             onChange={(e) => {
               setPwcheck(e.target.value);
@@ -234,27 +254,41 @@ function Signup() {
           />
           <Check>{pwDubleCheck() ? "" : "*비밀번호를 확인해주세요"}</Check>
           <Check2>{pwDubleCheck() ? "비밀번호가 일치합니다" : ""}</Check2>
-
-          <p>이메일</p>
+          <br />
+          <label htmlFor="email" className="SignupText">
+            이메일
+          </label>
+          <br />
           <div style={{ display: "flex" }}>
             <input
+              className="LoginInputBox"
               name="email"
               placeholder="이메일을 입력해주세요."
               onChange={emailCheck}
               required
             />
-            {/* <select>
-              <option value="직접선택">직접선택</option>
-              <option value="gmail.com">gmail.com</option>
-              <option value="naver.com">naver.com</option>
-              <option value="hanmail.net">hanmail.net</option>
-            </select> */}
+            {/* <span>
+              <select
+                name="sel_email"
+                onChange={(e) => {
+                  emailhandler(e);
+                }}
+              >
+                <option value="etc">직접선택</option>
+                <option value="gmail.com">gmail.com</option>
+                <option value="naver.com">naver.com</option>
+                <option value="hanmail.net">hanmail.net</option>
+              </select>
+            </span> */}
           </div>
           <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check>
           <Check2>{emailcheck ? "사용가능한 형식입니다" : ""}</Check2>
-
-          <p>닉네임</p>
+          <br />
+          <label htmlFor="nickname" className="SignupText">
+            닉네임
+          </label>
           <input
+            className="LoginInputBox"
             name="nickname"
             onChange={nickCheck}
             placeholder="닉네임을 입력해주세요."
@@ -264,69 +298,99 @@ function Signup() {
             {nicknamecheck ? "" : "*닉네임은 3자리 이상 9자리 이하입니다"}
           </Check>
           <Check2>{nicknamecheck ? "사용가능한 형식입니다" : ""}</Check2>
-
-          <p>주소</p>
-          <div style={{ display: "flex" }}>
+          <br />
+          <label htmlFor="adress" className="SignupText">
+            주소
+          </label>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <input
+              className="LoginInputBox"
+              style={{ width: "280px" }}
               placeholder="주소를 입력해주세요."
               name="address"
               onChange={(e) => e.current.value}
               value={address}
               required
             ></input>
-            <button
+            <div
               onClick={() => {
                 modalClose();
               }}
+              style={{
+                border: "2px solid #EEEEEE",
+                width: "148px",
+                height: "52px",
+                borderRadius: "8px",
+                backgroundColor: "#FFF",
+              }}
             >
-              우편번호 찾기
-            </button>
+              <div
+                className="SignupText"
+                style={{
+                  textAlign: "center",
+                  margin: "17px",
+                }}
+              >
+                우편번호 찾기
+              </div>
+            </div>
           </div>
           {opened ? (
             <div>
               <DaumPostCode style={postCodeStyle} onComplete={onComplete} />
             </div>
           ) : null}
-          <div style={{ display: "flex" }}>
-            <span>회원가입 약관 및 위치 동의</span>
-            <input
-              type="checkbox"
-              id="check"
-              onChange={(e) => onChecked(e.currentTarget.checked)}
-              checked={isAgree}
-              required
-            />
-            <label defaultValue="check" htmlFor="check">
-              동의함
-            </label>
-          </div>
-          <button
-            // type="submit"
-            // className="SignupButton"
-            onClick={signup}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "440px",
+              margin: "2% 0%",
+            }}
           >
-            회원가입
-          </button>
+            <span>위치서비스 제공에 동의합니다.</span>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <input
+                className="CheckboxStyle"
+                type="checkbox"
+                id="check"
+                onChange={(e) => onChecked(e.currentTarget.checked)}
+                checked={isAgree}
+                required
+              />
+              <label defaultValue="check" htmlFor="check">
+                동의함
+              </label>
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <button
+              className="SignupWhiteButton"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <div className="SignupButtonText">취소</div>
+            </button>
+            <button className="SignupGrayButton" onClick={signup}>
+              <div className="SignupButtonText">회원가입</div>
+            </button>
+          </div>
           {/* </form> */}
         </div>
-      </SignupBox>
+      </div>
     </>
   );
 }
 
-const SignupBox = styled.div`
-  width: 95%;
-  max-width: 500px;
-  margin: auto;
-`;
-
-const Check = styled.p`
+const Check = styled.div`
   color: red;
   font-size: 13px;
 `;
-const Check2 = styled.p`
+const Check2 = styled.div`
   color: green;
   font-size: 13px;
+  margin-left: 1%;
 `;
 
 // 주소 찾기 스타일

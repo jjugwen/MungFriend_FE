@@ -1,0 +1,117 @@
+/* signupsuccess page css */
+.SignupOutterBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  /* width: 100vw; */
+  /* max-width: 500px; */
+  height: 100vh;
+}
+
+.SignupCircleImg {
+  width: 140px;
+  height: 140px;
+  left: 650px;
+  top: 337px;
+  border-radius: 50%;
+  margin-bottom: 40px;
+  background-image: url("../assets/images/signupsuccess/회원가입완료.jpg");
+  background-size: cover;
+}
+
+.SignupSuccessText1 {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 100%;
+  margin-bottom: 30px;
+}
+
+.SignupSuccessText2 {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.SignupWhiteButton {
+  width: 214px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: none;
+}
+.SignupGrayButton {
+  width: 214px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #a4a4a4;
+  color: #ffffff;
+  border: none;
+}
+.SignupButtonText {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  margin: 18px auto;
+}
+
+.LoginLogo {
+  width: 100%;
+  max-width: 316px;
+  height: 130px;
+  background-color: orange;
+  margin-bottom: 47px;
+}
+
+.LoginInputBox {
+  width: 440px;
+  height: 52px;
+  background: #ffffff;
+  border: 2px solid #eeeeee;
+  border-radius: 8px;
+  margin: 6px 0px;
+  padding-left: 1%;
+}
+
+/* signup page css 추가 */
+.SignupText {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #121212;
+  margin-top: 40px;
+  margin-left: 1.2%;
+}
+
+.CheckboxStyle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 1px solid #999;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.1s;
+  display: inline-block; /* 영역적용가능해짐 */
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 9%;
+}
+:checked {
+  background-image: url(https://cdn.icon-icons.com/icons2/2248/PNG/512/checkbox_marked_icon_138772.png);
+  background-size: 135%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
