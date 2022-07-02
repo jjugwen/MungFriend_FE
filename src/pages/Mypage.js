@@ -8,34 +8,26 @@ import MyPostList from "../components/MyPostList";
 import MyReviewList from "../components/MyReviewList";
 
 const Mypage = () => {
-  let [change, setChange] = useState(<MyPostList />);
+  let [change, setChange] = useState(<MyPageComponent />);
 
   return (
     <Container>
       <ListBar>
         <button
-          onClick={() => {
-            setChange(<MyPostList />);
-          }}
-        >
+          onClick={() => {setChange(<MyPageComponent />);}}>
           마이페이지
         </button>
         <button
-          onClick={() => {
-            setChange(<MyPageComponent />);
-          }}
-        >
+          onClick={() => {setChange(<MyPostList />);}}>
           작성한 게시글
         </button>
         <button
-          onClick={() => {
-            setChange(<MyReviewList />);
-          }}
-        >
+          onClick={() => {setChange(<MyReviewList />);}}>
           후기 리스트
         </button>
       </ListBar>
-      <PageBox>{change}</PageBox>
+      {change}
+      <PageBox></PageBox>
     </Container>
   );
 };

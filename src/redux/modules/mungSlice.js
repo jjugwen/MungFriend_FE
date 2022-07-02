@@ -12,7 +12,7 @@ export const createMungAX =(mung)=>{
 //툴킷
 const mungSlice = createSlice({
   name: 'mung',
-  initialState:{},
+  initialState:{mung:[]},
   reducers:{
     createMung(state,action){
       state.mung.push(action.payload)

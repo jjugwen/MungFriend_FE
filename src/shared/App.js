@@ -10,6 +10,7 @@ import SignupSuccess from "../pages/SignupSuccess";
 //소셜로그인
 import KakaoLoginRedirect from "./KakaoLoginRedirect";
 import GoogleLoginRedirect from "./GoogleLoginRedirect";
+import MungPlusModal from "../components/MungPlusModal";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
+        <Route path="/test" element={<MungPlusModal/>}/>
       </Routes>
     </div>
   );

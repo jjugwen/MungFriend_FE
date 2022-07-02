@@ -12,6 +12,7 @@ function MyPageComponent() {
     dispatch(loadMyPageAX());
   }, []);
   const info = useSelector((state) => state.myPageSlice.mypage);
+  
   // console.log(info)
   // 자기소개가 없다면 등록하기 버튼이 나오도록 해보기
   const introduce = info?.introduce
