@@ -1,6 +1,6 @@
 name: CI
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Triggers the workflow on push events but only for the "main" branch
   push:
     branches: [ "main" ]
 
@@ -50,8 +50,4 @@ jobs:
             --region ${{ secrets.AWS_REGION }} \
             build s3://${{ secrets.BUCKET_NAME }}
       - name: Invalidate cache CloudFront
-        uses: chetan/invalidate-cloudfront-action@master
-        env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION_ID }}
-          PATHS: '/*'
-        continue-on-error: true
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CDN_DISTRIBUTION_ID }} --paths "/*"
