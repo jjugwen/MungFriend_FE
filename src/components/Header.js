@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeaderModal from "./HeaderModal";
-import noticeicon from "../assets/images/header/noticeicon.svg";
-import mymenu from "../assets/images/header/mymenu.svg";
-import openmenuarrow from "../assets/images/header/openmenuarrow.svg";
+import noticeicon from "../assets/images/Header/noticeicon.svg";
+import mymenu from "../assets/images/Header/mymenu.svg";
+import openmenuarrow from "../assets/images/Header/openmenuarrow.svg";
 
 function Header() {
   const navigate = useNavigate();
