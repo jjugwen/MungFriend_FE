@@ -26,7 +26,7 @@ function App() {
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
-        <Route path="/test" element={<MungPlusModal/>}/>
+        <Route path="/test" element={<MungPlusModal />} />
       </Routes>
     </div>
   );
