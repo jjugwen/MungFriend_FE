@@ -1,0 +1,76 @@
+{
+  "detail": [
+    {
+      "id": "1",
+      "nickname": "작성자",
+      "title": "게시글 제목",
+      "content": "게시글 내용",
+      "address": "작성자 주소",
+      "requestStartDate": "2022-06-27T12:34",
+      "requestEndDate": "2022-06-27T12:38",
+      "applyCount": 3,
+      "applyByMe": false,
+      "isComplete": false,
+      "applyList": [
+        {
+          "id": 1,
+          "nickname": "신청자",
+          "comment": "신청자 코멘트"
+        },
+        {
+          "id": 2,
+          "nickname": "신청자2",
+          "comment": "신청자 코멘트2"
+        }
+      ],
+      "dogList": [
+        {
+          "id": 1,
+          "name": "멍멍이1",
+          "gender": "남",
+          "size": "소형",
+          "dogImageFiles": [{ "id": 1, "imageUrl": "imageurl" }],
+          "isRepresentative": true
+        },
+        {
+          "id": 2,
+          "name": "멍멍이2",
+          "gender": "여",
+          "size": "중형",
+          "dogImageFiles": [{ "id": 1, "imageUrl": "imageurl" }],
+          "isRepresentative": false
+        }
+      ]
+    }
+  ],
+  "myinfo": [
+    {
+      "id": 1,
+      "nickname": "작성자",
+      "username": "아이디1"
+    }
+  ],
+  "userinfo": [
+    {
+      "id": 1,
+      "nickname": "신청자",
+      "introduce": "나를 소개합니다.",
+      "reviewList": [
+        {
+          "id": 1,
+          "postId": "리뷰가 작성된 postId",
+          "comment": "리뷰 코멘트",
+          "giverNickname": "리뷰 작성한 사용자 닉네임",
+          "giverDogProfileImgUrl": "리뷰 작성한 사용자의 대표 멍멍이 이미지 url"
+        },
+        {
+          "id": 2,
+          "postId": "리뷰가 작성된 postId2",
+          "comment": "리뷰 코멘트2",
+          "giverNickname": "리뷰 작성한 사용자 닉네임2",
+          "giverDogProfileImgUrl": "리뷰 작성한 사용자의 대표 멍멍이 이미지 url2"
+        }
+      ]
+    }
+  ]
+}
