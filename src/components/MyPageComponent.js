@@ -103,10 +103,10 @@ padding: 5px;
 
 const IntroduceDiv = styled.div`
 background-color: #F5F5F5;
-width: 680px;
+width: 665px;
 height: 160px;
+padding: 15px;
 border-radius: 12px;
-
 top: 304px;
 `;
 

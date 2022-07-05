@@ -54,11 +54,9 @@ const Container = styled.div`
     flex-direction: row;
   }
 
-  .font-20 {
-    font-size: 20px;
-  }
+/* 
   .font-18 {
-    font-size: 18px;
+    
     font-weight: 600;
   }
   .font-16 {
@@ -69,7 +67,7 @@ const Container = styled.div`
     color: #a4a4a4;
     padding: 5px;
     margin-top: 5px;
-  }
+  } */
 `;
 
 const DogImg = styled.img`

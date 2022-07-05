@@ -25,14 +25,18 @@ function DogList() {
         return (
           <Listbox key={i}>
             <CheckBox>
-            <label htmlFor="check2">
-            <input className="checkbox2" type="radio" name="isRepresentativ"/>
-            </label>
+              <label htmlFor="check2">
+                <input
+                  className="checkbox2"
+                  type="radio"
+                  name="isRepresentativ"
+                />
+              </label>
             </CheckBox>
             <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
             <div>
               <div className="font-18">
-                {dog.name} {dog.gender === "여" ? "♀" : "♂" }
+                {dog.name} {dog.gender === "여" ? "♀" : "♂"}
               </div>
               <div className="font-16">{dog.size}견</div>
             </div>
@@ -54,18 +58,11 @@ const Container = styled.div`
     flex-direction: row;
   }
 
-  .font-20 {
-    font-size: 20px;
-  }
   .font-18 {
-    font-size: 18px;
     font-weight: 600;
   }
-  .font-16 {
-    font-size: 16px;
-  }
+
   .font-14 {
-    font-size: 14px;
     color: #a4a4a4;
     padding: 5px;
     margin-top: 5px;
@@ -92,24 +89,24 @@ const Listbox = styled.div`
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
 `;
 
-const CheckBox= styled.div`
-.checkbox2{
-  margin: 18px;
-  appearance: none;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50px;
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-  background-color: #CCCCCC;
-  &:checked {
-    border-color: transparent;
+const CheckBox = styled.div`
+  .checkbox2 {
+    margin: 18px;
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50px;
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-    background-size: 100% 100%;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-color: black;
+    background-color: #cccccc;
+    &:checked {
+      border-color: transparent;
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+      background-size: 100% 100%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-color: black;
+    }
   }
-
-}`
+`;
 
 export default DogList;
