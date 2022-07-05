@@ -1,4 +1,3 @@
-import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //미들웨어
@@ -7,7 +6,7 @@ export const loginDB = (username, password) => {
   return function (dispatch) {
     axios
       .post(
-        `http://13.125.232.116:8080/member/login`,
+        `http://localhost:5001/member/login`,
         { username, password },
         {
           headers: {
@@ -35,18 +34,5 @@ export const loginDB = (username, password) => {
   };
 };
 
-//redux
-export const userSlice = createSlice({
-  name: "userinfo",
-  initialState: { list: [{ is_login: false }] },
-  reducers: {
-    userLOGIN: (state, action) => {
-      state.list = action.payload;
-    },
-  },
-});
-
 const actionCreators = { loginDB };
 export { actionCreators };
-export const { userLOGIN } = userSlice.actions;
-export default userSlice.reducer;
