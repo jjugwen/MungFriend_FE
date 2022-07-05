@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import "../elements/LoginSignupStyle.css";
-import { loginDB } from "../redux/modules/userSlice";
+import { loginDB } from "../redux/modules/loginAxios";
 import kakaoLoginBtn from "../assets/images/login/kakao_login_medium_wide.png";
 import googleLoginBtn from "../assets/images/login/btn_google_signin_light_focus_web@2x.png";
 
@@ -44,7 +44,7 @@ function Login() {
           ></input>
           <input
             className="LoginInputBox"
-            // type="password"
+            type="password"
             placeholder="비밀번호를 입력해주세요."
             ref={password}
             onChange={onChange}
@@ -54,7 +54,7 @@ function Login() {
             isActive={btnState}
             disabled={!btnState}
             onClick={() => {
-              console.log(username.current.value, password.current.value);
+              // console.log(username.current.value, password.current.value);
               dispatch(loginDB(username.current.value, password.current.value));
             }}
           >
