@@ -36,7 +36,7 @@ function ApplyComment() {
                 />
                 <div>
                   <div>{value.nickname}</div>
-                  <div>1분 전</div>
+                  <div>{value.createdAt}</div>
                 </div>
                 <div className="ApplyCommentText">{value.comment}</div>
                 <button>매칭하기</button>
