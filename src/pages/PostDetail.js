@@ -19,7 +19,7 @@ function PostDetail() {
       <div className="DetailTitleBox" style={{ width: "1000px" }}>
         <div style={{ display: "flex" }}>
           <div>{detailList.isComplete ? "모집종료" : "모집중"} | </div>
-          <div>신청자 {detailList.applyList.length}</div>
+          <div>신청자 {detailList.applyList?.length}</div>
         </div>
         <h1 className="DetailTitle">{detailList.title}</h1>
         <div>
