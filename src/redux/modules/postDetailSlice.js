@@ -4,9 +4,9 @@ import { act } from "react-dom/test-utils";
 // import instance from "./instance";
 
 //미들웨어
-export const detailDB = (id) => {
+export const getDetailDB = (id) => {
   return async function (dispatch) {
-    await axios.post(`http://localhost:5001/posts/${id}`).then((response) => {
+    await axios.get(`http://localhost:5001/posts/${id}`).then((response) => {
       console.log(response);
       dispatch(loadPostDetail(response.data));
     });
