@@ -29,7 +29,12 @@
           "name": "멍멍이1",
           "gender": "남",
           "size": "소형",
-          "dogImageFiles": [{ "id": 1, "imageUrl": "imageurl" }],
+          "dogImageFiles": [
+            {
+              "id": 1,
+              "imageUrl": "imageurl"
+            }
+          ],
           "isRepresentative": true
         },
         {
@@ -37,7 +42,12 @@
           "name": "멍멍이2",
           "gender": "여",
           "size": "중형",
-          "dogImageFiles": [{ "id": 1, "imageUrl": "imageurl" }],
+          "dogImageFiles": [
+            {
+              "id": 1,
+              "imageUrl": "imageurl"
+            }
+          ],
           "isRepresentative": false
         }
       ]
@@ -71,6 +81,18 @@
           "giverDogProfileImgUrl": "리뷰 작성한 사용자의 대표 멍멍이 이미지 url2"
         }
       ]
+    }
+  ],
+  "logininfo": [
+    {
+      "id": 1,
+      "username": "아이디1",
+      "password": "password1"
+    },
+    {
+      "username": "아이디1",
+      "password": "PASSWORD1",
+      "id": 2
     }
   ]
 }
