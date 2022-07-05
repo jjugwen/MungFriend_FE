@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react-dom/test-utils";
 // import instance from "./instance";
 
 //미들웨어
 export const getDetailDB = (id) => {
   return async function (dispatch) {
-    await axios.get(`http://localhost:5001/posts/${id}`).then((response) => {
-      console.log(response);
+    // await instance.get(`/posts/${id}`).then((response) => {
+    await axios.get(`http://localhost:5002/detail/${id}`).then((response) => {
+      // console.log(response.data);
       dispatch(loadPostDetail(response.data));
     });
   };
@@ -16,10 +16,10 @@ export const getDetailDB = (id) => {
 export const deleteDetailDB = (id) => {
   return async function (dispatch) {
     await axios
-      .delete(`http://localhost:5001/posts/${id}`)
+      .delete(`http://localhost:5002/detail/${id}`)
       .then((response) => {
         if (response.data.status === "true") {
-          console.log(response);
+          // console.log(response);
           dispatch(deletePostDetail(response.data));
         } else {
           console.log(response.data.status, response.data.message);
@@ -38,7 +38,7 @@ export const postDetailSlice = createSlice({
   initialState: {
     list: [
       {
-        id: "1",
+        id: "0",
         nickname: "작성자",
         dogProfileImgUrl:
           "https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_960_720.jpg",
@@ -115,6 +115,6 @@ export const postDetailSlice = createSlice({
   },
 });
 
-// export const actionCreators = { deleteDetailDB }
+export const actionCreators = { getDetailDB, deleteDetailDB };
 export const { loadPostDetail, deletePostDetail } = postDetailSlice.actions;
 export default postDetailSlice.reducer;
