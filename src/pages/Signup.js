@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
-  // 아이디 제한 조건 : 3자리 이상 9자리 이하 영문소문자/숫자
+  // 아이디 제한 조건 : 3자리 이상 15자리 이하 영문소문자/숫자
   const is_username = (username) => {
-    let _reg = /^(?=.*[a-z0-9])[a-z0-9]{3,9}$/;
+    let _reg = /^(?=.*[a-z0-9])[a-z0-9]{3,15}$/;
     return _reg.test(username);
   };
 
@@ -220,7 +220,7 @@ function Signup() {
           <Check>
             {usernameCheck
               ? ""
-              : "*아이디는 3자리 이상 9자리 이하 영어 소문자 및 숫자입니다"}
+              : "*아이디는 3자리 이상 15자리 이하 영어 소문자 및 숫자입니다"}
           </Check>
           <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
           <br />
@@ -250,7 +250,7 @@ function Signup() {
               setPwcheck(e.target.value);
             }}
             placeholder="비밀번호를 한번 더 입력해주세요."
-            // required
+            required
           />
           <Check>{pwDubleCheck() ? "" : "*비밀번호를 확인해주세요"}</Check>
           <Check2>{pwDubleCheck() ? "비밀번호가 일치합니다" : ""}</Check2>
