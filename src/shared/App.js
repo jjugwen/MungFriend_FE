@@ -7,10 +7,12 @@ import Mypage from "../pages/Mypage";
 import Posts from "../pages/Posts";
 import PostDetail from "../pages/PostDetail";
 import SignupSuccess from "../pages/SignupSuccess";
+import Test from "../components/Test";
 //소셜로그인
 import KakaoLoginRedirect from "./KakaoLoginRedirect";
 import GoogleLoginRedirect from "./GoogleLoginRedirect";
-import MungPlusModal from "../components/MungPlusModal";
+import DogPlusModal from "../components/DogPlusModal";
+
 
 function App() {
   return (
@@ -26,7 +28,8 @@ function App() {
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
-        <Route path="/test" element={<MungPlusModal />} />
+        <Route path="/test" element={<DogPlusModal/>}/>
+        <Route path="/test2" element={<Test/>}/>
       </Routes>
     </div>
   );

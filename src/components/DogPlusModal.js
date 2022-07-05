@@ -3,28 +3,26 @@ import { useDispatch } from "react-redux";
 import { createMungAX } from '../redux/modules/mungSlice';
 
 
-function MungPlusModal (){
+function DogPlusModal (){
   //이미지를 한번 추가해볼게요
   const [mungImage, setMungImage] = useState({
     image:"",
     previewUrl:""
   });
-  const [loaded, setLoaded] = useState(false);
 
-  const addImage = (e) => {
+  const addImage = (event) => {
     //어떤 이벤트를 명시적으로 처리하지 않은경우,
     //해당 이벤트에 대한 기본동작을 실행하지 않음
-    e.preventDefault();
+    event.preventDefault();
     const fileReader = new FileReader();
-
-    if(e.target.files[0]){
-      fileReader.readAsDataURL(e.target.files[0])
-    }
-    fileReader.onload =()=>{
+   fileReader.readAsDataURL(event.target.files[0])
+ 
+    fileReader.onload =(e)=>{
       setMungImage({
-          image_file: e.target.files[0],
-          preview_URL: fileReader.result
+          image_file: event.target.files[0],
+          previewUrl: e.target.result
       })
+      console.log(event.target.files[0]);
     }
 
   }
@@ -45,31 +43,25 @@ function MungPlusModal (){
   const signUp=()=>{
     const formData = new FormData();
     formData.append("image", mungImage.image )
-    // const json =JSON.stringify(puppy);
-    // const blob = new Blob([json],{type: "application/json"});
-    //infos 추가ㅜ추가
-    formData.append("name", puppy.name)
-    formData.append("age", puppy.age)
-    formData.append("info", puppy.info)
-    formData.append("gender", puppy.gender)
-    formData.append("size", puppy.size)
-    formData.append("isRepresentative", puppy.isRepresentative)
+    const json =JSON.stringify(puppy);
+    const blob = new Blob([json],{type: "application/json"});
+    //infos 추가
+    formData.append("infos", blob)
 
     dispatch(createMungAX(formData))
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
     setMungImage({
       image_file: "",
-      preview_URL: "img/default_image.png",
+      previewUrl: "img/default_image.png",
     });
 
   }
 return(
   <>
   <div style={{fontFamily:"Pretendard"}}>멍친구 등록</div>
+  <img src={mungImage.previewUrl} alt=''/>
   <div>이미지 등록 부분
-    <label onChange={addImage}>
-    <input type="file" accept="images/*"/> {/*스타일 diaplay none으로, 커스텀할려면 라벨링*/}
-    </label>
+    <input type="file" accept="images/*" onChange={addImage}/> {/*스타일 diaplay none으로, 커스텀할려면 라벨링*/}
   </div>
   <div>이름</div>
   <input onChange={handleChange("name")}/>
@@ -97,4 +89,4 @@ return(
 )
 }
 
-export default MungPlusModal;
+export default DogPlusModal;

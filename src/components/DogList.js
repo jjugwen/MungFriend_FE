@@ -1,9 +1,9 @@
-import styled from "styled-components";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
+import styled from "styled-components";
 
-function Test() {
+function DogList() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -32,7 +32,7 @@ function Test() {
             <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
             <div>
               <div className="font-18">
-                {dog.name} {dog.gender === "여" ? "♀" : "♂"}
+                {dog.name} {dog.gender === "여" ? "♀" : "♂" }
               </div>
               <div className="font-16">{dog.size}견</div>
             </div>
@@ -81,6 +81,7 @@ const DogImg = styled.img`
 const Listbox = styled.div`
   width: 660px;
   height: 80px;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -93,11 +94,13 @@ const Listbox = styled.div`
 
 const CheckBox= styled.div`
 .checkbox2{
+  margin: 18px;
   appearance: none;
   width: 1.2rem;
   height: 1.2rem;
-  /* border: 1.5px solid gainsboro; */
   border-radius: 50px;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+  background-color: #CCCCCC;
   &:checked {
     border-color: transparent;
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
@@ -107,9 +110,6 @@ const CheckBox= styled.div`
     background-color: black;
   }
 
-}
+}`
 
- 
-`
-
-export default Test;
+export default DogList;
