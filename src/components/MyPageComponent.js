@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { loadMyPageAX, patchIntroduceAX, patchPhoneNumAX  } from "../redux/modules/myPageSlice";
+import DogList from "./DogList";
 
 
 function MyPageComponent() {
@@ -34,6 +35,7 @@ function MyPageComponent() {
   const phoneNum = info?.phoneNum
   // console.log(phoneNum) 
   //숫자와 하이픈만 허용
+  //왜 지우기가 안돼냐
   const [inputValue, setInputValue] = useState();
   const phoneNumTest = (e)=> {
     const regex = /^[0-9\b -]{0,13}$/;
@@ -60,14 +62,15 @@ function MyPageComponent() {
 
   return (
     <Container>
-      <div>{info?.nickname}</div>
-      <div>{info?.email}</div>
-      {introduce === "" ? (
-        <input onKeyUp={Enter} ref={intro_ref} placeholder='자기소개 등록하기'/>
-      ) : (
-        <div>{introduce}</div>
-      )}
-       {phoneNum === "" ? (
+      <div style={{display: "flex"}}>
+      <Profileimg src='https://ifh.cc/g/sPZmVL.png' alt=""/>
+      <div  style={{marginTop:"13px"}}>
+      <div style={{fontSize: "20px"}}><b>{info?.nickname}</b>님 반갑습니다!</div>
+      <div style={{fontSize: "14px", color: "#747474"}} >{info?.email}</div>
+      </div>
+      </div >
+      {/*휴대폰 번호*/}
+      {phoneNum === "" ? (
         <>
         <input type='text' value={inputValue || ""} onChange={phoneNumTest} ref={phone_ref} placeholder='번호를 입력해 주세요' />
         <button onClick={patchPhoneNum}>핸드폰 번호 등록하기</button>
@@ -75,32 +78,37 @@ function MyPageComponent() {
       ) : (
         <div>{phoneNum}</div>
       )}
-
-      <DogList>
-        {info?.dogList.map((dog, i) => {
-          return (
-            <div key={i}>
-              <div>{dog.name}</div>
-              <div>{dog.gender}</div>
-              <div>{dog.size}</div>
-              <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
-            </div>
-          );
-        })}
-      </DogList>
+        {/*자기소개*/}
+      {introduce === "" ? (
+        <input onKeyUp={Enter} ref={intro_ref} placeholder='자기소개 등록하기'/>
+      ) : (
+        <IntroduceDiv>{introduce}</IntroduceDiv>
+      )}
+       
+    <br/>
+    <DogList/>
+     
     </Container>
   );
 }
-const Container = styled.div``;
-
-const DogList = styled.div`
-  display: flex;
-  flex-direction: row;
+const Container = styled.div`
+position: absolute;
+left: 510px;
+`;
+const Profileimg =styled.img`
+width: 60px;
+height: 60px;
+padding: 5px;
 `;
 
-const DogImg = styled.img`
-  width: 200px;
-  height: 200px;
+const IntroduceDiv = styled.div`
+background-color: #F5F5F5;
+width: 680px;
+height: 160px;
+border-radius: 12px;
+
+top: 304px;
 `;
+
 
 export default MyPageComponent;
