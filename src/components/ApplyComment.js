@@ -1,18 +1,24 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as Actions } from "../redux/modules/postDetailSlice";
+import { useParams } from "react-router-dom";
 
 function ApplyComment() {
+  const params = useParams();
+  const dispatch = useDispatch();
   const detailList = useSelector((state) => state.postDetailSlice.list);
-  // console.log(detailList[0].applyList);
-  const applyList = detailList[0].applyList;
-  // console.log(applyList);
+  // console.log(detailList);
+
+  useEffect(() => {
+    dispatch(Actions.getDetailDB(params.id));
+  }, []);
+
   return (
     <>
       <h1>신청자 댓글</h1>
-      <span>총 {detailList[0].applyCount}개</span>
+      <span>총 {detailList.applyCount}개</span>
       <hr />
-      {applyList.map((value) => {
-        // console.log(value);
+      {detailList.applyList?.map((value) => {
         return (
           <div key={value.id}>
             <div className="ApplyCommentBox">
