@@ -10,11 +10,15 @@ import MyReviewList from "../components/MyReviewList";
 const Mypage = () => {
   let [change, setChange] = useState(<MyPageComponent />);
 
+
   return (
     <Container>
+      
       <ListBar>
         <button
-          onClick={() => {setChange(<MyPageComponent />);}}>
+          onClick={(e) => {
+            setChange(<MyPageComponent />);
+            }}>
           마이페이지
         </button>
         <button
@@ -31,10 +35,14 @@ const Mypage = () => {
     </Container>
   );
 };
+
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 200px;
+  
 `;
 
 const ListBar = styled.div`
@@ -42,7 +50,12 @@ const ListBar = styled.div`
   flex-direction: column;
   width: 200px;
   height: 50vh;
-  /* background-color: gold; */
+  background-color: gold;
+  button{
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+  }
 `;
 
 const PageBox = styled.div``;
