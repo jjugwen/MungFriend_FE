@@ -1,100 +1,115 @@
-import { useState } from 'react';
-import 'antd/dist/antd.css';
-import "./uploader.scss";
-import { Button, Spin } from 'antd';
-import axios from 'axios';
+import styled from "styled-components";
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { loadMyPageAX } from "../redux/modules/myPageSlice";
 
-const Uploader = (props) => {
+function Test() {
+  const dispatch = useDispatch();
 
-  console.log(props)
-  const [image, setImage] = useState({
-    image_file: "", //서버에 보낼 실제 이미지
-    preview_URL: "img/default_image.png", //클라이언트에게 보여줄 이미지경로
-  });
- // preview_URL은 이미지 파일을 readAsDataURL로 읽어서(base64로 인코딩한 string 데이터) 
- //img 태그에 src에 넣어서 클라이언트한테 보여주기
-  const [loaded, setLoaded] = useState(false);
-
-  let inputRef;
-
-  const saveImage = (e) => {
-    e.preventDefault();
-    const fileReader = new FileReader();
-    
-    if(e.target.files[0]){
-      setLoaded("loading")
-      fileReader.readAsDataURL(e.target.files[0])
-    }
-    fileReader.onload = () => {
-      setImage(
-        {
-          image_file: e.target.files[0],
-          preview_URL: fileReader.result
-        }
-      )
-      setLoaded(true);
-    }
-    
-  }
-
-  const deleteImage = () => {
-    setImage({
-      image_file: "",
-      preview_URL: "img/default_image.png",
-    });
-    setLoaded(false);
-  }
-
-  const sendImageToServer = async () => {
-    if(image.image_file){
-      const formData = new FormData()
-      formData.append('file', image.image_file);
-      await axios.post('/api/image/upload', formData);
-      alert("서버에 등록이 완료되었습니다!");
-      setImage({
-        image_file: "",
-        preview_URL: "img/default_image.png",
-      });
-      setLoaded(false);
-    }
-    else{
-      alert("사진을 등록하세요!")
-    }
-  }
+  React.useEffect(() => {
+    dispatch(loadMyPageAX());
+  }, []);
+  const info = useSelector((state) => state.myPageSlice.mypage);
 
   return (
-    <div className="uploader-wrapper">
-      <input type="file" accept="image/*"
-        onChange={saveImage}
-        // 클릭할 때 마다 file input의 value를 초기화 하지 않으면 버그가 발생할 수 있다
-        // 사진 등록을 두개 띄우고 첫번째에 사진을 올리고 지우고 
-        // 두번째에 같은 사진을 올리면 그 값이 남아있음!
-        onClick={(e)=>e.target.value = null}
-        ref={refParam => inputRef = refParam}
-        style={{ display: "none" }}
-      />
-      <div className="img-wrapper">
-        {loaded === false || loaded === true ? (
-          <img src={image.preview_URL} />
-        ) : (
-          <Spin className="img-spinner" tip = "이미지 불러오는중"/>
-        )}
+    <Container>
+      <div className="header">
+        <div className="font-20">
+          <b>멍친구</b>
+        </div>
+        <div className="font-14">
+          * 대표 멍프로필을 선택해주세요. 최대 3마리까지 등록가능합니다.
+        </div>
       </div>
-
-      <div className="upload-button">
-        <Button type="primary" onClick={() => inputRef.click()}>
-          Preview
-        </Button>
-        <Button type="primary" onClick={deleteImage} danger>
-          Delete
-        </Button>
-        <Button type="ghost" onClick={sendImageToServer}>
-          Upload
-        </Button>
-      </div>
-
-    </div>
+      {info?.dogList.map((dog, i) => {
+        return (
+          <Listbox key={i}>
+            <CheckBox>
+            <label htmlFor="check2">
+            <input className="checkbox2" type="radio" name="isRepresentativ"/>
+            </label>
+            </CheckBox>
+            <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
+            <div>
+              <div className="font-18">
+                {dog.name} {dog.gender === "여" ? "♀" : "♂"}
+              </div>
+              <div className="font-16">{dog.size}견</div>
+            </div>
+          </Listbox>
+        );
+      })}
+    </Container>
   );
 }
 
-export default Uploader;
+const Container = styled.div`
+  flex-direction: row;
+  width: 706px;
+  height: 294px;
+  left: 503px;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .font-20 {
+    font-size: 20px;
+  }
+  .font-18 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .font-16 {
+    font-size: 16px;
+  }
+  .font-14 {
+    font-size: 14px;
+    color: #a4a4a4;
+    padding: 5px;
+    margin-top: 5px;
+  }
+`;
+
+const DogImg = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+`;
+
+const Listbox = styled.div`
+  width: 660px;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  :hover {
+    border: 1px solid black;
+  }
+  border-radius: 12px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
+`;
+
+const CheckBox= styled.div`
+.checkbox2{
+  appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  /* border: 1.5px solid gainsboro; */
+  border-radius: 50px;
+  &:checked {
+    border-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: black;
+  }
+
+}
+
+ 
+`
+
+export default Test;
