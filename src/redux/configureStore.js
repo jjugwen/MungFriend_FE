@@ -4,6 +4,7 @@ import mungSlice from "./modules/mungSlice";
 import myPageSlice from "./modules/myPageSlice";
 import postDetailSlice from "./modules/postDetailSlice";
 import userInfoSlice from "./modules/userInfoSlice";
+import applySlice from "./modules/applySlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     mungSlice,
     postDetailSlice,
     userInfoSlice,
+    applySlice,
   },
 });
 
