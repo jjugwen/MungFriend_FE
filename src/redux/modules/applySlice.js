@@ -1,12 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-// import axios from "axios";
+import axios from "axios";
 
 //미들웨어
-export const createApplyDB = (id, comment) => {
+export const createApplyDB = (data) => {
   return async function (dispatch) {
-    await instance
-      .post(`/api/applies/${id}`, { comment: comment })
+    console.log(data);
+    // await instance
+    // .post(`/api/applies/${id}`, { id: id, comment: comment })
+    await axios
+      .post(`/api/applies/${data.id}`, {
+        comment: data.comment,
+      })
       .then((response) => {
         if (response.data.staus === "true") {
           // console.log(response.data);
