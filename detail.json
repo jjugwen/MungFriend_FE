@@ -170,5 +170,19 @@
       "password": "PASSWORD1",
       "id": 2
     }
+  ],
+  "applies": [
+    {
+      "comment": "될까?된다고?",
+      "id": 1
+    },
+    {
+      "comment": "될까?된다고?",
+      "id": 2
+    },
+    {
+      "comment": "좋아요 ^^>_<",
+      "id": 4
+    }
   ]
 }
