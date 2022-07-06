@@ -10,3 +10,14 @@
 .font-20{
   font-size: 20px;
 }
+.font-24{
+  font-size: 24px;
+}
+.row-box{
+  display: flex;
+  flex-direction: row;
+}
+.column-box{
+  display: flex;
+  flex-direction: column;
+}
