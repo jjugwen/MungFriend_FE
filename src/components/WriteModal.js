@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { actionCreators as applyActions } from "../redux/modules/applySlice";
 function WriteModal(props) {
@@ -7,6 +8,7 @@ function WriteModal(props) {
   const { open, close, children } = props;
   const applyText = useRef(null);
   const dispatch = useDispatch();
+  const params = useParams();
 
   return (
     <div className={open ? "openModalcss" : "modal"}>
@@ -40,10 +42,20 @@ function WriteModal(props) {
               onClick={() => {
                 console.log(applyText.current.value);
                 if (children === "신청하기") {
-                  dispatch(applyActions.createApplyDB(applyText.current.value));
+                  dispatch(
+                    applyActions.createApplyDB({
+                      comment: applyText.current.value,
+                      id: params.id,
+                    })
+                  );
                 }
                 if (children === "후기작성") {
-                  dispatch(applyActions.createApplyDB(applyText.current.value));
+                  dispatch(
+                    applyActions.createApplyDB({
+                      comment: applyText.current.value,
+                      id: params.id,
+                    })
+                  );
                 }
               }}
             >
