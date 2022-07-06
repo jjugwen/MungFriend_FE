@@ -5,6 +5,7 @@ import styled from "styled-components";
 import "../elements/postDetailStyle.css";
 import { actionCreators as postActions } from "../redux/modules/postDetailSlice";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
+import { actionCreators as applyActions } from "../redux/modules/applySlice";
 import { useParams } from "react-router-dom";
 import WithDogs from "../components/WithDogs";
 import WriteModal from "../components/WriteModal";
@@ -88,7 +89,7 @@ function PostDetail() {
         </div>
         <hr />
         <WithDogs />
-        {!(myinfo?.nickname === detailList?.nickname) ? (
+        {myinfo?.nickname === detailList?.nickname ? (
           <div>
             <div style={{ display: "flex" }}>
               <button onClick={deletePost}>삭제하기</button>
@@ -97,7 +98,13 @@ function PostDetail() {
             <ApplyComment />
           </div>
         ) : detailList.applyByMe ? (
-          <button>신청취소</button>
+          <button
+            onClick={() => {
+              dispatch(applyActions.deleteApplyDB(params.id)); //id 어떻게 넣어주지?
+            }}
+          >
+            신청취소
+          </button>
         ) : (
           <div>
             <button onClick={openApplyModal}>신청하기</button>
