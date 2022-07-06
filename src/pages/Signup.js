@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DaumPostCode from "react-daum-postcode";
 import instance from "../redux/modules/instance";
 import { useNavigate } from "react-router-dom";
+// import Header from "../components/Header";
 
 function Signup() {
   const navigate = useNavigate();
@@ -124,7 +125,7 @@ function Signup() {
         });
       })
       .then((result) => {
-        console.log(result); // 위, 경도 결과 값
+        // console.log(result); // 위, 경도 결과 값
         const lat = result.lat;
         const lon = result.lon;
         setLatitude(lat);
@@ -202,6 +203,7 @@ function Signup() {
 
   return (
     <>
+      {/* <Header /> */}
       <div className="SignupOutterBox">
         {/* <form  action="#"> */}
         <div>
