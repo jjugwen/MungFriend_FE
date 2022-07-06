@@ -180,6 +180,7 @@ top: 73px; */
       font-family: 'Pretendard';
       font-size: 16px;
       padding: 10px;
+      resize: none;
       :focus {
         outline: none;
       }

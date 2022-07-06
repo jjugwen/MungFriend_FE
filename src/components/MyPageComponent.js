@@ -35,7 +35,6 @@ function MyPageComponent() {
   const phoneNum = info?.phoneNum
   // console.log(phoneNum) 
   //숫자와 하이픈만 허용
-  //왜 지우기가 안돼냐
   const [inputValue, setInputValue] = useState();
   const phoneNumTest = (e)=> {
     const regex = /^[0-9\b -]{0,13}$/;

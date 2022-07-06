@@ -104,24 +104,36 @@
       "info": "ㄴㄴ",
       "name": "ㅇㅇ",
       "size": "중형"
+    }
+  ],
+  "dogList": [
+    {
+      "id": 0,
+      "name": "노을",
+      "gender": "여",
+      "age":1,
+      "size": "소형",
+      "dogImageFiles": [
+        {
+          "id": 0,
+          "imageUrl": "https://ifh.cc/g/zBph8p.jpg"
+        }
+      ],
+      "isRepresentative": false
     },
     {
-      "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
+      "id": 1,
+      "name": "구름",
+      "gender": "여",
+      "age":13,
+      "size": "소형",
+      "dogImageFiles": [
+        {
+          "id": 0,
+          "imageUrl": "https://ifh.cc/g/dBbqYO.jpg"
+        }
+      ],
+      "isRepresentative": true
     }
   ]
 }
