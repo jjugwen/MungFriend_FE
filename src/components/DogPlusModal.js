@@ -19,7 +19,7 @@ function DogPlusModal() {
 
     fileReader.onload = (e) => {
       setMungImage({
-        image_file: event.target.files[0],
+        image: event.target.files[0],
         previewUrl: e.target.result,
       });
       console.log(event.target.files[0]);
@@ -51,7 +51,7 @@ function DogPlusModal() {
     dispatch(createMungAX(formData));
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
     setMungImage({
-      image_file: "",
+      image: "",
       previewUrl: "img/default_image.png",
     });
   };
@@ -177,7 +177,7 @@ top: 73px; */
       height: 180px;
       border-radius: 4px;
       border: 1px solid #e5e5e5;
-      font-family: 'Pretendard';
+      font-family: "Pretendard";
       font-size: 16px;
       padding: 10px;
       resize: none;
