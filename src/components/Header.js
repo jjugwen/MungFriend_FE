@@ -5,6 +5,7 @@ import HeaderModal from "./HeaderModal";
 import noticeicon from "../assets/images/Header/noticeicon.svg";
 import mymenu from "../assets/images/Header/mymenu.svg";
 import openmenuarrow from "../assets/images/Header/openmenuarrow.svg";
+import logo from "../assets/images/Header/logo.svg";
 
 function Header() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ function Header() {
             }, 100);
           }}
         >
-          logo
+          <img src={logo} alt={logo} />
         </div>
         <div
           style={{
