@@ -30,6 +30,7 @@ export const patchPhoneNumAX = (phoneNum) => {
       .then(() => dispatch(patchPhoneNum(phoneNum)));
   };
 };
+
 //툴킷
 const myPageSlice = createSlice({
   name: "mypage",
