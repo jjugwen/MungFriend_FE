@@ -30,7 +30,7 @@ const KakaoLoginRedirect = () => {
     // localStorage.setItem("profileImage", decodeProfileImage);
 
     //메인으로 보내기
-    window.location.replace("/");
+    window.location.replace("/signupsuccess");
   }, []);
   return <></>;
 };
