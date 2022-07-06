@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-
+import { actionCreators as applyActions } from "../redux/modules/applySlice";
 function WriteModal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  const { open, close } = props;
-  const { children } = props;
+  const { open, close, children } = props;
   const applyText = useRef(null);
+  const dispatch = useDispatch();
 
   return (
     <div className={open ? "openModalcss" : "modal"}>
@@ -34,10 +35,16 @@ function WriteModal(props) {
               }}
             >
               취소
-            </button>{" "}
+            </button>
             <button
               onClick={() => {
                 console.log(applyText.current.value);
+                if (children === "신청하기") {
+                  dispatch(applyActions.createApplyDB(applyText.current.value));
+                }
+                if (children === "후기작성") {
+                  dispatch(applyActions.createApplyDB(applyText.current.value));
+                }
               }}
             >
               확인
