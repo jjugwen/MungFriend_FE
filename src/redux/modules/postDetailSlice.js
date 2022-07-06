@@ -5,7 +5,7 @@ import instance from "./instance";
 //미들웨어
 export const getDetailDB = (id) => {
   return async function (dispatch) {
-    await instance.get(`/posts/${id}`).then((response) => {
+    await instance.get(`/api/posts/${id}`).then((response) => {
       // await axios.get(`/detail/${id}`).then((response) => {
       // console.log(response.data);
       dispatch(loadPostDetail(response.data));
@@ -16,7 +16,7 @@ export const getDetailDB = (id) => {
 export const deleteDetailDB = (id) => {
   return async function (dispatch) {
     await instance
-      .delete(`/posts/${id}`)
+      .delete(`/api/posts/${id}`)
       .then((response) => {
         if (response.data.status === "true") {
           // console.log(response);

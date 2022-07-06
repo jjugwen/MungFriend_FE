@@ -63,7 +63,7 @@ function Login() {
             </div>
           </LoginButton>
         </div>
-        <a href="http://13.125.232.116/oauth2/authorization/kakao">
+        <a href="http://3.39.6.175/oauth2/authorization/kakao">
           <div style={kakao}>
             <img src={kakaoLoginBtn} alt="kakaologin" width="100%" />
           </div>
@@ -80,7 +80,7 @@ function Login() {
             </div>
           </button> */}
         </a>
-        <a href="http://ec2-13-125-232-116.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google">
+        <a href="http://ec2-3-39-6-175.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google">
           <GoogleImage>
             <img src={googleLoginBtn} alt="googlelogin" />
           </GoogleImage>
