@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import instance from "./instance";
-import axios from "axios";
+import instance from "./instance";
+// import axios from "axios";
 
 //미들웨어
-export const createApplyDB = (comment) => {
+export const createApplyDB = (id, comment) => {
   return async function (dispatch) {
-    await axios
-      .post(`http://localhost:5002/applies/`, { comment: comment })
+    await instance
+      .post(`/api/applies/${id}`, { comment: comment })
       .then((response) => {
         if (response.data.staus === "true") {
           // console.log(response.data);
@@ -24,8 +24,8 @@ export const createApplyDB = (comment) => {
 
 export const deleteApplyDB = (id) => {
   return async function (dispatch) {
-    await axios
-      .delete(`http://localhost:5002/applies/${id}`)
+    await instance
+      .delete(`/api/applies/${id}`)
       .then((response) => {
         if (response.data.status === "true") {
           // console.log(response);

@@ -6,7 +6,7 @@ export const loginDB = (username, password) => {
   return function (dispatch) {
     axios
       .post(
-        `http://localhost:5001/member/login`,
+        `http://3.39.6.175/member/login`,
         { username, password },
         {
           headers: {
