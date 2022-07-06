@@ -6,8 +6,8 @@ import instance from "../redux/modules/instance";
 function PostCreate() {
     const [dogList, setDogList] =useState(); 
     React.useEffect(()=>{
-      // instance.get(`/api/dogs`)
-      axios.get(`http://localhost:5001/dogList`)
+      instance.get(`/api/dogs`)
+      // axios.get(`http://localhost:5001/dogList`)
       .then((res)=>{
         setDogList(res.data);
       });
