@@ -45,95 +45,105 @@ function Header() {
 
   return (
     <>
-      <HeaderBox>
-        <div
-          className="HeaderLogo"
-          onClick={() => {
-            navigate("/");
-            setTimeout(() => {
-              window.location.reload();
-            }, 100);
-          }}
-        >
-          <img src={logo} alt={logo} />
-        </div>
-        <div
-          style={{
-            width: "100%",
-            maxWidth: "500px",
-            display: "flex",
-            justifyContent: "space-around",
-          }}
-        >
-          <HeadButton
-            id="/"
-            onClick={(e) => {
-              GetClick(e);
+      <HeaderOutterBox>
+        <HeaderBox>
+          <div
+            className="HeaderLogo"
+            onClick={() => {
+              navigate("/");
+              setTimeout(() => {
+                window.location.reload();
+              }, 100);
             }}
           >
-            서비스 소개
-          </HeadButton>
-          <HeadButton
-            id="posts"
-            onClick={(e) => {
-              GetClick(e);
+            <img src={logo} alt={logo} />
+          </div>
+          <div
+            style={{
+              width: "100%",
+              maxWidth: "500px",
+              display: "flex",
+              justifyContent: "space-around",
             }}
           >
-            산책
-          </HeadButton>
-          <HeadButton
-            id="community"
-            onClick={(e) => {
-              GetClick(e);
-            }}
-          >
-            커뮤니티
-          </HeadButton>
-        </div>
-        {!token ? (
-          <div className="beforeLogin">
             <HeadButton
-              onClick={() => {
-                navigate("/login");
+              id="/"
+              onClick={(e) => {
+                GetClick(e);
               }}
             >
-              로그인
+              서비스 소개
             </HeadButton>
             <HeadButton
-              onClick={() => {
-                navigate("/signup");
+              id="posts"
+              onClick={(e) => {
+                GetClick(e);
               }}
             >
-              회원가입
+              산책
+            </HeadButton>
+            <HeadButton
+              id="community"
+              onClick={(e) => {
+                GetClick(e);
+              }}
+            >
+              커뮤니티
             </HeadButton>
           </div>
-        ) : (
-          <div className="AfterLogin">
-            <HeadButton
-              onClick={() => {
-                // navigate("/");
-              }}
-            >
-              <img src={noticeicon} alt="noticeicon" />
-            </HeadButton>
+          {!token ? (
+            <div className="beforeLogin">
+              <HeadButton
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                로그인
+              </HeadButton>
+              <HeadButton
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                회원가입
+              </HeadButton>
+            </div>
+          ) : (
+            <div className="AfterLogin">
+              <HeadButton
+                onClick={() => {
+                  // navigate("/");
+                }}
+              >
+                <img src={noticeicon} alt="noticeicon" />
+              </HeadButton>
 
-            <HeadButton
-              onClick={() => {
-                modalClose();
-              }}
-            >
-              {opened ? <HeaderModal /> : null}
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <img src={mymenu} alt="mymenu" />
-                <img src={openmenuarrow} alt="openmenuarrow" />
-              </div>
-            </HeadButton>
-          </div>
-        )}
-      </HeaderBox>
+              <HeadButton
+                onClick={() => {
+                  modalClose();
+                }}
+              >
+                {opened ? <HeaderModal /> : null}
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img src={mymenu} alt="mymenu" />
+                  <img src={openmenuarrow} alt="openmenuarrow" />
+                </div>
+              </HeadButton>
+            </div>
+          )}
+        </HeaderBox>
+      </HeaderOutterBox>
     </>
   );
 }
+
+const HeaderOutterBox = styled.div`
+  width: 100% !important;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  bottom: 0;
+`;
 
 const HeaderBox = styled.div`
   display: flex;
