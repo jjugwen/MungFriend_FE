@@ -5,6 +5,7 @@ import HeaderModal from "./HeaderModal";
 import noticeicon from "../assets/images/Header/noticeicon.svg";
 import mymenu from "../assets/images/Header/mymenu.svg";
 import openmenuarrow from "../assets/images/Header/openmenuarrow.svg";
+import logo from "../assets/images/Header/logo.svg";
 
 function Header() {
   const navigate = useNavigate();
@@ -28,12 +29,13 @@ function Header() {
     (e) => {
       if (currentClick !== null) {
         let current = document.getElementById(currentClick);
-        current.style.borderBottom = "2px solid";
+        current.style.color = "#FA5A30";
         current.style.fontWeight = "600";
       }
       if (prevClick !== null) {
         let prev = document.getElementById(prevClick);
         prev.style.fontWeight = "400";
+        prev.style.color = "black";
         prev.style.borderBottom = "none";
       }
       setPrevClick(currentClick);
@@ -53,7 +55,7 @@ function Header() {
             }, 100);
           }}
         >
-          logo
+          <img src={logo} alt={logo} />
         </div>
         <div
           style={{
@@ -136,7 +138,9 @@ function Header() {
 const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1% 5%;
+  align-items: center;
+  height: 72px;
+  margin: 0% 17.36%;
 `;
 
 const HeadButton = styled.button`

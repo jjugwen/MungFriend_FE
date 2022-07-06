@@ -2,21 +2,35 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import Textrotate from "../elements/textrotate";
+import MungFootPrint from "../assets/images/Main/MungFootPrint.svg";
 
 function Main() {
   return (
     <>
       <MainBox>
         {/* <Header /> */}
-        <h1>
-          오늘은 내가, <br />
-          내일은 멍친구가
-        </h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <h1>
+            오늘은 내가, <br />
+            내일은 멍친구가
+          </h1>
 
-        <span>반려견 산책을 도와주는 산책 매칭 서비스</span>
+          <span>반려견 산책을 도와주는 산책 매칭 서비스</span>
+        </div>
       </MainBox>
       <TextCircle>
         <Textrotate />
+        <img
+          src={MungFootPrint}
+          alt="MungFootPrint"
+          style={{ position: "absolute" }}
+        />
       </TextCircle>
     </>
   );
@@ -28,6 +42,8 @@ const MainBox = styled.div`
   height: 50vh;
   width: 100vw;
   background-color: #fbf1e8;
+  display: flex;
+  align-items: center;
 `;
 const TextCircle = styled.div`
   margin: 0;

@@ -14,7 +14,6 @@ import GoogleLoginRedirect from "./GoogleLoginRedirect";
 import DogPlusModal from "../components/DogPlusModal";
 import PostCreate from "../pages/PostCreate";
 
-
 function App() {
   return (
     <div className="App">
@@ -30,8 +29,8 @@ function App() {
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
-        <Route path="/test" element={<DogPlusModal/>}/>
-        <Route path="/test2" element={<Test/>}/>
+        <Route path="/test" element={<DogPlusModal />} />
+        <Route path="/test2" element={<Test />} />
       </Routes>
     </div>
   );
