@@ -19,12 +19,12 @@ export const loginDB = (username, password) => {
         if (response.data.status === "true") {
           // console.log(response);
           localStorage.setItem("token", response.data.accessToken);
+          localStorage.setItem("nickname", response.data.nickname);
           window.alert(response.data.message);
           window.location.replace("/");
         } else if (response.data.status === "false") {
           console.log(response.data.status);
           window.alert(response.data.message);
-          // return
         }
       })
       .catch((err) => {
