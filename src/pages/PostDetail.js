@@ -9,11 +9,16 @@ import { actionCreators as applyActions } from "../redux/modules/applySlice";
 import { useParams } from "react-router-dom";
 import WithDogs from "../components/WithDogs";
 import WriteModal from "../components/WriteModal";
+import MatchingProfile from "../components/MatchingProfile";
 
-function PostDetail() {
+function PostDetail(props) {
   const params = useParams();
+  const postId = params.id - 1;
+  // const postId = params.id; //전체 페이지 나오면 -1 지정 안하는 게 맞는 듯.
+  // console.log(postId);
   const dispatch = useDispatch();
-  const detailList = useSelector((state) => state.postDetailSlice.list);
+  const detailListRoot = useSelector((state) => state.postDetailSlice.list);
+  const detailList = detailListRoot[postId];
   // console.log(detailList);
   //신청하기 모달창
   const [applyModal, setApplyModal] = useState(false);
@@ -26,6 +31,7 @@ function PostDetail() {
 
   //작성자 확인 및 정보 모달 확인 시 필요
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
+
   //신청자 정보 모달 확인 시 필요
   const userinfo = useSelector((state) => state.userInfoSlice.userInfo);
 
@@ -44,11 +50,11 @@ function PostDetail() {
       <div className="DetailOutterBox">
         <div className="DetailTitleBox">
           <div style={{ display: "flex", gap: "1%" }}>
-            <div>{detailList.isComplete ? "모집종료" : "모집중"}</div>{" "}
+            <div>{detailList?.isComplete ? "모집종료" : "모집중"}</div>{" "}
             <div>|</div>
-            <div>신청자 {detailList.applyList?.length}</div>
+            <div>신청자 {detailList?.applyList?.length}</div>
           </div>
-          <h1 className="DetailTitle">{detailList.title}</h1>
+          <h1 className="DetailTitle">{detailList?.title}</h1>
           <div>
             <div
               className="DetailTitleBottom"
@@ -60,7 +66,7 @@ function PostDetail() {
               >
                 <MungProfileImgCircle
                   style={{
-                    backgroundImage: `url(${detailList.dogProfileImgUrl})`,
+                    backgroundImage: `url(${detailList?.dogProfileImgUrl})`,
                   }}
                 />
                 <div
@@ -70,26 +76,49 @@ function PostDetail() {
                   }}
                 >
                   <div style={{ display: "flex", gap: "5%", width: "170px" }}>
-                    <div>{detailList.nickname}</div>
+                    <div>{detailList?.nickname}</div>
                     {/* 소수점 첫째자리까지 반올림 */}
-                    <div>{detailList.distance?.toFixed(1)}km</div>
+                    <div>{detailList?.distance?.toFixed(1)}km</div>
                   </div>
-                  <div>{detailList.modifiedAt?.slice(0, 10)}</div>
+                  <div>{detailList?.modifiedAt?.slice(0, 10)}</div>
                 </div>
               </div>
               <div className="DetailTitleBottomEnd">
-                요청시간 : {detailList.requestStartDate}부터 (1시간)
+                요청시간 : {detailList?.requestStartDate}부터 (1시간)
               </div>
             </div>
           </div>
         </div>
         <hr />
         <div className="DetailBodyBox" style={{ height: "300px" }}>
-          {detailList.content}
+          {detailList?.content}
         </div>
         <hr />
         <WithDogs />
         {myinfo?.nickname === detailList?.nickname ? (
+          detailList?.applyByMe ? (
+            <button
+              onClick={() => {
+                dispatch(applyActions.deleteApplyDB(params.id));
+                setTimeout(() => {
+                  window.location.reload();
+                }, 500);
+              }}
+            >
+              신청취소
+            </button>
+          ) : (
+            <div>
+              <button onClick={openApplyModal}>신청하기</button>
+              <WriteModal
+                children="신청하기"
+                open={applyModal}
+                close={closeApplyModal}
+              />
+            </div>
+          )
+        ) : myinfo?.nickname !== detailList?.nickname &&
+          detailList?.isComplete === false ? (
           <div>
             <div style={{ display: "flex" }}>
               <button onClick={deletePost}>삭제하기</button>
@@ -97,23 +126,11 @@ function PostDetail() {
             </div>
             <ApplyComment />
           </div>
-        ) : detailList.applyByMe ? (
-          <button
-            onClick={() => {
-              dispatch(applyActions.deleteApplyDB(params.id)); //id 어떻게 넣어주지?
-            }}
-          >
-            신청취소
-          </button>
         ) : (
-          <div>
-            <button onClick={openApplyModal}>신청하기</button>
-            <WriteModal
-              children="신청하기"
-              open={applyModal}
-              close={closeApplyModal}
-            />
-          </div>
+          <>
+            <MatchingProfile />
+            <ApplyComment />
+          </>
         )}
       </div>
     </>
