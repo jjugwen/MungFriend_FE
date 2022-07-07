@@ -91,7 +91,7 @@ function Header() {
               커뮤니티
             </HeadButton>
           </div>
-          {!token ? (
+          {token ? (
             <div className="beforeLogin">
               <HeadButton
                 onClick={() => {
@@ -109,7 +109,7 @@ function Header() {
               </HeadButton>
             </div>
           ) : (
-            <div className="AfterLogin">
+            <div style={AfterLogin}>
               <HeadButton
                 onClick={() => {
                   // navigate("/");
@@ -124,7 +124,9 @@ function Header() {
                 }}
               >
                 {opened ? <HeaderModal /> : null}
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "3%" }}
+                >
                   <img src={mymenu} alt="mymenu" />
                   <img src={openmenuarrow} alt="openmenuarrow" />
                 </div>
@@ -158,4 +160,8 @@ const HeadButton = styled.button`
   background-color: transparent;
 `;
 
+const AfterLogin = {
+  display: "flex",
+  alignItems: "center",
+};
 export default Header;
