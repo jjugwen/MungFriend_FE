@@ -37,7 +37,7 @@ function DogPlusModal() {
     } else {
       setpuppy({ ...puppy, [prop]: Number(e.target.value) });
     }
-    console.log(puppy);
+    // console.log(puppy);
   };
 
   const signUp = () => {
