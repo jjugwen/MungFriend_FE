@@ -13,6 +13,7 @@ import KakaoLoginRedirect from "./KakaoLoginRedirect";
 import GoogleLoginRedirect from "./GoogleLoginRedirect";
 import DogPlusModal from "../components/DogPlusModal";
 import PostCreate from "../pages/PostCreate";
+import Footer from "../components/Footer";
 
 function App() {
   return (
@@ -25,13 +26,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/posts" element={<Posts />} />
-        <Route path="/postcreate" element={<PostCreate/>}/>
+        <Route path="/postcreate" element={<PostCreate />} />
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
         <Route path="/test" element={<DogPlusModal />} />
         <Route path="/test2" element={<Test />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
