@@ -52,7 +52,7 @@ function DogPlusModal() {
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
     setMungImage({
       image: "",
-      previewUrl: "img/default_image.png",
+      previewUrl: "",
     });
   };
   return (
