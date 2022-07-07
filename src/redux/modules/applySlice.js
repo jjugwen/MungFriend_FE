@@ -6,17 +6,19 @@ import axios from "axios";
 export const createApplyDB = (data) => {
   return async function (dispatch) {
     console.log(data);
-    // await instance
-    // .post(`/api/applies/${id}`, { id: id, comment: comment })
     await axios
-      .post(`/api/applies/${data.id}`, {
+      .post(`http://localhost:5002/applies/${data.id}`, {
         comment: data.comment,
       })
+      // await instance
+      //   .post(`/api/applies/${data.id}`, {
+      //     comment: data.comment,
+      //   })
       .then((response) => {
         if (response.data.staus === "true") {
           // console.log(response.data);
           dispatch(applyCreate(response.data));
-        } else {
+        } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
         }
       })
@@ -29,13 +31,15 @@ export const createApplyDB = (data) => {
 
 export const deleteApplyDB = (id) => {
   return async function (dispatch) {
-    await instance
-      .delete(`/api/applies/${id}`)
+    // await instance.delete(`/api/applies/${id}`)
+    await axios
+      .delete(`http://localhost:5002/applies/${id}`)
       .then((response) => {
+        // console.log(response);
         if (response.data.status === "true") {
           // console.log(response);
           dispatch(applyDelete(response.data));
-        } else {
+        } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
         }
       })
