@@ -6,18 +6,18 @@ const KakaoLoginRedirect = () => {
     const accessToken = new URL(window.location.href).searchParams.get(
       "Authorization"
     );
-    console.log(accessToken);
+    // console.log(accessToken);
     localStorage.setItem("token", accessToken);
 
     //id get
     const username = new URL(window.location.href).searchParams.get("username");
-    console.log(username);
+    // console.log(username);
     localStorage.setItem("username", username);
 
     //닉네임 get
     const nickname = new URL(window.location.href).searchParams.get("nickname");
     const decodeName = decodeURI(decodeURIComponent(nickname));
-    console.log(decodeName, "닉네임");
+    // console.log(decodeName, "닉네임");
     localStorage.setItem("nickname", decodeName);
 
     //profile 이미지 get
