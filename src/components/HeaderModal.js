@@ -17,9 +17,27 @@ function HeaderModal() {
         <UpperBox>
           <UserNameFont>홍길동님</UserNameFont>
           <EmailFont>meongfriend@naver.com</EmailFont>
-          <span>마이페이지</span>
-          <span>작성한 게시글</span>
-          <span>내가 받은 후기</span>
+          <span
+            onClick={() => {
+              navigate("/mypage");
+            }}
+          >
+            마이페이지
+          </span>
+          <span
+            onClick={() => {
+              navigate("/mypage");
+            }}
+          >
+            작성한 게시글
+          </span>
+          <span
+            onClick={() => {
+              navigate("/mypage");
+            }}
+          >
+            내가 받은 후기
+          </span>
           <hr />
         </UpperBox>
         <Logoutbtn
