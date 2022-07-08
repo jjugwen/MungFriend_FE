@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
 import Textrotate from "../elements/textrotate";
 import MungFootPrint from "../assets/images/Main/MungFootPrint.svg";
 import MainTopImg from "../assets/images/Main/main.png";
