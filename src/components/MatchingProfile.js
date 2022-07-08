@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { actionCreators as matchActions } from "../redux/modules/matchingSlice";
+import WriteModal from "./WriteModal";
 
 function Matching(props) {
   const params = useParams();
@@ -18,6 +19,16 @@ function Matching(props) {
   console.log(detailList.requestEndDate);
   console.log(now);
   // console.log(detailList?.requestEndDate - now);
+
+  //후기작성하기 모달창
+  const [applyModal, setApplyModal] = useState(false);
+  const openApplyModal = () => {
+    setApplyModal(true);
+  };
+  const closeApplyModal = () => {
+    setApplyModal(false);
+  };
+
   return (
     <>
       <Container>
@@ -43,9 +54,15 @@ function Matching(props) {
                 {detailList?.applyList[postId]?.nickname}
               </div>
             </div>
-            {detailList?.requestEndDate ? (
-              <button>
+            {/* {detailList?.requestEndDate ? ( */}
+            {2 > 0 ? (
+              <button onClick={openApplyModal}>
                 <b>후기작성</b>
+                <WriteModal
+                  children="후기작성"
+                  open={applyModal}
+                  close={closeApplyModal}
+                />
               </button>
             ) : (
               <button
