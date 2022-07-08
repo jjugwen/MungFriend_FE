@@ -16,23 +16,13 @@ import together from "../assets/images/Main/함께.png";
 function Main() {
   return (
     <div style={{ margin: "0" }}>
-      <MainBox1 style={{ backgroundImage: `url(${MainTopImg})` }}>
-        <Header />
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            margin: "0% 17.36%",
-          }}
-        >
-          <h1>
-            오늘은 내가, <br />
-            내일은 멍친구가
-          </h1>
-          <span>반려견 산책을 도와주는 산책 매칭 서비스</span>
-        </div> */}
-      </MainBox1>
+      <MainBox1
+        style={{
+          backgroundImage: `url(${MainTopImg})`,
+          zIndex: "-1",
+          top: "-4.5em",
+        }}
+      />
       <MainBox2>
         <div
           style={{
