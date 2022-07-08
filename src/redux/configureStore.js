@@ -7,6 +7,7 @@ import userInfoSlice from "./modules/userInfoSlice";
 import applySlice from "./modules/applySlice";
 import postSlice from "./modules/postSlice";
 import matchingSlice from "./modules/matchingSlice";
+import reviewSlice from "./modules/reviewSlice";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     applySlice,
     postSlice,
     matchingSlice,
+    reviewSlice,
   },
 });
 
