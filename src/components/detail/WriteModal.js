@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { actionCreators as applyActions } from "../../redux/modules/applySlice";
+import imgUpload from "../../assets/images/Modal/imgUpload.svg";
+import ReviewImgUpload from "./review/ReviewImgUpload";
+
 function WriteModal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, children } = props;
@@ -23,7 +26,7 @@ function WriteModal(props) {
               height: "3px",
             }}
           />
-          {children === "후기작성" ? <input type="file"></input> : null}
+          {children === "후기작성" ? <ReviewImgUpload /> : null}
           <hr style={{ width: "90%" }} />
           <ModalInput
             type="text"
@@ -81,7 +84,7 @@ function WriteModal(props) {
 
 const WriteModalbox = styled.div`
   position: fixed;
-  top: 20%;
+  top: 10%;
   left: 35%;
   width: 100%;
   max-width: 640px;
@@ -111,4 +114,5 @@ const ModalTitle = styled.h1`
   font-size: 24px;
   line-height: 100%;
 `;
+
 export default WriteModal;
