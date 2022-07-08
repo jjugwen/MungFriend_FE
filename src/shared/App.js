@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "../components/Header";
+import Header from "../components/shared/Header";
 import Main from "../pages/Main";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
@@ -13,7 +13,7 @@ import KakaoLoginRedirect from "./KakaoLoginRedirect";
 import GoogleLoginRedirect from "./GoogleLoginRedirect";
 import DogPlusModal from "../components/DogPlusModal";
 import PostCreate from "../pages/PostCreate";
-import Footer from "../components/Footer";
+import Footer from "../components/shared/Footer";
 import Error from "../pages/Error";
 
 function App() {
