@@ -1,24 +1,26 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as Actions } from "../redux/modules/postDetailSlice";
+import { actionCreators as Actions } from "../../redux/modules/postDetailSlice";
+import { actionCreators as matchActions } from "../../redux/modules/matchingSlice";
 import { useParams } from "react-router-dom";
 
 function ApplyComment() {
   const params = useParams();
+  const postId = params.id - 1;
   const dispatch = useDispatch();
-  const detailList = useSelector((state) => state.postDetailSlice.list);
-  // console.log(detailList);
+  const detailListroot = useSelector((state) => state.postDetailSlice.list);
+  const detailList = detailListroot[postId];
 
   useEffect(() => {
     dispatch(Actions.getDetailDB(params.id));
-  }, []);
+  }, [params.id]);
 
   return (
     <>
       <h1>신청자 댓글</h1>
-      <span>총 {detailList.applyCount}개</span>
+      <span>총 {detailList?.applyCount}개</span>
       <hr />
-      {detailList.applyList?.map((value) => {
+      {detailList?.applyList?.map((value) => {
         return (
           <div key={value.id}>
             <div className="ApplyCommentBox">
@@ -39,7 +41,15 @@ function ApplyComment() {
                   <div>{value.createdAt}</div>
                 </div>
                 <div className="ApplyCommentText">{value.comment}</div>
-                <button>매칭하기</button>
+                {/* isComplete가 false면 매칭하기 버튼 활성화 / true면 비활성화 */}
+                <button
+                  onClick={() => {
+                    // console.log(value.id);
+                    dispatch(matchActions.createMatchingDB(value.id));
+                  }}
+                >
+                  매칭하기
+                </button>
               </div>
             </div>
             <hr />

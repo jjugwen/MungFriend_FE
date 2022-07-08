@@ -2,15 +2,17 @@
 
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as Actions } from "../redux/modules/postDetailSlice";
+import { actionCreators as Actions } from "../../redux/modules/postDetailSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 function DogList() {
   const params = useParams();
+  const postId = params.id - 1;
   const dispatch = useDispatch();
-  const detailList = useSelector((state) => state.postDetailSlice.list);
-  //   console.log(detailList);
+  const detailListRoot = useSelector((state) => state.postDetailSlice.list);
+  const detailList = detailListRoot[postId];
+  // console.log(detailList);
   useEffect(() => {
     dispatch(Actions.getDetailDB(params.id));
   }, []);
@@ -22,7 +24,7 @@ function DogList() {
           <b className="DogListTitle">함께하는 멍친구</b>
         </div>
       </div>
-      {detailList.dogList?.map((dog) => {
+      {detailList?.dogList?.map((dog) => {
         return (
           <div
             key={dog.id}
@@ -42,7 +44,7 @@ function DogList() {
                   {dog.age}세<div className="font-16">{dog.size}견</div>
                 </div>
               </div>
-            </Listbox>{" "}
+            </Listbox>
           </div>
         );
       })}

@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { actionCreators as userActions } from "../../redux/modules/userInfoSlice";
+//컴포넌트
+import MyPageComponent from "../MyPageComponent";
+import MyPostList from "../MyPostList";
+import MyReviewList from "../MyReviewList";
 
 function HeaderModal() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  //로그인 유저
+  const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
+  // console.log(myinfo);
+  const [change, setChange] = useState(<MyPageComponent />);
   const Logout = () => {
     localStorage.clear();
     setTimeout(() => {
       navigate("/");
     }, 1000);
   };
+  useEffect(() => {
+    dispatch(userActions.myinfoDB());
+  }, []);
 
   return (
     <>
       <HeaderModalbox>
         <UpperBox>
-          <UserNameFont>홍길동님</UserNameFont>
-          <EmailFont>meongfriend@naver.com</EmailFont>
+          <UserNameFont>{myinfo[0]?.nickname}님</UserNameFont>
+          <EmailFont>{myinfo[0]?.email}</EmailFont>
           <span
             onClick={() => {
               navigate("/mypage");
@@ -27,6 +41,9 @@ function HeaderModal() {
           <span
             onClick={() => {
               navigate("/mypage");
+              // setTimeout(() => {
+              //   setChange(<MyPostList />);
+              // }, 500);
             }}
           >
             작성한 게시글
@@ -34,12 +51,14 @@ function HeaderModal() {
           <span
             onClick={() => {
               navigate("/mypage");
+              // setChange(<MyReviewList />);
             }}
           >
             내가 받은 후기
           </span>
           <hr />
         </UpperBox>
+        {/* {change} */}
         <Logoutbtn
           onClick={() => {
             console.log("로그아웃!");
@@ -59,8 +78,9 @@ const HeaderModalbox = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  margin: 3% -15%;
-  position: fixed;
+  position: absolute;
+  right: 17.5%;
+  top: 65px;
 
   background: #ffffff;
   border: 1px solid #e5e5e5;

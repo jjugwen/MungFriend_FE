@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logoBlack from "../assets/images/Footer/logoBlack.svg";
+import logoBlack from "../../assets/images/Footer/logoBlack.svg";
 
 function Footer() {
   return (

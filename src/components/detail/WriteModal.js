@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { actionCreators as applyActions } from "../redux/modules/applySlice";
+import { actionCreators as applyActions } from "../../redux/modules/applySlice";
 function WriteModal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, children } = props;
@@ -23,6 +23,8 @@ function WriteModal(props) {
               height: "3px",
             }}
           />
+          {children === "후기작성" ? <input type="file"></input> : null}
+          <hr style={{ width: "90%" }} />
           <ModalInput
             type="text"
             placeholder="내용을 입력해주세요."
@@ -40,22 +42,31 @@ function WriteModal(props) {
             </button>
             <button
               onClick={() => {
-                console.log(applyText.current.value);
+                // console.log(applyText.current.value);
                 if (children === "신청하기") {
                   dispatch(
                     applyActions.createApplyDB({
                       comment: applyText.current.value,
-                      id: params.id,
+                      // id: params.id,
                     })
                   );
+                  setTimeout(() => {
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 200);
+                    close();
+                  }, 400);
                 }
                 if (children === "후기작성") {
                   dispatch(
-                    applyActions.createApplyDB({
+                    applyActions.createReviewDB({
                       comment: applyText.current.value,
                       id: params.id,
                     })
                   );
+                  setTimeout(() => {
+                    close();
+                  }, 300);
                 }
               }}
             >
