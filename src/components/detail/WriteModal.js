@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { actionCreators as applyActions } from "../../redux/modules/applySlice";
-import imgUpload from "../../assets/images/Modal/imgUpload.svg";
+import "../../elements/modalStyle.css";
 import ReviewImgUpload from "./review/ReviewImgUpload";
 
 function WriteModal(props) {
@@ -14,9 +14,9 @@ function WriteModal(props) {
   const params = useParams();
 
   return (
-    <div className={open ? "openModalcss" : "modal"}>
+    <div className={open ? "openModalcss" : null}>
       {open ? (
-        <WriteModalbox>
+        <div className="modal">
           <ModalTitle>{children}</ModalTitle>
           <hr
             style={{
@@ -76,27 +76,12 @@ function WriteModal(props) {
               확인
             </button>
           </div>
-        </WriteModalbox>
+        </div>
       ) : null}
     </div>
   );
 }
 
-const WriteModalbox = styled.div`
-  position: fixed;
-  top: 10%;
-  left: 35%;
-  width: 100%;
-  max-width: 640px;
-  height: 580px;
-  border: 1px solid;
-  background: #ffffff;
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 const ModalInput = styled.textarea`
   width: 90%;
   height: 348px;
