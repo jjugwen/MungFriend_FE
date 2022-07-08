@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Textrotate from "../elements/textrotate";
 import MungFootPrint from "../assets/images/Main/MungFootPrint.svg";
-import MainTopImg from "../assets/images/Main/main.png";
+import MainTopImg from "../assets/images/Main/main2.png";
 import Step1 from "../assets/images/Main/step1.svg";
 import Step2 from "../assets/images/Main/step2.svg";
 import Step3 from "../assets/images/Main/step3.svg";
 import Step4 from "../assets/images/Main/step4.svg";
 import bannerHeart from "../assets/images/Main/img-banner-heart.png";
-import bannerWalk from "../assets/images/Main/img-banner-walk.png";
-import bannerhands from "../assets/images/Main/img-banner-hands.png";
+import bannerWalk from "../assets/images/Main/img-dog-sad.png";
+import bannerhands from "../assets/images/Main/img-hands.png";
 import together from "../assets/images/Main/함께.png";
 
 function Main() {
@@ -21,7 +21,28 @@ function Main() {
           zIndex: "-1",
           top: "-4.5em",
         }}
-      />
+      >
+        <div
+          style={{
+            marginBottom: "80px",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <div
+            style={{
+              margin: "10em 0 0 17.36%",
+            }}
+          >
+            <h1>
+              오늘은 내가, <br />
+              내일은 멍친구가
+            </h1>
+            <span>반려견 산책을 도와주는 산책 매칭 서비스</span>
+          </div>
+        </div>
+      </MainBox1>
+
       <MainBox2>
         <div
           style={{
@@ -78,9 +99,48 @@ function Main() {
         </CardBox>
       </MainBox2>
       <Banner style={{ backgroundImage: `url(${bannerHeart})` }} />
-      <MainBox3 style={{ backgroundImage: `url(${bannerWalk})` }} />
+      <MainBox3>
+        <div
+          style={{
+            display: "flex",
+            gap: "6.5em",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              margin: "0 0 0 17.36%",
+            }}
+          >
+            <h1>주인아 월!른 산책 나가개!</h1>
+            <span>반려견들은 하루종일 보호자를 기다리며 하루를 보냅니다.</span>
+            <br />
+            <span>기다리는 반려견을 위해 산책 서비스를 신청해보세요.</span>
+          </div>
+          <img src={bannerWalk} alt="sadDog" style={{ width: "30em" }} />
+        </div>
+      </MainBox3>
       <MainBox4 style={{ backgroundImage: `url(${together})` }} />
-      <MainBox3 style={{ backgroundImage: `url(${bannerhands})` }} />
+      <MainBox5>
+        <div
+          style={{
+            display: "flex",
+            gap: "6.5em",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              margin: "0 0 0 17.36%",
+            }}
+          >
+            <h1>멍친구는</h1>
+            <h1>반려견, 반려인들의 행복을</h1>
+            <h1>위해 함께합니다.</h1>
+          </div>
+          <img src={bannerhands} alt="hands" style={{ width: "29.4em" }} />
+        </div>
+      </MainBox5>
     </div>
   );
 }
@@ -89,6 +149,7 @@ const MainBox1 = styled.div`
   /* position: fixed; */
   height: 40em;
   width: 100%;
+
   /* background-color: #fbf1e8; */
   background-size: cover;
   position: relative;
@@ -108,7 +169,7 @@ const MainBox1 = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 100%;
+    line-height: 30px;
     color: #4e4e56;
   }
 `;
@@ -213,10 +274,26 @@ const Banner = styled.div`
 `;
 
 const MainBox3 = styled.div`
-  /* height: 360px; */
   height: 22em;
   background-size: contain;
-  /* background-repeat: no-repeat; */
+  margin-bottom: 7.5%;
+  background-color: #f2f3f6;
+
+  h1 {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 42px;
+  }
+  span {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+  }
 `;
 
 const MainBox4 = styled.div`
@@ -225,5 +302,20 @@ const MainBox4 = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   margin: 7.5% 17.36%;
+`;
+
+const MainBox5 = styled.div`
+  height: 22em;
+  background-size: contain;
+  background-color: #4e4e56;
+
+  h1 {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 25px;
+    color: white;
+  }
 `;
 export default Main;
