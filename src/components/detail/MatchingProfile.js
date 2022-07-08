@@ -16,8 +16,8 @@ function Matching(props) {
   const dispatch = useDispatch();
   //postID 아니고 , 선택한 applyList 번호 ... 리덕스/악시오스로 보내고 가져와야? 리덕스로 가져올 수 있을 듯.
   const now = new Date();
-  console.log(detailList.requestEndDate);
-  console.log(now);
+  // console.log(detailList.requestEndDate);
+  // console.log(now);
   // console.log(detailList?.requestEndDate - now);
 
   //후기작성하기 모달창
@@ -56,14 +56,14 @@ function Matching(props) {
             </div>
             {/* {detailList?.requestEndDate ? ( */}
             {2 > 0 ? (
-              <button onClick={openApplyModal}>
-                <b>후기작성</b>
+              <div>
+                <button onClick={openApplyModal}>후기작성</button>
                 <WriteModal
                   children="후기작성"
                   open={applyModal}
                   close={closeApplyModal}
                 />
-              </button>
+              </div>
             ) : (
               <button
                 onClick={() => {
