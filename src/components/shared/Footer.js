@@ -38,6 +38,7 @@ const FooterOutterBox = styled.div`
   display: block;
   position: relative;
   bottom: 0;
+  z-index: -1;
 `;
 const FooterBox = styled.div`
   display: flex;
