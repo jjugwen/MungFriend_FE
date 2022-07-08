@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ApplyComment from "../components/ApplyComment";
+import ApplyComment from "../components/detail/ApplyComment";
 import styled from "styled-components";
 import "../elements/postDetailStyle.css";
 import { actionCreators as postActions } from "../redux/modules/postDetailSlice";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
 import { actionCreators as applyActions } from "../redux/modules/applySlice";
 import { useParams } from "react-router-dom";
-import WithDogs from "../components/WithDogs";
-import WriteModal from "../components/WriteModal";
-import MatchingProfile from "../components/MatchingProfile";
+import WithDogs from "../components/detail/WithDogs";
+import WriteModal from "../components/detail/WriteModal";
+import MatchingProfile from "../components/detail/MatchingProfile";
 
-function PostDetail(props) {
+function PostDetail() {
   const params = useParams();
   const postId = params.id - 1;
   // const postId = params.id; //전체 페이지 나오면 -1 지정 안하는 게 맞는 듯.
@@ -118,7 +118,7 @@ function PostDetail(props) {
             </div>
           )
         ) : myinfo?.nickname !== detailList?.nickname &&
-          detailList?.isComplete === false ? (
+          detailList?.isComplete !== false ? (
           <div>
             <div style={{ display: "flex" }}>
               <button onClick={deletePost}>삭제하기</button>
