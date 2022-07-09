@@ -98,12 +98,32 @@
   ],
   "mung": [
     {
+      "id": 0,
+      "name": "노을",
+      "gender": "여",
+      "age": 1,
+      "size": "소형",
+      "dogImageFiles": [
+        {
+          "id": 0,
+          "imageUrl": "https://ifh.cc/g/zBph8p.jpg"
+        }
+      ],
+      "isRepresentative": false
+    },
+    {
       "id": 1,
-      "age": 11,
-      "gender": "남",
-      "info": "ㄴㄴ",
-      "name": "ㅇㅇ",
-      "size": "중형"
+      "name": "구름",
+      "gender": "여",
+      "age": 13,
+      "size": "소형",
+      "dogImageFiles": [
+        {
+          "id": 0,
+          "imageUrl": "https://ifh.cc/g/dBbqYO.jpg"
+        }
+      ],
+      "isRepresentative": true
     }
   ],
   "dogList": [
@@ -137,5 +157,133 @@
     }
   ],
   "post": [
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "1",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 1
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "1",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 2
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "1",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 3
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "1",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 4
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "1",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 5
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "1",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 6
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "1",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 7
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 8
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 9
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 10
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 11
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 12
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 13
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 14
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 15
+    },
+    {
+      "title": "",
+      "content": "",
+      "dogidList": "2",
+      "requestStartDate": "T1:1",
+      "requestEndDate": "T1:1",
+      "id": 16
+    }
   ]
 }
