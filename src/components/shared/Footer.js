@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logoBlack from "../assets/images/Footer/logoBlack.svg";
+import logoBlack from "../../assets/images/Footer/logoBlack.svg";
 
 function Footer() {
   return (
@@ -38,6 +38,7 @@ const FooterOutterBox = styled.div`
   display: block;
   position: relative;
   bottom: 0;
+  z-index: -1;
 `;
 const FooterBox = styled.div`
   display: flex;

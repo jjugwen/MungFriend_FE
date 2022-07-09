@@ -2,7 +2,10 @@ import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { actionCreators as applyActions } from "../redux/modules/applySlice";
+import { actionCreators as applyActions } from "../../redux/modules/applySlice";
+import "../../elements/modalStyle.css";
+import ReviewImgUpload from "./review/ReviewImgUpload";
+
 function WriteModal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close, children } = props;
@@ -11,9 +14,9 @@ function WriteModal(props) {
   const params = useParams();
 
   return (
-    <div className={open ? "openModalcss" : "modal"}>
+    <div className={open ? "openModalcss" : null}>
       {open ? (
-        <WriteModalbox>
+        <div className="modal">
           <ModalTitle>{children}</ModalTitle>
           <hr
             style={{
@@ -23,6 +26,8 @@ function WriteModal(props) {
               height: "3px",
             }}
           />
+          {children === "후기작성" ? <ReviewImgUpload /> : null}
+          <hr style={{ width: "90%" }} />
           <ModalInput
             type="text"
             placeholder="내용을 입력해주세요."
@@ -40,49 +45,43 @@ function WriteModal(props) {
             </button>
             <button
               onClick={() => {
-                console.log(applyText.current.value);
+                // console.log(applyText.current.value);
                 if (children === "신청하기") {
                   dispatch(
                     applyActions.createApplyDB({
                       comment: applyText.current.value,
-                      id: params.id,
+                      // id: params.id,
                     })
                   );
+                  setTimeout(() => {
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 200);
+                    close();
+                  }, 400);
                 }
                 if (children === "후기작성") {
                   dispatch(
-                    applyActions.createApplyDB({
+                    applyActions.createReviewDB({
                       comment: applyText.current.value,
                       id: params.id,
                     })
                   );
+                  setTimeout(() => {
+                    close();
+                  }, 300);
                 }
               }}
             >
               확인
             </button>
           </div>
-        </WriteModalbox>
+        </div>
       ) : null}
     </div>
   );
 }
 
-const WriteModalbox = styled.div`
-  position: fixed;
-  top: 20%;
-  left: 35%;
-  width: 100%;
-  max-width: 640px;
-  height: 580px;
-  border: 1px solid;
-  background: #ffffff;
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 const ModalInput = styled.textarea`
   width: 90%;
   height: 348px;
@@ -100,4 +99,5 @@ const ModalTitle = styled.h1`
   font-size: 24px;
   line-height: 100%;
 `;
+
 export default WriteModal;
