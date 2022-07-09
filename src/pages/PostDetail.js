@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import WithDogs from "../components/detail/WithDogs";
 import WriteModal from "../components/detail/WriteModal";
 import MatchingProfile from "../components/detail/MatchingProfile";
+import UserModal from "../components/detail/userModal/UserModal";
 
 function PostDetail() {
   const params = useParams();
@@ -32,9 +33,6 @@ function PostDetail() {
   //작성자 확인 및 정보 모달 확인 시 필요
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
 
-  //신청자 정보 모달 확인 시 필요
-  const userinfo = useSelector((state) => state.userInfoSlice.userInfo);
-
   const deletePost = () => {
     dispatch(postActions.deleteDetailDB(params.id));
   };
@@ -42,7 +40,6 @@ function PostDetail() {
   useEffect(() => {
     dispatch(postActions.getDetailDB(params.id));
     dispatch(userActions.myinfoDB());
-    dispatch(userActions.userinfoDB());
   }, []);
 
   return (
@@ -50,7 +47,7 @@ function PostDetail() {
       <div className="DetailOutterBox">
         <div className="DetailTitleBox">
           <div style={{ display: "flex", gap: "1%" }}>
-            <div>{detailList?.isComplete ? "모집종료" : "모집중"}</div>{" "}
+            <div>{detailList?.isComplete ? "모집종료" : "모집중"}</div>
             <div>|</div>
             <div>신청자 {detailList?.applyList?.length}</div>
           </div>
@@ -60,28 +57,49 @@ function PostDetail() {
               className="DetailTitleBottom"
               style={{ display: "flex", justifyContent: "space-between" }}
             >
-              <div
-                className="DetailTitleBottomStart"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <MungProfileImgCircle
-                  style={{
-                    backgroundImage: `url(${detailList?.dogProfileImgUrl})`,
+              <div className="clickUsermodal">
+                <button
+                  onClick={() => {
+                    dispatch(
+                      userActions.userinfoDB({ nickname: detailList?.nickname })
+                    );
+                    setTimeout(() => {
+                      openApplyModal();
+                    }, 500);
                   }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
+                  style={{ broder: "none", background: "none" }}
                 >
-                  <div style={{ display: "flex", gap: "5%", width: "170px" }}>
-                    <div>{detailList?.nickname}</div>
-                    {/* 소수점 첫째자리까지 반올림 */}
-                    <div>{detailList?.distance?.toFixed(1)}km</div>
+                  <div
+                    className="DetailTitleBottomStart"
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    <MungProfileImgCircle
+                      style={{
+                        backgroundImage: `url(${detailList?.dogProfileImgUrl})`,
+                      }}
+                    />
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <div
+                        style={{ display: "flex", gap: "5%", width: "170px" }}
+                      >
+                        <div>{detailList?.nickname}</div>
+                        {/* 소수점 첫째자리까지 반올림 */}
+                        <div>{detailList?.distance?.toFixed(1)}km</div>
+                      </div>
+                      <div>{detailList?.modifiedAt?.slice(0, 10)}</div>
+                    </div>
                   </div>
-                  <div>{detailList?.modifiedAt?.slice(0, 10)}</div>
-                </div>
+                </button>
+                <UserModal
+                  children="프로필"
+                  open={applyModal}
+                  close={closeApplyModal}
+                />
               </div>
               <div className="DetailTitleBottomEnd">
                 요청시간 : {detailList?.requestStartDate}부터 (1시간)
