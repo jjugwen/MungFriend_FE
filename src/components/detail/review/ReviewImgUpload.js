@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import imgUpload from "../../../assets/images/Modal/imgUpload.svg";
+import {
+  reveiewImgCreate,
+  reviewImgDelete,
+} from "../../../redux/modules/reviewSlice";
 
 function ReviewImgUpload() {
+  const dispatch = useDispatch();
   const [showImages, setShowImages] = useState([]);
   // 이미지 상대경로 저장
   const handleAddImages = (event) => {
@@ -20,19 +26,24 @@ function ReviewImgUpload() {
     }
     setShowImages(imageUrlLists);
   };
+  const formData = new FormData();
+  console.log(formData.append("showImages", showImages.blob));
+  // dispatch(reveiewImgCreate(currentImageUrl));
 
-  // X버튼 클릭 시 이미지 삭제
+  //클릭하면 이미지 삭제
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
     window.URL.revokeObjectURL(showImages); //blob url 삭제
   };
 
-  console.log(showImages);
+  // console.log(showImages);
 
   //이미지 전송 formdata
   const sendImg = () => {
     const formData = new FormData();
     console.log(formData.append("showImages", showImages.blob));
+    //dispatch로 리덕스에 저장하고 > writemodal에서 불러와서 다른 데이터와 함께 보내면 될 것 같다.
+    //그럼 업로드 했을 때, 저장하고, 삭제도 리덕스에서 관리하게 해주자.
   };
   return (
     <div className="addPicture" style={{ display: "flex", width: "560px" }}>
@@ -62,12 +73,12 @@ function ReviewImgUpload() {
               style={{ background: "none", border: "none" }}
               onClick={() => handleDeleteImage(id)}
             >
+              {/*이미지 누르면 삭제되도록 */}
               <Img src={image} alt={`${image}-${id}`} />
             </button>
           </div>
         ))}
       </div>
-      {/* <button onClick={sendImg}>전송</button> */}
     </div>
   );
 }
