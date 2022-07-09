@@ -7,16 +7,18 @@ import instance from "./instance";
 export const createMungAX = (mung) => {
   return async function (dispatch) {
     // await instance.post(`/api/dogs`, mung)
-      await axios.post(`http://localhost:5001/mung`,mung)
+    await axios
+      .post(`http://localhost:5001/mung`, mung)
       .then(() => dispatch(createMung(mung)));
   };
 };
-export const loadMyMungAX = ()=>{
-  return async function(dispatch) {
-    await axios.get(`http://localhost:5001/mung`)
-    .then((res)=> dispatch(loadMyMung(res.data)));
-  }
-}
+export const loadMyMungAX = () => {
+  return async function (dispatch) {
+    await axios
+      .get(`http://localhost:5001/mung`)
+      .then((res) => dispatch(loadMyMung(res.data)));
+  };
+};
 //툴킷
 const mungSlice = createSlice({
   name: "mung",
@@ -25,9 +27,9 @@ const mungSlice = createSlice({
     createMung(state, action) {
       state.mung.push(action.payload);
     },
-    loadMyMung(state,action){
+    loadMyMung(state, action) {
       state.mung = action.payload;
-    }
+    },
   },
 });
 
