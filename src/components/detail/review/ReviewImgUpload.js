@@ -12,12 +12,13 @@ function ReviewImgUpload() {
   const [showImages, setShowImages] = useState([]);
   // 이미지 상대경로 저장
   const handleAddImages = (event) => {
-    const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
-
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageUrl = window.URL.createObjectURL(imageLists[i]); //blob url 생성
+    let filelist = [];
+    for (let i = 0; i < event.target.files.length; i++) {
+      const currentImageUrl = window.URL.createObjectURL(event.target.files[i]); //blob url 생성
       imageUrlLists.push(currentImageUrl);
+      console.log(event.target.files[i]);
+      filelist[i] = event.target.files[i];
     }
 
     if (imageUrlLists.length > 3) {
@@ -25,9 +26,13 @@ function ReviewImgUpload() {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
     setShowImages(imageUrlLists);
+    console.log([...filelist]);
+    event.target.value = "";
+
+    dispatch(reveiewImgCreate([...filelist]));
   };
-  const formData = new FormData();
-  console.log(formData.append("showImages", showImages.blob));
+  // const formData = new FormData();
+  // console.log(formData.append("showImages", showImages.blob));
   // dispatch(reveiewImgCreate(currentImageUrl));
 
   //클릭하면 이미지 삭제
@@ -36,15 +41,6 @@ function ReviewImgUpload() {
     window.URL.revokeObjectURL(showImages); //blob url 삭제
   };
 
-  // console.log(showImages);
-
-  //이미지 전송 formdata
-  const sendImg = () => {
-    const formData = new FormData();
-    console.log(formData.append("showImages", showImages.blob));
-    //dispatch로 리덕스에 저장하고 > writemodal에서 불러와서 다른 데이터와 함께 보내면 될 것 같다.
-    //그럼 업로드 했을 때, 저장하고, 삭제도 리덕스에서 관리하게 해주자.
-  };
   return (
     <div className="addPicture" style={{ display: "flex", width: "560px" }}>
       <label
@@ -71,7 +67,9 @@ function ReviewImgUpload() {
           <div className="imageContainer" style={{ display: "flex" }} key={id}>
             <button
               style={{ background: "none", border: "none" }}
-              onClick={() => handleDeleteImage(id)}
+              onClick={() => {
+                handleDeleteImage(id);
+              }}
             >
               {/*이미지 누르면 삭제되도록 */}
               <Img src={image} alt={`${image}-${id}`} />

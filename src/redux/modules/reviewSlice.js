@@ -3,16 +3,17 @@ import instance from "./instance";
 import axios from "axios";
 
 //미들웨어
-export const createReviewDB = (data) => {
-  console.log(data);
+export const createReviewDB = (formData) => {
+  console.log(formData);
   return async function (dispatch) {
+    // await instance
+    //   .post("/api/reviews", formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   })
     await axios
-      .post(`http://localhost:5002/reviews/${data.id}`, {
-        comment: data.comment,
-        images: data.images,
-        applicantNickname: data.applicantNickname,
-        postId: data.id,
-      })
+      .post(`http://localhost:5002/reviews`, formData)
       .then((response) => {
         if (response.data.staus === "true") {
           dispatch(reviewCreate(response.data));
@@ -31,25 +32,24 @@ export const createReviewDB = (data) => {
 export const reviewSlice = createSlice({
   name: "reviews",
   initialState: {
-    list: [
-      {
-        comment: "후기입니다",
-        images: "imgUrl?",
-        applicantNickname: "산책시켜준 사람 닉네임",
-        postId: 3, //게시글 아이디
-      },
-    ],
+    infos: [],
+    image: [],
   },
   reducers: {
     reviewCreate(state, action) {
+      console.log(action.payload);
       state.list = action.payload;
     },
     reveiewImgCreate(state, action) {
       console.log(action.payload);
-      state.list.images = action.payload;
+      state.image = action.payload;
     },
     reviewImgDelete(state, action) {
-      state.list.images = action.payload;
+      console.log(action.payload);
+      const newImage = state.image.filter((v, i) => v[i] !== action.payload);
+      state.image = newImage;
+      // state.images = action.payload;
+      console.log(state.image);
     },
   },
 });
