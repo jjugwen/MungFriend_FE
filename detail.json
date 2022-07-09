@@ -156,6 +156,29 @@
           "postId": "리뷰가 작성된 postId",
           "comment": "리뷰 코멘트",
           "giverNickname": "리뷰 작성한 사용자 닉네임",
+          "giverDogProfileImgUrl": "https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_960_720.jpg",
+          "createdAt": "2022-06-26T22:13"
+        },
+        {
+          "id": 2,
+          "postId": "리뷰가 작성된 postId2",
+          "comment": "리뷰 코멘트2",
+          "giverNickname": "리뷰 작성한 사용자 닉네임2",
+          "giverDogProfileImgUrl": "https://cdn.pixabay.com/photo/2019/11/07/08/40/puppy-4608266_960_720.jpg",
+          "createdAt": "2022-06-26T22:13"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nickname": "신청자1",
+      "introduce": "나를 소개합니다.",
+      "reviewList": [
+        {
+          "id": 1,
+          "postId": "리뷰가 작성된 postId",
+          "comment": "리뷰 코멘트",
+          "giverNickname": "리뷰 작성한 사용자 닉네임",
           "giverDogProfileImgUrl": "https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_960_720.jpg"
         },
         {
@@ -220,6 +243,11 @@
     },
     {
       "id": 2
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1
     }
   ]
 }
