@@ -16,7 +16,7 @@ export const createPostAX = (post) => {
 //툴킷
 const postSlice = createSlice({
   name: "post",
-  initialState: { post: {} },
+  initialState: { post: [] },
   reducers: {
     createPost(state, action) {
       state.post.push(action.payload);
