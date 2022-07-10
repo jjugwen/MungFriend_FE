@@ -41,7 +41,7 @@ const Mypage = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 200px;
+  margin-top: 100px;
   
 `;
 
