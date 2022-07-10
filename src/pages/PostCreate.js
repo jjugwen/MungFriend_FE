@@ -1,18 +1,19 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { loadMyMungAX } from "../redux/modules/mungSlice";
+import instance from "../redux/modules/instance";
 import { createPostAX } from "../redux/modules/postSlice";
 
- const c = []
 function PostCreate() {
   const dispatch = useDispatch();
-  
-  React.useEffect(()=>{
-    dispatch(loadMyMungAX());
-  },[])
-
-  const dogList = useSelector((state)=> state.mungSlice.mung)
+  const [dogList, setDogList] = useState();
+  React.useEffect(() => {
+    // instance.get(`/api/dogs`)
+    axios.get(`http://localhost:5001/dogList`).then((res) => {
+      setDogList(res.data);
+    });
+  }, []);
   // console.log(dogList)
 
   const dateRef = useRef();
@@ -23,17 +24,18 @@ function PostCreate() {
   //입력창 정보
   const titleRef = useRef(null);
   const contentRef = useRef(null);
+  const dogListRef = useRef(null);
   const startHourRef = useRef(null);
   const startMinuteRef = useRef(null);
   const endHourRef = useRef(null);
   const endMinuteRef = useRef(null);
 
   const click = () => {
- 
+   
     const post = {
       title: titleRef.current.value,
       content: contentRef.current.value,
-      dogidList:c,
+      dogidList:dogListRef.current.value,
       //아이디값이 배열형태로 안담긴다 ㅠㅠ
       requestStartDate:
         dateRef.current.value +
@@ -48,19 +50,10 @@ function PostCreate() {
         ":" +
         endMinuteRef.current.value
     };
-    console.log(post)
     dispatch(createPostAX(post))
     //등록후 가야할 페이지 navigate해주기
   };
-  // const [c, setC] = useState([]);
-  // const [b,setB] = useState(0);
-  const a = (e)=>{
-    // setB(e.target.value)
-    c.push(e.target.value)
-    // console.log(e.target.value); 
-    console.log(c);
-  }
- 
+
   return (
     <>
       <div>
@@ -70,15 +63,14 @@ function PostCreate() {
         <button>추가하기</button>
       </div>
       <div className="row-box">
-
         {dogList?.map((dog, index) => {
           return (
             <Listbox key={index}>
-             <CheckBox>
-            <label htmlFor="check2">
-            <input className="checkbox2" type="checkbox" value={dog.id} onClick={a}/>
-            </label>
-        </CheckBox>
+              <CheckBox>
+                <label htmlFor="check2">
+                  <input className="checkbox2" type="radio" value={dog.id} ref={dogListRef}/>
+                </label>
+              </CheckBox>
               <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
               <div>
                 <div className="font-18">
