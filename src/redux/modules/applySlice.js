@@ -1,22 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-import axios from "axios";
+// import axios from "axios";
 
 //미들웨어
 export const createApplyDB = (data) => {
   return async function (dispatch) {
-    console.log(data);
-    await axios
-      .post(`http://localhost:5002/applies/${data.id}`, {
+    // await axios
+    //   .post(`http://localhost:5002/applies`, {
+    //     comment: data.comment,
+    //   })
+    await instance
+      .post(`/api/applies/${data.id}`, {
         comment: data.comment,
       })
-      // await instance
-      //   .post(`/api/applies/${data.id}`, {
-      //     comment: data.comment,
-      //   })
       .then((response) => {
         if (response.data.staus === "true") {
-          // console.log(response.data);
           dispatch(applyCreate(response.data));
         } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
@@ -31,14 +29,16 @@ export const createApplyDB = (data) => {
 
 export const deleteApplyDB = (id) => {
   return async function (dispatch) {
-    // await instance.delete(`/api/applies/${id}`)
-    await axios
-      .delete(`http://localhost:5002/applies/${id}`)
+    await instance
+      .delete(`/api/applies/${id}`)
+      // await axios
+      //   .delete(`http://localhost:5002/applies/${id}`)
       .then((response) => {
-        // console.log(response);
         if (response.data.status === "true") {
-          // console.log(response);
           dispatch(applyDelete(response.data));
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
         } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
         }
@@ -53,13 +53,18 @@ export const deleteApplyDB = (id) => {
 //리덕스 toolkit
 export const applySlice = createSlice({
   name: "apply",
-  initialState: { comment: "코멘트" },
+  initialState: {
+    list: [],
+  },
   reducers: {
     applyCreate(state, action) {
-      state.comment = action.payload;
+      state.list.push(action.payload);
     },
     applyDelete(state, action) {
-      state.comment = action.payload;
+      const new_comment_list = state.list.filter(
+        (v) => v.id !== action.payload.id
+      );
+      state.list = new_comment_list;
     },
   },
 });
