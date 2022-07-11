@@ -16,9 +16,34 @@ function Footer() {
             }}
           >
             <div style={sitePromise}>
-              <span>이용약관</span>
+              <span>
+                <a
+                  target="_blank"
+                  style={{
+                    color: "black",
+                    textDecoration: "none",
+                    zIndex: 3,
+                  }}
+                  href="https://protective-iodine-bc7.notion.site/bbd8abbf735140109899396c1c87dc61"
+                >
+                  이용약관
+                </a>
+              </span>
+
               <span> | </span>
-              <span>개인정보처리방침</span>
+              <span>
+                <a
+                  target="_blank"
+                  style={{
+                    color: "black",
+                    textDecoration: "none",
+                    zIndex: 3,
+                  }}
+                  href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
+                >
+                  개인정보처리방침
+                </a>
+              </span>
             </div>
             <span style={copyright}>
               Copyright ⓒ 2022 (주)멍친구 All Rights Reserved.
@@ -33,12 +58,12 @@ function Footer() {
 const FooterOutterBox = styled.div`
   width: 100% !important;
   height: 170px;
-  background-color: #f2f3f6;
+  border: 1px solid #e5e5e5;
   box-sizing: border-box;
   display: block;
   position: relative;
   bottom: 0;
-  z-index: -1;
+  z-index: 1;
 `;
 const FooterBox = styled.div`
   display: flex;
@@ -61,6 +86,7 @@ const copyright = {
   fontSize: "14px",
   lineHeight: "100%",
   color: "#7A7A80",
+  marginTop: "3.7%",
 };
 
 const sitePromise = {
