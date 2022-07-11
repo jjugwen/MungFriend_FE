@@ -71,17 +71,17 @@ function WriteModal(props) {
             </button>
             <button
               onClick={() => {
-                // console.log(applyText.current.value);
+                console.log(applyText.current.value);
                 if (children === "신청하기") {
                   dispatch(
-                    applyActions.createReviewDB({
+                    applyActions.createApplyDB({
                       comment: applyText.current.value,
                       id: params.id,
                     })
                   );
                   setTimeout(() => {
                     setTimeout(() => {
-                      window.location.reload();
+                      // window.location.reload();
                     }, 200);
                     close();
                   }, 400);
