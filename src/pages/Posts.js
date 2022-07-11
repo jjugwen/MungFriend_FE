@@ -17,12 +17,24 @@ function Posts() {
   const myMung = useSelector((state) => state.mungSlice.mung);
   // console.log(myMung);
   const Posts =useSelector((state)=>state.postSlice.post)
-  console.log(Posts)
+  // console.log(Posts)
 
   // const a = myMung.isRepresentative
   // console.log(a)
 
+    // const postImg = Posts.map((p,i)=>p.imagePath.map((p,i)=>(p)))
+    // console.log(postImg)
+
+    // for(let i=0; i<= postImg.length; i++){
+    //   console.log(postImg[i])
+    // }
+    
+    // const a = postImg.map((image,i)=> image)
+
+    // console.log(a)
+    
   return (
+    <>
     <Box className="row-box">
       {myMung?.map((dog, i) => {
         return (
@@ -41,6 +53,24 @@ function Posts() {
         );
       })}
     </Box>
+    <Container>
+      {Posts?.map((post,i)=>{
+        // console.log(post.imagePath)
+        return(
+          <div key={i}>
+            {post.imagePath.map((image,i)=>(
+              <PostImg key={i} src={image} alt=""/>    
+      ))}
+            {/* <PostImg src={post.imagePath} alt=""/> */}
+            <div>{post.nickname}</div>
+            <div>{post.requestStartDate}</div>
+            <div>신청자 {post.applyCount}</div>
+
+          </div>
+        )
+      })}
+    </Container>
+    </>
   );
 }
 
@@ -64,5 +94,14 @@ const Subimg = styled.img`
   width: 48px;
   height: 48px;
 `;
+
+const Container = styled.div`
+`
+
+const PostImg = styled.img`
+border-radius: 50%;
+width: 48px;
+height: 48px;
+`
 
 export default Posts;
