@@ -65,6 +65,7 @@ function Posts() {
             <div>{post.nickname}</div>
             <div>{post.requestStartDate}</div>
             <div>신청자 {post.applyCount}</div>
+            <div>{post.content}</div>
 
           </div>
         )

@@ -165,6 +165,7 @@
       "applyCount":22,
       "applyByMe":true,
       "isComplete":true,
+      "content":"상세내용이에요",
       "imagePath":[
         "https://ifh.cc/g/GFpGa0.png",
         "https://ifh.cc/g/j6Cb8M.jpg"
@@ -179,6 +180,7 @@
       "applyCount":2,
       "applyByMe":true,
       "isComplete":true,
+      "content":"상세내용이에요2222",
       "imagePath":[
         "https://ifh.cc/g/fcv8X4.jpg"
       ],
@@ -192,6 +194,7 @@
       "applyCount":2,
       "applyByMe":true,
       "isComplete":true,
+      "content":"상세내용입니다",
       "imagePath":[
         "https://ifh.cc/g/ttcwoL.png"
       ],
@@ -205,6 +208,7 @@
       "applyCount":2,
       "applyByMe":true,
       "isComplete":true,
+      "content":"상세내용이에요33333",
       "imagePath":[
         "https://ifh.cc/g/tBcpcD.jpg",
         "https://ifh.cc/g/B21g89.jpg"
