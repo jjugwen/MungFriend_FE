@@ -29,12 +29,12 @@ function PostCreate() {
   const endMinuteRef = useRef(null);
 
   const click = () => {
- 
+    
     const post = {
+      dogidList: c,
       title: titleRef.current.value,
       content: contentRef.current.value,
-      dogidList:c,
-      //아이디값이 배열형태로 안담긴다 ㅠㅠ
+      
       requestStartDate:
         dateRef.current.value +
         "T" +
@@ -49,18 +49,24 @@ function PostCreate() {
         endMinuteRef.current.value
     };
     console.log(post)
-    dispatch(createPostAX(post))
+    // dispatch(createPostAX(post))
     //등록후 가야할 페이지 navigate해주기
   };
   // const [c, setC] = useState([]);
   // const [b,setB] = useState(0);
   const a = (e)=>{
     // setB(e.target.value)
-    c.push(e.target.value)
+    let index = c.indexOf(e.target.value)
+    if(c.includes(e.target.value)===true){
+      c.splice(index,1)
+    }else{
+      c.push(e.target.value)
+    }
     // console.log(e.target.value); 
     console.log(c);
+  
   }
- 
+
   return (
     <>
       <div>
