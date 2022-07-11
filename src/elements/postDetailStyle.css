@@ -6,6 +6,83 @@
   margin-top: 2%;
 }
 
+.DetailTitleBottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.DetailTitleBottomStart {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  gap: 2%;
+}
+
+.NickAndDistanceAndDate {
+  display: flex;
+  flex-direction: column;
+}
+
+.betweenNickAndDistance {
+  display: flex;
+  gap: 4px;
+  width: 160px;
+}
+
+.DetailTitleBottomEnd {
+  display: flex;
+  gap: 1%;
+  width: 100%;
+  min-width: 300px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-bottom: 7px;
+}
+
+.DetailTitleBottomEnd > span {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+}
+
+/* text CSS */
+.DetailTitle {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 100%;
+  margin: 8px 0 40px 0;
+}
+.nicknameText {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+}
+.distanceText {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  color: #fa5a30;
+}
+
+.writeTimeText {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  color: #747474;
+  width: 38%;
+  margin-top: 3%;
+}
+
 /* WithDogs */
 .DogListTitle {
   font-family: "Pretendard";
@@ -13,4 +90,42 @@
   font-weight: 600;
   font-size: 30px;
   line-height: 100%;
+}
+
+.DeleteAndEditBtn {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 48px 0;
+}
+
+.clickUsermodal {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 180px;
+  /* gap: 2%; */
+  gap: 12px;
+}
+
+.MungProfileImgCircle {
+  width: 48px;
+  height: 48px;
+  background-color: green;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+/* ApplyComment */
+.ApplyCommentBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ApplyCommentText {
+  width: 100%;
+  max-width: 700px;
+  margin: 0;
 }

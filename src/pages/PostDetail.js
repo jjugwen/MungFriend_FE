@@ -10,6 +10,10 @@ import { useParams } from "react-router-dom";
 import WithDogs from "../components/detail/WithDogs";
 import WriteModal from "../components/detail/WriteModal";
 import MatchingProfile from "../components/detail/MatchingProfile";
+import UserModal from "../components/detail/userModal/UserModal";
+import Button from "../elements/Button";
+import applyIng from "../assets/images/IsComplete/모집중.svg";
+import applyEnd from "../assets/images/IsComplete/모집종료.svg";
 
 function PostDetail() {
   const params = useParams();
@@ -32,9 +36,6 @@ function PostDetail() {
   //작성자 확인 및 정보 모달 확인 시 필요
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
 
-  //신청자 정보 모달 확인 시 필요
-  const userinfo = useSelector((state) => state.userInfoSlice.userInfo);
-
   const deletePost = () => {
     dispatch(postActions.deleteDetailDB(params.id));
   };
@@ -42,74 +43,116 @@ function PostDetail() {
   useEffect(() => {
     dispatch(postActions.getDetailDB(params.id));
     dispatch(userActions.myinfoDB());
-    dispatch(userActions.userinfoDB());
   }, []);
 
   return (
     <>
       <div className="DetailOutterBox">
         <div className="DetailTitleBox">
-          <div style={{ display: "flex", gap: "1%" }}>
-            <div>{detailList?.isComplete ? "모집종료" : "모집중"}</div>{" "}
-            <div>|</div>
-            <div>신청자 {detailList?.applyList?.length}</div>
+          <div>
+            {detailList?.isComplete ? (
+              <img src={applyEnd} alt="applyEnd" />
+            ) : (
+              <img src={applyIng} alt="applyIng" />
+            )}
           </div>
+
           <h1 className="DetailTitle">{detailList?.title}</h1>
           <div>
-            <div
-              className="DetailTitleBottom"
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <div
-                className="DetailTitleBottomStart"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <MungProfileImgCircle
-                  style={{
-                    backgroundImage: `url(${detailList?.dogProfileImgUrl})`,
-                  }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
+            <div className="DetailTitleBottom">
+              <div className="clickUsermodal">
+                <UserModalBtn
+                  onClick={() => {
+                    dispatch(
+                      userActions.userinfoDB({ nickname: detailList?.nickname })
+                    );
+                    setTimeout(() => {
+                      openApplyModal();
+                    }, 500);
                   }}
                 >
-                  <div style={{ display: "flex", gap: "5%", width: "170px" }}>
-                    <div>{detailList?.nickname}</div>
-                    {/* 소수점 첫째자리까지 반올림 */}
-                    <div>{detailList?.distance?.toFixed(1)}km</div>
+                  <div className="DetailTitleBottomStart">
+                    <MungProfileImgCircle
+                      style={{
+                        backgroundImage: `url(${detailList?.dogProfileImgUrl})`,
+                      }}
+                    />
+                    <div className="NickAndDistanceAndDate">
+                      <div className="betweenNickAndDistance">
+                        <span className="nicknameText">
+                          {detailList?.nickname}
+                        </span>
+                        {/* 소수점 첫째자리까지 반올림 */}
+                        <span className="distanceText">
+                          {detailList?.distance?.toFixed(1)}km
+                        </span>
+                      </div>
+                      <span className="writeTimeText">
+                        {detailList?.modifiedAt
+                          ?.slice(0, 10) /* 시간 2022-06-26 */
+                          /* -를 .으로 2022.06.26 */
+                          .replace(/\-/g, ".")}
+                      </span>
+                    </div>
                   </div>
-                  <div>{detailList?.modifiedAt?.slice(0, 10)}</div>
-                </div>
+                </UserModalBtn>
+                <UserModal
+                  children="프로필"
+                  open={applyModal}
+                  close={closeApplyModal}
+                />
               </div>
               <div className="DetailTitleBottomEnd">
-                요청시간 : {detailList?.requestStartDate}부터 (1시간)
+                <span>
+                  신청자{" "}
+                  <span style={{ fontWeight: "500" }}>
+                    {detailList?.applyList?.length}
+                  </span>
+                </span>
+                <span>|</span>
+                <span>
+                  요청시간 :{" "}
+                  <span style={{ fontWeight: "500" }}>
+                    {detailList?.requestStartDate}부터
+                  </span>
+                  <span style={{ color: "#FA5A30" }}> (1시간)</span>
+                </span>
               </div>
             </div>
           </div>
         </div>
-        <hr />
+        <Hr />
         <div className="DetailBodyBox" style={{ height: "300px" }}>
           {detailList?.content}
         </div>
-        <hr />
+        <Hr />
         <WithDogs />
-        {myinfo?.nickname === detailList?.nickname ? (
-          detailList?.applyByMe ? (
-            <button
-              onClick={() => {
-                dispatch(applyActions.deleteApplyDB(params.id));
-                setTimeout(() => {
-                  window.location.reload();
-                }, 500);
-              }}
-            >
-              신청취소
-            </button>
+        {myinfo?.nickname === detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
+          detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                grey_small
+                margin="0 0 4.9em 0"
+                _onClick={() => {
+                  dispatch(applyActions.deleteApplyDB(params.id));
+                  setTimeout(() => {
+                    // window.location.reload();
+                  }, 500);
+                }}
+              >
+                신청취소
+              </Button>
+            </div>
           ) : (
-            <div>
-              <button onClick={openApplyModal}>신청하기</button>
+            //applyByMe가 false면 신청한 상태 : 신청하기 버튼 보이기
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                orange_small
+                margin="0 0 4.9em 0"
+                _onClick={openApplyModal}
+              >
+                신청하기
+              </Button>
               <WriteModal
                 children="신청하기"
                 open={applyModal}
@@ -117,16 +160,21 @@ function PostDetail() {
               />
             </div>
           )
-        ) : myinfo?.nickname !== detailList?.nickname &&
-          detailList?.isComplete !== false ? (
+        ) : myinfo?.nickname !== detailList?.nickname && //작성자 정보와 로그인한 유저가 같으면서,
+          detailList?.isComplete === false ? ( //모집중이면(isComplete가 true) 게시글 수정/삭제 가능
           <div>
-            <div style={{ display: "flex" }}>
-              <button onClick={deletePost}>삭제하기</button>
-              <button>수정하기</button>
+            <div className="DeleteAndEditBtn">
+              <Button grey_small _onClick={deletePost}>
+                삭제하기
+              </Button>
+              <Button orange_small _onClick={() => {}}>
+                수정하기
+              </Button>
             </div>
             <ApplyComment />
           </div>
         ) : (
+          //모집 완료(isComplete가 false)면 매칭 프로필 보이기
           <>
             <MatchingProfile />
             <ApplyComment />
@@ -138,10 +186,20 @@ function PostDetail() {
 }
 
 const MungProfileImgCircle = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  max-width: 32px;
+  height: 32px;
   background-size: cover;
   border-radius: 50%;
 `;
 
+const UserModalBtn = styled.button`
+  border: none;
+  background: none;
+`;
+
+const Hr = styled.hr`
+  border: 0.1px solid #e3e5e9;
+  width: 100%;
+`;
 export default PostDetail;

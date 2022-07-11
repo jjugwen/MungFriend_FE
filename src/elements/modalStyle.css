@@ -21,3 +21,28 @@
   max-width: 640px;
   height: 580px;
 }
+
+/* 유저 모달 창 CSS */
+.userModal {
+  position: absolute;
+  top: calc(50vh - 400px);
+  left: calc(50vw - 150px);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  height: 839px;
+}
+
+.userModal > p {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  color: green;
+}

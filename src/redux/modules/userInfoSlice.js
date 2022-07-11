@@ -13,13 +13,16 @@ export const myinfoDB = () => {
   };
 };
 
-export const userinfoDB = (id) => {
+export const userinfoDB = (nickname) => {
+  console.log(nickname);
   return async function (dispatch) {
-    // await instance.get(`/userinfo/${id}`).then((response) => {
-    await axios.get(`http://localhost:5002/userinfo`).then((response) => {
-      //   console.log(response.data);
-      dispatch(getUserInfo(response.data));
-    });
+    // await instance.get(`/userinfo`, nickname).then((response) => {
+    await axios
+      .get(`http://localhost:5002/userinfo`, nickname)
+      .then((response) => {
+        //   console.log(response.data);
+        dispatch(getUserInfo(response.data));
+      });
   };
 };
 
