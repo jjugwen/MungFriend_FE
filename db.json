@@ -193,7 +193,7 @@
       "requestEndDate": "2022.02.06T13:44",
       "applyCount":2,
       "applyByMe":true,
-      "isComplete":true,
+      "isComplete":false,
       "content":"상세내용입니다",
       "imagePath":[
         "https://ifh.cc/g/ttcwoL.png"
