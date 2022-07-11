@@ -91,8 +91,8 @@ function MyPageComponent() {
   );
 }
 const Container = styled.div`
-position: absolute;
-left: 510px;
+/* position: absolute;
+left: 510px; */
 `;
 const Profileimg =styled.img`
 width: 60px;
