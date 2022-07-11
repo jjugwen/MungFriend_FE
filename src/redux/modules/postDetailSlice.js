@@ -22,7 +22,10 @@ export const deleteDetailDB = (id) => {
         if (response.data.status === "true") {
           // console.log(response);
           dispatch(deletePostDetail(response.data));
-        } else {
+          setTimeout(() => {
+            window.location.replace("/");
+          }, 500);
+        } else if (response.data.status === "false") {
           console.log(response.data.status, response.data.message);
         }
       })
@@ -44,7 +47,8 @@ export const postDetailSlice = createSlice({
       state.list = action.payload;
     },
     deletePostDetail(state, action) {
-      state.list = action.payload;
+      const new_list = state.list.filter((v) => v.id !== action.payload.id);
+      state.list = new_list;
     },
   },
 });
