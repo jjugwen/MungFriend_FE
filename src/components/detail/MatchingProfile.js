@@ -9,9 +9,7 @@ function Matching(props) {
   const params = useParams();
   const postId = Number(params.id);
   // console.log(postId);
-  const detailList = useSelector((state) =>
-    state.postDetailSlice.list.find((post) => post.id === postId)
-  );
+  const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
   const dispatch = useDispatch();
 
@@ -47,6 +45,9 @@ function Matching(props) {
             <CancleBtn
               onClick={() => {
                 dispatch(matchActions.deleteMatchingDB(postId)); //params.id  아닌데, 변경 확인 . mockAPi axios 테스트 작동은 확인
+                setTimeout(() => {
+                  window.location.reload();
+                }, 500);
               }}
             >
               매칭취소
