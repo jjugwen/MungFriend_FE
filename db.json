@@ -1,5 +1,6 @@
 {
   "mypage": {
+    "id": 0,
     "nickname": "홍길동",
     "email": "terxt132@naver.com",
     "introduce": "255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한하기로 했어요  255자로 제한",
@@ -127,25 +128,23 @@
     }
   ],
   "dogList": [
-    {
-      "id": 0,
-      "name": "노을",
-      "gender": "여",
-      "age": 1,
-      "size": "소형",
-      "dogImageFiles": [
-        {
-          "id": 0,
-          "imageUrl": "https://ifh.cc/g/zBph8p.jpg"
-        }
-      ],
-      "isRepresentative": false
-    },
+          {
+        "id": 0,
+        "name": "노을",
+        "gender": "여",
+        "size": "소형",
+        "dogImageFiles": [
+          {
+            "id": 0,
+            "imageUrl": "https://ifh.cc/g/zBph8p.jpg"
+          }
+        ],
+        "isRepresentative": false
+      },
     {
       "id": 1,
       "name": "구름",
       "gender": "여",
-      "age": 13,
       "size": "소형",
       "dogImageFiles": [
         {
@@ -158,58 +157,58 @@
   ],
   "post": [
     {
-      "nickname":"서동현",
+      "nickname": "서동현",
       "title": "헤드라인은 두번째 줄까지 노출됩니다.",
       "requestStartDate": "2022.02.04T12:44",
       "requestEndDate": "2022.02.04T13:44",
-      "applyCount":22,
-      "applyByMe":true,
-      "isComplete":true,
-      "content":"상세내용이에요",
-      "imagePath":[
+      "applyCount": 22,
+      "applyByMe": true,
+      "isComplete": true,
+      "content": "상세내용이에요",
+      "imagePath": [
         "https://ifh.cc/g/GFpGa0.png",
         "https://ifh.cc/g/j6Cb8M.jpg"
       ],
       "id": 1
     },
     {
-      "nickname":"김형준",
+      "nickname": "김형준",
       "title": "산책메이트 구해요",
       "requestStartDate": "2022.02.06T12:44",
       "requestEndDate": "2022.02.06T13:44",
-      "applyCount":2,
-      "applyByMe":true,
-      "isComplete":true,
-      "content":"상세내용이에요2222",
-      "imagePath":[
+      "applyCount": 2,
+      "applyByMe": true,
+      "isComplete": true,
+      "content": "상세내용이에요2222",
+      "imagePath": [
         "https://ifh.cc/g/fcv8X4.jpg"
       ],
       "id": 2
     },
     {
-      "nickname":"인기천",
+      "nickname": "인기천",
       "title": "산책산책산책산책",
       "requestStartDate": "2022.02.06T12:44",
       "requestEndDate": "2022.02.06T13:44",
-      "applyCount":2,
-      "applyByMe":true,
-      "isComplete":false,
-      "content":"상세내용입니다",
-      "imagePath":[
+      "applyCount": 2,
+      "applyByMe": true,
+      "isComplete": false,
+      "content": "상세내용입니다",
+      "imagePath": [
         "https://ifh.cc/g/ttcwoL.png"
       ],
       "id": 3
     },
     {
-      "nickname":"용희님 성을 까먹었다",
+      "nickname": "용희님 성을 까먹었다",
       "title": "떡실신 몽뭉이",
       "requestStartDate": "2022.02.06T12:44",
       "requestEndDate": "2022.02.06T13:44",
-      "applyCount":2,
-      "applyByMe":true,
-      "isComplete":true,
-      "content":"상세내용이에요33333",
-      "imagePath":[
+      "applyCount": 2,
+      "applyByMe": true,
+      "isComplete": true,
+      "content": "상세내용이에요33333",
+      "imagePath": [
         "https://ifh.cc/g/tBcpcD.jpg",
         "https://ifh.cc/g/B21g89.jpg"
       ],
