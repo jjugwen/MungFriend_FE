@@ -277,11 +277,11 @@ const OrangeBtn214 = styled.button`
 
 const GreyBtn180 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   box-sizing: border-box;
   min-width: 180px;
   height: 3em;
-  background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#B8BBC0")};
+  background-color: ${(props) => (props.disabled ? "white" : "#B8BBC0")};
   border: none;
   border-radius: 4px;
   color: white;
