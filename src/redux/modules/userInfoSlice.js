@@ -14,15 +14,17 @@ export const myinfoDB = () => {
 };
 
 export const userinfoDB = (nickname) => {
-  // console.log(nickname);
+  console.log(nickname);
   return async function (dispatch) {
-    await instance.get(`/userinfo`, nickname).then((response) => {
-      // await axios
-      // .get(`http://localhost:5002/userinfo`, { nickname: nickname })
-      // .then((response) => {
-      //   console.log(response.data);
-      dispatch(UserInfoLoad(response.data));
-    });
+    await instance
+      .post(`/userinfo`, { nickname: nickname })
+      .then((response) => {
+        // await axios
+        // .get(`http://localhost:5002/userinfo`, { nickname: nickname })
+        // .then((response) => {
+        console.log(response.data);
+        dispatch(UserInfoLoad(response.data));
+      });
   };
 };
 
