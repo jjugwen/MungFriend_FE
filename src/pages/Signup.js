@@ -65,7 +65,7 @@ function Signup() {
       setUsernameCheck(true);
     }
     setUsername(e.target.value);
-    console.log(setUsername(e.target.value));
+    // console.log(setUsername(e.target.value));
   };
 
   //email 유효성 체크
@@ -179,7 +179,7 @@ function Signup() {
       instance
         .post("/member/signup", data)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           if (response.data.status === "true") {
             console.log(response.data.message);
             navigate("/signupsuccess");
@@ -405,6 +405,7 @@ const postCodeStyle = {
   border: "2px solid #d2d2d2",
   position: "absolute",
   // backgroundColor: "orange",
+  zIndex: "3",
 };
 
 export default Signup;
