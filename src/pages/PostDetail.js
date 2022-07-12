@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ApplyComment from "../components/detail/ApplyComment";
-import styled from "styled-components";
-import "../elements/postDetailStyle.css";
-import { actionCreators as postActions } from "../redux/modules/postDetailSlice";
-import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
-import { actionCreators as applyActions } from "../redux/modules/applySlice";
 import { useParams } from "react-router-dom";
+//컴포넌트
+import ApplyComment from "../components/detail/ApplyComment";
 import WithDogs from "../components/detail/WithDogs";
 import WriteModal from "../components/detail/WriteModal";
 import MatchingProfile from "../components/detail/MatchingProfile";
 import UserModal from "../components/detail/userModal/UserModal";
+import { betweenTime } from "../components/detail/TimeCalculator";
+//CSS
+import styled from "styled-components";
+import "../elements/postDetailStyle.css";
 import Button from "../elements/Button";
 import applyIng from "../assets/images/IsComplete/모집중.svg";
 import applyEnd from "../assets/images/IsComplete/모집종료.svg";
+//미들웨어
+import { actionCreators as postActions } from "../redux/modules/postDetailSlice";
+import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
+import { actionCreators as applyActions } from "../redux/modules/applySlice";
 
 function PostDetail() {
   const params = useParams();
-  const postId = params.id - 1;
-  // const postId = params.id; //전체 페이지 나오면 -1 지정 안하는 게 맞는 듯.
+  const postId = Number(params.id); //숫자로 변환해야 읽힘.
   // console.log(postId);
   const dispatch = useDispatch();
-  const detailListRoot = useSelector((state) => state.postDetailSlice.list);
-  const detailList = detailListRoot[postId];
+  const detailList = useSelector((state) =>
+    state.postDetailSlice.list.find((post) => post.id === postId)
+  );
   // console.log(detailList);
-  //신청하기 모달창
+
+  //신청하기 모달창 여닫기
   const [applyModal, setApplyModal] = useState(false);
   const openApplyModal = () => {
     setApplyModal(true);
@@ -33,8 +38,19 @@ function PostDetail() {
     setApplyModal(false);
   };
 
+  //유정정보 모달창 여닫기
+  const [userModal, setUserModal] = useState(false);
+  const openUserModal = () => {
+    setUserModal(true);
+  };
+  const closeUserModal = () => {
+    setUserModal(false);
+  };
+
   //작성자 확인 및 정보 모달 확인 시 필요
-  const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
+  // const myinfo = useSelector((state) => state.userInfoSlice.myInfo); //로컬스토리지로 닉네임 가져오기로. MockAPI test 시에는 myinfo 정보 필요할 수도.
+  const loginNickname = localStorage.getItem("nickname");
+  // console.log(loginNickname);
 
   const deletePost = () => {
     dispatch(postActions.deleteDetailDB(params.id));
@@ -42,8 +58,8 @@ function PostDetail() {
 
   useEffect(() => {
     dispatch(postActions.getDetailDB(params.id));
-    dispatch(userActions.myinfoDB());
-  }, []);
+    // dispatch(userActions.myinfoDB());
+  }, [dispatch, params.id]);
 
   return (
     <>
@@ -64,10 +80,10 @@ function PostDetail() {
                 <UserModalBtn
                   onClick={() => {
                     dispatch(
-                      userActions.userinfoDB({ nickname: detailList?.nickname })
+                      userActions.userinfoDB({ nickname: loginNickname })
                     );
                     setTimeout(() => {
-                      openApplyModal();
+                      openUserModal();
                     }, 500);
                   }}
                 >
@@ -91,15 +107,15 @@ function PostDetail() {
                         {detailList?.modifiedAt
                           ?.slice(0, 10) /* 시간 2022-06-26 */
                           /* -를 .으로 2022.06.26 */
-                          .replace(/\-/g, ".")}
+                          .replace(/-/g, ".")}
                       </span>
                     </div>
                   </div>
                 </UserModalBtn>
                 <UserModal
                   children="프로필"
-                  open={applyModal}
-                  close={closeApplyModal}
+                  open={userModal}
+                  close={closeUserModal}
                 />
               </div>
               <div className="DetailTitleBottomEnd">
@@ -113,9 +129,22 @@ function PostDetail() {
                 <span>
                   요청시간 :{" "}
                   <span style={{ fontWeight: "500" }}>
-                    {detailList?.requestStartDate}부터
+                    {detailList?.requestStartDate
+                      ?.slice(0, 10)
+                      .replace(/-/g, ".")}{" "}
+                    {detailList?.requestStartDate?.split("T")[1].split(":")[0]}
+                    시{" "}
+                    {detailList?.requestStartDate?.split("T")[1].split(":")[1]}
+                    분부터
                   </span>
-                  <span style={{ color: "#FA5A30" }}> (1시간)</span>
+                  <span style={{ color: "#FA5A30" }}>
+                    (
+                    {betweenTime({
+                      EndTime: detailList?.requestEndDate,
+                      StartTime: detailList?.requestStartDate,
+                    })}
+                    )
+                  </span>
                 </span>
               </div>
             </div>
@@ -127,7 +156,7 @@ function PostDetail() {
         </div>
         <Hr />
         <WithDogs />
-        {myinfo?.nickname === detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
+        {loginNickname === detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
@@ -135,9 +164,6 @@ function PostDetail() {
                 margin="0 0 4.9em 0"
                 _onClick={() => {
                   dispatch(applyActions.deleteApplyDB(params.id));
-                  setTimeout(() => {
-                    // window.location.reload();
-                  }, 500);
                 }}
               >
                 신청취소
@@ -160,7 +186,7 @@ function PostDetail() {
               />
             </div>
           )
-        ) : myinfo?.nickname !== detailList?.nickname && //작성자 정보와 로그인한 유저가 같으면서,
+        ) : loginNickname === detailList?.nickname && //작성자 정보와 로그인한 유저가 같으면서,
           detailList?.isComplete === false ? ( //모집중이면(isComplete가 true) 게시글 수정/삭제 가능
           <div>
             <div className="DeleteAndEditBtn">
