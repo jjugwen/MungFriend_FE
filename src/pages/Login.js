@@ -6,6 +6,7 @@ import "../elements/LoginSignupStyle.css";
 import { loginDB } from "../redux/modules/loginAxios";
 import kakaoLoginBtn from "../assets/images/login/kakao_login_medium_wide.png";
 import googleLoginBtn from "../assets/images/login/btn_google_signin_light_focus_web@2x.png";
+import Logo from "../assets/images/login/mungfreindLogo.svg";
 
 function Login() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function Login() {
   return (
     <>
       <div className="SignupOutterBox">
-        <div className="LoginLogo">logo</div>
+        <img src={Logo} alt="logo" />
         <div
           style={{
             display: "flex",
