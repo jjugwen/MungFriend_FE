@@ -48,8 +48,8 @@ export const postDetailSlice = createSlice({
       state.list = action.payload;
     },
     deletePostDetail(state, action) {
-      const new_list = state.list.filter((v) => v.id !== action.payload.id);
-      state.list = new_list;
+      // const new_list = state.list.filter((v) => v.id !== action.payload.id);
+      state.list = action.payload;
     },
   },
 });
