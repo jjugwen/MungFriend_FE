@@ -18,7 +18,7 @@ export const userinfoDB = (nickname) => {
   return async function (dispatch) {
     // await instance.get(`/userinfo`, nickname).then((response) => {
     await axios
-      .get(`http://localhost:5002/userinfo`, nickname)
+      .get(`http://localhost:5002/userinfo`, { nickname: nickname })
       .then((response) => {
         //   console.log(response.data);
         dispatch(getUserInfo(response.data));
