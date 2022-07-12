@@ -8,13 +8,14 @@ import styled from "styled-components";
 
 function DogList() {
   const params = useParams();
-  const postId = params.id - 1;
+  const postId = Number(params.id);
   const dispatch = useDispatch();
-  const detailListRoot = useSelector((state) => state.postDetailSlice.list);
-  const detailList = detailListRoot[postId];
+  const detailList = useSelector((state) =>
+    state.postDetailSlice.list.find((post) => post.id === postId)
+  );
   // console.log(detailList);
   useEffect(() => {
-    dispatch(Actions.getDetailDB(params.id));
+    dispatch(Actions.getDetailDB(postId));
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import { actionCreators as applyActions } from "../../redux/modules/applySlice";
 import { actionCreators as reviewActions } from "../../redux/modules/reviewSlice";
 import "../../elements/modalStyle.css";
 import ReviewImgUpload from "./review/ReviewImgUpload";
-import { reviewCreate } from "../../redux/modules/reviewSlice";
+import Button from "../../elements/Button";
 
 function WriteModal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -14,13 +14,12 @@ function WriteModal(props) {
   const applyText = useRef(null);
   const dispatch = useDispatch();
   const params = useParams();
-  const postId = params.id;
+  const postId = Number(params.id);
   const image = useSelector((state) => state.reviewSlice.image);
   // console.log(image);
-  const detailListRoot = useSelector((state) => state.postDetailSlice.list);
-  const detailList = detailListRoot[postId];
-  // const list = useSelector((state) => state.reviewSlice.list);
-  // console.log(list);
+  const detailList = useSelector((state) =>
+    state.postDetailSlice.list.find((post) => post.id === postId)
+  );
   // console.log(detailList);
   // 데이터 formData로 보내기
   const addReview = async () => {
@@ -37,12 +36,13 @@ function WriteModal(props) {
     const blob = new Blob([json], { type: "application/json" });
     formData.append("infos", blob);
     dispatch(reviewActions.createReviewDB(formData));
+    for (const value of formData) console.log(value);
   };
 
   return (
     <div className={open ? "openModalcss" : null}>
       {open ? (
-        <div className="modal">
+        <div className="Reviewmodal">
           <ModalTitle>{children}</ModalTitle>
           <hr
             style={{
@@ -53,30 +53,32 @@ function WriteModal(props) {
             }}
           />
           {children === "후기작성" ? <ReviewImgUpload /> : null}
-          <hr style={{ width: "90%" }} />
+          {children === "후기작성" ? <Hr /> : null}
           <ModalInput
             type="text"
             placeholder="내용을 입력해주세요."
             ref={applyText}
           />
-          <hr style={{ width: "90%" }} />
-          <div style={{ display: "flex" }}>
-            <button
+          <Hr />
+          <div style={{ display: "flex", gap: "12px", padding: "40px" }}>
+            <Button
+              white_large
               className="close"
-              onClick={() => {
+              _onClick={() => {
                 close();
               }}
             >
               취소
-            </button>
-            <button
-              onClick={() => {
+            </Button>
+            <Button
+              orange_large
+              _onClick={(e) => {
                 console.log(applyText.current.value);
                 if (children === "신청하기") {
                   dispatch(
                     applyActions.createApplyDB({
                       comment: applyText.current.value,
-                      id: params.id,
+                      id: postId,
                     })
                   );
                   setTimeout(() => {
@@ -87,15 +89,19 @@ function WriteModal(props) {
                   }, 400);
                 }
                 if (children === "후기작성") {
+                  // if (image.length >= 3) {
+                  //   alert("사진은 최대 3장만 올릴 수 있어요 :)");
+                  // } else {
                   addReview();
                   setTimeout(() => {
                     close();
                   }, 300);
+                  // }
                 }
               }}
             >
               확인
-            </button>
+            </Button>
           </div>
         </div>
       ) : null}
@@ -105,7 +111,7 @@ function WriteModal(props) {
 
 const ModalInput = styled.textarea`
   width: 90%;
-  height: 348px;
+  height: 345px;
   border: none;
   vertical-align: top;
   text-align: left;
@@ -119,6 +125,11 @@ const ModalTitle = styled.h1`
   font-weight: 600;
   font-size: 24px;
   line-height: 100%;
+`;
+
+const Hr = styled.hr`
+  width: 90%;
+  border: 1px solid #e5e5e5;
 `;
 
 export default WriteModal;
