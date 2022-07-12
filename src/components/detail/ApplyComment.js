@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as Actions } from "../../redux/modules/postDetailSlice";
 import { actionCreators as matchActions } from "../../redux/modules/matchingSlice";
 import { actionCreators as userActions } from "../../redux/modules/userInfoSlice";
 import { useParams } from "react-router-dom";
 import UserModal from "../../components/detail/userModal/UserModal";
 import styled from "styled-components";
 import Button from "../../elements/Button";
+import { timeForToday } from "./TimeCalculator";
 
 function ApplyComment() {
   const params = useParams();
-  const postId = params.id - 1;
+  const postId = Number(params.id);
   const dispatch = useDispatch();
-  const detailListroot = useSelector((state) => state.postDetailSlice.list);
-  const detailList = detailListroot[postId];
+  const detailList = useSelector((state) =>
+    state.postDetailSlice.list.find((post) => post.id === postId)
+  );
+  // console.log(detailList);
 
   //신청하기 모달창
   const [applyModal, setApplyModal] = useState(false);
@@ -24,25 +26,22 @@ function ApplyComment() {
     setApplyModal(false);
   };
 
-  useEffect(() => {
-    dispatch(Actions.getDetailDB(params.id));
-  }, [params.id]);
-
   return (
     <>
-      <h1>신청자 댓글</h1>
-      <span>총 {detailList?.applyCount}개</span>
+      <h1 className="DetailTitle">신청자 댓글</h1>
+      <span>
+        총 <span style={{ color: "#FA5A30" }}>{detailList?.applyCount}</span>개
+      </span>
       <hr />
       {detailList?.applyList?.map((value) => {
         return (
           <div key={value.id}>
             <div className="ApplyCommentBox">
-              {/* <div className="clickUsermodal"> */}
               <UserModalBtn
                 onClick={() => {
                   dispatch(
                     userActions.userinfoDB({
-                      nickname: detailList?.nickname,
+                      nickname: value.nickname,
                     })
                   );
                   setTimeout(() => {
@@ -59,12 +58,7 @@ function ApplyComment() {
                   />
                   <div className="NickAndDistanceAndDate">
                     <p>{value.nickname}</p>
-                    <span>
-                      {value.createdAt
-                        ?.slice(5, 10) /* 시간 2022-06-26 */
-                        /* -를 .으로 2022.06.26 */
-                        .replace(/\-/g, ".")}
-                    </span>
+                    <span>{timeForToday(value.createdAt)}</span>
                   </div>
                 </div>
               </UserModalBtn>
@@ -95,7 +89,7 @@ function ApplyComment() {
                 </Button>
               )}
             </div>
-            <hr />
+            <Hr />
           </div>
         );
       })}
@@ -125,6 +119,11 @@ const UserModalBtn = styled.button`
     line-height: 100%;
     color: #7a7a80;
   }
+`;
+
+const Hr = styled.hr`
+  border: 0.1px solid #e3e5e9;
+  width: 100%;
 `;
 
 export default ApplyComment;
