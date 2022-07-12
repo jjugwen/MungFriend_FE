@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+// import axios from "axios";
 import instance from "./instance";
 
 //미들웨어
-export const getDetailDB = () => {
+export const getDetailDB = (id) => {
   return async function (dispatch) {
-    // await instance.get(`/api/posts/${id}`).then((response) => {
-    await axios.get(`http://localhost:5002/detail/`).then((response) => {
+    await instance.get(`/api/posts/${id}`).then((response) => {
+      // await axios.get(`http://localhost:5002/detail/`).then((response) => {
       // console.log(response.data);
       dispatch(loadPostDetail(response.data));
     });
@@ -15,9 +15,10 @@ export const getDetailDB = () => {
 
 export const deleteDetailDB = (id) => {
   return async function (dispatch) {
-    // await instance.delete(`/api/posts/${id}`)
-    await axios
-      .delete(`http://localhost:5002/detail/${id}`)
+    await instance
+      .delete(`/api/posts/${id}`)
+      // await axios
+      // .delete(`http://localhost:5002/detail/${id}`)
       .then((response) => {
         if (response.data.status === "true") {
           // console.log(response);

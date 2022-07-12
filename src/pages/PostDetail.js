@@ -53,13 +53,12 @@ function PostDetail() {
   // console.log(loginNickname);
 
   const deletePost = () => {
-    dispatch(postActions.deleteDetailDB(params.id));
+    dispatch(postActions.deleteDetailDB(postId));
   };
 
   useEffect(() => {
-    dispatch(postActions.getDetailDB(params.id));
-    // dispatch(userActions.myinfoDB());
-  }, [dispatch, params.id]);
+    dispatch(postActions.getDetailDB(postId));
+  }, [dispatch, postId]);
 
   return (
     <>
@@ -156,14 +155,14 @@ function PostDetail() {
         </div>
         <Hr />
         <WithDogs />
-        {loginNickname === detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
+        {loginNickname !== detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 grey_small
                 margin="0 0 4.9em 0"
                 _onClick={() => {
-                  dispatch(applyActions.deleteApplyDB(params.id));
+                  dispatch(applyActions.deleteApplyDB(postId));
                 }}
               >
                 신청취소
@@ -187,7 +186,7 @@ function PostDetail() {
             </div>
           )
         ) : loginNickname === detailList?.nickname && //작성자 정보와 로그인한 유저가 같으면서,
-          detailList?.isComplete === false ? ( //모집중이면(isComplete가 true) 게시글 수정/삭제 가능
+          detailList?.isComplete ? ( //모집중이면(isComplete가 true) 게시글 수정/삭제 가능
           <div>
             <div className="DeleteAndEditBtn">
               <Button grey_small _onClick={deletePost}>

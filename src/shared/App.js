@@ -27,13 +27,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupsuccess" element={<SignupSuccess />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/mypage" element={!token ? <Mypage /> : <Error />} />
-        <Route path="/posts" element={!token ? <Posts /> : <Error />} />
+        <Route path="/mypage" element={token ? <Mypage /> : <Error />} />
+        <Route path="/posts" element={token ? <Posts /> : <Error />} />
         <Route path="/postcreate" element={<PostCreate />} />
-        <Route
-          path="/posts/:id"
-          element={!token ? <PostDetail /> : <Error />}
-        />
+        <Route path="/posts/:id" element={token ? <PostDetail /> : <Error />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
         <Route path="/test" element={<DogPlusModal />} />

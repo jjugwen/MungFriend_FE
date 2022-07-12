@@ -1,22 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-import axios from "axios";
+// import axios from "axios";
 
 //미들웨어
 export const createReviewDB = (formData) => {
   console.log(formData);
   return async function (dispatch) {
-    // await instance
-    //   .post("/api/reviews", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   })
-    await axios
-      .post(`http://localhost:5002/reviews`, formData)
+    await instance
+      .post("/api/reviews", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      // await axios
+      //   .post(`http://localhost:5002/reviews`, formData)
       .then((response) => {
         if (response.data.staus === "true") {
           dispatch(reviewCreate(response.data));
+          // window.location.replace('/');
         } else if (response.data.staus === "false") {
           console.log(response.data.message);
         }
@@ -33,22 +34,17 @@ export const reviewSlice = createSlice({
   name: "reviews",
   initialState: {
     infos: [],
-    image: [],
+    image: "",
   },
   reducers: {
     reviewCreate(state, action) {
       console.log(action.payload);
-      state.list = action.payload;
+      state.infos.push(action.payload);
     },
     reveiewImgCreate(state, action) {
       console.log(action.payload);
+      // state.image.push(action.payload);
       state.image = action.payload;
-    },
-    reviewImgDelete(state, action) {
-      console.log(action.payload);
-      const newImage = state.image.filter((v, i) => v[i] !== action.payload);
-      state.image = newImage;
-      // state.images = action.payload;
       console.log(state.image);
     },
   },
