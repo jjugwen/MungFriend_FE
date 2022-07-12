@@ -2,64 +2,62 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { actionCreators as userActions } from "../../../redux/modules/userInfoSlice";
+import Button from "../../../elements/Button";
 
 function UserModal(props) {
   const { open, close, children } = props;
   //신청자 정보 모달 확인 시 필요
   const userInfoRoot = useSelector((state) => state.userInfoSlice.userInfo);
   const userInfo = userInfoRoot[0];
-  console.log(userInfo);
-  const dispatch = useDispatch();
+  // console.log(userInfo);
 
-  useEffect(() => {
-    dispatch(userActions.userinfoDB());
-  }, []);
   return (
     <div className={open ? "openModalcss" : null}>
       {open ? (
         <div className="userModal">
-          <ModalTitle>{children}</ModalTitle>
+          <ModalTitle style={{ textAlign: "center" }}>{children}</ModalTitle>
           <p>닉네임</p>
           <div className="userNickname">{userInfo?.nickname}</div>
           <p>자기소개</p>
           <div className="userIntroduce">{userInfo?.introduce}</div>
           <p>후기리스트</p>
-          {userInfo?.reviewList?.map((v) => {
-            return (
-              <div key={v.id}>
-                <div
-                  className="reviewList"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  <MungProfileImgCircle
-                    style={{
-                      backgroundImage: `url(${v.giverDogProfileImgUrl})`,
-                    }}
-                  />
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <div style={{ display: "flex", gap: "5%", width: "170px" }}>
-                      <div>{v.giverNickname}</div>
+          <div className="reviewListBox">
+            {userInfo?.reviewList?.slice(0, 2).map((value) => {
+              return (
+                <div key={value.id}>
+                  <div className="reviewList">
+                    <div className="clickUsermodal">
+                      <div
+                        className="MungProfileImgCircle"
+                        style={{
+                          backgroundImage: `url(${value.giverDogProfileImgUrl})`,
+                        }}
+                      />
+                      <div className="NickAndDistanceAndDate">
+                        <span className="nicknameText">
+                          {value.giverNickname}
+                        </span>
+                        <span className="writeTimeText">
+                          {value.createdAt?.slice(0, 10).replace(/\-/g, ".")}
+                        </span>
+                      </div>
                     </div>
-                    <div>{v.createdAt?.slice(0, 10)}</div>
+                    <p>{value.comment.slice(0, 52)}</p>
                   </div>
                 </div>
-                <div>{v.comment}</div>
-              </div>
-            );
-          })}
-          <button
-            className="close"
-            onClick={() => {
-              close();
-            }}
-          >
-            확인
-          </button>
+              );
+            })}
+          </div>
+          <div style={{ margin: "5% 133px" }}>
+            <Button
+              orange_large
+              _onClick={() => {
+                close();
+              }}
+            >
+              확인
+            </Button>
+          </div>
         </div>
       ) : null}
     </div>
@@ -74,10 +72,4 @@ const ModalTitle = styled.h1`
   line-height: 100%;
 `;
 
-const MungProfileImgCircle = styled.div`
-  width: 40px;
-  height: 40px;
-  background-size: cover;
-  border-radius: 50%;
-`;
 export default UserModal;

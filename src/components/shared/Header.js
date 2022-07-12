@@ -91,7 +91,7 @@ function Header() {
               커뮤니티
             </HeadButton>
           </div>
-          {token ? (
+          {!token ? (
             <div className="beforeLogin">
               <HeadButton
                 onClick={() => {
@@ -158,6 +158,11 @@ const HeaderBox = styled.div`
 const HeadButton = styled.button`
   border: none;
   background-color: transparent;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
 `;
 
 const AfterLogin = {

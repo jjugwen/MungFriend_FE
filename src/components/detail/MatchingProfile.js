@@ -7,104 +7,60 @@ import WriteModal from "./WriteModal";
 
 function Matching(props) {
   const params = useParams();
-  const postId = params.id - 1;
-  // const postId = params.id; //전체 페이지 나오면 -1 지정 안하는 게 맞는 듯.
+  const postId = Number(params.id);
   // console.log(postId);
-  const detailListRoot = useSelector((state) => state.postDetailSlice.list);
-  const detailList = detailListRoot[postId];
+  const detailList = useSelector((state) =>
+    state.postDetailSlice.list.find((post) => post.id === postId)
+  );
   // console.log(detailList);
   const dispatch = useDispatch();
-  //postID 아니고 , 선택한 applyList 번호 ... 리덕스/악시오스로 보내고 가져와야? 리덕스로 가져올 수 있을 듯.
-  const now = new Date();
-  // console.log(detailList.requestEndDate);
-  // console.log(now);
-  // console.log(detailList?.requestEndDate - now);
 
   //후기작성하기 모달창
-  const [applyModal, setApplyModal] = useState(false);
-  const openApplyModal = () => {
-    setApplyModal(true);
+  const [Modal, setModal] = useState(false);
+  const openModal = () => {
+    setModal(true);
   };
-  const closeApplyModal = () => {
-    setApplyModal(false);
+  const closeModal = () => {
+    setModal(false);
   };
 
   return (
     <>
       <Container>
         <div className="header">
-          <div className="font-20">
-            <b className="DogListTitle">매칭한 프로필</b>
-          </div>
+          <h1 className="DetailTitle">매칭한 프로필</h1>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            margin: "0 2% auto",
-          }}
-        >
-          <Listbox>
-            <DogImg
-              src={detailList?.applyList[postId]?.dogProfileImgUrl}
-              alt="dogimg"
-            />
+
+        <Listbox>
+          <DogImg
+            src={detailList?.applyList[postId]?.dogProfileImgUrl}
+            alt="dogimg"
+          />
+          <p>{detailList?.applyList[postId]?.nickname}</p>
+          {/* {detailList?.requestEndDate ? ( */}
+          {2 > 0 ? (
             <div>
-              <div className="font-18">
-                {detailList?.applyList[postId]?.nickname}
-              </div>
+              <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
+              <WriteModal children="후기작성" open={Modal} close={closeModal} />
             </div>
-            {/* {detailList?.requestEndDate ? ( */}
-            {2 > 0 ? (
-              <div>
-                <button onClick={openApplyModal}>후기작성</button>
-                <WriteModal
-                  children="후기작성"
-                  open={applyModal}
-                  close={closeApplyModal}
-                />
-              </div>
-            ) : (
-              <button
-                onClick={() => {
-                  dispatch(matchActions.deleteMatchingDB(params.id)); //params.id  아닌데, 변경 확인 . mockAPi axios 테스트 작동은 확인
-                }}
-              >
-                <span>매칭취소</span>
-              </button>
-            )}
-          </Listbox>
-        </div>
+          ) : (
+            <CancleBtn
+              onClick={() => {
+                dispatch(matchActions.deleteMatchingDB(postId)); //params.id  아닌데, 변경 확인 . mockAPi axios 테스트 작동은 확인
+              }}
+            >
+              매칭취소
+            </CancleBtn>
+          )}
+        </Listbox>
       </Container>
     </>
   );
 }
 const Container = styled.div`
-  flex-direction: row;
-  width: 706px;
-  height: auto;
-
-  .header {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .font-20 {
-    font-size: 20px;
-  }
-  .font-18 {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .font-16 {
-    font-size: 16px;
-  }
-  .font-14 {
-    font-size: 14px;
-    color: #a4a4a4;
-    padding: 5px;
-    margin-top: 5px;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 8.4% 0; //80px
 `;
 
 const DogImg = styled.img`
@@ -114,40 +70,55 @@ const DogImg = styled.img`
 `;
 
 const Listbox = styled.div`
-  width: 900px;
-  height: 80px;
+  width: 100%;
+  max-width: 28.7em;
+  /* max-width: 460px; */
+  padding: 2.24%; //1.25em //20px
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  :hover {
-    border: 1px solid black;
-  }
-  border-radius: 12px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
 
-  button {
-    background-color: #b8bbc0;
-    border-radius: 4px;
-    border: none;
-    width: 65px;
-    height: 30px;
-  }
-  b {
+  box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
+  border-radius: 8px;
+
+  p {
+    margin: 0 30% 0 12px;
     font-family: "Pretendard";
     font-style: normal;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 100%;
-    color: #ffffff;
+    width: 200px;
+    color: #121212;
   }
-  span {
-    font-family: "Pretendard";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 100%;
-    color: red;
-  }
+`;
+
+const ReviewBtn = styled.button`
+  background-color: #fa5a30;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  width: 65px;
+  height: 30px;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+`;
+
+const CancleBtn = styled.button`
+  background-color: #b8bbc0;
+  border-radius: 4px;
+  border: none;
+  width: 65px;
+  height: 30px;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  color: white;
 `;
 export default Matching;

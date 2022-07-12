@@ -14,7 +14,8 @@ function HeaderModal() {
   //로그인 유저
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
   // console.log(myinfo);
-  const [change, setChange] = useState(<MyPageComponent />);
+  const [change, setChange] = useState("");
+
   const Logout = () => {
     localStorage.clear();
     setTimeout(() => {
@@ -40,10 +41,8 @@ function HeaderModal() {
           </span>
           <span
             onClick={() => {
-              navigate("/mypage");
-              // setTimeout(() => {
-              //   setChange(<MyPostList />);
-              // }, 500);
+              navigate("/mypage?value=1");
+              // setChange(<MyPostList />);
             }}
           >
             작성한 게시글
@@ -51,14 +50,18 @@ function HeaderModal() {
           <span
             onClick={() => {
               navigate("/mypage");
-              // setChange(<MyReviewList />);
+
+              setTimeout(() => {
+                setChange(<MyReviewList />);
+              }, 500);
             }}
           >
-            내가 받은 후기
+            내가 받은 후기 {change}
           </span>
+
           <hr />
         </UpperBox>
-        {/* {change} */}
+
         <Logoutbtn
           onClick={() => {
             console.log("로그아웃!");

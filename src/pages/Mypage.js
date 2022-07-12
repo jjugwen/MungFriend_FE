@@ -10,23 +10,28 @@ import MyReviewList from "../components/MyReviewList";
 const Mypage = () => {
   let [change, setChange] = useState(<MyPageComponent />);
 
-
   return (
     <Container>
-      
       <ListBar>
         <button
           onClick={(e) => {
             setChange(<MyPageComponent />);
-            }}>
+          }}
+        >
           마이페이지
         </button>
         <button
-          onClick={() => {setChange(<MyPostList />);}}>
+          onClick={() => {
+            setChange(<MyPostList />);
+          }}
+        >
           작성한 게시글
         </button>
         <button
-          onClick={() => {setChange(<MyReviewList />);}}>
+          onClick={() => {
+            setChange(<MyReviewList />);
+          }}
+        >
           후기 리스트
         </button>
       </ListBar>
@@ -36,13 +41,10 @@ const Mypage = () => {
   );
 };
 
-
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 100px;
-  
 `;
 
 const ListBar = styled.div`
@@ -51,7 +53,7 @@ const ListBar = styled.div`
   width: 200px;
   height: 50vh;
   background-color: gold;
-  button{
+  button {
     border: none;
     background-color: transparent;
     padding: 10px;

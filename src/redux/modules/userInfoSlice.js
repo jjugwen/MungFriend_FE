@@ -1,28 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-import axios from "axios";
+// import axios from "axios";
 
 //미들웨어
 export const myinfoDB = () => {
   return async function (dispatch) {
-    // await instance.get(`/myinfo`).then((response) => {
-    await axios.get(`http://localhost:5002/myinfo`).then((response) => {
+    await instance.get(`/myinfo`).then((response) => {
+      // await axios.get(`http://localhost:5002/myinfo`).then((response) => {
       //   console.log(response.data);
-      dispatch(getMyInfo(response.data));
+      dispatch(MyInfoLoad(response.data));
     });
   };
 };
 
 export const userinfoDB = (nickname) => {
-  console.log(nickname);
+  // console.log(nickname);
   return async function (dispatch) {
-    // await instance.get(`/userinfo`, nickname).then((response) => {
-    await axios
-      .get(`http://localhost:5002/userinfo`, nickname)
-      .then((response) => {
-        //   console.log(response.data);
-        dispatch(getUserInfo(response.data));
-      });
+    await instance.get(`/userinfo`, nickname).then((response) => {
+      // await axios
+      // .get(`http://localhost:5002/userinfo`, { nickname: nickname })
+      // .then((response) => {
+      //   console.log(response.data);
+      dispatch(UserInfoLoad(response.data));
+    });
   };
 };
 
@@ -34,15 +34,15 @@ export const userInfoSlice = createSlice({
     userInfo: [],
   },
   reducers: {
-    getMyInfo(state, action) {
+    MyInfoLoad(state, action) {
       state.myInfo = action.payload;
     },
-    getUserInfo(state, action) {
+    UserInfoLoad(state, action) {
       state.userInfo = action.payload;
     },
   },
 });
 
 export const actionCreators = { myinfoDB, userinfoDB };
-export const { getMyInfo, getUserInfo } = userInfoSlice.actions;
+export const { MyInfoLoad, UserInfoLoad } = userInfoSlice.actions;
 export default userInfoSlice.reducer;

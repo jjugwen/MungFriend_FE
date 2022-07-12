@@ -8,77 +8,59 @@ import styled from "styled-components";
 
 function DogList() {
   const params = useParams();
-  const postId = params.id - 1;
+  const postId = Number(params.id);
   const dispatch = useDispatch();
-  const detailListRoot = useSelector((state) => state.postDetailSlice.list);
-  const detailList = detailListRoot[postId];
+  const detailList = useSelector((state) =>
+    state.postDetailSlice.list.find((post) => post.id === postId)
+  );
   // console.log(detailList);
   useEffect(() => {
-    dispatch(Actions.getDetailDB(params.id));
+    dispatch(Actions.getDetailDB(postId));
   }, []);
 
   return (
     <Container>
       <div className="header">
-        <div className="font-20">
-          <b className="DogListTitle">함께하는 멍친구</b>
-        </div>
+        <h1 className="DetailTitle">함께하는 멍친구</h1>
       </div>
-      {detailList?.dogList?.map((dog) => {
-        return (
-          <div
-            key={dog.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              margin: "0 2% auto",
-            }}
-          >
-            <Listbox>
-              <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
-              <div>
-                <div className="font-18">
-                  {dog.name} {dog.gender === "여" ? "♀" : "♂"}
-                </div>
-                <div style={{ display: "flex", gap: "5%", width: "100px" }}>
-                  {dog.age}세<div className="font-16">{dog.size}견</div>
+      <ListOutterBox>
+        {detailList?.dogList?.map((dog) => {
+          return (
+            <Listbox key={dog.id}>
+              <div className="betweenDogPicAndDogInfo">
+                <DogImg src={dog.dogImageFiles[0].imageUrl} alt="dogUrl" />
+                <div style={{ width: "100%", minWidth: "80px" }}>
+                  <div className="WithDogsDogName">
+                    {dog.name}{" "}
+                    {dog.gender === "여" ? (
+                      <span style={{ color: "#FA5A30" }}>♀</span>
+                    ) : (
+                      <span style={{ color: "#4F65FF" }}>♂</span>
+                    )}
+                  </div>
+                  <span className="WithDogsAgeAndSize">
+                    {dog.age}세, {dog.size}견
+                  </span>
                 </div>
               </div>
             </Listbox>
-          </div>
-        );
-      })}
+          );
+        })}
+      </ListOutterBox>
     </Container>
   );
 }
 
 const Container = styled.div`
-  flex-direction: row;
-  width: 706px;
-  height: 294px;
-  left: 503px;
+  display: flex;
+  flex-direction: column;
+  margin: 60px 0;
+`;
 
-  .header {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .font-20 {
-    font-size: 20px;
-  }
-  .font-18 {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  .font-16 {
-    font-size: 16px;
-  }
-  .font-14 {
-    font-size: 14px;
-    color: #a4a4a4;
-    padding: 5px;
-    margin-top: 5px;
-  }
+const ListOutterBox = styled.div`
+  display: flex;
+  gap: 2%;
+  justify-content: flex-start;
 `;
 
 const DogImg = styled.img`
@@ -88,17 +70,17 @@ const DogImg = styled.img`
 `;
 
 const Listbox = styled.div`
-  width: 900px;
-  height: 80px;
+  width: 100%;
+  max-width: 28.7em;
+  /* max-width: 460px; */
+  padding: 2.24%; //1.25em //20px
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  :hover {
-    border: 1px solid black;
-  }
-  border-radius: 12px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
+
+  box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
+  border-radius: 8px;
 `;
 
 export default DogList;

@@ -39,6 +39,7 @@ const Wrap = styled.div`
   top: -4.5em;
   background-color: white;
   width: 100%;
+  z-index: 5;
 `;
 const Wrap2 = styled.div`
   position: relative;
