@@ -12,9 +12,7 @@ function ApplyComment() {
   const params = useParams();
   const postId = Number(params.id);
   const dispatch = useDispatch();
-  const detailList = useSelector((state) =>
-    state.postDetailSlice.list.find((post) => post.id === postId)
-  );
+  const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
 
   //신청하기 모달창
@@ -39,11 +37,7 @@ function ApplyComment() {
             <div className="ApplyCommentBox">
               <UserModalBtn
                 onClick={() => {
-                  dispatch(
-                    userActions.userinfoDB({
-                      nickname: value.nickname,
-                    })
-                  );
+                  dispatch(userActions.userinfoDB(value.nickname));
                   setTimeout(() => {
                     openApplyModal();
                   }, 500);
@@ -79,7 +73,7 @@ function ApplyComment() {
                   MatchingBtn
                   _onClick={() => {
                     // console.log(value.id);
-                    dispatch(matchActions.createMatchingDB(value.id));
+                    dispatch(matchActions.createMatchingDB(value.id, postId));
                     setTimeout(() => {
                       window.location.reload();
                     }, 300);
