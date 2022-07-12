@@ -16,6 +16,9 @@ export const createApplyDB = (data) => {
       .then((response) => {
         if (response.data.staus === "true") {
           dispatch(applyCreate(response.data));
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
         } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
         }
