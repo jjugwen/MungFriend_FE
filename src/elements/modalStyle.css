@@ -5,12 +5,13 @@
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.8);
+  z-index: 2;
 }
 
 .modal {
   position: absolute;
   top: calc(50vh - 250px);
-  left: calc(50vw - 200px);
+  left: calc(50vw - 250px);
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -19,23 +20,34 @@
   border-radius: 24px;
   width: 100%;
   max-width: 640px;
-  height: 580px;
+  height: 645px;
 }
 
-/* 유저 모달 창 CSS */
-.userModal {
+.Reviewmodal {
   position: absolute;
-  top: calc(50vh - 400px);
-  left: calc(50vw - 150px);
+  top: calc(50vh - 250px);
+  left: calc(50vw - 250px);
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 24px;
   width: 100%;
-  max-width: 520px;
-  height: 839px;
+  max-width: 640px;
+  height: 645px;
+}
+
+/* 유저 모달 창 CSS */
+.userModal {
+  position: absolute;
+  top: calc(50vh - 430px);
+  left: calc(50vw - 250px);
+  background-color: #fff;
+  display: wrap;
+  /* align-items: flex-start; */
+  border-radius: 20px;
+  padding: 2.5em;
 }
 
 .userModal > p {
@@ -44,5 +56,62 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 100%;
-  color: green;
+}
+
+.userModal > .userNickname {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 16px;
+  /* margin-bottom: 2.5em;*/
+  margin-bottom: 1%;
+}
+
+.userModal > .userIntroduce {
+  width: 100%;
+  max-width: 440px;
+  /* height: 9.25em; */
+  height: 13.2em;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 16px;
+  /* margin-bottom: 2.5em; */
+  margin-bottom: 1%;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.reviewListBox {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 190px;
+  /* height: 216px; */
+
+  background: #ffffff;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 10%;
+}
+
+.reviewList > p {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #4e4e56;
 }

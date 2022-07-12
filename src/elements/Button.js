@@ -114,6 +114,14 @@ Button.defaultProps = {
   padding: false,
   _disabled: false,
   is_circle: false,
+  orange_small: false,
+  orange_medium: false,
+  orange_large: false,
+  white_small: false,
+  white_medium: false,
+  white_large: false,
+  grey_small: false,
+  MatchingBtn: false,
   onClick: () => {},
 };
 
@@ -169,7 +177,7 @@ const WhiteBtn194 = styled.button`
   background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#FFFFFF")};
   border: 1px solid #e3e5e9;
   border-radius: 4px;
-  color: white;
+  color: black;
   font-weight: 500;
   font-size: 16px;
 
@@ -190,7 +198,7 @@ const WhiteBtn214 = styled.button`
   background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#FFFFFF")};
   border: 1px solid #e3e5e9;
   border-radius: 4px;
-  color: white;
+  color: black;
   font-weight: 500;
   font-size: 16px;
 
