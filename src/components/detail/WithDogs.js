@@ -10,9 +10,7 @@ function DogList() {
   const params = useParams();
   const postId = Number(params.id);
   const dispatch = useDispatch();
-  const detailList = useSelector((state) =>
-    state.postDetailSlice.list.find((post) => post.id === postId)
-  );
+  const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
   useEffect(() => {
     dispatch(Actions.getDetailDB(postId));
