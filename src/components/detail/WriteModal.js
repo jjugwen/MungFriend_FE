@@ -17,9 +17,7 @@ function WriteModal(props) {
   const postId = Number(params.id);
   const image = useSelector((state) => state.reviewSlice.image);
   // console.log(image);
-  const detailList = useSelector((state) =>
-    state.postDetailSlice.list.find((post) => post.id === postId)
-  );
+  const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
   // 데이터 formData로 보내기
   const addReview = async () => {
