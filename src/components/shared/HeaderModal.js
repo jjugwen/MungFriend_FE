@@ -14,13 +14,15 @@ function HeaderModal() {
   //로그인 유저
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
   // console.log(myinfo);
+  // const nickname = localStorage.getItem("nickname");
+  // console.log(myinfo);
   const [change, setChange] = useState("");
 
   const Logout = () => {
     localStorage.clear();
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 500);
   };
   useEffect(() => {
     dispatch(userActions.myinfoDB());
@@ -30,8 +32,8 @@ function HeaderModal() {
     <>
       <HeaderModalbox>
         <UpperBox>
-          <UserNameFont>{myinfo[0]?.nickname}님</UserNameFont>
-          <EmailFont>{myinfo[0]?.email}</EmailFont>
+          <UserNameFont>{myinfo?.nickname}님</UserNameFont>
+          <EmailFont>{myinfo?.email}</EmailFont>
           <span
             onClick={() => {
               navigate("/mypage");
