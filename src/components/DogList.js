@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
 import styled from "styled-components";
+import { deleteMyMungAX } from "../redux/modules/mungSlice";
+
 
 function DogList() {
   const dispatch = useDispatch();
@@ -9,8 +11,12 @@ function DogList() {
   React.useEffect(() => {
     dispatch(loadMyPageAX());
   }, []);
+  
   const info = useSelector((state) => state.myPageSlice.mypage);
 
+  const deleteDog=(e)=>{
+    dispatch(deleteMyMungAX(Number(e.target.value)));
+  }
   return (
     <Container>
       <div className="header">
@@ -40,6 +46,7 @@ function DogList() {
               </div>
               <div className="font-16">{dog.size}견</div>
             </div>
+            <button value={dog.id} onClick={deleteDog}>삭제</button>
           </Listbox>
         );
       })}

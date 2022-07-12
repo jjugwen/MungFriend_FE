@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
 import styled from "styled-components";
 import { loadPostListAX } from "../redux/modules/postSlice";
+import Ing from "../assets/images/IsComplete/모집중.svg"
+import Done from "../assets/images/IsComplete/모집종료.svg"
 
 function Posts() {
   const dispatch = useDispatch();
@@ -57,17 +59,21 @@ function Posts() {
       {Posts?.map((post,i)=>{
         // console.log(post.imagePath)
         return(
-          <div key={i}>
+          <PostBox key={i}>
             {post.imagePath.map((image,i)=>(
               <PostImg key={i} src={image} alt=""/>    
       ))}
             {/* <PostImg src={post.imagePath} alt=""/> */}
             <div>{post.nickname}</div>
-            <div>{post.requestStartDate}</div>
-            <div>신청자 {post.applyCount}</div>
+            <div>{post.requestStartDate.substring(0,10)}</div>
+            <div>{post.title}</div>
             <div>{post.content}</div>
-
-          </div>
+            <hr/>
+            <div className="row-box">
+            <div>신청자 {post.applyCount}</div>
+            <div>{post.isComplete===true? <img src={Ing} alt=""/>: <img src={Done} alt=""/>}</div>
+            </div>
+          </PostBox>
         )
       })}
     </Container>
@@ -97,8 +103,17 @@ const Subimg = styled.img`
 `;
 
 const Container = styled.div`
-`
+display: flex;
+gap: 2%;
+width: 66%;
 
+
+`
+const PostBox =styled.div`
+background-color: pink;
+width:31%;
+height:250px;
+`
 const PostImg = styled.img`
 border-radius: 50%;
 width: 48px;

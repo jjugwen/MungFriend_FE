@@ -47,7 +47,8 @@ function DogPlusModal() {
     const blob = new Blob([json], { type: "application/json" });
     //infos 추가
     formData.append("infos", blob);
-
+    // console.log(formData);
+    // for (const value of formData) console.log(value);
     dispatch(createMungAX(formData));
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
     setMungImage({
