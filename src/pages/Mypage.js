@@ -1,15 +1,18 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 //컴포넌트
 import MyPageComponent from "../components/MyPageComponent";
 import MyPostList from "../components/MyPostList";
 import MyReviewList from "../components/MyReviewList";
+import { loadMyPageAX } from "../redux/modules/myPageSlice";
 
 const Mypage = () => {
   let [change, setChange] = useState(<MyPageComponent />);
-
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(loadMyPageAX());
+  }, []);
   return (
     <Container>
       <ListBar>
