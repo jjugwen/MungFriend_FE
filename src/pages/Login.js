@@ -33,7 +33,7 @@ function Login() {
           src={Logo}
           alt="logo"
           style={{
-            marginBottom: "12.5%", //50px
+            marginBottom: "4%", //50px
           }}
         />
         <div
@@ -146,7 +146,8 @@ const Img = styled.img`
   width: 10%;
   min-width: 171.5px;
   height: 258.08px;
-  right: -100%;
+  right: -33%;
+  bottom: 177px;
 `;
 
 export default Login;
