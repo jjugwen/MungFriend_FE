@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
+import axios from "axios";
 import instance from "./instance";
 
 //미들웨어
 export const getDetailDB = (id) => {
   return async function (dispatch) {
-    await instance.get(`/api/posts/${id}`).then((response) => {
-      // await axios.get(`http://localhost:5002/detail/`).then((response) => {
-      // console.log(response.data);
+    // await instance.get(`/api/posts/${id}`).then((response) => {
+      await axios.get(`http://localhost:5002/detail/`).then((response) => {
+      console.log(response.data);
       dispatch(loadPostDetail(response.data));
     });
   };
