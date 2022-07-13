@@ -10,27 +10,28 @@ export const createMungAX = (mung) => {
   return async function (dispatch) {
     // console.log(mung)
     // for (const value of mung) console.log(value);
-    await instance.post(`/api/dogs`, mung)
-    // await axios
-      // .post(`http://localhost:5001/dogList`, mung)
+    // await instance.post(`/api/dogs`, mung)
+    await axios
+      .post(`http://localhost:5001/dogList`, mung)
       .then(() => dispatch(createMung(mung)));
   };
 };
 export const loadMyMungAX = () => {
   return async function (dispatch) {
-    await instance.get(`/api/dogs`)
-    // await axios
-      // .get(`http://localhost:5001/dogList`)
+    // await instance.get(`/api/dogs`)
+    await axios
+      .get(`http://localhost:5001/dogList`)
       .then((res) => dispatch(loadMyMung(res.data)));
   };
 };
 
 export const deleteMyMungAX = (id) => {
   return async function (dispatch) {
-    await instance.delete(`/api/dogs/${id}`)
-    // await axios
-      // .delete(`http://localhost:5001/dogList/${id}`)
+    // await instance.delete(`/api/dogs/${id}`)
+    await axios
+      .delete(`http://localhost:5001/dogList/${id}`)
       .then(() => dispatch(deleteMyMung(id)));
+      // 삭제리듀서는 mypageSlice에
     // dispatch(deleteMyMung(id))
   };
 };
@@ -45,12 +46,6 @@ const mungSlice = createSlice({
     loadMyMung(state, action) {
       state.mung = action.payload;
     },
-    // deleteMyMung(state, action){
-    //   console.log(action.payload)
-    //   state.mung=state.mung.filter((element)=>(element.id !== action.payload))
-    //   console.log(state.mung)
-      
-    // }
   },
 });
 
