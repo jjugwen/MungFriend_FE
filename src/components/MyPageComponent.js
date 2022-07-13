@@ -7,6 +7,10 @@ import DogList from "./DogList";
 
 
 function MyPageComponent() {
+  //사용자 정보 불러오기
+  const user = useSelector((state)=> state.userinfoSlice)
+  console.log(user)
+  
   const dispatch = useDispatch();
 
   React.useEffect(() => {
