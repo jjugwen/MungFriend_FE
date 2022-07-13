@@ -1,22 +1,21 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import "../elements/LoginSignupStyle.css";
 import { loginDB } from "../redux/modules/loginAxios";
-import kakaoLoginBtn from "../assets/images/login/kakao_login_medium_wide.png";
-import googleLoginBtn from "../assets/images/login/btn_google_signin_light_focus_web@2x.png";
+import kakaoIcon from "../assets/images/login/kakao_icon.svg";
+import googleIcon from "../assets/images/login/google_icon.svg";
 import Logo from "../assets/images/login/mungfreindLogo.svg";
-
+import MungImg from "../assets/images/login/login_Mung_img.svg";
 function Login() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const username = useRef(null);
   const password = useRef(null);
 
   //버튼 비활성/활성
   const [btnState, setBtnState] = useState(false);
-  const onChange = (e) => {
+  const onChange = () => {
     if (
       username.current.value.length > 0 &&
       password.current.value.length > 0
@@ -29,8 +28,14 @@ function Login() {
 
   return (
     <>
-      <div className="SignupOutterBox">
-        <img src={Logo} alt="logo" />
+      <div className="LoginOutterBox">
+        <img
+          src={Logo}
+          alt="logo"
+          style={{
+            marginBottom: "12.5%", //50px
+          }}
+        />
         <div
           style={{
             display: "flex",
@@ -50,7 +55,6 @@ function Login() {
             ref={password}
             onChange={onChange}
           ></input>
-
           <LoginButton
             isActive={btnState}
             disabled={!btnState}
@@ -59,41 +63,25 @@ function Login() {
               dispatch(loginDB(username.current.value, password.current.value));
             }}
           >
-            <div className="SignupButtonText" style={{ color: "#fff" }}>
-              로그인
-            </div>
+            <span>로그인</span>
           </LoginButton>
+          <Link to="/signup">
+            <p className="RequestSignupText">회원이 아니신가요?</p>
+          </Link>
         </div>
         <a href="http://3.39.6.175/oauth2/authorization/kakao">
-          <div style={kakao}>
-            <img src={kakaoLoginBtn} alt="kakaologin" width="100%" />
-          </div>
-          {/* <button
-            className="SignupWhiteButton"
-            style={{
-              width: "440px",
-              margin: "6px",
-              backgroundColor: "#FEE500",
-            }}
-          >
-            <div className="SignupButtonText" style={{ color: "#000" }}>
-              카카오 아이디로 로그인 하기
-            </div>
-          </button> */}
+          <KakaoLoginBtn>
+            <img src={kakaoIcon} alt="kakaoIcon" />
+            <span className="LoginButtonText">카카오 아이디로 로그인 하기</span>
+          </KakaoLoginBtn>
         </a>
         <a href="http://ec2-3-39-6-175.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google">
-          <GoogleImage>
-            <img src={googleLoginBtn} alt="googlelogin" />
-          </GoogleImage>
-          {/* <button
-            className="SignupWhiteButton"
-            style={{ width: "440px", margin: "6px" }}
-          >
-            <div className="SignupButtonText" style={{ color: "#000" }}>
-              구글 아이디로 로그인 하기
-            </div>
-          </button> */}
+          <GoogleLoginBtn>
+            <img src={googleIcon} alt="googleIcon" />
+            <span className="LoginButtonText">구글 아이디로 로그인 하기</span>
+          </GoogleLoginBtn>
         </a>
+        <Img src={MungImg} alt="MungImg" />
       </div>
     </>
   );
@@ -103,9 +91,9 @@ const LoginButton = styled.button`
   margin-top: 12px;
   height: 60px;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: #a4a4a4;
+  border-radius: 4px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  background-color: #fa5a30;
   ${(props) =>
     props.isActive
       ? `
@@ -113,39 +101,52 @@ const LoginButton = styled.button`
         `
       : `
           background-color: #ddd;
-          cursor: not-allowed
         `}
+
+  span {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: right;
+
+    color: #ffffff;
+  }
 `;
 
-const kakao = {
-  width: "440px",
-  margin: "6px",
-  borderRadius: "8px",
-  backgroundColor: "transparent",
-  position: "relative",
-  backgroundSize: "cover",
-};
-
-const GoogleImage = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  min-width: 440px;
+const KakaoLoginBtn = styled.button`
+  width: 400px;
   height: 60px;
-  border-radius: 8px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  margin: 6px;
+  background: #ffe600;
+  border-radius: 4px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1%;
+`;
 
-  img {
-    position: absolute;
-    width: 110%;
-    top: -9999px;
-    bottom: -9999px;
-    left: -9999px;
-    right: -9999px;
-    margin: auto;
-  }
+const GoogleLoginBtn = styled.button`
+  width: 400px;
+  height: 60px;
+  margin: 6px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1%;
+`;
+
+const Img = styled.img`
+  position: relative;
+  width: 10%;
+  min-width: 171.5px;
+  height: 258.08px;
+  right: -100%;
 `;
 
 export default Login;
