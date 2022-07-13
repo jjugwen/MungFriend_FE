@@ -15,6 +15,7 @@ function DogList() {
   const info = useSelector((state) => state.myPageSlice.mypage);
 
   const deleteDog=(e)=>{
+    // console.log(typeof(e.target.value))
     dispatch(deleteMyMungAX(Number(e.target.value)));
   }
   return (
