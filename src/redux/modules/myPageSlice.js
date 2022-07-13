@@ -7,8 +7,7 @@ import instance from "./instance";
 //나중에 멤버 아이디값 받아와서 넘겨주기
 export const loadMyPageAX = (id) => {
   return async function (dispatch) {
-    await instance.post(`/mypage/${id}`)
-    // await axios.get(`http://localhost:5001/mypage`)
+    await axios.get(`http://localhost:5001/mypage`)
     // await instance
       // .get(`/mypage/${id}`)
       .then((response) => dispatch(loadMyPage(response.data)));
@@ -48,7 +47,7 @@ const myPageSlice = createSlice({
       state.mypage.phoneNum = action.payload.phoneNum;
     },
     deleteMyMung(state, action){
-      console.log(action.payload);
+      // console.log(action.payload);
       state.mypage.dogList = state
       .mypage.dogList.filter(
         (element) => {
