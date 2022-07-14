@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 // import axios from "axios";
 
-//미들웨어
+//axios
 //create 매칭하기
 export const createMatchingDB = (id, postId) => {
   return async function (dispatch) {
