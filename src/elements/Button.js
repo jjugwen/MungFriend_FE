@@ -8,6 +8,8 @@ const Button = (props) => {
     bg,
     margin,
     padding,
+    position,
+    bottom,
     font_size,
     _disabled,
     _onClick,
@@ -28,6 +30,8 @@ const Button = (props) => {
     margin,
     padding,
     font_size,
+    position,
+    bottom,
   };
 
   if (is_circle) {
@@ -112,6 +116,8 @@ Button.defaultProps = {
   width: "100%",
   margin: false,
   padding: false,
+  position: "relative",
+  bottom: false,
   _disabled: false,
   is_circle: false,
   orange_small: false,
@@ -269,6 +275,8 @@ const OrangeBtn214 = styled.button`
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
   ${(props) => (props.font_size ? `font-size: ${props.font_size};` : "")};
+  ${(props) => (props.position ? `position: ${props.position};` : "")};
+  ${(props) => (props.bottom ? `bottom: ${props.bottom};` : "")};
 
   @media (max-width: 280px) {
     font-size: 11px;
