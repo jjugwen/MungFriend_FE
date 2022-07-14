@@ -22,6 +22,9 @@ README
 
  + 정예빈 :
 
+# :🛠: 기술 스택 
+<img src="https://user-images.githubusercontent.com/82041804/178923080-3297f289-a65c-4a77-91c9-7a18403d9f6d.JPG"/>
+
 # :dizzy: 핵심기능
 > 1) 회원가입 / 로그인
  + JWT 인증 방식으로 로그인 구현
