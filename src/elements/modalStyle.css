@@ -115,3 +115,74 @@
   line-height: 24px;
   color: #4e4e56;
 }
+
+/* 후기 상세 모달창 ReviewDetailModal CSS */
+.revieweDetailTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 330px;
+  margin-left: 230px;
+  position: absolute;
+  top: 20px;
+}
+
+.reviewerInfo {
+  display: flex;
+  align-items: center;
+  width: 85%;
+  min-width: 180px;
+  /* gap: 2%; */
+  gap: 12px;
+  position: absolute;
+  top: 80px;
+}
+
+.imgBox {
+  display: flex;
+  width: 560px;
+}
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 150px;
+  opacity: 0;
+  transition: opacity ease-in-out 0.4s;
+}
+.slide img {
+  width: 560px;
+  height: 350px;
+  object-fit: cover;
+}
+.active-anim {
+  opacity: 1; /* 불투명도 0~1 */
+}
+.containerDots {
+  position: absolute;
+  bottom: 245px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background: #f1f1f1;
+}
+.dot.active {
+  background: #fa5a30;
+}
+
+.reviewTextBox {
+  width: 85%;
+  position: absolute;
+  bottom: 91px;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+}
