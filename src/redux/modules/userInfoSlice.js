@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 // import axios from "axios";
 
-//미들웨어
+//axios
 export const myinfoDB = () => {
   return async function (dispatch) {
     await instance.get(`/myinfo`).then((response) => {
       // await axios.get(`http://localhost:5002/myinfo`).then((response) => {
-      //   console.log(response.data);
+      // console.log(response.data);
       dispatch(MyInfoLoad(response.data));
     });
   };
@@ -20,9 +20,8 @@ export const userinfoDB = (nickname) => {
       .post(`/userinfo`, { nickname: nickname })
       .then((response) => {
         // await axios
-        // .get(`http://localhost:5002/userinfo`, { nickname: nickname })
-        // .then((response) => {
-        console.log(response.data);
+        //   .get(`http://localhost:5002/userinfo`, { nickname: nickname })
+        // console.log(response.data);
         dispatch(UserInfoLoad(response.data));
       });
   };
