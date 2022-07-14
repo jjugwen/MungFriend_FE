@@ -22,7 +22,7 @@ README
 
  + 정예빈 :
 
-# :🛠: 기술 스택 
+# 🛠 서비스 아키텍처 
 <img src="https://user-images.githubusercontent.com/82041804/178923080-3297f289-a65c-4a77-91c9-7a18403d9f6d.JPG"/>
 
 # :dizzy: 핵심기능
