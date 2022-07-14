@@ -1,26 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+// import axios from "axios";
 import instance from "./instance";
 
-//미들웨어
+//axios
 //나중에 멤버 아이디값 받아와서 넘겨주기
 export const createPostAX = (post) => {
   return async function (dispatch) {
     await instance
       .post(`/api/posts`, post)
-      // await axios.post(`http://localhost:5001/post`,post)
+      // await axios
+      //   .post(`http://localhost:5001/post`, post)
       .then(() => dispatch(createPost(post)));
   };
 };
 
-export const loadPostListAX =()=>{
-  return async function (dispatch){
-    // await axios.get(`http://localhost:5001/post`)
+export const loadPostListAX = () => {
+  return async function (dispatch) {
+    // await axios
+    //   .get(`http://localhost:5001/post`)
     await instance
-    .get(`/api/posts`)
-    .then((response)=> dispatch(loadPost(response.data)))
-  }
-}
+      .get(`/api/posts`)
+      .then((response) => dispatch(loadPost(response.data)));
+  };
+};
 
 //툴킷
 const postSlice = createSlice({
@@ -30,9 +32,9 @@ const postSlice = createSlice({
     createPost(state, action) {
       state.post.push(action.payload);
     },
-    loadPost(state, action){
-      state.post=action.payload
-    }
+    loadPost(state, action) {
+      state.post = action.payload;
+    },
   },
 });
 
