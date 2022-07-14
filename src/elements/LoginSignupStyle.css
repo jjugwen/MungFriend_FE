@@ -141,10 +141,10 @@
   display: inline-block; /* 영역적용가능해짐 */
   box-sizing: border-box;
   position: relative;
-  margin-bottom: 9%;
+  margin-bottom: 1%;
 }
 :checked {
-  background-image: url("../assets/images/Signup/checkbox_marked_icon.png");
+  background-image: url("../assets/images/Signup/checkbox_icon.svg");
   background-size: 135%;
   background-repeat: no-repeat;
   background-position: center;
