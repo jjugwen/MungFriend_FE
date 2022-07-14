@@ -11,13 +11,13 @@ function ReviewDetailModal(props) {
   const { open, close } = props;
   const dispatch = useDispatch();
 
-  //   const [slide, setSlide] = useState();
-  //   const nextImage = () => {
-  //     setSlide("translateX(-100%)");
-  //   };
+  //이미지 슬라이더
+  const [slide, setSlide] = useState(1);
+  const moveDot = (index) => {
+    setSlide(index);
+  };
 
   const reviewDetail = useSelector((state) => state.reviewSlice.list);
-  console.log(reviewDetail);
 
   useEffect(() => {
     dispatch(Actions.loadReviewDetailDB());
@@ -25,114 +25,95 @@ function ReviewDetailModal(props) {
   return (
     <>
       <div className="openModalcss">
-        {/* <div className={open ? "openModalcss" : null}> */}
-        {/* {open ?  */}(
-        <div className="modal" style={{ height: "750px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: "200px",
-              marginLeft: "200px",
-            }}
-          >
-            <ModalTitle style={{ textAlign: "center" }}>후기상세</ModalTitle>
-            <button
-              onClick={() => {
-                close();
-              }}
-              style={{
-                background: "transparent",
-                border: "none",
-              }}
-            >
-              <img src={closeBtn} alt="closeBtn" />
-            </button>
-          </div>
-          {reviewDetail?.map((value) => {
-            return (
-              <>
-                <div className="clickUsermodal">
-                  <div
-                    className="MungProfileImgCircle"
-                    style={{
-                      backgroundImage: `url(${value.giverDogProfileImgUrl})`,
-                    }}
-                  />
-                  <div className="NickAndDistanceAndDate">
-                    <span className="nicknameText">{value.giverNickname}</span>
-                    <span className="writeTimeText">
-                      {value.createdAt?.slice(0, 10).replace(/\-/g, ".")}
-                    </span>
-                  </div>
-                </div>
-                <hr
-                  style={{
-                    width: "90%",
-                    backgroundColor: "black",
-                    border: "none",
-                    height: "3px",
-                  }}
-                />
-                <div
-                  style={{
-                    display: "flex",
-                    overflow: "hidden",
-                    width: "560px",
-                  }}
-                >
-                  {value?.reviewImgList?.map((image) => {
-                    return (
-                      <>
-                        <img
-                          key={image.id}
-                          src={image}
-                          alt=""
-                          style={{
-                            width: "560px",
-                            // transform: `onChange=${slide}`,
-                          }}
-                        />
-                      </>
-                    );
-                  })}
-                </div>
-                <div style={{ display: "flex", gap: "20%" }}>
-                  {value?.reviewImgList?.map((v) => {
-                    return (
-                      <button
-                        style={{
-                          width: "25px",
-                          height: "15px",
-                          background: "#FA5A30",
-                          border: "none",
-                          borderRadius: "50%",
-                          margin: "5% auto",
-                        }}
-                        onClick={() => {
-                          //   nextImage();
-                        }}
-                      />
-                    );
-                  })}
-                </div>
-                {value.comment}
-                <Hr />
-                <Button
-                  orange_large
-                  className="close"
-                  _onClick={() => {
+        <div className={open ? "openModalcss" : null}>
+          {open ? (
+            <div className="modal" style={{ height: "750px", padding: "0.7%" }}>
+              <div className="revieweDetailTitle">
+                <ModalTitle style={{ textAlign: "center" }}>
+                  후기상세
+                </ModalTitle>
+                <button
+                  onClick={() => {
                     close();
                   }}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                  }}
                 >
-                  확인
-                </Button>
-              </>
-            );
-          })}
+                  <img src={closeBtn} alt="closeBtn" />
+                </button>
+              </div>
+              {reviewDetail?.map((value) => {
+                return (
+                  <>
+                    <div key={value.giverNickname} className="reviewerInfo">
+                      <div
+                        className="MungProfileImgCircle"
+                        style={{
+                          backgroundImage: `url(${value.giverDogProfileImgUrl})`,
+                        }}
+                      />
+                      <div className="NickAndDistanceAndDate">
+                        <span className="nicknameText">
+                          {value.giverNickname}
+                        </span>
+                        <span className="writeTimeText">
+                          {value.createdAt?.slice(0, 10).replace(/\-/g, ".")}
+                        </span>
+                      </div>
+                    </div>
+                    <HrBlack />
+                    <div className="imgBox">
+                      {value?.reviewImgList?.map((image, index) => {
+                        return (
+                          <>
+                            <div
+                              key={image.id}
+                              className={
+                                slide === index + 1
+                                  ? "slide active-anim"
+                                  : "slide"
+                              }
+                            >
+                              <img src={image} alt="reviewImages" />
+                            </div>
+                            <div className="containerDots">
+                              {Array.from({
+                                length: value?.reviewImgList?.length,
+                              }).map((item, index) => (
+                                <div
+                                  key={index}
+                                  onClick={() => moveDot(index + 1)}
+                                  className={
+                                    slide === index + 1 ? "dot active" : "dot"
+                                  }
+                                ></div>
+                              ))}
+                            </div>
+                          </>
+                        );
+                      })}
+                    </div>
+                    <div className="reviewTextBox">{value.comment}</div>
+                    <Hr />
+                    <Button
+                      orange_large
+                      className="close"
+                      _onClick={() => {
+                        close();
+                      }}
+                      position="absolute"
+                      bottom="19px"
+                    >
+                      확인
+                    </Button>
+                  </>
+                );
+              })}
+            </div>
+          ) : null}
         </div>
-        ){/* : null} */}
       </div>
     </>
   );
@@ -146,8 +127,20 @@ const ModalTitle = styled.h1`
   line-height: 100%;
   color: #121212;
 `;
+
+const HrBlack = styled.hr`
+  width: 85%;
+  background-color: black;
+  border: none;
+  height: 2px;
+  position: absolute;
+  top: 130px;
+`;
+
 const Hr = styled.hr`
-  width: 90%;
+  width: 85%;
   border: 1px solid #e5e5e5;
+  position: absolute;
+  bottom: 75px;
 `;
 export default ReviewDetailModal;
