@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 // import axios from "axios";
 
-//미들웨어
+//axios
 export const createApplyDB = (data) => {
   return async function (dispatch) {
     // await axios
