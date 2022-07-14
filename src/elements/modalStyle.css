@@ -10,8 +10,8 @@
 
 .modal {
   position: absolute;
-  top: calc(50vh - 250px);
-  left: calc(50vw - 250px);
+  top: calc(50vh - 350px);
+  left: calc(50vw - 350px);
   background-color: #fff;
   display: flex;
   flex-direction: column;
