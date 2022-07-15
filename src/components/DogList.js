@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
 import styled from "styled-components";
 import { deleteMyMungAX } from "../redux/modules/mungSlice";
+import DogPlusModal from '../components/DogPlusModal';
 
 
 function DogList() {
@@ -18,15 +19,20 @@ function DogList() {
     // console.log(typeof(e.target.value))
     dispatch(deleteMyMungAX(Number(e.target.value)));
   }
+  let [modal, setModal] = useState(false);
   return (
     <Container>
-      <div className="header">
-        <div className="font-20">
-          <b>멍친구</b>
+        {modal && <Test />}
+        {modal && <DogPlusModal/>}
+        
+        <div className="row-box">
+          <div className="font-20">
+            <b>멍친구</b>
+          </div>
+          <div className="font-14">
+            * 대표 멍프로필을 선택해주세요. 최대 3마리까지 등록가능합니다.
         </div>
-        <div className="font-14">
-          * 대표 멍프로필을 선택해주세요. 최대 3마리까지 등록가능합니다.
-        </div>
+        <AddButton onClick={()=>{setModal(true);}}><img src="https://ifh.cc/g/NL36Wc.png" alt=""/>추가하기</AddButton>
       </div>
       {info?.dogList.map((dog, i) => {
         return (
@@ -41,13 +47,13 @@ function DogList() {
               </label>
             </CheckBox>
             <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
-            <div>
-              <div className="font-18">
-                {dog.name} {dog.gender === "여" ? "♀" : "♂"}
+            <div className="name-box">
+              <div className="font-18 row-box">
+                {dog.name} {dog.gender === "여" ? <div className="orange-color">♀</div> : <div className="blue-color">♂</div>}
               </div>
               <div className="font-16">{dog.size}견</div>
             </div>
-            <button value={dog.id} onClick={deleteDog}>삭제</button>
+            <DelButton  value={dog.id} onClick={deleteDog}>삭제</DelButton>
           </Listbox>
         );
       })}
@@ -55,17 +61,28 @@ function DogList() {
   );
 }
 
+const Test = styled.div`
+ position: fixed;
+  top:0; left: 0; bottom: 0; right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+`;
+
 const Container = styled.div`
   flex-direction: row;
-  width: 706px;
+
   height: 294px;
   left: 503px;
-
-  .header {
-    display: flex;
-    flex-direction: row;
+  box-sizing: border-box;
+  button{
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid #E5E5E5;
+border-radius: 4px;
+background: #FFFFFF;
   }
-
+  div{margin-left: 5px;}
+  
   .font-18 {
     font-weight: 600;
   }
@@ -74,6 +91,19 @@ const Container = styled.div`
     color: #a4a4a4;
     padding: 5px;
     margin-top: 5px;
+  }
+   .orange-color{
+    color: #FA5A30;
+    position: relative;
+    bottom: 4px;
+    }
+  .blue-color{
+    color: #4F65FF;
+    position: relative;
+    bottom: 4px;
+  }
+  .row-box{
+    margin-bottom: 20px;
   }
 `;
 
@@ -84,14 +114,16 @@ const DogImg = styled.img`
 `;
 
 const Listbox = styled.div`
-  width: 660px;
   height: 80px;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   :hover {
-    border: 1px solid black;
+    border: 2px solid #FA5A30;
+  }
+  .name-box{
+    margin-left: 10px;
   }
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
@@ -112,9 +144,28 @@ const CheckBox = styled.div`
       background-size: 100% 100%;
       background-position: 50%;
       background-repeat: no-repeat;
-      background-color: black;
+      background-color: #FA5A30;
     }
   }
 `;
 
+const DelButton = styled.button`
+position: absolute;
+right: 3%;
+
+font-size: 14px;
+width: 47px;
+height: 30px;
+`
+const AddButton =styled.button`
+position: absolute;
+right: 2%;
+height: 40px;
+width: 104px;
+img{
+  width: 12px;
+  height: 12px;
+}
+
+`
 export default DogList;
