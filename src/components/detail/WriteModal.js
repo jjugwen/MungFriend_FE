@@ -26,7 +26,7 @@ function WriteModal(props) {
     console.log(image);
     const data = {
       postId: postId,
-      applicantNickname: detailList?.applyList[0]?.nickname,
+      applicantNickname: detailList?.matchedNickname,
       comment: applyText.current.value,
     };
     console.log(data);
