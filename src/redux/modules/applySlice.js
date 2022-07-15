@@ -16,9 +16,6 @@ export const createApplyDB = (data) => {
       .then((response) => {
         if (response.data.staus === "true") {
           dispatch(applyCreate(response.data));
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
         } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
         }
@@ -39,9 +36,6 @@ export const deleteApplyDB = (id) => {
       .then((response) => {
         if (response.data.status === "true") {
           dispatch(applyDelete(response.data));
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
         } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
         }

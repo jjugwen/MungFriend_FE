@@ -81,7 +81,7 @@ function WriteModal(props) {
                   );
                   setTimeout(() => {
                     setTimeout(() => {
-                      // window.location.reload();
+                      window.location.reload();
                     }, 200);
                     close();
                   }, 400);
