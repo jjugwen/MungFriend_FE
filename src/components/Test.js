@@ -4,117 +4,122 @@ import styled from "styled-components";
 import instance from "../redux/modules/instance";
 
 function PostCreate() {
-    const [dogList, setDogList] =useState(); 
-    React.useEffect(()=>{
-      // instance.get(`/api/dogs`)
-      axios.get(`http://localhost:5001/dogList`)
-      .then((res)=>{
-        setDogList(res.data);
-      });
-    },[]);
-    // console.log(dogList)
+  const [dogList, setDogList] = useState();
+  React.useEffect(() => {
+    // instance.get(`/api/dogs`)
+    axios.get(`http://localhost:5001/dogList`).then((res) => {
+      setDogList(res.data);
+    });
+  }, []);
+  // console.log(dogList)
 
-    const dateRef =useRef();
-    const time={
-      hour:[...Array(24).keys()].map((key)=> key + 1),
-      minute:[...Array(60).keys()].map((key)=>key + 1)
+  const dateRef = useRef();
+  const time = {
+    hour: [...Array(24).keys()].map((key) => key + 1),
+    minute: [...Array(60).keys()].map((key) => key + 1),
+  };
+  const [post, setPost] = useState({});
+  const handleChange = (prop) => (e) => {
+    if (prop === "dogIdList") {
+      setPost({ ...post, [prop]: [e.target.value] });
     }
-   const [post, setPost] =useState({}); 
-   const handleChange=(prop)=>(e)=>{
-    
-      if (prop === "dogidList"){
-        setPost({...post,[prop]:[e.target.value]})       
-      }
-     
-   }
-// console.log(post)
+  };
+  // console.log(post)
 
   //  React.useEffect(()=>{
   //   console.log(post,'2')
   //  },[handleChange])
   return (
-  <>
-  <div>
-    <div>게시글 작성</div>
-    <div>멍 프로필 선택</div>
-    <div>다중선택 가능합니다</div>
-    <button>추가하기</button>
-  </div>
-  <div className="row-box">
-    {dogList?.map((dog,index)=>{
-      return(
-        <Listbox key={index}>
-            <CheckBox>
-              <label htmlFor="check2">
-                <input
-                  className="checkbox2"
-                  type="radio"
-                  value={dog.id}
-                  onChange={handleChange("dogidList")}
-                />
-              </label>
-            </CheckBox>
-            <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
-            <div>
-              <div className="font-18">
-                {dog.name} {dog.gender === "여" ? "♀" : "♂"}
+    <>
+      <div>
+        <div>게시글 작성</div>
+        <div>멍 프로필 선택</div>
+        <div>다중선택 가능합니다</div>
+        <button>추가하기</button>
+      </div>
+      <div className="row-box">
+        {dogList?.map((dog, index) => {
+          return (
+            <Listbox key={index}>
+              <CheckBox>
+                <label htmlFor="check2">
+                  <input
+                    className="checkbox2"
+                    type="radio"
+                    value={dog.id}
+                    onChange={handleChange("dogIdList")}
+                  />
+                </label>
+              </CheckBox>
+              <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
+              <div>
+                <div className="font-18">
+                  {dog.name} {dog.gender === "여" ? "♀" : "♂"}
+                </div>
+                <div className="font-16">{dog.size}견</div>
               </div>
-              <div className="font-16">{dog.size}견</div>
-            </div>
-          </Listbox>
-      )
-      })}
-    </div>
-  <div>요청일자 및 시간</div>
-  
-  <div>날짜선택</div>
-  <input type="date" ref={dateRef}/>
-  <div>시작시간</div>
-  <select>
-    {time.hour.map((hour,index)=>{
-      return(
-        <option key={index} value={hour}>
-          {hour}
-        </option>
-      )
-    })}
-  </select>시
-  <select>
-    {time.minute.map((minute,index)=>{
-      return(
-        <option key={index} value={minute}>
-          {minute}
-        </option>
-      )
-    })}
-  </select>분
-  <div>마감시간</div>
-  <select>
-    {time.hour.map((hour,index)=>{
-      return(
-        <option key={index} value={hour}>
-          {hour}
-        </option>
-      )
-    })}
-  </select>시
-  <select>
-    {time.minute.map((minute,index)=>{
-      return(
-        <option key={index} value={minute}>
-          {minute}
-        </option>
-      )
-    })}
-  </select>분
-  <div>내용입력</div>
-  <div>제목을 입력해주세요</div>
-  <input placeholder="제목을 입력해 주세요" onChange={handleChange("title")}/>
-  <hr/>
-  <div>내용을 입력해주세요</div>
-  <textarea placeholder="내용을 입력해 주세요" onChange={handleChange("content")}/>
-  </>
-)}
+            </Listbox>
+          );
+        })}
+      </div>
+      <div>요청일자 및 시간</div>
+      <div>날짜선택</div>
+      <input type="date" ref={dateRef} />
+      <div>시작시간</div>
+      <select>
+        {time.hour.map((hour, index) => {
+          return (
+            <option key={index} value={hour}>
+              {hour}
+            </option>
+          );
+        })}
+      </select>
+      시
+      <select>
+        {time.minute.map((minute, index) => {
+          return (
+            <option key={index} value={minute}>
+              {minute}
+            </option>
+          );
+        })}
+      </select>
+      분<div>마감시간</div>
+      <select>
+        {time.hour.map((hour, index) => {
+          return (
+            <option key={index} value={hour}>
+              {hour}
+            </option>
+          );
+        })}
+      </select>
+      시
+      <select>
+        {time.minute.map((minute, index) => {
+          return (
+            <option key={index} value={minute}>
+              {minute}
+            </option>
+          );
+        })}
+      </select>
+      분<div>내용입력</div>
+      <div>제목을 입력해주세요</div>
+      <input
+        placeholder="제목을 입력해 주세요"
+        onChange={handleChange("title")}
+      />
+      <hr />
+      <div>내용을 입력해주세요</div>
+      <textarea
+        placeholder="내용을 입력해 주세요"
+        onChange={handleChange("content")}
+      />
+    </>
+  );
+}
 
 const DogImg = styled.img`
   width: 60px;
@@ -152,6 +157,7 @@ const CheckBox = styled.div`
       background-repeat: no-repeat;
       background-color: black;
     }
-  }`
+  }
+`;
 
 export default PostCreate;

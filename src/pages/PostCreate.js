@@ -57,7 +57,7 @@ function PostCreate() {
     const post = {
       title: titleRef.current.value,
       content: contentRef.current.value,
-      dogidList: c,
+      dogIdList: c,
       requestStartDate:
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
@@ -87,7 +87,7 @@ function PostCreate() {
     const updatePost = {
       title: titleRef.current.value,
       content: contentRef.current.value,
-      dogidList: c,
+      dogIdList: c,
       requestStartDate:
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
