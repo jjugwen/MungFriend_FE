@@ -9,7 +9,7 @@ function ProfileUpdate (){
   
   const dispatch = useDispatch();
   const info = useSelector((state) => state.myPageSlice.mypage);
-  console.log(info)
+  // console.log(info)
   //이메일 가공하기
   const email = info?.email.split('@')[0]
   React.useEffect(() => {
@@ -32,11 +32,12 @@ function ProfileUpdate (){
     <input value={info?.nickname}></input>
     <div className="row-box">이메일
     <input value={email}></input>
-    <select>
+    {/* <select>
       <option>직접입력</option>
       <option>naver.com</option>
       <option>nate.com</option>
-    </select></div>
+    </select> */}
+    </div>
     <div>휴대폰번호</div>
     <input defaultValue={info?.phoneNum}></input>
     <div>주소</div>
@@ -71,10 +72,12 @@ function Address(props){
     })
     .then((result) => {
       // console.log(result); // 위, 경도 결과 값
+      //위도
       const lat = result.lat;
+      //경도
       const lon = result.lon;
       console.log(lat, lon)
-      //위경도값 받는거 영주님한테 물어보기
+      
     });
     props.onClose()
   };
