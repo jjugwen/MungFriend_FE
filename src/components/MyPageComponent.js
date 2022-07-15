@@ -1,21 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { loadMyPageAX, patchIntroduceAX, patchPhoneNumAX  } from "../redux/modules/myPageSlice";
+import {patchIntroduceAX, patchPhoneNumAX  } from "../redux/modules/myPageSlice";
 import DogList from "./DogList";
 
 
 function MyPageComponent() {
-  //사용자 정보 불러오기
-  const user = useSelector((state)=> state.userinfoSlice)
-  console.log(user)
-  
+
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch(loadMyPageAX());
-  }, []);
   const info = useSelector((state) => state.myPageSlice.mypage);
   // const info = useSelector((state) => state);
   // console.log(info)
@@ -62,17 +55,17 @@ function MyPageComponent() {
     }
     dispatch(patchPhoneNumAX(new_phone_num))
   }
-
   return (
     <Container>
+    
       <div style={{display: "flex"}}>
       <Profileimg src='https://ifh.cc/g/sPZmVL.png' alt=""/>
       <div  style={{marginTop:"13px"}}>
-      <div style={{fontSize: "20px"}}><b>{info?.nickname}</b>님 반갑습니다!</div>
+      <div className="font-20"><b>{info?.nickname}</b>님 반갑습니다!</div>
       <div style={{fontSize: "14px", color: "#747474"}} >{info?.email}</div>
       </div>
       </div >
-      {/*휴대폰 번호*/}
+      {/* 휴대폰 번호
       {phoneNum === "" ? (
         <>
         <input type='text' value={inputValue || ""} onChange={phoneNumTest} ref={phone_ref} placeholder='번호를 입력해 주세요' />
@@ -80,13 +73,13 @@ function MyPageComponent() {
         </>
       ) : (
         <div>{phoneNum}</div>
-      )}
+      )} */}
         {/*자기소개*/}
-      {introduce === "" ? (
+      {/* {introduce === "" ? (
         <input onKeyUp={Enter} ref={intro_ref} placeholder='자기소개 등록하기'/>
-      ) : (
+      ) : ( */}
         <IntroduceDiv>{introduce}</IntroduceDiv>
-      )}
+      {/* )} */}
        
     <br/>
     <DogList/>
@@ -94,6 +87,7 @@ function MyPageComponent() {
     </Container>
   );
 }
+
 const Container = styled.div`
 /* position: absolute;
 left: 510px; */
@@ -106,7 +100,6 @@ padding: 5px;
 
 const IntroduceDiv = styled.div`
 background-color: #F5F5F5;
-width: 665px;
 height: 160px;
 padding: 15px;
 border-radius: 12px;
