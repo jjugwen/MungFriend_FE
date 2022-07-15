@@ -16,7 +16,7 @@ function MyReviewList() {
   };
 
   const info = useSelector((state) => state.myPageSlice.mypage);
-  console.log(info.reviewList);
+  console.log(info?.reviewList);
 
   return (
     <>
