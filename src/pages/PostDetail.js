@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 //컴포넌트
 import ApplyComment from "../components/detail/ApplyComment";
 import WithDogs from "../components/detail/WithDogs";
@@ -24,8 +24,10 @@ function PostDetail() {
   const postId = Number(params.id); //숫자로 변환해야 읽힘.
   // console.log(postId);
   const dispatch = useDispatch();
+  const navigate =useNavigate();
   const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
+  
 
   //신청하기 모달창 여닫기
   const [applyModal, setApplyModal] = useState(false);
@@ -195,7 +197,9 @@ function PostDetail() {
               <Button grey_small _onClick={deletePost}>
                 삭제하기
               </Button>
-              <Button orange_small _onClick={() => {}}>
+              <Button orange_small _onClick={() => {
+                navigate(`/postcreate/${postId}`)
+              }}>
                 수정하기
               </Button>
             </div>

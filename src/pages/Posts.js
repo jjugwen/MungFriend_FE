@@ -64,7 +64,7 @@ function Posts() {
           <PostBox key={i} onClick={()=>{
             navigate(`/posts/${post.id}`)
           }}>
-            {post.imagePath.map((image,i)=>(
+            {post.imagePath?.map((image,i)=>(
               <PostImg key={i} src={image} alt=""/>    
       ))}
             {/* <PostImg src={post.imagePath} alt=""/> */}
