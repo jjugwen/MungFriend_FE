@@ -62,9 +62,9 @@ const ListOutterBox = styled.div`
 `;
 
 const DogImg = styled.img`
-  width: 60px;
+  width: 100px;
   height: 60px;
-  border-radius: 50px;
+  border-radius: 50%;
 `;
 
 const Listbox = styled.div`
