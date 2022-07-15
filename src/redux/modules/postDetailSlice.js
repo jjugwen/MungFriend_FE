@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // import axios from "axios";
 import instance from "./instance";
 
-//미들웨어
+//axios
 export const getDetailDB = (id) => {
   return async function (dispatch) {
     await instance.get(`/api/posts/${id}`).then((response) => {
@@ -18,7 +18,7 @@ export const deleteDetailDB = (id) => {
     await instance
       .delete(`/api/posts/${id}`)
       // await axios
-      // .delete(`http://localhost:5002/detail/${id}`)
+      //   .delete(`http://localhost:5002/detail/${id}`)
       .then((response) => {
         if (response.data.status === "true") {
           // console.log(response);
@@ -48,8 +48,8 @@ export const postDetailSlice = createSlice({
       state.list = action.payload;
     },
     deletePostDetail(state, action) {
-      const new_list = state.list.filter((v) => v.id !== action.payload.id);
-      state.list = new_list;
+      // const new_list = state.list.filter((v) => v.id !== action.payload.id);
+      state.list = action.payload;
     },
   },
 });

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import imgUpload from "../../../assets/images/Modal/imgUpload.svg";
-import { reveiewImgCreate } from "../../../redux/modules/reviewSlice";
+import { reviewImgCreate } from "../../../redux/modules/reviewSlice";
 
 function ReviewImgUpload() {
   const dispatch = useDispatch();
@@ -26,7 +26,11 @@ function ReviewImgUpload() {
     setImage([...image, ...filelist]);
     e.target.value = "";
   };
-  console.log(image);
+  // console.log(image);
+
+  useEffect(() => {
+    dispatch(reviewImgCreate(image));
+  }, [dispatch, image]);
 
   return (
     <div className="addPicture" style={{ display: "flex", width: "560px" }}>
@@ -76,18 +80,6 @@ function ReviewImgUpload() {
               </button>
             </div>
           ))}
-        <button
-          onClick={(e) => {
-            if (preview.length > 3) {
-              e.preventDefault();
-              alert("사진은 최대 3장만 올릴 수 있어요 :)");
-            }
-            // dispatch(reveiewImgCreate([image]));
-            dispatch(reveiewImgCreate(image));
-          }}
-        >
-          이미지 등록
-        </button>
       </div>
     </div>
   );

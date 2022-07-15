@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 //컴포넌트
@@ -8,7 +8,25 @@ import MyPostList from "../components/MyPostList";
 import MyReviewList from "../components/MyReviewList";
 
 const Mypage = () => {
-  let [change, setChange] = useState(<MyPageComponent />);
+  const [change, setChange] = useState(<MyPageComponent />);
+  let [value, setValue] = useState("");
+  value = new URL(window.location.href).searchParams.get("value");
+  window.addEventListener("click", getValue);
+  function getValue() {
+    setValue(new URL(window.location.href).searchParams.get("value"));
+  }
+
+  useEffect(() => {
+    if (value === "mypage") {
+      setChange(<MyPageComponent />);
+    }
+    if (value === "mypost") {
+      setChange(<MyPostList />);
+    }
+    if (value === "myreview") {
+      setChange(<MyReviewList />);
+    }
+  }, [value]);
 
   return (
     <Container>

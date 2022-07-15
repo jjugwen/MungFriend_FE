@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 // import axios from "axios";
 
-//미들웨어
+//axios
 export const createReviewDB = (formData) => {
   console.log(formData);
   return async function (dispatch) {
@@ -29,28 +29,50 @@ export const createReviewDB = (formData) => {
   };
 };
 
+export const loadReviewDetailDB = (id) => {
+  return async function (dispatch) {
+    await instance
+      .get(`/api/reviews/${id}`)
+      // await axios.get(`http://localhost:5002/reviewdetail`)
+      .then((response) => {
+        dispatch(reviewDetailLoad(response.data));
+      });
+  };
+};
+
 //redux toolkit
 export const reviewSlice = createSlice({
   name: "reviews",
   initialState: {
     infos: [],
     image: "",
+    list: [],
   },
   reducers: {
     reviewCreate(state, action) {
       console.log(action.payload);
       state.infos.push(action.payload);
     },
-    reveiewImgCreate(state, action) {
+    reviewImgCreate(state, action) {
       console.log(action.payload);
       // state.image.push(action.payload);
       state.image = action.payload;
       console.log(state.image);
     },
+    reviewImgDelete(state, action) {
+      state.image = action.payload;
+    },
+    reviewDetailLoad(state, action) {
+      state.list = action.payload;
+    },
   },
 });
 
-export const actionCreators = { createReviewDB };
-export const { reviewCreate, reveiewImgCreate, reviewImgDelete } =
-  reviewSlice.actions;
+export const actionCreators = { createReviewDB, loadReviewDetailDB };
+export const {
+  reviewCreate,
+  reviewImgCreate,
+  reviewImgDelete,
+  reviewDetailLoad,
+} = reviewSlice.actions;
 export default reviewSlice.reducer;

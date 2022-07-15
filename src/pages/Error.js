@@ -23,6 +23,7 @@ function Error() {
               margin="40px 0 0 0"
               _onClick={() => {
                 navigate("/");
+                window.location.reload();
               }}
             >
               홈으로
@@ -53,10 +54,11 @@ const Body = styled.div`
   align-items: center;
   /* width: 100%; */
   gap: 3.75%;
+  margin: 0% 10% auto;
 `;
 
 const Img = styled.img`
-  margin-left: 26%;
+  margin-left: 17%;
   width: 27.5%;
 `;
 

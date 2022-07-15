@@ -4,15 +4,15 @@ import styled from "styled-components";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
 import { createPostAX } from "../redux/modules/postSlice";
 
- const c = []
+const c = [];
 function PostCreate() {
   const dispatch = useDispatch();
-  
-  React.useEffect(()=>{
-    dispatch(loadMyMungAX());
-  },[])
 
-  const dogList = useSelector((state)=> state.mungSlice.mung)
+  React.useEffect(() => {
+    dispatch(loadMyMungAX());
+  }, []);
+
+  const dogList = useSelector((state) => state.mungSlice.mung);
   // console.log(dogList)
 
   const dateRef = useRef();
@@ -29,43 +29,41 @@ function PostCreate() {
   const endMinuteRef = useRef(null);
 
   const click = () => {
-    
     const post = {
-      dogidList: c,
+      dogIdList: c,
       title: titleRef.current.value,
       content: contentRef.current.value,
-      
+
       requestStartDate:
         dateRef.current.value +
         "T" +
         startHourRef.current.value +
         ":" +
         startMinuteRef.current.value,
-        requestEndDate:
+      requestEndDate:
         dateRef.current.value +
         "T" +
         endHourRef.current.value +
         ":" +
-        endMinuteRef.current.value
+        endMinuteRef.current.value,
     };
-    console.log(post)
-    // dispatch(createPostAX(post))
+    console.log(post);
+    dispatch(createPostAX(post));
     //등록후 가야할 페이지 navigate해주기
   };
   // const [c, setC] = useState([]);
   // const [b,setB] = useState(0);
-  const a = (e)=>{
+  const a = (e) => {
     // setB(e.target.value)
-    let index = c.indexOf(e.target.value)
-    if(c.includes(e.target.value)===true){
-      c.splice(index,1)
-    }else{
-      c.push(e.target.value)
+    let index = c.indexOf(Number(e.target.value));
+    if (c.includes(Number(e.target.value)) === true) {
+      c.splice(index, 1);
+    } else {
+      c.push(Number(e.target.value));
     }
-    // console.log(e.target.value); 
+    // console.log(e.target.value);
     console.log(c);
-  
-  }
+  };
 
   return (
     <>
@@ -76,15 +74,19 @@ function PostCreate() {
         <button>추가하기</button>
       </div>
       <div className="row-box">
-
         {dogList?.map((dog, index) => {
           return (
             <Listbox key={index}>
-             <CheckBox>
-            <label htmlFor="check2">
-            <input className="checkbox2" type="checkbox" value={dog.id} onClick={a}/>
-            </label>
-        </CheckBox>
+              <CheckBox>
+                <label htmlFor="check2">
+                  <input
+                    className="checkbox2"
+                    type="checkbox"
+                    value={dog.id}
+                    onClick={a}
+                  />
+                </label>
+              </CheckBox>
               <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
               <div>
                 <div className="font-18">

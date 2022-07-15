@@ -65,7 +65,7 @@ function Signup() {
       setUsernameCheck(true);
     }
     setUsername(e.target.value);
-    console.log(setUsername(e.target.value));
+    // console.log(setUsername(e.target.value));
   };
 
   //email 유효성 체크
@@ -179,7 +179,7 @@ function Signup() {
       instance
         .post("/member/signup", data)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           if (response.data.status === "true") {
             console.log(response.data.message);
             navigate("/signupsuccess");
@@ -203,9 +203,7 @@ function Signup() {
 
   return (
     <>
-      {/* <Header /> */}
       <div className="SignupOutterBox">
-        {/* <form  action="#"> */}
         <div>
           <label htmlFor="id" className="SignupText">
             아이디
@@ -346,11 +344,35 @@ function Signup() {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              width: "440px",
-              margin: "2% 0%",
+              width: "430px",
+              margin: "2% 1%",
             }}
           >
-            <span>위치서비스 제공에 동의합니다.</span>
+            <span>
+              멍친구{" "}
+              <a
+                target="blank"
+                style={{
+                  color: "black",
+                  zIndex: 3,
+                }}
+                href="https://protective-iodine-bc7.notion.site/bbd8abbf735140109899396c1c87dc61"
+              >
+                이용약관
+              </a>
+              ,{" "}
+              <a
+                target="blank"
+                style={{
+                  color: "black",
+                  zIndex: 3,
+                }}
+                href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
+              >
+                개인정보취급방침
+              </a>
+              에 모두 동의합니다.
+            </span>
             <div style={{ display: "flex", alignItems: "center" }}>
               <input
                 className="CheckboxStyle"
@@ -378,7 +400,6 @@ function Signup() {
               <div className="SignupButtonText">회원가입</div>
             </button>
           </div>
-          {/* </form> */}
         </div>
       </div>
     </>
@@ -405,6 +426,7 @@ const postCodeStyle = {
   border: "2px solid #d2d2d2",
   position: "absolute",
   // backgroundColor: "orange",
+  zIndex: "3",
 };
 
 export default Signup;

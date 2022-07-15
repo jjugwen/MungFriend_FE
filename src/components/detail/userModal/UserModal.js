@@ -7,8 +7,7 @@ import Button from "../../../elements/Button";
 function UserModal(props) {
   const { open, close, children } = props;
   //신청자 정보 모달 확인 시 필요
-  const userInfoRoot = useSelector((state) => state.userInfoSlice.userInfo);
-  const userInfo = userInfoRoot[0];
+  const userInfo = useSelector((state) => state.userInfoSlice.userInfo);
   // console.log(userInfo);
 
   return (

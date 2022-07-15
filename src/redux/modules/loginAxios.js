@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//미들웨어
+//axios
 export const loginDB = (username, password) => {
   // console.log(username, password);
   return function (dispatch) {

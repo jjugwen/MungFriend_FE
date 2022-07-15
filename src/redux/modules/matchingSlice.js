@@ -2,19 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 // import axios from "axios";
 
-//미들웨어
+//axios
 //create 매칭하기
-export const createMatchingDB = (id) => {
+export const createMatchingDB = (id, postId) => {
   return async function (dispatch) {
     console.log(id);
     // await axios
     //   .post(`http://localhost:5002/match`, { id: id })
     await instance
-      .post(`/api/match/${id}`)
+      .post(`/api/match/${id}`, { postId: postId })
       .then((response) => {
         if (response.data.staus === "true") {
           // console.log(response.data);
           dispatch(matchCreate(response.data));
+          console.log(response.data.status, response.data.message);
         } else if (response.data.staus === "false") {
           console.log(response.data.status, response.data.message);
         }
@@ -27,16 +28,16 @@ export const createMatchingDB = (id) => {
 };
 
 //delete - 매칭 취소
-export const deleteMatchingDB = (id) => {
+export const deleteMatchingDB = (postId) => {
   return async function (dispatch) {
     // await axios
     //   .delete(`http://localhost:5002/match/${id}`)
     await instance
-      .delete(`/api/match/cancel`)
+      .post(`/api/match/cancel`, { postId: postId })
       .then((response) => {
         // console.log(response);
-        console.log(response.data.staus, response.data.message);
-        dispatch(matchDelete(id));
+        console.log(response.data.status, response.data.message);
+        dispatch(matchDelete(postId));
       })
       .catch((err) => {
         window.alert("에러가 발생했어요!");
