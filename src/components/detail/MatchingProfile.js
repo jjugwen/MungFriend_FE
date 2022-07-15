@@ -13,6 +13,9 @@ function Matching(props) {
   // console.log(detailList);
   const dispatch = useDispatch();
 
+  //매칭한 프로필 아이디 가져오기
+  const matchingId = useSelector((state) => state.matchingSlice.list.id);
+  console.log(matchingId);
   //후기작성하기 모달창
   const [Modal, setModal] = useState(false);
   const openModal = () => {
@@ -20,6 +23,19 @@ function Matching(props) {
   };
   const closeModal = () => {
     setModal(false);
+  };
+
+  //시간 계산
+  const now = new Date(+new Date() + 3240 * 10000).toISOString();
+  const endTime = detailList?.requestEndDate;
+  console.log(now, endTime);
+  const nowMinusEndTime = () => {
+    return now.slice(0, 4) - endTime.slice(0, 4) >= 0 &&
+      now.slice(5, 7) - endTime.slice(5, 7) >= 0 &&
+      now.slice(8, 10) - endTime.slice(8, 10) >= 0 &&
+      now.split("T")[1].slice(0, 2) - endTime.split("T")[1].slice(0, 2) >= 0
+      ? false
+      : true;
   };
 
   return (
@@ -31,28 +47,27 @@ function Matching(props) {
 
         <Listbox>
           <DogImg
-            src={detailList?.applyList[postId]?.dogProfileImgUrl}
+            src={detailList?.applyList[matchingId]?.dogProfileImgUrl}
             alt="dogimg"
           />
-          <p>{detailList?.applyList[postId]?.nickname}</p>
-          {/* {detailList?.requestEndDate ? ( */}
-          {/* {2 < 0 ? ( */}
-          <div>
-            <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
-            <WriteModal children="후기작성" open={Modal} close={closeModal} />
-          </div>
-          {/* ) : ( */}
-          <CancleBtn
-            onClick={() => {
-              dispatch(matchActions.deleteMatchingDB(postId)); //params.id  아닌데, 변경 확인 . mockAPi axios 테스트 작동은 확인
-              setTimeout(() => {
-                window.location.reload();
-              }, 500);
-            }}
-          >
-            매칭취소
-          </CancleBtn>
-          {/* )} */}
+          <p>{detailList?.applyList[matchingId]?.nickname}</p>
+          {nowMinusEndTime ? (
+            <div>
+              <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
+              <WriteModal children="후기작성" open={Modal} close={closeModal} />
+            </div>
+          ) : (
+            <CancleBtn
+              onClick={() => {
+                dispatch(matchActions.deleteMatchingDB(postId));
+                setTimeout(() => {
+                  window.location.reload();
+                }, 500);
+              }}
+            >
+              매칭취소
+            </CancleBtn>
+          )}
         </Listbox>
       </Container>
     </>

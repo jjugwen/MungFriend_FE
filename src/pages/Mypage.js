@@ -12,9 +12,17 @@ import { userinfoDB } from "../redux/modules/userInfoSlice";
 const Mypage = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(loadMyPageAX());
+    dispatch(loadMyPageAX(user));
   }, []);
 
+  //사용자 정보 불러오기
+  //사용자 정보 불러오기
+  const [user, setUser] = useState(null);
+  React.useEffect(() => {
+    instance.get(`/myinfo`).then((res) => {
+      setUser(res.data.id);
+    });
+  }, []);
   let [change, setChange] = useState(<MyPageComponent />);
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
@@ -52,11 +60,11 @@ const Mypage = () => {
 
   //헤더 모달창 컴포넌트 연결
   let [value, setValue] = useState("");
-  value = new URL(window.location.href).searchParams.get("value");
-  window.addEventListener("click", getValue);
-  function getValue() {
-    setValue(new URL(window.location.href).searchParams.get("value"));
-  }
+  // value = new URL(window.location.href).searchParams.get("value");
+  // window.addEventListener("click", getValue);
+  // function getValue() {
+  //   setValue(new URL(window.location.href).searchParams.get("value"));
+  // }
 
   React.useEffect(() => {
     if (value === "mypage") {

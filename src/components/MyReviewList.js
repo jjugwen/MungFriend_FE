@@ -30,7 +30,7 @@ function MyReviewList() {
                 <button
                   style={{ background: "none", border: "none" }}
                   onClick={() => {
-                    dispatch(reviewActions.loadReviewDetailDB(i));
+                    dispatch(reviewActions.loadReviewDetailDB(review?.id));
                     setTimeout(() => {
                       openReviewModal();
                     }, 500);
