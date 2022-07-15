@@ -60,7 +60,7 @@ const Mypage = () => {
 
   //헤더 모달창 컴포넌트 연결
   let [value, setValue] = useState("");
-  // value = new URL(window.location.href).searchParams.get("value");
+  value = new URL(window.location.href).searchParams.get("value");
   // window.addEventListener("click", getValue);
   // function getValue() {
   //   setValue(new URL(window.location.href).searchParams.get("value"));
