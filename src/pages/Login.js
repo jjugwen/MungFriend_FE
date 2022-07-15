@@ -26,6 +26,17 @@ function Login() {
     }
   };
 
+  //엔터 이벤트
+  const onClick = () => {
+    console.log("enter");
+    // dispatch(loginDB(username.current.value, password.current.value));
+  };
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClick();
+    }
+  };
+
   return (
     <>
       <div className="LoginOutterBox">
@@ -54,14 +65,12 @@ function Login() {
             placeholder="비밀번호를 입력해주세요."
             ref={password}
             onChange={onChange}
+            onKeyPress={onKeyPress}
           ></input>
           <LoginButton
             isActive={btnState}
             disabled={!btnState}
-            onClick={() => {
-              // console.log(username.current.value, password.current.value);
-              dispatch(loginDB(username.current.value, password.current.value));
-            }}
+            onClick={onClick}
           >
             <span>로그인</span>
           </LoginButton>
