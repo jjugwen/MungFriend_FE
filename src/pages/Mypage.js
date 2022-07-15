@@ -5,21 +5,24 @@ import styled from "styled-components";
 import MyPageComponent from "../components/MyPageComponent";
 import MyPostList from "../components/MyPostList";
 import MyReviewList from "../components/MyReviewList";
+import instance from "../redux/modules/instance";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
 import { userinfoDB } from "../redux/modules/userInfoSlice";
 
 const Mypage = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(loadMyPageAX());
-    //유저정보 불러오기
-    dispatch(userinfoDB());
+    dispatch(loadMyPageAX(user));
   }, []);
 
   //사용자 정보 불러오기
-  const user = useSelector((state) => state.userinfoSlice);
-  console.log(user);
-
+    //사용자 정보 불러오기
+    const [user, setUser] = useState(null);
+    React.useEffect(()=>{
+  instance.get(`/myinfo`).then((res)=>{
+    setUser(res.data.id);
+  })
+    },[])
   let [change, setChange] = useState(<MyPageComponent />);
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
