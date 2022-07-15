@@ -73,6 +73,7 @@ const ReviewList = styled.div`
       color: #fa5a30;
     }
   }
+  margin-bottom: 100px;
 `;
 const ReviewBox = styled.div`
   width: 48%;
