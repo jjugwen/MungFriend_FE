@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import instance from "../redux/modules/instance";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
-import { getDetailDB } from "../redux/modules/postDetailSlice";
+import {useNavigate} from 'react-router-dom';
 import { createPostAX, updatePostAX } from "../redux/modules/postSlice";
 
 const c = [];
@@ -16,6 +16,7 @@ function PostCreate() {
   const isNew = params.id === undefined;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(loadMyMungAX());
@@ -64,7 +65,7 @@ function PostCreate() {
     };
     // console.log(post);
     dispatch(createPostAX(post));
-    //등록후 가야할 페이지 navigate해주기
+    navigate(`/posts`)
   };
   //수정버튼
   const updateClick = () => {
@@ -96,6 +97,7 @@ function PostCreate() {
       .put(`/api/posts/${params.id}`, updatePost)
       .then((response) => {
         console.log(response);
+        navigate(`/posts`)
       })
       .catch((error) => {
         alert(error);
@@ -119,7 +121,8 @@ function PostCreate() {
   //수정하기
   React.useEffect(() => {
     if (!isNew) {
-      axios.get(`http://localhost:5001/detail/${params.id}`).then((res) => {
+      instance.get(`/api/posts/${params.id}`).then((res)=>{
+      // axios.get(`http://localhost:5001/detail/${params.id}`).then((res) => {
         setUpdatePost(res.data);
       });
     }
