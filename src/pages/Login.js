@@ -28,8 +28,8 @@ function Login() {
 
   //엔터 이벤트
   const onClick = () => {
-    console.log("enter");
-    // dispatch(loginDB(username.current.value, password.current.value));
+    // console.log("enter");
+    dispatch(loginDB(username.current.value, password.current.value));
   };
   const onKeyPress = (e) => {
     if (e.key === "Enter") {
