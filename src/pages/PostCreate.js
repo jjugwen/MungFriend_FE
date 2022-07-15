@@ -131,7 +131,6 @@ function PostCreate() {
         <div>게시글 작성</div>
         <div>멍 프로필 선택</div>
         <div>다중선택 가능합니다</div>
-        <button>추가하기</button>
       </div>
       <div className="row-box">
         {dogList?.map((dog, index) => {
