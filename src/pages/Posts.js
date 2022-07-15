@@ -5,9 +5,11 @@ import styled from "styled-components";
 import { loadPostListAX } from "../redux/modules/postSlice";
 import Ing from "../assets/images/IsComplete/모집중.svg"
 import Done from "../assets/images/IsComplete/모집종료.svg"
+import { useNavigate } from "react-router-dom";
 
 function Posts() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(loadMyMungAX());
@@ -36,7 +38,7 @@ function Posts() {
     // console.log(a)
     
   return (
-    <>
+    <All>
     <Box className="row-box">
       {myMung?.map((dog, i) => {
         return (
@@ -59,7 +61,9 @@ function Posts() {
       {Posts?.map((post,i)=>{
         // console.log(post.imagePath)
         return(
-          <PostBox key={i}>
+          <PostBox key={i} onClick={()=>{
+            navigate(`/posts/${post.id}`)
+          }}>
             {post.imagePath.map((image,i)=>(
               <PostImg key={i} src={image} alt=""/>    
       ))}
@@ -77,10 +81,16 @@ function Posts() {
         )
       })}
     </Container>
-    </>
+    <AddPostButton onClick={()=>{
+      navigate('/postcreate')
+    }}><img src="https://ifh.cc/g/nW36zN.png" alt=""/></AddPostButton>
+    </All>
   );
 }
 
+const All=styled.div`
+height:100vh;
+`
 const Box = styled.div`
   background-color: orange;
   position: relative;
@@ -119,5 +129,18 @@ border-radius: 50%;
 width: 48px;
 height: 48px;
 `
-
+const AddPostButton =styled.button`
+position: absolute;
+width: 80px;
+height: 80px;
+right:10%;
+bottom: 10%;
+border: none;
+background-color: #4F65FF;
+border-radius: 50%;
+img{
+  width: 40px;
+  height: 40px;
+}
+`
 export default Posts;
