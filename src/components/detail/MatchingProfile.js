@@ -43,11 +43,8 @@ function Matching(props) {
         </div>
 
         <Listbox>
-          <DogImg
-            src={detailList?.applyList[0]?.dogProfileImgUrl} //수정 필요
-            alt="dogimg"
-          />
-          <p>{detailList?.applyList[0]?.nickname}</p>
+          <DogImg src={detailList?.matchedDogProfileImgUrl} alt="dogimg" />
+          <p>{detailList?.matchedNickname}</p>
           {nowMinusEndTime !== true ? ( //현재시간 - 산책종료 시간(hour 단위) > 0 이면 매칭취소 버튼
             <CancleBtn
               onClick={() => {
