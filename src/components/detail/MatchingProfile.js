@@ -36,23 +36,23 @@ function Matching(props) {
           />
           <p>{detailList?.applyList[postId]?.nickname}</p>
           {/* {detailList?.requestEndDate ? ( */}
-          {2 > 0 ? (
-            <div>
-              <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
-              <WriteModal children="후기작성" open={Modal} close={closeModal} />
-            </div>
-          ) : (
-            <CancleBtn
-              onClick={() => {
-                dispatch(matchActions.deleteMatchingDB(postId)); //params.id  아닌데, 변경 확인 . mockAPi axios 테스트 작동은 확인
-                setTimeout(() => {
-                  window.location.reload();
-                }, 500);
-              }}
-            >
-              매칭취소
-            </CancleBtn>
-          )}
+          {/* {2 < 0 ? ( */}
+          <div>
+            <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
+            <WriteModal children="후기작성" open={Modal} close={closeModal} />
+          </div>
+          {/* ) : ( */}
+          <CancleBtn
+            onClick={() => {
+              dispatch(matchActions.deleteMatchingDB(postId)); //params.id  아닌데, 변경 확인 . mockAPi axios 테스트 작동은 확인
+              setTimeout(() => {
+                window.location.reload();
+              }, 500);
+            }}
+          >
+            매칭취소
+          </CancleBtn>
+          {/* )} */}
         </Listbox>
       </Container>
     </>
