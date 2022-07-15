@@ -11,11 +11,8 @@ function Matching(props) {
   // console.log(postId);
   const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
-  const dispatch = useDispatch();
 
-  //매칭한 프로필 아이디 가져오기
-  const matchingId = useSelector((state) => state.matchingSlice.list.id); //수정 필요
-  console.log(matchingId); // undefind
+  const dispatch = useDispatch();
   //후기작성하기 모달창
   const [Modal, setModal] = useState(false);
   const openModal = () => {
@@ -47,11 +44,11 @@ function Matching(props) {
 
         <Listbox>
           <DogImg
-            src={detailList?.applyList[matchingId]?.dogProfileImgUrl} //수정 필요
+            src={detailList?.applyList[0]?.dogProfileImgUrl} //수정 필요
             alt="dogimg"
           />
-          <p>{detailList?.applyList[matchingId]?.nickname}</p>
-          {nowMinusEndTime === true ? ( //현재시간 - 산책종료 시간(hour 단위) > 0 이면 매칭취소 버튼
+          <p>{detailList?.applyList[0]?.nickname}</p>
+          {nowMinusEndTime !== true ? ( //현재시간 - 산책종료 시간(hour 단위) > 0 이면 매칭취소 버튼
             <CancleBtn
               onClick={() => {
                 dispatch(matchActions.deleteMatchingDB(postId));
