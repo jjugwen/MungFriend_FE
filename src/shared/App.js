@@ -29,7 +29,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupsuccess" element={<SignupSuccess />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/mypage" element={ <Mypage />} />
+        <Route path="/mypage" element={<Mypage />} />
         <Route path="/posts" element={token ? <Posts /> : <Error />} />
         <Route path="/postcreate" element={<PostCreate />} />
         <Route path="/postcreate/:id" element={<PostCreate />} />
@@ -37,8 +37,8 @@ function App() {
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
         <Route path="/test" element={<DogPlusModal />} />
-        <Route path="/test2" element={<ProfileUpdate/>} />
-        <Route path="/reviewdetail" element={<ReviewDetailModal />} />
+        <Route path="/test2" element={<ProfileUpdate />} />
+        <Route path="/reviews/:id" element={<ReviewDetailModal />} />
       </Routes>
       <Footer />
     </div>
