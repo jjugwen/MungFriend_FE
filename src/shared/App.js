@@ -33,7 +33,7 @@ function App() {
         <Route path="/posts" element={token ? <Posts /> : <Error />} />
         <Route path="/postcreate" element={<PostCreate />} />
         <Route path="/postcreate/:id" element={<PostCreate />} />
-        <Route path="/posts/:id" element={token ? <PostDetail /> : <Error />} />
+        <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
         <Route path="/test" element={<DogPlusModal />} />
