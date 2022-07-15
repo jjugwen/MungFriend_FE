@@ -21,9 +21,6 @@ README
  + 이영주 : 
 
  + 정예빈 :
- 
-# 📏 ERD
-![멍친구 ERD (채팅 추가)](https://user-images.githubusercontent.com/82041804/178925767-b721bcee-3286-4fc9-9290-09025d168629.JPG)
 
 # 🛠 서비스 아키텍처
 ![멍프렌드 통합 아키텍처](https://user-images.githubusercontent.com/82041804/178923080-3297f289-a65c-4a77-91c9-7a18403d9f6d.JPG)
