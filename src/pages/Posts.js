@@ -92,7 +92,7 @@ function Posts() {
                     신청자 {post.applyCount}
                   </div>
                   <div>
-                    {post.isComplete === true ? (
+                    {post.isComplete === false ? (
                       <img src={Ing} alt="" />
                     ) : (
                       <img src={Done} alt="" />
@@ -202,7 +202,7 @@ const AddPostButton = styled.button`
   width: 80px;
   height: 80px;
   right: 10%;
-  bottom: 10%;
+  bottom: 40%;
   border: none;
   background-color: #4f65ff;
   border-radius: 50%;
