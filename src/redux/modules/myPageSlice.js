@@ -56,9 +56,9 @@ const myPageSlice = createSlice({
         } else {
           return false;
         }
-      );
+      });
     },
-  }
+  },
 });
 
 export const { loadMyPage, patchIntroduce, patchPhoneNum, deleteMyMung } =
