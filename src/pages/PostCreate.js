@@ -65,7 +65,7 @@ function PostCreate() {
     };
     // console.log(post);
     dispatch(createPostAX(post));
-    //등록후 가야할 페이지 navigate해주기
+    navigate(`/posts`)
   };
   //수정버튼
   const updateClick = () => {
