@@ -5,7 +5,7 @@ import {
   patchIntroduceAX,
   patchPhoneNumAX,
 } from "../redux/modules/myPageSlice";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import DogList from "./DogList";
 
 function MyPageComponent() {
@@ -14,7 +14,7 @@ function MyPageComponent() {
 
   const info = useSelector((state) => state.myPageSlice.mypage);
   // const info = useSelector((state) => state);
-  // console.log(info);
+  console.log(info);
   // 자기소개가 없다면 등록하기 버튼이 나오도록 해보기
   const introduce = info?.introduce;
   // console.log(introduce)
@@ -62,7 +62,7 @@ function MyPageComponent() {
   return (
     <Container>
       <div style={{ display: "flex" }}>
-        <Profileimg src="https://ifh.cc/g/sPZmVL.png" alt="" />
+        <Profileimg src={info?.dogProfileImgUrl} alt="" />
         <div style={{ marginTop: "13px" }}>
           <div className="font-20">
             <b>{info?.nickname}</b>님 반갑습니다!
@@ -71,9 +71,13 @@ function MyPageComponent() {
             {info?.email}
           </div>
         </div>
-        <UpdateButton onClick={()=>{
-          navigate(`/test2`)
-        }}>임시 프로필 수정</UpdateButton>
+        <UpdateButton
+          onClick={() => {
+            navigate(`/test2`);
+          }}
+        >
+          임시 프로필 수정
+        </UpdateButton>
       </div>
       {/* 휴대폰 번호
       {phoneNum === "" ? (
@@ -110,6 +114,7 @@ const Profileimg = styled.img`
   width: 60px;
   height: 60px;
   padding: 5px;
+  border-radius: 50%;
 `;
 
 const IntroduceDiv = styled.div`
@@ -121,14 +126,14 @@ const IntroduceDiv = styled.div`
 `;
 
 const UpdateButton = styled.button`
-position:absolute;
-right: 5%;
-background: #FFFFFF;
-border: 1px solid #E5E5E5;
-border-radius: 4px;
-width: 150px;
-height: 40px;
-font-size: 14px;
-`
+  position: absolute;
+  right: 5%;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  width: 150px;
+  height: 40px;
+  font-size: 14px;
+`;
 
 export default MyPageComponent;

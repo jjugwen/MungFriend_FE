@@ -11,11 +11,8 @@ function Matching(props) {
   // console.log(postId);
   const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
-  const dispatch = useDispatch();
 
-  //매칭한 프로필 아이디 가져오기
-  const matchingId = useSelector((state) => state.matchingSlice.list.id); //수정 필요
-  console.log(matchingId); // undefind
+  const dispatch = useDispatch();
   //후기작성하기 모달창
   const [Modal, setModal] = useState(false);
   const openModal = () => {
@@ -26,17 +23,13 @@ function Matching(props) {
   };
 
   //시간 계산
-  const now = new Date(+new Date() + 3240 * 10000).toISOString();
-  const endTime = detailList?.requestEndDate;
-  console.log(now, endTime);
+  const now = new Date().getTime();
+  const endTime = new Date(detailList?.requestEndDate).getTime();
+
   const nowMinusEndTime = () => {
-    return now.slice(0, 4) - endTime.slice(0, 4) >= 0 &&
-      now.slice(5, 7) - endTime.slice(5, 7) >= 0 &&
-      now.slice(8, 10) - endTime.slice(8, 10) >= 0 &&
-      now.split("T")[1].slice(0, 2) - endTime.split("T")[1].slice(0, 2) >= 0
-      ? true
-      : false;
+    return endTime - now >= 0 ? true : false;
   };
+  // console.log(nowMinusEndTime());
 
   return (
     <>
@@ -46,12 +39,9 @@ function Matching(props) {
         </div>
 
         <Listbox>
-          <DogImg
-            src={detailList?.applyList[matchingId]?.dogProfileImgUrl} //수정 필요
-            alt="dogimg"
-          />
-          <p>{detailList?.applyList[matchingId]?.nickname}</p>
-          {nowMinusEndTime === true ? ( //현재시간 - 산책종료 시간(hour 단위) > 0 이면 매칭취소 버튼
+          <DogImg src={detailList?.matchedDogProfileImgUrl} alt="dogimg" />
+          <p>{detailList?.matchedNickname}</p>
+          {nowMinusEndTime() ? ( //산책종료 시간 - 현재시간 >= 0 이면 매칭취소 버튼
             <CancleBtn
               onClick={() => {
                 dispatch(matchActions.deleteMatchingDB(postId));

@@ -25,23 +25,24 @@ function timeForToday(value) {
 
 function betweenTime(data) {
   // console.log(data);
-  const EndTime = data.EndTime;
-  const StartTime = data.StartTime;
-  // console.log(EndTime, StartTime);
-  const exHourTime =
-    EndTime?.split("T")[1].split(":")[0] -
-    StartTime?.split("T")[1].split(":")[0] +
-    "시간 ";
-  // console.log(exHourTime);
+  const EndTime = new Date(data.EndTime).getTime();
+  const StartTime = new Date(data.StartTime).getTime();
+  const gapTime = Math.floor((EndTime - StartTime) / 1000 / 60);
+  const betweenTimeHour = Math.floor(gapTime / 60);
 
-  const exMinuteTime =
-    EndTime?.split("T")[1].split(":")[1] -
-    StartTime?.split("T")[1].split(":")[1] +
-    "분";
-  // console.log(exMinuteTime);
-  // if (exHourTime < 0) {
-  // }
-  return exHourTime + exMinuteTime;
+  const exMinuteTime = () => {
+    if (gapTime < 60) {
+      return `${gapTime}분`;
+    }
+    return "0분";
+  };
+  const exHourTime = () => {
+    if (betweenTimeHour < 24) {
+      return `${betweenTimeHour}시간`;
+    }
+  };
+
+  return exHourTime() + exMinuteTime();
 }
 
 export { timeForToday, betweenTime };
