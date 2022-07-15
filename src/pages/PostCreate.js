@@ -62,8 +62,8 @@ function PostCreate() {
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
     };
-    console.log(post);
-    // dispatch(createPostAX(post))
+    // console.log(post);
+    dispatch(createPostAX(post));
     //등록후 가야할 페이지 navigate해주기
   };
   //수정버튼
@@ -92,12 +92,15 @@ function PostCreate() {
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
     };
-    instance.put((`/api/posts/${params.id}`),updatePost)
-    .then(response=>{console.log(response)})
-    .catch(error=>{
-      alert(error)
-    })
-  }
+    instance
+      .put(`/api/posts/${params.id}`, updatePost)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
   // const [c, setC] = useState([]);
   // const [b,setB] = useState(0);
   const a = (e) => {
@@ -200,11 +203,23 @@ function PostCreate() {
       </select>
       분<div>내용입력</div>
       <div>제목을 입력해주세요</div>
-      <input placeholder="제목을 입력해 주세요" ref={titleRef} defaultValue={updatePost? updatePost.title:""} />
+      <input
+        placeholder="제목을 입력해 주세요"
+        ref={titleRef}
+        defaultValue={updatePost ? updatePost.title : ""}
+      />
       <hr />
       <div>내용을 입력해주세요</div>
-      <textarea placeholder="내용을 입력해 주세요" ref={contentRef} defaultValue={updatePost? updatePost.content:""}/>
-      {isNew? <button onClick={click}>등록</button>:<button onClick={updateClick}>수정</button>}
+      <textarea
+        placeholder="내용을 입력해 주세요"
+        ref={contentRef}
+        defaultValue={updatePost ? updatePost.content : ""}
+      />
+      {isNew ? (
+        <button onClick={click}>등록</button>
+      ) : (
+        <button onClick={updateClick}>수정</button>
+      )}
     </>
   );
 }

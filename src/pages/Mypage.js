@@ -24,35 +24,38 @@ const Mypage = () => {
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
 
-  React.useEffect((e)=>{
-    if(currentClick !== null){
-      let current = document.getElementById(currentClick);
-      current.style.color ="white";
-      current.style.background= "#FA5A30";
-      current.style.boxShadow = "4px 4px 20px rgba(250, 90, 48, 0.2)";
-    }
-    if (prevClick !== null) {
-      let prev = document.getElementById(prevClick);
-      prev.style.color ="black";
-      prev.style.background= " transparent";
-      prev.style.boxShadow="none"
-    }
-    setPrevClick(currentClick);
-  },[currentClick]);
-  
-const getClick = (e)=>{
-    const id = e.target.id
-    setCurrentClick(id)
-    if(id ==="1"){
-      setChange(<MyPageComponent/>)
-    }else if(id ==="2"){
-      setChange(<MyPostList/>)
-    }else{
-      setChange(<MyReviewList/>)
-    }
-  }
+  React.useEffect(
+    (e) => {
+      if (currentClick !== null) {
+        let current = document.getElementById(currentClick);
+        current.style.color = "white";
+        current.style.background = "#FA5A30";
+        current.style.boxShadow = "4px 4px 20px rgba(250, 90, 48, 0.2)";
+      }
+      if (prevClick !== null) {
+        let prev = document.getElementById(prevClick);
+        prev.style.color = "black";
+        prev.style.background = " transparent";
+        prev.style.boxShadow = "none";
+      }
+      setPrevClick(currentClick);
+    },
+    [currentClick]
+  );
 
- //헤더 모달창 컴포넌트 연결
+  const getClick = (e) => {
+    const id = e.target.id;
+    setCurrentClick(id);
+    if (id === "1") {
+      setChange(<MyPageComponent />);
+    } else if (id === "2") {
+      setChange(<MyPostList />);
+    } else {
+      setChange(<MyReviewList />);
+    }
+  };
+
+  //헤더 모달창 컴포넌트 연결
   let [value, setValue] = useState("");
   value = new URL(window.location.href).searchParams.get("value");
   window.addEventListener("click", getValue);
@@ -71,7 +74,7 @@ const getClick = (e)=>{
       setChange(<MyReviewList />);
     }
   }, [value]);
-  
+
   return (
     <Container>
       <ListBar>
@@ -109,8 +112,8 @@ const ListBar = styled.div`
   box-sizing: border-box;
   flex-shrink: 0;
   button {
-     font-size: 16px;
-  font-weight: 600;
+    font-size: 16px;
+    font-weight: 600;
     border: none;
     background-color: transparent;
     border-radius: 8px;
