@@ -136,7 +136,7 @@ const Logoutbtn = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
-  margin: 16px 95px 16px 95px;
+  padding: 16px 95px 16px 95px;
   color: #747474;
 `;
 
