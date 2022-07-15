@@ -34,8 +34,8 @@ function Matching(props) {
       now.slice(5, 7) - endTime.slice(5, 7) >= 0 &&
       now.slice(8, 10) - endTime.slice(8, 10) >= 0 &&
       now.split("T")[1].slice(0, 2) - endTime.split("T")[1].slice(0, 2) >= 0
-      ? false
-      : true;
+      ? true
+      : false;
   };
 
   return (
@@ -51,12 +51,7 @@ function Matching(props) {
             alt="dogimg"
           />
           <p>{detailList?.applyList[matchingId]?.nickname}</p>
-          {nowMinusEndTime ? (
-            <div>
-              <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
-              <WriteModal children="후기작성" open={Modal} close={closeModal} />
-            </div>
-          ) : (
+          {nowMinusEndTime === true ? ( //현재시간 - 산책종료 시간(hour 단위) > 0 이면 매칭취소 버튼
             <CancleBtn
               onClick={() => {
                 dispatch(matchActions.deleteMatchingDB(postId));
@@ -67,6 +62,12 @@ function Matching(props) {
             >
               매칭취소
             </CancleBtn>
+          ) : (
+            // 시간 지났으면 후기작성
+            <div>
+              <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
+              <WriteModal children="후기작성" open={Modal} close={closeModal} />
+            </div>
           )}
         </Listbox>
       </Container>
