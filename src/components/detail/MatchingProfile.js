@@ -23,17 +23,13 @@ function Matching(props) {
   };
 
   //시간 계산
-  const now = new Date(+new Date() + 3240 * 10000).toISOString();
-  const endTime = detailList?.requestEndDate;
-  console.log(now, endTime);
+  const now = new Date().getTime();
+  const endTime = new Date(detailList?.requestEndDate).getTime();
+
   const nowMinusEndTime = () => {
-    return now.slice(0, 4) - endTime.slice(0, 4) >= 0 &&
-      now.slice(5, 7) - endTime.slice(5, 7) >= 0 &&
-      now.slice(8, 10) - endTime.slice(8, 10) >= 0 &&
-      now.split("T")[1].slice(0, 2) - endTime.split("T")[1].slice(0, 2) >= 0
-      ? true
-      : false;
+    return endTime - now >= 0 ? true : false;
   };
+  // console.log(nowMinusEndTime());
 
   return (
     <>
@@ -45,7 +41,7 @@ function Matching(props) {
         <Listbox>
           <DogImg src={detailList?.matchedDogProfileImgUrl} alt="dogimg" />
           <p>{detailList?.matchedNickname}</p>
-          {nowMinusEndTime !== true ? ( //현재시간 - 산책종료 시간(hour 단위) > 0 이면 매칭취소 버튼
+          {nowMinusEndTime() ? ( //산책종료 시간 - 현재시간 >= 0 이면 매칭취소 버튼
             <CancleBtn
               onClick={() => {
                 dispatch(matchActions.deleteMatchingDB(postId));
