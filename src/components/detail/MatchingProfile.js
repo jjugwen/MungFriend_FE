@@ -14,8 +14,8 @@ function Matching(props) {
   const dispatch = useDispatch();
 
   //매칭한 프로필 아이디 가져오기
-  const matchingId = useSelector((state) => state.matchingSlice.list.id);
-  console.log(matchingId);
+  const matchingId = useSelector((state) => state.matchingSlice.list.id); //수정 필요
+  console.log(matchingId); // undefind
   //후기작성하기 모달창
   const [Modal, setModal] = useState(false);
   const openModal = () => {
@@ -47,7 +47,7 @@ function Matching(props) {
 
         <Listbox>
           <DogImg
-            src={detailList?.applyList[matchingId]?.dogProfileImgUrl}
+            src={detailList?.applyList[matchingId]?.dogProfileImgUrl} //수정 필요
             alt="dogimg"
           />
           <p>{detailList?.applyList[matchingId]?.nickname}</p>
