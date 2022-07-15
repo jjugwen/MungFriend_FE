@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import ReviewDetailModal from "./ReviewDetailModal";
+import { actionCreators as reviewActions } from "../redux/modules/reviewSlice";
 function MyReviewList() {
+  const dispatch = useDispatch();
   //모달창 여닫기
   const [reviewModal, setReviewModal] = useState(false);
   const openReviewModal = () => {
@@ -28,7 +30,10 @@ function MyReviewList() {
                 <button
                   style={{ background: "none", border: "none" }}
                   onClick={() => {
-                    openReviewModal();
+                    dispatch(reviewActions.loadReviewDetailDB(i));
+                    setTimeout(() => {
+                      openReviewModal();
+                    }, 500);
                   }}
                 >
                   <div className="row-box">

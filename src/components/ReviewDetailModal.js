@@ -24,97 +24,95 @@ function ReviewDetailModal(props) {
   }, [dispatch]);
   return (
     <>
-      <div className="openModalcss">
-        <div className={open ? "openModalcss" : null}>
-          {open ? (
-            <div className="modal" style={{ height: "750px", padding: "0.7%" }}>
-              <div className="revieweDetailTitle">
-                <ModalTitle style={{ textAlign: "center" }}>
-                  후기상세
-                </ModalTitle>
-                <button
-                  onClick={() => {
-                    close();
-                  }}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                  }}
-                >
-                  <img src={closeBtn} alt="closeBtn" />
-                </button>
-              </div>
-              {reviewDetail?.map((value) => {
-                return (
-                  <>
-                    <div key={value.giverNickname} className="reviewerInfo">
-                      <div
-                        className="MungProfileImgCircle"
-                        style={{
-                          backgroundImage: `url(${value.giverDogProfileImgUrl})`,
-                        }}
-                      />
-                      <div className="NickAndDistanceAndDate">
-                        <span className="nicknameText">
-                          {value.giverNickname}
-                        </span>
-                        <span className="writeTimeText">
-                          {value.createdAt?.slice(0, 10).replace(/\-/g, ".")}
-                        </span>
-                      </div>
-                    </div>
-                    <HrBlack />
-                    <div className="imgBox">
-                      {value?.reviewImgList?.map((image, index) => {
-                        return (
-                          <>
-                            <div
-                              key={image.id}
-                              className={
-                                slide === index + 1
-                                  ? "slide active-anim"
-                                  : "slide"
-                              }
-                            >
-                              <img src={image} alt="reviewImages" />
-                            </div>
-                            <div className="containerDots">
-                              {Array.from({
-                                length: value?.reviewImgList?.length,
-                              }).map((item, index) => (
-                                <div
-                                  key={index}
-                                  onClick={() => moveDot(index + 1)}
-                                  className={
-                                    slide === index + 1 ? "dot active" : "dot"
-                                  }
-                                ></div>
-                              ))}
-                            </div>
-                          </>
-                        );
-                      })}
-                    </div>
-                    <div className="reviewTextBox">{value.comment}</div>
-                    <Hr />
-                    <Button
-                      orange_large
-                      className="close"
-                      _onClick={() => {
-                        close();
-                      }}
-                      position="absolute"
-                      bottom="19px"
-                    >
-                      확인
-                    </Button>
-                  </>
-                );
-              })}
+      {/* <div className="openModalcss"> */}
+      <div className={open ? "openModalcss" : null}>
+        {open ? (
+          <div className="modal" style={{ height: "750px", padding: "0.7%" }}>
+            <div className="revieweDetailTitle">
+              <ModalTitle style={{ textAlign: "center" }}>후기상세</ModalTitle>
+              <button
+                onClick={() => {
+                  close();
+                }}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                }}
+              >
+                <img src={closeBtn} alt="closeBtn" />
+              </button>
             </div>
-          ) : null}
-        </div>
+            {reviewDetail?.map((value) => {
+              return (
+                <>
+                  <div key={value.giverNickname} className="reviewerInfo">
+                    <div
+                      className="MungProfileImgCircle"
+                      style={{
+                        backgroundImage: `url(${value.giverDogProfileImgUrl})`,
+                      }}
+                    />
+                    <div className="NickAndDistanceAndDate">
+                      <span className="nicknameText">
+                        {value.giverNickname}
+                      </span>
+                      <span className="writeTimeText">
+                        {value.createdAt?.slice(0, 10).replace(/\-/g, ".")}
+                      </span>
+                    </div>
+                  </div>
+                  <HrBlack />
+                  <div className="imgBox">
+                    {value?.reviewImgList?.map((image, index) => {
+                      return (
+                        <>
+                          <div
+                            key={image.id}
+                            className={
+                              slide === index + 1
+                                ? "slide active-anim"
+                                : "slide"
+                            }
+                          >
+                            <img src={image} alt="reviewImages" />
+                          </div>
+                          <div className="containerDots">
+                            {Array.from({
+                              length: value?.reviewImgList?.length,
+                            }).map((item, index) => (
+                              <div
+                                key={index}
+                                onClick={() => moveDot(index + 1)}
+                                className={
+                                  slide === index + 1 ? "dot active" : "dot"
+                                }
+                              ></div>
+                            ))}
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+                  <div className="reviewTextBox">{value.comment}</div>
+                  <Hr />
+                  <Button
+                    orange_large
+                    className="close"
+                    _onClick={() => {
+                      close();
+                    }}
+                    position="absolute"
+                    bottom="19px"
+                  >
+                    확인
+                  </Button>
+                </>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
+      {/* </div> */}
     </>
   );
 }
