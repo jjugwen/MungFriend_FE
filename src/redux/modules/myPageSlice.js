@@ -4,12 +4,12 @@ import instance from "./instance";
 
 //axios
 //나중에 멤버 아이디값 받아와서 넘겨주기
-export const loadMyPageAX = (id) => {
+export const loadMyPageAX = () => {
   return async function (dispatch) {
     await instance
       // await axios.get(`http://localhost:5001/mypage`)
       // await instance
-      .get(`/mypage/${id}`)
+      .get(`/mypage`)
       .then((response) => dispatch(loadMyPage(response.data)));
   };
 };
