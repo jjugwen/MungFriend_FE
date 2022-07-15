@@ -1,11 +1,20 @@
-import React, { useRef, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import instance from "../redux/modules/instance";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
-import { createPostAX } from "../redux/modules/postSlice";
+import { getDetailDB } from "../redux/modules/postDetailSlice";
+import { createPostAX, updatePostAX } from "../redux/modules/postSlice";
 
 const c = [];
 function PostCreate() {
+  const params = useParams();
+  // console.log(params.id);
+  //id값으로 게시글 판별
+  const isNew = params.id === undefined;
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -14,11 +23,11 @@ function PostCreate() {
 
   const dogList = useSelector((state) => state.mungSlice.mung);
   // console.log(dogList)
-
+  const [updatePost, setUpdatePost] = useState(null);
   const dateRef = useRef();
   const time = {
     hour: [...Array(24).keys()].map((key) => key + 1),
-    minute: [...Array(60).keys()].map((key) => key + 1),
+    minute: [...Array(60).keys()].map((key) => key),
   };
   //입력창 정보
   const titleRef = useRef(null);
@@ -27,34 +36,73 @@ function PostCreate() {
   const startMinuteRef = useRef(null);
   const endHourRef = useRef(null);
   const endMinuteRef = useRef(null);
-
+  //작성버튼
   const click = () => {
+    let startHour = startHourRef.current.value;
+    if (startHour.length === 1) {
+      startHour = 0 + startHour;
+    }
+    let startMinute = startMinuteRef.current.value;
+    if (startMinute.length === 1) {
+      startMinute = 0 + startMinute;
+    }
+    let endHour = endHourRef.current.value;
+    if (endHour.length === 1) {
+      endHour = 0 + endHour;
+    }
+    let endMinute = endMinuteRef.current.value;
+    if (endMinute.length === 1) {
+      endMinute = 0 + endMinute;
+    }
     const post = {
-      dogIdList: c,
       title: titleRef.current.value,
       content: contentRef.current.value,
-
+      dogidList: c,
       requestStartDate:
-        dateRef.current.value +
-        "T" +
-        startHourRef.current.value +
-        ":" +
-        startMinuteRef.current.value,
-      requestEndDate:
-        dateRef.current.value +
-        "T" +
-        endHourRef.current.value +
-        ":" +
-        endMinuteRef.current.value,
+        dateRef.current.value + "T" + startHour + ":" + startMinute,
+      requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
     };
     console.log(post);
-    dispatch(createPostAX(post));
+    // dispatch(createPostAX(post))
     //등록후 가야할 페이지 navigate해주기
   };
+  //수정버튼
+  const updateClick = () => {
+    let startHour = startHourRef.current.value;
+    if (startHour.length === 1) {
+      startHour = 0 + startHour;
+    }
+    let startMinute = startMinuteRef.current.value;
+    if (startMinute.length === 1) {
+      startMinute = 0 + startMinute;
+    }
+    let endHour = endHourRef.current.value;
+    if (endHour.length === 1) {
+      endHour = 0 + endHour;
+    }
+    let endMinute = endMinuteRef.current.value;
+    if (endMinute.length === 1) {
+      endMinute = 0 + endMinute;
+    }
+    const updatePost = {
+      title: titleRef.current.value,
+      content: contentRef.current.value,
+      dogidList: c,
+      requestStartDate:
+        dateRef.current.value + "T" + startHour + ":" + startMinute,
+      requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
+    };
+    instance.put((`/api/posts/${params.id}`),updatePost)
+    .then(response=>{console.log(response)})
+    .catch(error=>{
+      alert(error)
+    })
+  }
   // const [c, setC] = useState([]);
   // const [b,setB] = useState(0);
   const a = (e) => {
     // setB(e.target.value)
+
     let index = c.indexOf(Number(e.target.value));
     if (c.includes(Number(e.target.value)) === true) {
       c.splice(index, 1);
@@ -65,6 +113,15 @@ function PostCreate() {
     console.log(c);
   };
 
+  //수정하기
+  React.useEffect(() => {
+    if (!isNew) {
+      axios.get(`http://localhost:5001/detail/${params.id}`).then((res) => {
+        setUpdatePost(res.data);
+      });
+    }
+  }, []);
+  // console.log(updatePost)
   return (
     <>
       <div>
@@ -143,11 +200,11 @@ function PostCreate() {
       </select>
       분<div>내용입력</div>
       <div>제목을 입력해주세요</div>
-      <input placeholder="제목을 입력해 주세요" ref={titleRef} />
+      <input placeholder="제목을 입력해 주세요" ref={titleRef} defaultValue={updatePost? updatePost.title:""} />
       <hr />
       <div>내용을 입력해주세요</div>
-      <textarea placeholder="내용을 입력해 주세요" ref={contentRef} />
-      <button onClick={click}>등록</button>
+      <textarea placeholder="내용을 입력해 주세요" ref={contentRef} defaultValue={updatePost? updatePost.content:""}/>
+      {isNew? <button onClick={click}>등록</button>:<button onClick={updateClick}>수정</button>}
     </>
   );
 }

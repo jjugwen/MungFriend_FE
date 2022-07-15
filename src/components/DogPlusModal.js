@@ -72,7 +72,7 @@ function DogPlusModal() {
       <PreviewBtn>
         <label className="input-button" htmlFor="input-file">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/748/748113.png"
+            src="https://ifh.cc/g/ZfSpJc.png"
             alt=""
           />
         </label>
@@ -157,8 +157,12 @@ const Container = styled.div`
   box-sizing: border-box;
   padding: 20px;
   width: 520px;
-  height: 854px;
-
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 3;
   border-radius: 24px;
   align-items: center;
   text-align: center;
@@ -227,8 +231,8 @@ const PreviewImg = styled.img`
 `;
 const PreviewBtn = styled.div`
   position: absolute;
-  left: 290px;
-  top: 230px;
+  left: 55%;
+  top: 20%;
 
   img {
     width: 20px;
@@ -238,10 +242,9 @@ const PreviewBtn = styled.div`
     width: 40px;
     line-height: 40px;
     padding: 13px 9px 4px 9px;
-    background-color: #ffffff;
-    border: 1px solid #e5e5e5;
+    background-color: #FA5A30;;
+    border: 1px solid ;
     border-radius: 50%;
-    color: #d9d9d9;
     /* cursor: pointer; */
   }
   .filebtn {

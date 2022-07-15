@@ -24,6 +24,15 @@ export const loadPostListAX = () => {
   };
 };
 
+// export const updatePostAX =(id, post)=>{
+//   return async function (dispatch){
+//     await axios.patch(`http://localhost:5001/detail/${id}`,post)
+//     // await instance
+//     // .put(`/api/posts/${id}`)
+//     .then((response)=> dispatch(updatePost((response.data))))
+//   }
+// }
+
 //툴킷
 const postSlice = createSlice({
   name: "post",
@@ -32,11 +41,11 @@ const postSlice = createSlice({
     createPost(state, action) {
       state.post.push(action.payload);
     },
-    loadPost(state, action) {
-      state.post = action.payload;
+    loadPost(state, action){
+      state.post=action.payload
     },
   },
 });
 
-export const { createPost, loadPost } = postSlice.actions;
+export const { createPost, loadPost,updatePost } = postSlice.actions;
 export default postSlice.reducer;

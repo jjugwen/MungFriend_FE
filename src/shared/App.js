@@ -15,6 +15,7 @@ import DogPlusModal from "../components/DogPlusModal";
 import PostCreate from "../pages/PostCreate";
 import Footer from "../components/shared/Footer";
 import Error from "../pages/Error";
+import ProfileUpdate from "../components/ProfileUpdate";
 import ReviewDetailModal from "../components/ReviewDetailModal";
 
 function App() {
@@ -28,14 +29,15 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupsuccess" element={<SignupSuccess />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/mypage" element={token ? <Mypage /> : <Error />} />
+        <Route path="/mypage" element={ <Mypage />} />
         <Route path="/posts" element={token ? <Posts /> : <Error />} />
         <Route path="/postcreate" element={<PostCreate />} />
+        <Route path="/postcreate/:id" element={<PostCreate />} />
         <Route path="/posts/:id" element={token ? <PostDetail /> : <Error />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
         <Route path="/test" element={<DogPlusModal />} />
-        <Route path="/test2" element={<Test />} />
+        <Route path="/test2" element={<ProfileUpdate/>} />
         <Route path="/reviewdetail" element={<ReviewDetailModal />} />
       </Routes>
       <Footer />

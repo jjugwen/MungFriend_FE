@@ -33,6 +33,7 @@ export const deleteMyMungAX = (id) => {
       // await axios
       // .delete(`http://localhost:5001/dogList/${id}`)
       .then(() => dispatch(deleteMyMung(id)));
+      // 삭제리듀서는 mypageSlice에
     // dispatch(deleteMyMung(id))
   };
 };
@@ -47,12 +48,6 @@ const mungSlice = createSlice({
     loadMyMung(state, action) {
       state.mung = action.payload;
     },
-    // deleteMyMung(state, action){
-    //   console.log(action.payload)
-    //   state.mung=state.mung.filter((element)=>(element.id !== action.payload))
-    //   console.log(state.mung)
-
-    // }
   },
 });
 
