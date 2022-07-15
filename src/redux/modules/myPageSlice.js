@@ -48,16 +48,13 @@ const myPageSlice = createSlice({
     patchPhoneNum(state, action) {
       state.mypage.phoneNum = action.payload.phoneNum;
     },
-    deleteMyMung(state, action){
+    deleteMyMung(state, action) {
       // console.log(action.payload);
-      state.mypage.dogList = state
-      .mypage.dogList.filter(
-        (element) => {
-          if (element.id !== action.payload) {
-            return true
-          } else {
-            return false 
-          }
+      state.mypage.dogList = state.mypage.dogList.filter((element) => {
+        if (element.id !== action.payload) {
+          return true;
+        } else {
+          return false;
         }
       });
     },
