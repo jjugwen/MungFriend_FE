@@ -30,11 +30,13 @@ export const createReviewDB = (formData) => {
 };
 
 export const loadReviewDetailDB = (id) => {
+  console.log(id);
   return async function (dispatch) {
     await instance
       .get(`/api/reviews/${id}`)
       // await axios.get(`http://localhost:5002/reviewdetail`)
       .then((response) => {
+        // console.log(response.data);
         dispatch(reviewDetailLoad(response.data));
       });
   };

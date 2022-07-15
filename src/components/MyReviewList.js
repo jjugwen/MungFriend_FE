@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import ReviewDetailModal from "./ReviewDetailModal";
 import { actionCreators as reviewActions } from "../redux/modules/reviewSlice";
+
 function MyReviewList() {
   const dispatch = useDispatch();
   //모달창 여닫기
@@ -15,6 +16,7 @@ function MyReviewList() {
   };
 
   const info = useSelector((state) => state.myPageSlice.mypage);
+  console.log(info.reviewList);
 
   return (
     <>
@@ -30,7 +32,7 @@ function MyReviewList() {
                 <button
                   style={{ background: "none", border: "none" }}
                   onClick={() => {
-                    dispatch(reviewActions.loadReviewDetailDB(review?.id));
+                    dispatch(reviewActions.loadReviewDetailDB(review.id));
                     setTimeout(() => {
                       openReviewModal();
                     }, 500);
