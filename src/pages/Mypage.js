@@ -12,17 +12,9 @@ import { userinfoDB } from "../redux/modules/userInfoSlice";
 const Mypage = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(loadMyPageAX(user));
+    dispatch(loadMyPageAX());
   }, []);
 
-  //사용자 정보 불러오기
-    //사용자 정보 불러오기
-    const [user, setUser] = useState(null);
-    React.useEffect(()=>{
-  instance.get(`/myinfo`).then((res)=>{
-    setUser(res.data.id);
-  })
-    },[])
   let [change, setChange] = useState(<MyPageComponent />);
   const [currentClick, setCurrentClick] = useState(null);
   const [prevClick, setPrevClick] = useState(null);
