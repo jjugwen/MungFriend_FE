@@ -159,7 +159,9 @@ function PostDetail() {
                   grey_small
                   margin="0 0 4.9em 0"
                   _onClick={() => {
-                    dispatch(applyActions.deleteApplyDB(postId));
+                    dispatch(
+                      applyActions.deleteApplyDB(detailList?.applyList?.id)
+                    );
                     setTimeout(() => {
                       window.location.reload();
                     }, 500);

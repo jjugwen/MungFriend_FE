@@ -33,12 +33,14 @@ function betweenTime(data) {
     StartTime?.split("T")[1].split(":")[0] +
     "시간 ";
   // console.log(exHourTime);
+
   const exMinuteTime =
     EndTime?.split("T")[1].split(":")[1] -
     StartTime?.split("T")[1].split(":")[1] +
     "분";
   // console.log(exMinuteTime);
-
+  // if (exHourTime < 0) {
+  // }
   return exHourTime + exMinuteTime;
 }
 
