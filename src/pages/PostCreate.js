@@ -102,11 +102,12 @@ function PostCreate() {
   // const [b,setB] = useState(0);
   const a = (e) => {
     // setB(e.target.value)
-    let index = c.indexOf(e.target.value);
-    if (c.includes(e.target.value) === true) {
+
+    let index = c.indexOf(Number(e.target.value));
+    if (c.includes(Number(e.target.value)) === true) {
       c.splice(index, 1);
     } else {
-      c.push(e.target.value);
+      c.push(Number(e.target.value));
     }
     // console.log(e.target.value);
     console.log(c);

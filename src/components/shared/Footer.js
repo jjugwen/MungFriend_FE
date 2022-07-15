@@ -18,7 +18,7 @@ function Footer() {
             <div style={sitePromise}>
               <span>
                 <a
-                  target="_blank"
+                  target="blank"
                   style={{
                     color: "black",
                     textDecoration: "none",
@@ -33,7 +33,7 @@ function Footer() {
               <span> | </span>
               <span>
                 <a
-                  target="_blank"
+                  target="blank"
                   style={{
                     color: "black",
                     textDecoration: "none",
@@ -41,7 +41,7 @@ function Footer() {
                   }}
                   href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
                 >
-                  개인정보처리방침
+                  개인정보취급방침
                 </a>
               </span>
             </div>

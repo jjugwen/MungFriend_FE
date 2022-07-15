@@ -28,7 +28,7 @@ function DogPlusModal() {
   const dispatch = useDispatch();
   //강아지 정보
   //age는 숫자로 받아와야 함
-  const [puppy, setpuppy] = useState({});
+  const [puppy, setpuppy] = useState({ isRepresentative: false });
   // 강아지 정보 input 입력값 넣어두기
   //나이는 숫자데이터 . if문 사용해서 숫자로 감싸주기
   const handleChange = (prop) => (e) => {

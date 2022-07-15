@@ -24,9 +24,7 @@ function PostDetail() {
   const postId = Number(params.id); //숫자로 변환해야 읽힘.
   // console.log(postId);
   const dispatch = useDispatch();
-  const detailList = useSelector((state) =>
-    state.postDetailSlice.list.find((post) => post.id === postId)
-  );
+  const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
 
   //신청하기 모달창 여닫기
@@ -78,9 +76,7 @@ function PostDetail() {
               <div className="clickUsermodal">
                 <UserModalBtn
                   onClick={() => {
-                    dispatch(
-                      userActions.userinfoDB({ nickname: loginNickname })
-                    );
+                    dispatch(userActions.userinfoDB(detailList?.nickname));
                     setTimeout(() => {
                       openUserModal();
                     }, 500);
@@ -158,15 +154,20 @@ function PostDetail() {
         {loginNickname !== detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button
-                grey_small
-                margin="0 0 4.9em 0"
-                _onClick={() => {
-                  dispatch(applyActions.deleteApplyDB(postId));
-                }}
-              >
-                신청취소
-              </Button>
+              {!detailList?.isComplete ? (
+                <Button
+                  grey_small
+                  margin="0 0 4.9em 0"
+                  _onClick={() => {
+                    dispatch(applyActions.deleteApplyDB(postId));
+                    setTimeout(() => {
+                      window.location.reload();
+                    }, 500);
+                  }}
+                >
+                  신청취소
+                </Button>
+              ) : null}
             </div>
           ) : (
             //applyByMe가 false면 신청한 상태 : 신청하기 버튼 보이기
@@ -174,7 +175,9 @@ function PostDetail() {
               <Button
                 orange_small
                 margin="0 0 4.9em 0"
-                _onClick={openApplyModal}
+                _onClick={() => {
+                  openApplyModal();
+                }}
               >
                 신청하기
               </Button>
@@ -186,7 +189,7 @@ function PostDetail() {
             </div>
           )
         ) : loginNickname === detailList?.nickname && //작성자 정보와 로그인한 유저가 같으면서,
-          detailList?.isComplete ? ( //모집중이면(isComplete가 true) 게시글 수정/삭제 가능
+          detailList?.isComplete === false ? ( //모집중이면(isComplete가 false) 게시글 수정/삭제 가능
           <div>
             <div className="DeleteAndEditBtn">
               <Button grey_small _onClick={deletePost}>

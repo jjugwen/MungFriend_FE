@@ -16,6 +16,7 @@ import PostCreate from "../pages/PostCreate";
 import Footer from "../components/shared/Footer";
 import Error from "../pages/Error";
 import ProfileUpdate from "../components/ProfileUpdate";
+import ReviewDetailModal from "../components/ReviewDetailModal";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -37,6 +38,7 @@ function App() {
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
         <Route path="/test" element={<DogPlusModal />} />
         <Route path="/test2" element={<ProfileUpdate/>} />
+        <Route path="/reviewdetail" element={<ReviewDetailModal />} />
       </Routes>
       <Footer />
     </div>

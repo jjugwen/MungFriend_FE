@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { actionCreators as userActions } from "../../redux/modules/userInfoSlice";
-//컴포넌트
-import MyPageComponent from "../MyPageComponent";
-import MyPostList from "../MyPostList";
-import MyReviewList from "../MyReviewList";
 
 function HeaderModal() {
   const navigate = useNavigate();
@@ -14,13 +10,14 @@ function HeaderModal() {
   //로그인 유저
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
   // console.log(myinfo);
-  const [change, setChange] = useState("");
+  // const nickname = localStorage.getItem("nickname");
+  // console.log(myinfo);
 
   const Logout = () => {
     localStorage.clear();
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 500);
   };
   useEffect(() => {
     dispatch(userActions.myinfoDB());
@@ -30,33 +27,28 @@ function HeaderModal() {
     <>
       <HeaderModalbox>
         <UpperBox>
-          <UserNameFont>{myinfo[0]?.nickname}님</UserNameFont>
-          <EmailFont>{myinfo[0]?.email}</EmailFont>
+          <UserNameFont>{myinfo?.nickname}님</UserNameFont>
+          <EmailFont>{myinfo?.email}</EmailFont>
           <span
             onClick={() => {
-              navigate("/mypage");
+              navigate("/mypage?value=mypage");
             }}
           >
             마이페이지
           </span>
           <span
             onClick={() => {
-              navigate("/mypage?value=1");
-              // setChange(<MyPostList />);
+              navigate("/mypage?value=mypost");
             }}
           >
             작성한 게시글
           </span>
           <span
             onClick={() => {
-              navigate("/mypage");
-
-              setTimeout(() => {
-                setChange(<MyReviewList />);
-              }, 500);
+              navigate("/mypage?value=myreview");
             }}
           >
-            내가 받은 후기 {change}
+            내가 받은 후기
           </span>
 
           <hr />
@@ -89,6 +81,7 @@ const HeaderModalbox = styled.div`
   border: 1px solid #e5e5e5;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
+  z-index: 3;
 `;
 
 const UpperBox = styled.div`
