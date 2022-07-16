@@ -7,6 +7,8 @@ import {
 } from "../redux/modules/myPageSlice";
 import { useNavigate } from "react-router-dom";
 import DogList from "./DogList";
+import DogPlusModal from '../components/DogPlusModal';
+import ProfileUpdate from "./ProfileUpdate";
 
 function MyPageComponent() {
   const dispatch = useDispatch();
@@ -59,21 +61,27 @@ function MyPageComponent() {
     };
     dispatch(patchPhoneNumAX(new_phone_num));
   };
+  const [mungModal, setMungModal] = useState();
+  const [profileModal, setProfileModal] = useState();
   return (
     <Container>
-      <div style={{ display: "flex" }}>
+      {mungModal && <Test />}
+      {mungModal && <DogPlusModal setMungModal={setMungModal} modal ={mungModal}/>}
+      {profileModal && <Test/>}
+      {profileModal && <ProfileUpdate setProfileModal={setProfileModal} modal ={profileModal}/>}
+      <div>
         <Profileimg src={info?.dogProfileImgUrl} alt="" />
-        <div style={{ marginTop: "13px" }}>
-          <div className="font-20">
+        <div>
+          <div>
             <b>{info?.nickname}</b>님 반갑습니다!
           </div>
-          <div style={{ fontSize: "14px", color: "#747474" }}>
+          <div>
             {info?.email}
           </div>
         </div>
         <UpdateButton
           onClick={() => {
-            navigate(`/test2`);
+            setProfileModal(!profileModal)
           }}
         >
           임시 프로필 수정
@@ -101,7 +109,7 @@ function MyPageComponent() {
       <IntroduceDiv>{introduce}</IntroduceDiv>
       {/* )} */}
       <br />
-      <DogList />
+      <DogList setMungModal={setMungModal} modal ={mungModal}/>
     </Container>
   );
 }
@@ -136,4 +144,10 @@ const UpdateButton = styled.button`
   font-size: 14px;
 `;
 
+const Test = styled.div`
+ position: fixed;
+  top:0; left: 0; bottom: 0; right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+`;
 export default MyPageComponent;
