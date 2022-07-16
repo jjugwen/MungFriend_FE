@@ -101,9 +101,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   position: relative;
-  margin-top: 100px;
-  width: 60%;
-  margin: 100px auto auto auto;
+  width: 70%;
+  margin: 100px auto;
 `;
 
 const ListBar = styled.div`

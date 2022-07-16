@@ -70,7 +70,6 @@ const Test = styled.div`
 
 const Container = styled.div`
   flex-direction: row;
-
   height: 294px;
   left: 503px;
   box-sizing: border-box;
@@ -102,9 +101,7 @@ background: #FFFFFF;
     position: relative;
     bottom: 4px;
   }
-  .row-box{
-    margin-bottom: 20px;
-  }
+
 `;
 
 const DogImg = styled.img`
@@ -115,7 +112,7 @@ const DogImg = styled.img`
 
 const Listbox = styled.div`
   height: 80px;
-
+  margin: 20px 0;
   display: flex;
   flex-direction: row;
   align-items: center;
