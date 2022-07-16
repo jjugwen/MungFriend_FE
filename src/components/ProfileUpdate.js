@@ -46,10 +46,10 @@ function ProfileUpdate (){
       phoneNum:phoneNumRef.current.value,
       isAgree:true
     }
-    console.log(update_data);
-    // instance.post(`/mypage`, update_data).then(()=>{
-      // navigate('/mypage')
-    // })
+    // console.log(update_data);
+    instance.post(`/mypage`, update_data).then(()=>{
+      navigate('/mypage')
+    })
   }
 
   return(
@@ -74,7 +74,9 @@ function ProfileUpdate (){
     <div></div>
     <textarea placeholder="자기소개 255자" defaultValue={info?.introduce} ref={introduceRef}></textarea>
     <div className="row-box">
-    <button className="cancle">취소</button>
+    <button className="cancle" onClick={()=>{
+      window.location.replace('/mypage')
+    }}>취소</button>
     <button className="update" onClick={updateMypage}>수정</button>
     </div>
     </Container>
