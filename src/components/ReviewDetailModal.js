@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as Actions } from "../redux/modules/reviewSlice";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 // style
 import styled from "styled-components";
@@ -40,7 +39,6 @@ function ReviewDetailModal(props) {
                 <img src={closeBtn} alt="closeBtn" />
               </button>
             </div>
-            return (
             <>
               <div key={reviewDetail.giverNickname} className="reviewerInfo">
                 <div
