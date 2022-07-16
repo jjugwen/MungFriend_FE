@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createMungAX } from "../redux/modules/mungSlice";
 import styled from "styled-components";
-
+import {useNavigate} from 'react-router-dom'
 function DogPlusModal() {
   //이미지를 한번 추가해볼게요
+  const navigate =useNavigate();
   const [mungImage, setMungImage] = useState({
     image: "",
     previewUrl: "",
@@ -50,6 +51,7 @@ function DogPlusModal() {
     // console.log(formData);
     // for (const value of formData) console.log(value);
     dispatch(createMungAX(formData));
+    window.location.reload()
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
     setMungImage({
       image: "",
@@ -145,7 +147,9 @@ function DogPlusModal() {
         />
       </div>
       <div className="btn-box">
-        <button> 취소 </button>
+        <button onClick={()=>{
+          window.location.reload()
+        }}> 취소 </button>
         <button type="submit" onClick={signUp}>
           확인
         </button>

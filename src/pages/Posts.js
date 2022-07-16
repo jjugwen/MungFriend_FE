@@ -39,7 +39,13 @@ function Posts() {
 
   return (
     <All>
-      <Box className="row-box">
+      {myMung.length === 0?
+      <Testimg src="https://ifh.cc/g/xg56ba.png" alt=""/>
+    :<Box className="row-box">
+        <div className="name mung">
+          <br />
+          멍친구는
+        </div>
         {myMung?.map((dog, i) => {
           return (
             <div key={i}>
@@ -48,18 +54,33 @@ function Posts() {
               ) : (
                 ""
               )}
-
-              <div>
-                {dog.name} {dog.age}살
+              <div className="name">
+                <br />
+                {dog.name} {dog.age}살{/* {dog.length !== 1 ? ",":""} */}
               </div>
+              
+            </div>
+            
+          );
+        })}
+        <SSub>
+        {myMung?.map((dog, i) => {
+          return (
+            <div key={i}>
+              <div className="test"></div>
               <Subimg src={dog.dogImageFiles[0].imageUrl} />
             </div>
           );
         })}
+        </SSub>
       </Box>
+    }
+      
+      
       <Container>
         {Posts?.map((post, i) => {
           // console.log(post.imagePath)
+          // console.log(post.content.length);
           return (
             <PostBox
               key={i}
@@ -79,11 +100,13 @@ function Posts() {
                 </div>
               </div>
               <div className="title">{post.title}</div>
-              <div className="content">{post.content}</div>
+              <div className="content">{post.content.length > 40?
+              post.content.substr(0,33) : post.content
+            }</div>
               <div className="footer">
                 <hr />
-                <div className="row-box">
-                  <div className="font-14">
+                <div className="row-box b-box">
+                  <div className="font-14 applyCount">
                     <img
                       className="applyCountImg"
                       src="https://ifh.cc/g/dHor7J.png"
@@ -121,22 +144,54 @@ const All = styled.div`
   width: 65%;
   margin: 50px auto auto auto;
 `;
+
+const Testimg= styled.img`
+width: 100%;
+`
 const Box = styled.div`
-  background-color: orange;
+box-sizing: border-box;
+ align-items: center;
+  background: #fa5a30;
+  box-shadow: 4px 4px 20px rgba(250, 90, 48, 0.2);
+  border-radius: 20px;
   position: relative;
-  /* width: 65%; */
+  gap: 13%;
   height: 228px;
+ padding: 50px 0 20% 0;
+ @media screen and (max-width: 960px) {
+  gap:20%
+  }
+ /* padding-top: 50px; */
+
+  .name {
+    position: absolute;
+    padding-left: 8%;
+    /* padding-bottom: 20%; */
+    font-size: 30px;
+    line-height: 40px;
+    color: #ffffff;
+  }
 `;
 const Kingimg = styled.img`
   border-radius: 50%;
   position: absolute;
   width: 220px;
   height: 220px;
-  right: 10%;
+  right: 8%;
   bottom: 40px;
 `;
 
+const SSub = styled.div`
+display: flex;
+flex-direction: row;
+position: absolute;
+gap: 10%;
+padding-left:8%;
+padding-bottom: 3%;
+bottom: 0;
+`
 const Subimg = styled.img`
+  
   border-radius: 50%;
   width: 48px;
   height: 48px;
@@ -189,6 +244,13 @@ const PostBox = styled.div`
     .applyCountImg {
       width: 20px;
       height: 20px;
+      position: relative;
+      top: 5px;
+    }
+    
+    .b-box{
+      /* display: flex; */
+      justify-content: space-between;
     }
   }
 `;

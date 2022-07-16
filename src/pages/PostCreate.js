@@ -129,11 +129,13 @@ function PostCreate() {
   }, []);
   // console.log(updatePost)
   return (
-    <>
+    <Container>
       <div>
-        <div>게시글 작성</div>
-        <div>멍 프로필 선택</div>
-        <div>다중선택 가능합니다</div>
+        <div className="title">게시글 작성</div>
+        <div className="row-box">
+        <div className="sub-title">멍 프로필 선택</div>
+        <div className="select-text">* 다중선택 가능합니다.</div>
+        </div>
       </div>
       <div className="row-box">
         {dogList?.map((dog, index) => {
@@ -160,11 +162,11 @@ function PostCreate() {
           );
         })}
       </div>
-      <div>요청일자 및 시간</div>
-      <div>날짜선택</div>
-      <input type="date" ref={dateRef} />
-      <div>시작시간</div>
+      <div className="sub-title">신청날짜</div>
+      <div className="row-box">
+      <input type="date" ref={dateRef} className="date-input"/>
       <select ref={startHourRef}>
+      <option>시간</option>
         {time.hour.map((hour, index) => {
           return (
             <option key={index} value={hour}>
@@ -173,8 +175,9 @@ function PostCreate() {
           );
         })}
       </select>
-      시
+      
       <select ref={startMinuteRef}>
+      <option>분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
@@ -183,8 +186,9 @@ function PostCreate() {
           );
         })}
       </select>
-      분<div>마감시간</div>
+      <div className="font-20">~</div>
       <select ref={endHourRef}>
+        <option>시간</option>
         {time.hour.map((hour, index) => {
           return (
             <option key={index} value={hour}>
@@ -193,8 +197,9 @@ function PostCreate() {
           );
         })}
       </select>
-      시
+      
       <select ref={endMinuteRef}>
+      <option>분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
@@ -203,29 +208,91 @@ function PostCreate() {
           );
         })}
       </select>
-      분<div>내용입력</div>
-      <div>제목을 입력해주세요</div>
+      
+      </div>
+      
+      <div className="sub-title">내용입력</div>
+     <hr />
+     <div className="column-box">
       <input
+        className="input-box"
         placeholder="제목을 입력해 주세요"
         ref={titleRef}
         defaultValue={updatePost ? updatePost.title : ""}
       />
-      <hr />
-      <div>내용을 입력해주세요</div>
+      
       <textarea
+      className="input-box"
         placeholder="내용을 입력해 주세요"
         ref={contentRef}
         defaultValue={updatePost ? updatePost.content : ""}
       />
+      </div>
+     
+      <ButtonBox>
+      <button onClick={()=>{
+        navigate('/posts')
+      }}>취소</button>
       {isNew ? (
-        <button onClick={click}>등록</button>
+        <button className="orange" onClick={click}>등록</button>
       ) : (
-        <button onClick={updateClick}>수정</button>
+        <button className="orange" onClick={updateClick}>수정</button>
       )}
-    </>
+      </ButtonBox>
+    </Container>
   );
 }
+const Container=styled.div`
+width: 80%;
+margin: auto;
+justify-content: center;
+align-items: center;
+.title{
+  font-weight: 600;
+  font-size: 30px;
+  margin: 50px 0px;
+}
+.sub-title{
+  font-weight: 600;
+font-size: 20px;
+}
+.select-text{
+  color: #7A7A80;
+  font-size: 14px;
+  padding-left: 8px;
+}
+select{
+  width: 104px;
+height: 48px;
+font-size: 16px;
+}
+.date-input{
+  width: 460px;
+}
+hr{
+  border: 1px solid black;
+}
+.input-box{
+  border: none;
+  border-bottom: 1px solid #E3E5E9;
+  font-family: 'Pretendard';
+  font-weight: 400;
+font-size: 16px;
 
+}
+textarea{
+  border: none;
+  border-bottom: 1px solid #E3E5E9;
+  font-family: 'Pretendard';
+  resize : none;
+  heighddddddt: 200px;
+}
+.font-20{
+  font-size: 24px;
+  font-weight: 600;
+  padding-top: 10px;
+}
+`
 const DogImg = styled.img`
   width: 60px;
   height: 60px;
@@ -252,7 +319,7 @@ const CheckBox = styled.div`
     width: 1.2rem;
     height: 1.2rem;
     border-radius: 50px;
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg   viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
     background-color: #cccccc;
     &:checked {
       border-color: transparent;
@@ -265,4 +332,24 @@ const CheckBox = styled.div`
   }
 `;
 
+const ButtonBox =styled.div`
+position: relative;
+left: 25%;
+align-items: center;
+justify-content: center;
+button{
+  border-radius: 4px;
+  font-weight: 500;
+font-size: 16px;
+  width: 180px;
+margin: 10px;
+height: 48px;
+border: none;
+
+}
+.orange{
+  background: #FA5A30;
+  color: white;
+}
+`
 export default PostCreate;
