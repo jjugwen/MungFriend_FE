@@ -243,7 +243,7 @@ function PostCreate() {
   );
 }
 const Container=styled.div`
-width: 80%;
+width: 70%;
 margin: auto;
 justify-content: center;
 align-items: center;
@@ -285,7 +285,7 @@ textarea{
   border-bottom: 1px solid #E3E5E9;
   font-family: 'Pretendard';
   resize : none;
-  heighddddddt: 200px;
+  height: 200px;
 }
 .font-20{
   font-size: 24px;
