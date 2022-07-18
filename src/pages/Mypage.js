@@ -99,6 +99,9 @@ const Container = styled.div`
   position: relative;
   width: 70%;
   margin: 100px auto;
+  @media screen and (max-width: 960px) {
+    width: 90%;
+  }
 `;
 
 const ListBar = styled.div`
@@ -106,7 +109,7 @@ const ListBar = styled.div`
   flex-direction: column;
   width: 200px;
   height: 52px;
-  margin: 50px;
+  margin: 50px 50px 50px 0px;
   box-sizing: border-box;
   flex-shrink: 0;
   button {
