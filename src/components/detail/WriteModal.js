@@ -23,18 +23,18 @@ function WriteModal(props) {
   const addReview = async () => {
     const formData = new FormData();
     image.forEach((image) => formData.append("image", image));
-    console.log(image);
+    // console.log(image);
     const data = {
       postId: postId,
       applicantNickname: detailList?.matchedNickname,
       comment: applyText.current.value,
     };
-    console.log(data);
+    // console.log(data);
     const json = JSON.stringify(data);
     const blob = new Blob([json], { type: "application/json" });
     formData.append("infos", blob);
     dispatch(reviewActions.createReviewDB(formData));
-    for (const value of formData) console.log(value);
+    // for (const value of formData) console.log(value);
   };
 
   return (

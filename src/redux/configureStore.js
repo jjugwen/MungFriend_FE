@@ -9,6 +9,10 @@ import postSlice from "./modules/postSlice";
 // import matchingSlice from "./modules/matchingSlice";
 import reviewSlice from "./modules/reviewSlice";
 
+//chat
+import channelSlice from "./modules/chat/channelSlice";
+import chatSlice from "./modules/chat/chatSlice";
+
 const store = configureStore({
   reducer: {
     myPageSlice,
@@ -19,6 +23,8 @@ const store = configureStore({
     postSlice,
     // matchingSlice,
     reviewSlice,
+    chat: chatSlice,
+    channel: channelSlice,
   },
 });
 
