@@ -3,7 +3,7 @@ import axios from "axios";
 //axios
 export const loginDB = (username, password) => {
   // console.log(username, password);
-  return function (dispatch) {
+  return function () {
     axios
       .post(
         `http://3.39.6.175/member/login`,
@@ -20,6 +20,7 @@ export const loginDB = (username, password) => {
           // console.log(response);
           localStorage.setItem("token", response.data.accessToken);
           localStorage.setItem("nickname", response.data.nickname);
+          localStorage.setItem("memberId", response.data.memberId);
           // window.alert(response.data.message);
           window.location.replace("/");
         } else if (response.data.status === "false") {
@@ -34,5 +35,4 @@ export const loginDB = (username, password) => {
   };
 };
 
-const actionCreators = { loginDB };
-export { actionCreators };
+export const actionCreators = { loginDB };
