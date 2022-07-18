@@ -6,6 +6,7 @@ import noticeicon from "../../assets/images/Header/noticeicon.svg";
 import mymenu from "../../assets/images/Header/mymenu.svg";
 import openmenuarrow from "../../assets/images/Header/openmenuarrow.svg";
 import logo from "../../assets/images/Header/logo.svg";
+import chatting from "../../assets/images/Header/chatIcon.svg";
 
 function Header() {
   const navigate = useNavigate();
@@ -110,6 +111,13 @@ function Header() {
             </div>
           ) : (
             <div style={AfterLogin}>
+              <HeadButton
+                onClick={() => {
+                  navigate("/chat");
+                }}
+              >
+                <img src={chatting} alt="chatting" />
+              </HeadButton>
               <HeadButton
                 onClick={() => {
                   // navigate("/");
