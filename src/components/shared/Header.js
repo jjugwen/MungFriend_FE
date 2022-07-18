@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HeaderModal from "./HeaderModal";
@@ -18,31 +18,40 @@ function Header() {
   }, [opened]);
 
   // 메뉴 버튼 클릭했을 때 클릭한 버튼 상태 변화 유지하기
-  const [currentClick, setCurrentClick] = useState(null);
-  const [prevClick, setPrevClick] = useState(null);
+  const mainRef = useRef();
+  const postsRef = useRef();
+  const communityRef = useRef();
   const GetClick = (e) => {
     // console.log(e.target.id);
-    setCurrentClick(e.target.id);
-    navigate(`${e.target.id}`);
+    const id = e.target.id;
+    navigate(`${id}`);
+    if (id === "/") {
+      mainRef.current.style = `
+        color : #FA5A30;
+        font-weight: 600;`;
+      postsRef.current.style = "";
+      communityRef.current.style = "";
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    } else if (id === "posts") {
+      mainRef.current.style = "";
+      postsRef.current.style = `
+      color : #FA5A30;
+      font-weight: 600;`;
+      communityRef.current.style = "";
+    } else if (id === "community") {
+      mainRef.current.style = "";
+      postsRef.current.style = "";
+      communityRef.current.style = `
+      color : #FA5A30;
+      font-weight: 600;`;
+    } else {
+      mainRef.current.style = "";
+      postsRef.current.style = "";
+      communityRef.current.style = "";
+    }
   };
-  // 변한 상태 css 스타일
-  useEffect(
-    (e) => {
-      if (currentClick !== null) {
-        let current = document.getElementById(currentClick);
-        current.style.color = "#FA5A30";
-        current.style.fontWeight = "600";
-      }
-      if (prevClick !== null) {
-        let prev = document.getElementById(prevClick);
-        prev.style.fontWeight = "400";
-        prev.style.color = "black";
-        prev.style.borderBottom = "none";
-      }
-      setPrevClick(currentClick);
-    },
-    [currentClick]
-  );
 
   return (
     <>
@@ -67,28 +76,13 @@ function Header() {
               justifyContent: "space-around",
             }}
           >
-            <HeadButton
-              id="/"
-              onClick={(e) => {
-                GetClick(e);
-              }}
-            >
+            <HeadButton id="/" onClick={GetClick} ref={mainRef}>
               서비스 소개
             </HeadButton>
-            <HeadButton
-              id="posts"
-              onClick={(e) => {
-                GetClick(e);
-              }}
-            >
+            <HeadButton id="posts" onClick={GetClick} ref={postsRef}>
               산책
             </HeadButton>
-            <HeadButton
-              id="community"
-              onClick={(e) => {
-                GetClick(e);
-              }}
-            >
+            <HeadButton id="community" onClick={GetClick} ref={communityRef}>
               커뮤니티
             </HeadButton>
           </div>
@@ -120,7 +114,7 @@ function Header() {
               </HeadButton>
               <HeadButton
                 onClick={() => {
-                  // navigate("/");
+                  navigate("/preparing");
                 }}
               >
                 <img src={noticeicon} alt="noticeicon" />
