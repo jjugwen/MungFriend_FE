@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
 import styled from "styled-components";
 import { deleteMyMungAX } from "../redux/modules/mungSlice";
-import DogPlusModal from '../components/DogPlusModal';
 
 
-function DogList() {
+function DogList(props) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -19,12 +18,12 @@ function DogList() {
     // console.log(typeof(e.target.value))
     dispatch(deleteMyMungAX(Number(e.target.value)));
   }
-  let [modal, setModal] = useState(false);
+  const modal = () => {
+    props.setMungModal(!props.modal)
+  }
+
   return (
     <Container>
-        {modal && <Test />}
-        {modal && <DogPlusModal/>}
-        
         <div className="row-box">
           <div className="font-20">
             <b>멍친구</b>
@@ -32,7 +31,7 @@ function DogList() {
           <div className="font-14">
             * 대표 멍프로필을 선택해주세요. 최대 3마리까지 등록가능합니다.
         </div>
-        <AddButton onClick={()=>{setModal(true);}}><img src="https://ifh.cc/g/NL36Wc.png" alt=""/>추가하기</AddButton>
+        <AddButton onClick={modal}><img src="https://ifh.cc/g/NL36Wc.png" alt=""/>추가하기</AddButton>
       </div>
       {info?.dogList.map((dog, i) => {
         return (
@@ -61,12 +60,6 @@ function DogList() {
   );
 }
 
-const Test = styled.div`
- position: fixed;
-  top:0; left: 0; bottom: 0; right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 2;
-`;
 
 const Container = styled.div`
   flex-direction: row;
