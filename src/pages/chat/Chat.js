@@ -44,7 +44,14 @@ const Chat = (props) => {
   return (
     <React.Fragment>
       <Container>
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            position: "relative",
+            height: "133%",
+            background: "white",
+          }}
+        >
           <LeftContainer>
             <ChannelList2>
               <h1>개설된 채팅방</h1>
@@ -83,21 +90,24 @@ const Chat = (props) => {
   );
 };
 const Container = styled.div`
+  /* padding: 0 0 12.18em 0%; */
+  position: relative;
+  z-index: 6;
+  /* background-color: #f2f3f6; */
+  /* height: 100%; */
+  height: 610px;
   margin: auto;
 `;
 
 const LeftContainer = styled.div`
+  /* position: relative;
+  z-index: 6; */
   background: #f2f3f6;
-  width: 100%;
   min-width: 274px; //19.05%
   max-width: 15%;
-  height: 100%;
-  min-height: 640px;
-  max-height: 77vh;
 `;
 
 const ChannelList2 = styled.div`
-  /* height: 100%; */
   & h1 {
     font-family: "Pretendard";
     font-style: normal;

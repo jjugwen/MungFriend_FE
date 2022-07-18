@@ -244,7 +244,11 @@ const Chatting = (props) => {
                       </span>
                     ) : null}
                     <br />
-                    {list?.message}
+                    {list.sender === "[알림]" ? (
+                      <span style={{ color: "#7A7A80" }}>{list?.message}</span>
+                    ) : (
+                      <span>{list?.message}</span>
+                    )}
                   </p>
                 </ChatContent>
               );
@@ -275,6 +279,9 @@ const Chatting = (props) => {
 // params 받아온거를 api get요청 하나 더 만들어서 roomId를 디스패치하고
 // chatList 부분에 noRoom && Chatting 비교해서 출력한다.
 const ChatListContainer = styled.div`
+  position: relative;
+  z-index: 6;
+  background-color: white;
   width: 95%;
   max-height: 77%;
   overflow-y: auto !important;
