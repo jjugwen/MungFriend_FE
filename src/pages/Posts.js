@@ -39,13 +39,8 @@ function Posts() {
 
   return (
     <All>
-      {myMung.length === 0?
-      <Testimg src="https://ifh.cc/g/xg56ba.png" alt=""/>
-    :<Box className="row-box">
-        <div className="name mung">
-          <br />
-          멍친구는
-        </div>
+      
+    <Box className="row-box">
         {myMung?.map((dog, i) => {
           return (
             <div key={i}>
@@ -74,7 +69,7 @@ function Posts() {
         })}
         </SSub>
       </Box>
-    }
+    
       
       
       <Container>
@@ -139,15 +134,12 @@ function Posts() {
 }
 
 const All = styled.div`
-  /* height:100vh; */
-
+  height:100vh;
   width: 65%;
   margin: 50px auto auto auto;
 `;
 
-const Testimg= styled.img`
-width: 100%;
-`
+
 const Box = styled.div`
 box-sizing: border-box;
  align-items: center;

@@ -8,7 +8,7 @@ import { loadMyPageAX } from "../redux/modules/myPageSlice";
 
 
 
-function ProfileUpdate (){
+function ProfileUpdate (props){
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //정보창
@@ -48,7 +48,7 @@ function ProfileUpdate (){
     }
     // console.log(update_data);
     instance.post(`/mypage`, update_data).then(()=>{
-      navigate('/mypage')
+      props.setProfileModal(!props.modal)
     })
   }
 
@@ -75,7 +75,7 @@ function ProfileUpdate (){
     <textarea placeholder="자기소개 255자" defaultValue={info?.introduce} ref={introduceRef}></textarea>
     <div className="row-box">
     <button className="cancle" onClick={()=>{
-      window.location.replace('/mypage')
+      props.setProfileModal(!props.modal)
     }}>취소</button>
     <button className="update" onClick={updateMypage}>수정</button>
     </div>
@@ -133,7 +133,14 @@ display: flex;
 flex-direction: column;
 width: 50%;
 margin: 20px auto;
-
+//모달 css
+position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 3;
+//
 input{
   border: 1px solid #E3E5E9;
 border-radius: 4px;
