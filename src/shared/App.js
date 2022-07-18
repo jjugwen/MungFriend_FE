@@ -18,6 +18,12 @@ import Error from "../pages/Error";
 import ProfileUpdate from "../components/ProfileUpdate";
 import ReviewDetailModal from "../components/ReviewDetailModal";
 
+//chatting
+import Chat from "../pages/chat/Chat";
+
+//loading
+import Spinner from "../components/shared/Spinner";
+
 function App() {
   const token = localStorage.getItem("token");
 
@@ -39,6 +45,8 @@ function App() {
         <Route path="/test" element={<DogPlusModal />} />
         <Route path="/test2" element={<ProfileUpdate />} />
         <Route path="/reviews/:id" element={<ReviewDetailModal />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/chat/:id" element={<Chat />} />
       </Routes>
       <Footer />
     </div>
