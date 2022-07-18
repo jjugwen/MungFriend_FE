@@ -7,6 +7,8 @@ import UserModal from "../../components/detail/userModal/UserModal";
 import styled from "styled-components";
 import Button from "../../elements/Button";
 import { timeForToday } from "./TimeCalculator";
+//chat
+import { createChannel } from "../../redux/modules/chat/channelSlice";
 
 function ApplyComment() {
   const params = useParams();
@@ -74,7 +76,15 @@ function ApplyComment() {
                   _onClick={() => {
                     // console.log(value.id);
                     dispatch(matchActions.createMatchingDB(value.id, postId));
+                    dispatch(
+                      createChannel({
+                        nickname: value.nickname,
+                      })
+                    );
                     setTimeout(() => {
+                      window.alert(
+                        "매칭이 완료되었습니다. 웹사이트 상단 메뉴의 말풍선 아이콘 버튼을 눌러, 매칭된 신청자와 이야기를 나눠보세요."
+                      );
                       window.location.reload();
                     }, 300);
                   }}
