@@ -69,7 +69,7 @@ function MyPageComponent() {
       {mungModal && <DogPlusModal setMungModal={setMungModal} modal ={mungModal}/>}
       {profileModal && <Test/>}
       {profileModal && <ProfileUpdate setProfileModal={setProfileModal} modal ={profileModal}/>}
-      <div>
+      <RowBox>
         <Profileimg src={info?.dogProfileImgUrl} alt="" />
         <div>
           <div>
@@ -86,7 +86,7 @@ function MyPageComponent() {
         >
           임시 프로필 수정
         </UpdateButton>
-      </div>
+      </RowBox>
       {/* 휴대폰 번호
       {phoneNum === "" ? (
         <>
@@ -115,8 +115,7 @@ function MyPageComponent() {
 }
 
 const Container = styled.div`
-  /* position: absolute;
-left: 510px; */
+width: 100%;
 `;
 const Profileimg = styled.img`
   width: 60px;
@@ -130,8 +129,12 @@ const IntroduceDiv = styled.div`
   height: 160px;
   padding: 15px;
   border-radius: 12px;
-  top: 304px;
 `;
+
+const RowBox=styled.div`
+display: flex;
+flex-direction: row;
+`
 
 const UpdateButton = styled.button`
   position: absolute;
