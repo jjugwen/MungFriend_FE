@@ -14,7 +14,6 @@ import GoogleLoginRedirect from "./GoogleLoginRedirect";
 import DogPlusModal from "../components/DogPlusModal";
 import PostCreate from "../pages/PostCreate";
 import Footer from "../components/shared/Footer";
-import Error from "../pages/Error";
 import ProfileUpdate from "../components/ProfileUpdate";
 import ReviewDetailModal from "../components/ReviewDetailModal";
 
@@ -23,6 +22,12 @@ import Chat from "../pages/chat/Chat";
 
 //loading
 import Spinner from "../components/shared/Spinner";
+
+//에러 페이지
+import ErrorNoAccess from "../components/shared/errors/ErrorNoAccess";
+import ErrorNotFound from "../components/shared/errors/ErrorNotFound";
+import ErrorPage from "../components/shared/errors/ErrorPage";
+import Preparing from "../components/shared/errors/Preparing";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -36,7 +41,7 @@ function App() {
         <Route path="/signupsuccess" element={<SignupSuccess />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/posts" element={token ? <Posts /> : <Error />} />
+        <Route path="/posts" element={token ? <Posts /> : <ErrorNoAccess />} />
         <Route path="/postcreate" element={<PostCreate />} />
         <Route path="/postcreate/:id" element={<PostCreate />} />
         <Route path="/posts/:id" element={<PostDetail />} />
@@ -47,6 +52,8 @@ function App() {
         <Route path="/reviews/:id" element={<ReviewDetailModal />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/chat/:id" element={<Chat />} />
+        <Route path="/errortest" element={<ErrorPage />} />
+        <Route path="/preparing" element={<Preparing />} />
       </Routes>
       <Footer />
     </div>
