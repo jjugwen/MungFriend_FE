@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   // baseURL: "https://hjkim-sparta.shop",
-  baseURL: "hjkim-sparta.shop",
+  baseURL: "https://hjkim-sparta.shop",
 });
 
 const token = localStorage.getItem("token");
