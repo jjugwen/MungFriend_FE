@@ -8,15 +8,16 @@ import openmenuarrow from "../../assets/images/Header/openmenuarrow.svg";
 import logo from "../../assets/images/Header/logo.svg";
 import chatting from "../../assets/images/Header/chatIcon.svg";
 
-function Header() {
+function Header(props) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  const [opened, setOpened] = useState(false);
-  const modalClose = useCallback(() => {
-    setOpened(!opened);
-  }, [opened]);
+  // const [opened, setOpened] = useState(false);
+  // const modalClose = useCallback(() => {
+  //   setOpened(!opened);
+  // }, [opened]);
 
+ 
   // 메뉴 버튼 클릭했을 때 클릭한 버튼 상태 변화 유지하기
   const mainRef = useRef();
   const postsRef = useRef();
@@ -120,12 +121,15 @@ function Header() {
                 <img src={noticeicon} alt="noticeicon" />
               </HeadButton>
 
-              <HeadButton
-                onClick={() => {
-                  modalClose();
-                }}
-              >
-                {opened ? <HeaderModal /> : null}
+              <HeadButton onClick={()=>{
+                props.setModal(!props.modal)
+              }}>
+
+              {/* {/* //   onClick={() => {
+              //     modalClose();
+              //   }}
+              // >
+              //   {opened ? <HeaderModal /> : null} */}
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "3%" }}
                 >
