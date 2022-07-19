@@ -136,6 +136,7 @@ const KakaoLoginBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1%;
+  cursor: pointer;
 `;
 
 const GoogleLoginBtn = styled.button`
@@ -149,6 +150,7 @@ const GoogleLoginBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1%;
+  cursor: pointer;
 `;
 
 const Img = styled.img`
