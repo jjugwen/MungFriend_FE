@@ -66,9 +66,9 @@ function PostCreate() {
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
     };
-    console.log(post);
-    // dispatch(createPostAX(post));
-    // navigate(`/posts`)
+    // console.log(post);
+    dispatch(createPostAX(post));
+    navigate(`/posts`)
   };
    //수정 게시글 데이터 가져오기
   React.useEffect(() => {
