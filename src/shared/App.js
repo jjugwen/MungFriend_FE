@@ -1,3 +1,4 @@
+import {useRef, useState} from 'react';
 import { Route, Routes } from "react-router-dom";
 import Header from "../components/shared/Header";
 import Main from "../pages/Main";
@@ -28,13 +29,21 @@ import ErrorNoAccess from "../components/shared/errors/ErrorNoAccess";
 import ErrorNotFound from "../components/shared/errors/ErrorNotFound";
 import ErrorPage from "../components/shared/errors/ErrorPage";
 import Preparing from "../components/shared/errors/Preparing";
+import HeaderModal from '../components/shared/HeaderModal';
+import styled from 'styled-components';
 
 function App() {
   const token = localStorage.getItem("token");
 
+  const[headerModal, setHeaderModal] =useState(false);
+  // const outSection = useRef();
   return (
     <div className="App">
-      <Header />
+      <Header modal={headerModal} setModal={setHeaderModal}/>
+      {headerModal && <HeaderModal/>}
+      {headerModal &&<OutSection onClick={()=>{
+        setHeaderModal(false);
+      }}/>}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
@@ -60,4 +69,13 @@ function App() {
   );
 }
 
+const OutSection = styled.div`
+position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* background: rgba(0, 0, 0, 0.8); */
+  z-index: 2;
+`
 export default App;
