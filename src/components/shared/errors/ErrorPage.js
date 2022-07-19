@@ -19,7 +19,6 @@ function ErrorPage() {
             <span>홈페이지 이용에 불편을 드려 죄송합니다.</span>
             <span>새로고침(F5)을 누르시거나, 잠시 후 이용해 주세요.</span>
             <Button
-              width="194px"
               orange_medium
               margin="40px 0 0 0"
               _onClick={() => {

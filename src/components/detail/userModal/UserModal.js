@@ -49,6 +49,7 @@ function UserModal(props) {
           </div>
           <div style={{ margin: "5% 133px" }}>
             <Button
+              width="214px"
               orange_large
               _onClick={() => {
                 close();

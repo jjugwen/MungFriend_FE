@@ -243,7 +243,8 @@ const OrangeBtn194 = styled.button`
   cursor: pointer;
   box-sizing: border-box;
   width: ${(props) => props.width};
-  min-width: 194px;
+  min-width: 100px;
+  max-width: 194px;
   height: 3em;
   background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#FA5A30")};
   border: none;

@@ -69,6 +69,7 @@ function WriteModal(props) {
               취소
             </Button>
             <Button
+              width="214px"
               orange_large
               _onClick={(e) => {
                 console.log(applyText.current.value);

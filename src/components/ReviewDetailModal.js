@@ -89,6 +89,7 @@ function ReviewDetailModal(props) {
               <div className="reviewTextBox">{reviewDetail.comment}</div>
               <Hr />
               <Button
+                width="214px"
                 orange_large
                 className="close"
                 _onClick={() => {
