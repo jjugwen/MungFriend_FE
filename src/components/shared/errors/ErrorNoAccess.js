@@ -1,10 +1,12 @@
+//403 페이지
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import dogError from "../assets/images/Errors/img-dog-error.png";
-import Button from "../elements/Button";
+import dogError from "../../../assets/images/Errors/img-dog-error.png";
+import Button from "../../../elements/Button";
 
-function Error() {
+function ErrorNoAccess() {
   const navigate = useNavigate();
   return (
     <Wrap>
@@ -95,4 +97,4 @@ const ErrorTextArea = styled.div`
     line-height: 24px;
   }
 `;
-export default Error;
+export default ErrorNoAccess;

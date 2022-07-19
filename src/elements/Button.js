@@ -242,6 +242,7 @@ const OrangeBtn194 = styled.button`
   font-family: "Pretendard";
   cursor: pointer;
   box-sizing: border-box;
+  width: ${(props) => props.width};
   min-width: 194px;
   height: 3em;
   background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#FA5A30")};
@@ -263,6 +264,7 @@ const OrangeBtn214 = styled.button`
   font-family: "Pretendard";
   cursor: pointer;
   box-sizing: border-box;
+  width: ${(props) => props.width};
   min-width: 214px;
   height: 3em;
   background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#FA5A30")};
