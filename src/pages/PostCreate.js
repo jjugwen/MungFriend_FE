@@ -6,12 +6,11 @@ import styled from "styled-components";
 import instance from "../redux/modules/instance";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
 import {useNavigate} from 'react-router-dom';
-import { createPostAX, updatePostAX } from "../redux/modules/postSlice";
+import { createPostAX} from "../redux/modules/postSlice";
 
 const c = [];
 function PostCreate() {
   const params = useParams();
-  // console.log(params.id);
   //id값으로 게시글 판별
   const isNew = params.id === undefined;
 
@@ -25,6 +24,7 @@ function PostCreate() {
   const dogList = useSelector((state) => state.mungSlice.mung);
   // console.log(dogList)
   const [updatePost, setUpdatePost] = useState(null);
+  
   const dateRef = useRef();
   const time = {
     hour: [...Array(24).keys()].map((key) => key + 1),
@@ -37,6 +37,9 @@ function PostCreate() {
   const startMinuteRef = useRef(null);
   const endHourRef = useRef(null);
   const endMinuteRef = useRef(null);
+ 
+ 
+
   //작성버튼
   const click = () => {
     let startHour = startHourRef.current.value;
@@ -63,10 +66,25 @@ function PostCreate() {
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
     };
-    // console.log(post);
-    dispatch(createPostAX(post));
-    navigate(`/posts`)
+    console.log(post);
+    // dispatch(createPostAX(post));
+    // navigate(`/posts`)
   };
+   //수정 게시글 데이터 가져오기
+  React.useEffect(() => {
+    if (!isNew) {
+      // instance.get(`/api/posts/${params.id}`).then((res)=>{
+      axios.get(`http://localhost:5002/detail/${params.id}`).then((res) => {
+        setUpdatePost(res.data);
+      });
+    }
+  }, []);
+
+  let startHour = isNew ? "0" : Number(updatePost?.requestStartDate.split('T')[1].split(':')[0]);
+   let startMinute = isNew ? "0" : Number(updatePost?.requestStartDate.split('T')[1].split(':')[1]);
+   let endHour = isNew ? "0" : Number(updatePost?.requestEndDate.split('T')[1].split(':')[0]);
+   let endMinute = isNew ? "0" : Number(updatePost?.requestEndDate.split('T')[1].split(':')[1]);
+
   //수정버튼
   const updateClick = () => {
     let startHour = startHourRef.current.value;
@@ -102,7 +120,9 @@ function PostCreate() {
       .catch((error) => {
         alert(error);
       });
+    console.log(updatePost);
   };
+
   // const [c, setC] = useState([]);
   // const [b,setB] = useState(0);
   const a = (e) => {
@@ -118,66 +138,66 @@ function PostCreate() {
     console.log(c);
   };
 
-  //수정하기
-  React.useEffect(() => {
-    if (!isNew) {
-      instance.get(`/api/posts/${params.id}`).then((res)=>{
-      // axios.get(`http://localhost:5001/detail/${params.id}`).then((res) => {
-        setUpdatePost(res.data);
-      });
-    }
-  }, []);
-  // console.log(updatePost)
+
   return (
     <Container>
       <div>
-        <div className="title">게시글 작성</div>
-        <div className="row-box">
-        <div className="sub-title">멍 프로필 선택</div>
-        <div className="select-text">* 다중선택 가능합니다.</div>
-        </div>
+        <div >게시글 작성</div>
+        <RowBox>
+        <div>멍 프로필 선택</div>
+        <div>* 다중선택 가능합니다.</div>
+        </RowBox>
       </div>
-      <div className="row-box">
+      <RowBox>
         {dogList?.map((dog, index) => {
           return (
             <Listbox key={index}>
-              <CheckBox>
-                <label htmlFor="check2">
-                  <input
-                    className="checkbox2"
-                    type="checkbox"
-                    value={dog.id}
-                    onClick={a}
-                  />
-                </label>
-              </CheckBox>
-              <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
-              <div>
-                <div className="font-18">
-                  {dog.name} {dog.gender === "여" ? "♀" : "♂"}
-                </div>
-                <div className="font-16">{dog.size}견</div>
-              </div>
+            <CheckBox
+              onClick={a}
+              defaultValue={dog.id}
+              type="checkbox"
+              name="isRepresentative"
+            />
+            <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
+            <div>
+              <RowBox>
+                <TextBox16>
+                  {dog.name}
+                  {dog.gender === "여" ? (
+                    <img src="https://ifh.cc/g/1DDK9D.png" alt="" />
+                  ) : (
+                    <img src="https://ifh.cc/g/WP9vdy.png" alt="" />
+                  )}
+                </TextBox16>
+              </RowBox>
+              <TextBox14>
+                {dog.age}세, {dog.size}견
+              </TextBox14>
+            </div>
             </Listbox>
           );
         })}
-      </div>
-      <div className="sub-title">신청날짜</div>
-      <div className="row-box">
-      <input type="date" ref={dateRef} className="date-input"/>
-      <select ref={startHourRef}>
-      <option>시간</option>
-        {time.hour.map((hour, index) => {
-          return (
-            <option key={index} value={hour}>
-              {hour}
-            </option>
-          );
-        })}
+      </RowBox>
+      <div>신청날짜</div>
+      <RowBox>
+      <input type="date" ref={dateRef}  defaultValue={updatePost?.requestStartDate.split('T')[0]}/>
+      {/*시작시간*/}
+      {startHour && (
+      <select ref={startHourRef} defaultValue={startHour}>
+        <option value={0}>시간</option>
+          {time.hour.map((hour, index) => {
+            return (
+              <option key={index} value={hour}>
+                {hour}
+              </option>
+            );
+          })}
       </select>
-      
-      <select ref={startMinuteRef}>
-      <option>분</option>
+      )}
+       {/*시작분*/}
+       {startHour && (
+      <select ref={startMinuteRef} defaultValue={startMinute}>
+      <option value={0}>분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
@@ -186,9 +206,11 @@ function PostCreate() {
           );
         })}
       </select>
-      <div className="font-20">~</div>
-      <select ref={endHourRef}>
-        <option>시간</option>
+      )}
+      <div>~</div>
+      {/*끝시간*/}
+      { endHour && (<select ref={endHourRef} defaultValue={endHour}>
+        <option value={0}>시간</option>
         {time.hour.map((hour, index) => {
           return (
             <option key={index} value={hour}>
@@ -197,9 +219,11 @@ function PostCreate() {
           );
         })}
       </select>
+      )}
       
-      <select ref={endMinuteRef}>
-      <option>분</option>
+      {/*끝분*/}
+      {endMinute && (<select ref={endMinuteRef} defaultValue={endMinute}>
+      <option value={0}>분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
@@ -207,79 +231,50 @@ function PostCreate() {
             </option>
           );
         })}
-      </select>
+      </select>)}
       
-      </div>
       
-      <div className="sub-title">내용입력</div>
+      </RowBox>
+      
+      <div>내용입력</div>
      <hr />
-     <div className="column-box">
+     <CoulmnBox >
       <input
-        className="input-box"
         placeholder="제목을 입력해 주세요"
         ref={titleRef}
         defaultValue={updatePost ? updatePost.title : ""}
       />
       
       <textarea
-      className="input-box"
         placeholder="내용을 입력해 주세요"
         ref={contentRef}
         defaultValue={updatePost ? updatePost.content : ""}
       />
-      </div>
+      </CoulmnBox >
      
       <ButtonBox>
       <button onClick={()=>{
         navigate('/posts')
       }}>취소</button>
       {isNew ? (
-        <button className="orange" onClick={click}>등록</button>
+        <button  onClick={click}>등록</button>
       ) : (
-        <button className="orange" onClick={updateClick}>수정</button>
+        <button  onClick={updateClick}>수정</button>
       )}
       </ButtonBox>
     </Container>
   );
 }
-const Container=styled.div`
+const Container=styled.form`
 width: 70%;
 margin: auto;
 justify-content: center;
 align-items: center;
-.title{
-  font-weight: 600;
-  font-size: 30px;
-  margin: 50px 0px;
-}
-.sub-title{
-  font-weight: 600;
-font-size: 20px;
-}
-.select-text{
-  color: #7A7A80;
-  font-size: 14px;
-  padding-left: 8px;
-}
-select{
-  width: 104px;
-height: 48px;
-font-size: 16px;
-}
-.date-input{
-  width: 460px;
-}
+
 hr{
   border: 1px solid black;
 }
-.input-box{
-  border: none;
-  border-bottom: 1px solid #E3E5E9;
-  font-family: 'Pretendard';
-  font-weight: 400;
-font-size: 16px;
 
-}
 textarea{
   border: none;
   border-bottom: 1px solid #E3E5E9;
@@ -287,11 +282,7 @@ textarea{
   resize : none;
   height: 200px;
 }
-.font-20{
-  font-size: 24px;
-  font-weight: 600;
-  padding-top: 10px;
-}
+
 `
 const DogImg = styled.img`
   width: 60px;
@@ -306,14 +297,13 @@ const Listbox = styled.div`
   flex-direction: row;
   align-items: center;
   :hover {
-    border: 1px solid black;
+    border: 2px solid #FA5A30;
   }
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
 `;
 
-const CheckBox = styled.div`
-  .checkbox2 {
+const CheckBox = styled.input`
     margin: 18px;
     appearance: none;
     width: 1.2rem;
@@ -327,14 +317,36 @@ const CheckBox = styled.div`
       background-size: 100% 100%;
       background-position: 50%;
       background-repeat: no-repeat;
-      background-color: black;
+      background-color: #FA5A30;
     }
+  
+`;
+const RowBox = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const CoulmnBox= styled.div`
+display: flex;
+flex-direction: column;
+`
+const TextBox16 = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  img {
+    margin-left: 5px;
+    width: 17px;
+    height: 17px;
   }
 `;
 
+const TextBox14 = styled.div`
+  font-size: 14px;
+  color: #7a7a80;
+  padding: 5px;
+  margin-top: 5px;
+`;
+
 const ButtonBox =styled.div`
-position: relative;
-left: 25%;
 align-items: center;
 justify-content: center;
 button{
@@ -347,9 +359,6 @@ height: 48px;
 border: none;
 
 }
-.orange{
-  background: #FA5A30;
-  color: white;
-}
+
 `
 export default PostCreate;
