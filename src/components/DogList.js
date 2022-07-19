@@ -23,7 +23,7 @@ function DogList(props) {
   };
   const ChoiceRep = (e) => {
     const id = e.target.value;
-    instance.put(`api/dog/${id}`).then((res) => alert(res.data));
+    instance.put(`api/dogs/${id}`).then((res) => alert(res.data));
     // console.log(id)
   };
   return (
