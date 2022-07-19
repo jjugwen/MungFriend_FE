@@ -78,13 +78,14 @@ function Login() {
             <p className="RequestSignupText">회원이 아니신가요?</p>
           </Link>
         </div>
-        <a href="http://3.39.6.175/oauth2/authorization/kakao">
+        <a href="https://hjkim-sparta.shop/oauth2/authorization/kakao">
           <KakaoLoginBtn>
             <img src={kakaoIcon} alt="kakaoIcon" />
             <span className="LoginButtonText">카카오 아이디로 로그인 하기</span>
           </KakaoLoginBtn>
         </a>
-        <a href="http://ec2-3-39-6-175.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google">
+        {/* <a href="http://ec2-3-39-6-175.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google"> */}
+        <a href="https://hjkim-sparta.shop/oauth2/authorization/google">
           <GoogleLoginBtn>
             <img src={googleIcon} alt="googleIcon" />
             <span className="LoginButtonText">구글 아이디로 로그인 하기</span>

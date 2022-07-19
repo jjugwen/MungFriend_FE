@@ -6,7 +6,7 @@ export const loginDB = (username, password) => {
   return function () {
     axios
       .post(
-        `http://3.39.6.175/member/login`,
+        `https://hjkim-sparta.shop/member/login`,
         { username, password },
         {
           headers: {
