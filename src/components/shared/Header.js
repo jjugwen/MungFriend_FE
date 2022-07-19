@@ -40,7 +40,7 @@ function Header() {
       color : #FA5A30;
       font-weight: 600;`;
       communityRef.current.style = "";
-    } else if (id === "community") {
+    } else if (id === "preparing") {
       mainRef.current.style = "";
       postsRef.current.style = "";
       communityRef.current.style = `
@@ -82,7 +82,7 @@ function Header() {
             <HeadButton id="posts" onClick={GetClick} ref={postsRef}>
               산책
             </HeadButton>
-            <HeadButton id="community" onClick={GetClick} ref={communityRef}>
+            <HeadButton id="preparing" onClick={GetClick} ref={communityRef}>
               커뮤니티
             </HeadButton>
           </div>

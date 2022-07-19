@@ -1,5 +1,5 @@
 // react
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // style
 import styled from "styled-components";
@@ -36,11 +36,22 @@ const Chat = (props) => {
 
   React.useEffect(() => {
     if (id) {
-      console.log("useEffect >> LoadChat넘기기전 id : " + id);
+      // console.log("useEffect >> LoadChat넘기기전 id : " + id);
       dispatch(loadChat(id));
     }
   }, [dispatch, id]);
 
+  //채팅방 색깔 바꾸기
+  const [cateActive, setCateActive] = useState(
+    Array(channel_data.length).fill(false)
+  );
+  const btnActiveHandler = (id, link) => {
+    const activeCheck = cateActive.map((el, index) => {
+      return index === id - 1;
+    });
+    setCateActive(activeCheck);
+    navigate(link);
+  };
   return (
     <React.Fragment>
       <Container>
@@ -59,7 +70,11 @@ const Chat = (props) => {
                 channel_data.map((list, index) => {
                   return (
                     <ChannelListBox
+                      props={cateActive}
+                      id={list.id}
                       key={list.id}
+                      btnActiveHandler={btnActiveHandler}
+                      cateActive={cateActive}
                       onClick={() => {
                         navigate(`/chat/${list.id}`);
                         // clearStorage('channelId');
@@ -92,7 +107,7 @@ const Chat = (props) => {
 const Container = styled.div`
   /* padding: 0 0 12.18em 0%; */
   position: relative;
-  z-index: 6;
+  z-index: 2;
   /* background-color: #f2f3f6; */
   /* height: 100%; */
   height: 610px;
@@ -124,21 +139,20 @@ const ChannelListBox = styled.div`
   max-width: 15%;
   margin: 4% 8%;
   height: 50px;
-  background: #fa5a30;
   border-radius: 8px;
   display: flex;
   align-items: center;
   cursor: pointer;
   position: relative;
   padding: 1% 5%;
-
+  background-color: ${({ props, id }) => (props[id - 1] ? "#fa5a30" : "#fff")};
   & p {
     font-family: "Pretendard";
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 100%;
-    color: white;
+    color: ${({ props, id }) => (props[id - 1] ? "white" : "black")};
   }
   & div {
     cursor: pointer;
