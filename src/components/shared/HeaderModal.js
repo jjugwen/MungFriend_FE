@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { actionCreators as userActions } from "../../redux/modules/userInfoSlice";
 
-function HeaderModal() {
+function HeaderModal(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   //로그인 유저
@@ -32,6 +32,7 @@ function HeaderModal() {
           <span
             onClick={() => {
               navigate("/mypage?value=mypage");
+              props.setModal(!props.modal)
             }}
           >
             마이페이지
@@ -39,6 +40,7 @@ function HeaderModal() {
           <span
             onClick={() => {
               navigate("/mypage?value=mypost");
+              props.setModal(!props.modal)
             }}
           >
             작성한 게시글
@@ -46,6 +48,7 @@ function HeaderModal() {
           <span
             onClick={() => {
               navigate("/mypage?value=myreview");
+              props.setModal(!props.modal)
             }}
           >
             내가 받은 후기

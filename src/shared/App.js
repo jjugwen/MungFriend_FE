@@ -40,7 +40,7 @@ function App() {
   return (
     <div className="App">
       <Header modal={headerModal} setModal={setHeaderModal}/>
-      {headerModal && <HeaderModal/>}
+      {headerModal && <HeaderModal modal={headerModal} setModal={setHeaderModal}/>}
       {headerModal &&<OutSection onClick={()=>{
         setHeaderModal(false);
       }}/>}
