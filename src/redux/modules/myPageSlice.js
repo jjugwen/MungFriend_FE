@@ -14,25 +14,7 @@ export const loadMyPageAX = () => {
   };
 };
 
-export const patchIntroduceAX = (introduce) => {
-  return async function (dispatch) {
-    axios
-      .patch(`http://localhost:5001/mypage`, introduce)
-      // await instance
-      //   .patch(`/mypage/introduce`, introduce)
-      .then(() => dispatch(patchIntroduce(introduce)));
-  };
-};
 
-export const patchPhoneNumAX = (phoneNum) => {
-  return function (dispatch) {
-    axios
-      .patch(`http://localhost:5001/mypage`, phoneNum)
-      // instance
-      //   .patch(`/mypage/phoneNum`, phoneNum)
-      .then(() => dispatch(patchPhoneNum(phoneNum)));
-  };
-};
 
 //툴킷
 const myPageSlice = createSlice({
@@ -41,23 +23,7 @@ const myPageSlice = createSlice({
   reducers: {
     loadMyPage(state, action) {
       state.mypage = action.payload;
-    },
-    patchIntroduce(state, action) {
-      state.mypage.introduce = action.payload.introduce;
-    },
-    patchPhoneNum(state, action) {
-      state.mypage.phoneNum = action.payload.phoneNum;
-    },
-    deleteMyMung(state, action) {
-      // console.log(action.payload);
-      state.mypage.dogList = state.mypage.dogList.filter((element) => {
-        if (element.id !== action.payload) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-    },
+    }
   },
 });
 
