@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadMyPageAX } from "../redux/modules/myPageSlice";
 import styled from "styled-components";
-import { deleteMyMungAX } from "../redux/modules/mungSlice";
+import { deleteMyMungAX, loadMyMungAX } from "../redux/modules/mungSlice";
 import instance from "../redux/modules/instance";
+
 
 function DogList(props) {
   const dispatch = useDispatch();
+  //대표멍멍이 선택시 스타일 유지
 
   React.useEffect(() => {
-    dispatch(loadMyPageAX());
+    dispatch(loadMyMungAX());
   }, []);
 
-  const info = useSelector((state) => state.myPageSlice.mypage);
-
+  const info = useSelector((state) => state.mungSlice.mung);
+  // console.log(info)
+ 
   const deleteDog = (e) => {
     // console.log(typeof(e.target.value))
     dispatch(deleteMyMungAX(Number(e.target.value)));
@@ -23,9 +25,13 @@ function DogList(props) {
   };
   const ChoiceRep = (e) => {
     const id = e.target.value;
-    instance.put(`api/dogs/${id}`).then((res) => alert(res.data));
+    instance.put(`api/dogs/${id}`).then((res) => {alert(res.data.message)
+    window.location.reload(); 
+    }); 
+                               
     // console.log(id)
   };
+ 
   return (
     <Container>
       <RowBox>
@@ -38,14 +44,15 @@ function DogList(props) {
           추가하기
         </AddButton>
       </RowBox>
-      {info?.dogList.map((dog, i) => {
+      {info?.map((dog, i) => {
         return (
-          <Listbox key={i}>
+          <Listbox key={i}   style={ dog.isRepresentative === true? {border:'2px solid #fa5a30'}:{} }>
             <CheckBox
               onClick={ChoiceRep}
               value={dog.id}
               type="radio"
-              name="isRepresentativ"
+              name="isRepresentative"
+              style={ dog.isRepresentative === true? {backgroundColor: '#fa5a30'}:{} }
             />
             <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
             <div>
@@ -125,6 +132,7 @@ const CheckBox = styled.input`
     background-repeat: no-repeat;
     background-color: #fa5a30;
   }
+
 `;
 const DogImg = styled.img`
   width: 60px;
