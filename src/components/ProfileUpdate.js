@@ -44,8 +44,11 @@ function ProfileUpdate(props) {
       isAgree: true,
     };
     // console.log(update_data);
-    instance.post(`/mypage`, update_data).then(() => {
-      props.setProfileModal(!props.modal);
+    instance.post(`/mypage`, update_data).then((response) => {
+      // props.setProfileModal(!props.modal);
+      console.log(response);
+    }).catch(error=>{
+      alert(error)
     });
   };
 
@@ -66,12 +69,12 @@ function ProfileUpdate(props) {
       <TextBox>휴대폰번호</TextBox>
       <RowBox>
         <TwoInput defaultValue={info?.phoneNum} ref={phoneNumRef}></TwoInput>
-        <TwoButton>입력</TwoButton>
+        <TwoButton type="button">입력</TwoButton>
       </RowBox>
       <TextBox>주소</TextBox>
       <RowBox>
         <TwoInput value={address} defaultValue={info?.address}></TwoInput>
-        <TwoButton onClick={Popup}>우편번호 찾기</TwoButton>
+        <TwoButton onClick={Popup} type="button">우편번호 찾기</TwoButton>
         {popup && (
           <Address
             onClose={Popup}
@@ -85,7 +88,7 @@ function ProfileUpdate(props) {
      
       <TextBox>멍친구 이용약관, 개인정보 취급방침에 모두 동의합니다.</TextBox>
       <RowBox>
-      <CheckInput type="checkbox" required /> <TextBox>동의함</TextBox></RowBox>
+      <CheckInput type="checkbox" required/> <TextBox>동의함</TextBox></RowBox>
       <textarea
         placeholder="자기소개 255자"
         defaultValue={info?.introduce}
