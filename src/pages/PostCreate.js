@@ -81,10 +81,10 @@ function PostCreate() {
     }
   }, []);
 
-  let startHour = isNew ? "0" : Number(updatePost?.requestStartDate.split('T')[1].split(':')[0]);
-   let startMinute = isNew ? "0" : Number(updatePost?.requestStartDate.split('T')[1].split(':')[1]);
-   let endHour = isNew ? "0" : Number(updatePost?.requestEndDate.split('T')[1].split(':')[0]);
-   let endMinute = isNew ? "0" : Number(updatePost?.requestEndDate.split('T')[1].split(':')[1]);
+  let startHour = isNew ? null : Number(updatePost?.requestStartDate.split('T')[1].split(':')[0]);
+   let startMinute = isNew ? null : Number(updatePost?.requestStartDate.split('T')[1].split(':')[1]);
+   let endHour = isNew ? null : Number(updatePost?.requestEndDate.split('T')[1].split(':')[0]);
+   let endMinute = isNew ? null : Number(updatePost?.requestEndDate.split('T')[1].split(':')[1]);
 
   //수정버튼
   const updateClick = () => {
@@ -193,7 +193,7 @@ function PostCreate() {
       {/*시작시간*/}
       {startHour && (
       <select ref={startHourRef} defaultValue={startHour}>
-        <option value={0}>시간</option>
+        <option value={null}>시간</option>
           {time.hour.map((hour, index) => {
             return (
               <option key={index} value={hour}>
@@ -206,7 +206,7 @@ function PostCreate() {
        {/*시작분*/}
        {startHour && (
       <select ref={startMinuteRef} defaultValue={startMinute}>
-      <option value={0}>분</option>
+      <option value={null}>분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
@@ -219,7 +219,7 @@ function PostCreate() {
       <div>~</div>
       {/*끝시간*/}
       { endHour && (<select ref={endHourRef} defaultValue={endHour}>
-        <option value={0}>시간</option>
+        <option value={null}>시간</option>
         {time.hour.map((hour, index) => {
           return (
             <option key={index} value={hour}>
@@ -232,7 +232,7 @@ function PostCreate() {
       
       {/*끝분*/}
       {endMinute && (<select ref={endMinuteRef} defaultValue={endMinute}>
-      <option value={0}>분</option>
+      <option value={null}>분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
