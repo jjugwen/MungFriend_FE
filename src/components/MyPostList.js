@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
 
 function MyPostList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(loadMyPageAX());
@@ -21,7 +23,9 @@ function MyPostList() {
       <PostList>
         {info?.myPostList.map((mypost, i) => {
           return (
-            <div key={i} className="row-box">
+            <div key={i} className="row-box" onClick={()=>{
+              navigate(`/posts/${mypost.id}`)
+            }}>
               <div className="post-title">{mypost.title}</div>
               <div className="modified-at">
                 {mypost.modifiedAt.split("T")[0]}
