@@ -8,12 +8,12 @@ import { loadMyMungAX } from "../redux/modules/mungSlice";
 import {useNavigate} from 'react-router-dom';
 import { createPostAX} from "../redux/modules/postSlice";
 
-const c = [];
+const selectDog = [];
 function PostCreate() {
   const params = useParams();
   //id값으로 게시글 판별
   const isNew = params.id === undefined;
-
+  console.log(params.id)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ function PostCreate() {
   const dogList = useSelector((state) => state.mungSlice.mung);
   // console.log(dogList)
   const [updatePost, setUpdatePost] = useState(null);
+  console.log(updatePost)
   
   const dateRef = useRef();
   const time = {
@@ -61,7 +62,7 @@ function PostCreate() {
     const post = {
       title: titleRef.current.value,
       content: contentRef.current.value,
-      dogIdList: c,
+      dogIdList: selectDog,
       requestStartDate:
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
@@ -70,11 +71,11 @@ function PostCreate() {
     dispatch(createPostAX(post));
     navigate(`/posts`)
   };
-   //수정 게시글 데이터 가져오기
+  //  수정 게시글 데이터 가져오기
   React.useEffect(() => {
     if (!isNew) {
-      // instance.get(`/api/posts/${params.id}`).then((res)=>{
-      axios.get(`http://localhost:5002/detail/${params.id}`).then((res) => {
+      instance.get(`/api/posts/${params.id}`).then((res)=>{
+      // axios.get(`http://localhost:5002/detail/${params.id}`).then((res) => {
         setUpdatePost(res.data);
       });
     }
@@ -87,30 +88,31 @@ function PostCreate() {
 
   //수정버튼
   const updateClick = () => {
-    let startHour = startHourRef.current.value;
+    let startHour = startHourRef.current.defaultValue;
     if (startHour.length === 1) {
       startHour = 0 + startHour;
     }
-    let startMinute = startMinuteRef.current.value;
+    let startMinute = startMinuteRef.current.defaultValue;
     if (startMinute.length === 1) {
       startMinute = 0 + startMinute;
     }
-    let endHour = endHourRef.current.value;
+    let endHour = endHourRef.current.defaultValue;
     if (endHour.length === 1) {
       endHour = 0 + endHour;
     }
-    let endMinute = endMinuteRef.current.value;
+    let endMinute = endMinuteRef.current.defaultValue;
     if (endMinute.length === 1) {
       endMinute = 0 + endMinute;
     }
-    const updatePost = {
-      title: titleRef.current.value,
-      content: contentRef.current.value,
-      dogIdList: c,
+    const newUpdatePost = {
+      title: titleRef.current.defaultValue,
+      content: contentRef.current.defaultValue,
+      dogIdList: selectDog,
       requestStartDate:
-        dateRef.current.value + "T" + startHour + ":" + startMinute,
-      requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
+        dateRef.current.defaultValue + "T" + startHour + ":" + startMinute,
+      requestEndDate: dateRef.current.defaultValue + "T" + endHour + ":" + endMinute,
     };
+
     instance
       .put(`/api/posts/${params.id}`, updatePost)
       .then((response) => {
@@ -120,22 +122,19 @@ function PostCreate() {
       .catch((error) => {
         alert(error);
       });
-    console.log(updatePost);
+    console.log(newUpdatePost);
   };
 
-  // const [c, setC] = useState([]);
-  // const [b,setB] = useState(0);
-  const a = (e) => {
-    // setB(e.target.value)
 
-    let index = c.indexOf(Number(e.target.value));
-    if (c.includes(Number(e.target.value)) === true) {
-      c.splice(index, 1);
+  const a = (e) => {
+    let index = selectDog.indexOf(Number(e.target.value));
+    if (selectDog.includes(Number(e.target.value)) === true) {
+      selectDog.splice(index, 1);
     } else {
-      c.push(Number(e.target.value));
+      selectDog.push(Number(e.target.value));
     }
     // console.log(e.target.value);
-    console.log(c);
+    console.log(selectDog);
   };
 
 
@@ -154,7 +153,7 @@ function PostCreate() {
             <Listbox key={index}>
             <CheckBox
               onClick={a}
-              defaultValue={dog.id}
+              value={dog.id}
               type="checkbox"
               name="isRepresentative"
             />
