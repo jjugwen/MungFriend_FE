@@ -49,7 +49,7 @@ function ProfileUpdate(props) {
     };
     console.log(update_data);
     instance.post(`/mypage`, update_data).then((response) => {
-      // props.setProfileModal(!props.modal);
+      props.setProfileModal(!props.modal);
       console.log(response);
     }).catch(error=>{
       alert(error)
