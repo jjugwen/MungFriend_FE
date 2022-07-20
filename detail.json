@@ -43,7 +43,7 @@
           "dogImageFiles": [
             {
               "id": 1,
-              "imageUrl": "https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_960_720.jpg"
+              "image": "https://cdn.pixabay.com/photo/2017/09/25/13/14/dog-2785077_960_720.jpg"
             }
           ],
           "isRepresentative": true
