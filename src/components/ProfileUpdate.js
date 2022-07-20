@@ -17,6 +17,7 @@ function ProfileUpdate(props) {
   const [lon, setLon] = useState(null);
   const [lat, setLat] = useState(null);
   const [address, setAddress] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState();
 
   const info = useSelector((state) => state.myPageSlice.mypage);
   // console.log(info)
@@ -33,17 +34,20 @@ function ProfileUpdate(props) {
   };
 
   const updateMypage = () => {
-    const update_data = {
+    if(isAgree===false){
+      alert('동의함에 체크해주세요!')
+    }
+    let update_data = {
       nickname: nicknameRef.current.value,
       email: emailRef.current.value,
-      address: address,
-      latitude: lat,
-      longitude: lon,
+      address: info?.address? info?.address:address,
+      latitude: info?.latitude?info?.latitude:lat,
+      longitude: info?.longitude ? info?.longitude:lon,
       introduce: introduceRef.current.value,
-      phoneNum: phoneNumRef.current.value,
-      isAgree: true,
+      phoneNum: phoneNumber,
+      isAgree,
     };
-    // console.log(update_data);
+    console.log(update_data);
     instance.post(`/mypage`, update_data).then((response) => {
       // props.setProfileModal(!props.modal);
       console.log(response);
@@ -51,10 +55,14 @@ function ProfileUpdate(props) {
       alert(error)
     });
   };
+  let [isAgree,setIsAgree] = useState(false);
+  // console.log(isAgree)
 
 
   return (
-    <Container>
+    <Container onSubmit={(e) => {
+      e.preventDefault(); // 이걸 통해 페이지 새로고침을 막아서 해결
+    }}>
       <Title>프로필 수정</Title>
       <TextBox>닉네임</TextBox>
       <OneInput defaultValue={info?.nickname} ref={nicknameRef}></OneInput>
@@ -88,7 +96,7 @@ function ProfileUpdate(props) {
      
       <TextBox>멍친구 이용약관, 개인정보 취급방침에 모두 동의합니다.</TextBox>
       <RowBox>
-      <CheckInput type="checkbox" required/> <TextBox>동의함</TextBox></RowBox>
+      <CheckInput type="checkbox" required onClick={()=>{setIsAgree(!isAgree)}}/> <TextBox>동의함</TextBox></RowBox>
       <textarea
         placeholder="자기소개 255자"
         defaultValue={info?.introduce}
@@ -103,6 +111,9 @@ function ProfileUpdate(props) {
         >
           취소
         </CancleBtn>
+        {/*
+
+        */}
         <UpdateBtn onClick={updateMypage}>수정</UpdateBtn>
       </RowBox>
     </Container>
