@@ -15,22 +15,30 @@ function MyPostList() {
 
   return (
     <Container>
-      <div className="title">작성한 게시글</div>
-      <div className="count">
-        총<div className="orange-color">{info?.myPostList.length}</div>건
-      </div>
-      <hr/>
+      <Title >작성한 게시글</Title>
+      <Count >
+        총
+        <OrangeColor >
+          {info?.myPostList.length}
+        </OrangeColor>
+        건
+      </Count>
+      <hr />
       <PostList>
         {info?.myPostList.map((mypost, i) => {
           return (
-            <div key={i} className="row-box" onClick={()=>{
-              navigate(`/posts/${mypost.id}`)
-            }}>
-              <div className="post-title">{mypost.title}</div>
-              <div className="modified-at">
+            <RowBox
+              key={i}
+              
+              onClick={() => {
+                navigate(`/posts/${mypost.id}`);
+              }}
+            >
+              <PostTitle >{mypost.title}</PostTitle>
+              <ModifiedAt>
                 {mypost.modifiedAt.split("T")[0]}
-              </div>
-            </div>
+              </ModifiedAt>
+            </RowBox>
           );
         })}
       </PostList>
@@ -40,42 +48,42 @@ function MyPostList() {
 
 const Container = styled.div`
   width: 100%;
-  hr{
+  hr {
     border: 1px solid black;
     background-color: black;
     margin-bottom: 0;
   }
-  
-  .title {
-    font-weight: 600;
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
-  .count {     
-    display: flex;
-    font-weight: 500;
-    .orange-color {
-      color: #fa5a30;
-    }
-  }
+`;
+const Title = styled.div`
+  font-weight: 600;
+  font-size: 30px;
+  margin-bottom: 30px;
+`;
+const Count = styled.div`
+  display: flex;
+  font-weight: 500;
+`;
+const OrangeColor = styled.div`
+  color: #fa5a30;
 `;
 
 const PostList = styled.div`
   height: 327px;
-  .row-box {
-    border-bottom: 1px solid #E3E5E9;
-    align-items: center;
-    justify-content: space-between;
-    height: 67px;
-  }
-  .post-title {
-    font-weight: 500;
-    font-size: 16px;
-  }
-  .modified-at {
-    font-size: 14px;
-    color: #7a7a80;
-  }
 `;
-
+const RowBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #e3e5e9;
+  align-items: center;
+  justify-content: space-between;
+  height: 67px;
+`;
+const PostTitle = styled.div`
+  font-weight: 500;
+  font-size: 16px;
+`;
+const ModifiedAt = styled.div`
+  font-size: 14px;
+  color: #7a7a80;
+`;
 export default MyPostList;
