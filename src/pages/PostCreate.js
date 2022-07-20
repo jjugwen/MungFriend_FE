@@ -88,33 +88,33 @@ function PostCreate() {
 
   //수정버튼
   const updateClick = () => {
-    let startHour = startHourRef.current.defaultValue;
+    let startHour = startHourRef.current.value;
     if (startHour.length === 1) {
       startHour = 0 + startHour;
     }
-    let startMinute = startMinuteRef.current.defaultValue;
+    let startMinute = startMinuteRef.current.value;
     if (startMinute.length === 1) {
       startMinute = 0 + startMinute;
     }
-    let endHour = endHourRef.current.defaultValue;
+    let endHour = endHourRef.current.value;
     if (endHour.length === 1) {
       endHour = 0 + endHour;
     }
-    let endMinute = endMinuteRef.current.defaultValue;
+    let endMinute = endMinuteRef.current.value;
     if (endMinute.length === 1) {
       endMinute = 0 + endMinute;
     }
     const newUpdatePost = {
-      title: titleRef.current.defaultValue,
-      content: contentRef.current.defaultValue,
+      title: titleRef.current.value,
+      content: contentRef.current.value,
       dogIdList: selectDog,
       requestStartDate:
-        dateRef.current.defaultValue + "T" + startHour + ":" + startMinute,
-      requestEndDate: dateRef.current.defaultValue + "T" + endHour + ":" + endMinute,
+        dateRef.current.value + "T" + startHour + ":" + startMinute,
+      requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
     };
 
     instance
-      .put(`/api/posts/${params.id}`, updatePost)
+      .put(`/api/posts/${params.id}`, newUpdatePost)
       .then((response) => {
         console.log(response);
         navigate(`/posts`)
@@ -124,22 +124,31 @@ function PostCreate() {
       });
     console.log(newUpdatePost);
   };
+  // 수정이라면, dogList 초기화 해주기
+  // 두번째 수정때 dogList가 배열에서 빠지는 오류 때문에추가  
+ if(!isNew){
 
+ selectDog.length = 0;
+ }
 
   const a = (e) => {
+
     let index = selectDog.indexOf(Number(e.target.value));
     if (selectDog.includes(Number(e.target.value)) === true) {
       selectDog.splice(index, 1);
     } else {
       selectDog.push(Number(e.target.value));
     }
+
     // console.log(e.target.value);
     console.log(selectDog);
   };
 
 
   return (
-    <Container>
+    <Container onSubmit={(e) => {
+      e.preventDefault(); // 이걸 통해 페이지 새로고침을 막아서 해결
+    }}>
       <div>
         <div >게시글 작성</div>
         <RowBox>
@@ -149,6 +158,7 @@ function PostCreate() {
       </div>
       <RowBox>
         {dogList?.map((dog, index) => {
+      
           return (
             <Listbox key={index}>
             <CheckBox
