@@ -98,6 +98,7 @@ const Container = styled.div`
   flex-direction: row;
   position: relative;
   width: 70%;
+  height: 100%;
   margin: 100px auto;
   @media screen and (max-width: 960px) {
     width: 90%;

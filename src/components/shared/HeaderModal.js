@@ -61,6 +61,7 @@ function HeaderModal(props) {
           onClick={() => {
             console.log("로그아웃!");
             Logout();
+            props.setModal(!props.modal)
           }}
         >
           로그아웃

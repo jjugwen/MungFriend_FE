@@ -134,7 +134,7 @@ function Posts() {
 }
 
 const All = styled.div`
-  height:100vh;
+  height:100%;
   width: 65%;
   margin: 50px auto auto auto;
 `;
