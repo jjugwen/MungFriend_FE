@@ -161,10 +161,10 @@ function Posts() {
                     신청자 {post.applyCount}
                   </div>
                   <div>
-                    {post.isComplete === false ? (
-                      <img src={Ing} alt="" />
-                    ) : (
+                    {post.isComplete ? (
                       <img src={Done} alt="" />
+                    ) : (
+                      <img src={Ing} alt="" />
                     )}
                   </div>
                 </div>
