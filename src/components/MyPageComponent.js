@@ -8,7 +8,7 @@ import ProfileUpdate from "./ProfileUpdate";
 function MyPageComponent() {
   const info = useSelector((state) => state.myPageSlice.mypage);
   // console.log(info);
-  //모달창 영역밖 클릭시 창닫기
+
   const [mungModal, setMungModal] = useState();
   const [profileModal, setProfileModal] = useState();
   return (
