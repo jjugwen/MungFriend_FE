@@ -3,7 +3,7 @@ import styled from "styled-components";
 import DaumPostCode from "react-daum-postcode";
 import instance from "../redux/modules/instance";
 import { useNavigate } from "react-router-dom";
-// import Header from "../components/Header";
+import checkblue from "../assets/images/Signup/check_blue.svg";
 
 function Signup() {
   const navigate = useNavigate();
@@ -209,32 +209,25 @@ function Signup() {
             아이디
           </label>
           <br />
-          <input
-            className="LoginInputBox"
+          <SignupInputBox
             naem="username"
             type="text"
-            placeholder="아이디를 입력해주세요."
+            placeholder="아이디(3~15자리 영어 소문자 및 숫자)를 입력해주세요."
             onChange={IdCheck}
             required
           />
-          <Check>
-            {usernameCheck
-              ? ""
-              : "*아이디는 3자리 이상 15자리 이하 영어 소문자 및 숫자입니다"}
-          </Check>
           <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
           <br />
           <label htmlFor="password" className="SignupText">
             비밀번호
           </label>
           <br />
-          <input
-            className="LoginInputBox"
+          <SignupInputBox
             type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            placeholder="비밀번호(8~20자리)를 입력하세요"
+            placeholder="비밀번호(8~20자리)를 입력해주세요"
             required
           />
           <br />
@@ -243,25 +236,25 @@ function Signup() {
             비밀번호 확인
           </label>
           <br />
-          <input
-            className="LoginInputBox"
-            type="password"
-            onChange={(e) => {
-              setPwcheck(e.target.value);
-            }}
-            placeholder="비밀번호를 한번 더 입력해주세요."
-            required
-          />
-          <Check>{pwDubleCheck() ? "" : "*비밀번호를 확인해주세요"}</Check>
-          <Check2>{pwDubleCheck() ? "비밀번호가 일치합니다" : ""}</Check2>
+          <div style={{ display: "flex", gap: "2%" }}>
+            <SignupInputBox
+              type="password"
+              onChange={(e) => {
+                setPwcheck(e.target.value);
+              }}
+              placeholder="비밀번호를 한번 더 입력해주세요."
+              required
+            />
+            {/* <Check>{pwDubleCheck() ? "" : "*비밀번호를 확인해주세요"}</Check> */}
+            {pwDubleCheck() ? <img width="20px" src={checkblue} alt="" /> : ""}
+          </div>
           <br />
           <label htmlFor="email" className="SignupText">
             이메일
           </label>
           <br />
           <div style={{ display: "flex" }}>
-            <input
-              className="LoginInputBox"
+            <SignupInputBox
               name="email"
               placeholder="이메일을 입력해주세요."
               onChange={emailCheck}
@@ -281,58 +274,54 @@ function Signup() {
               </select>
             </span> */}
           </div>
-          <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check>
+          {/* <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check> */}
           <Check2>{emailcheck ? "사용가능한 형식입니다" : ""}</Check2>
           <br />
           <label htmlFor="nickname" className="SignupText">
             닉네임
           </label>
-          <input
-            className="LoginInputBox"
+          <SignupInputBox
             name="nickname"
             onChange={nickCheck}
-            placeholder="닉네임을 입력해주세요."
+            placeholder="닉네임(3~9자리)을 입력해주세요."
             required
           />
-          <Check>
-            {nicknamecheck ? "" : "*닉네임은 3자리 이상 9자리 이하입니다"}
-          </Check>
           <Check2>{nicknamecheck ? "사용가능한 형식입니다" : ""}</Check2>
           <br />
           <label htmlFor="adress" className="SignupText">
             주소
           </label>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <input
-              className="LoginInputBox"
-              style={{ width: "280px" }}
+          <div style={{ display: "flex", alignItems: "center", gap: "2%" }}>
+            <SignupInputBox
+              style={{ width: "260px" }}
               placeholder="주소를 입력해주세요."
               name="address"
               onChange={(e) => e.current.value}
               value={address}
               required
-            ></input>
+            />
             <div
               onClick={() => {
                 modalClose();
               }}
               style={{
                 border: "2px solid #EEEEEE",
-                width: "148px",
+                width: "128px",
                 height: "52px",
                 borderRadius: "8px",
-                backgroundColor: "#FFF",
+                backgroundColor: "#B8BBC0",
               }}
             >
-              <div
+              <p
                 className="SignupText"
                 style={{
                   textAlign: "center",
                   margin: "17px",
+                  color: "white",
                 }}
               >
                 우편번호 찾기
-              </div>
+              </p>
             </div>
           </div>
           {opened ? (
@@ -346,6 +335,7 @@ function Signup() {
               justifyContent: "space-between",
               width: "430px",
               margin: "2% 1%",
+              fontWeight: "600",
             }}
           >
             <span>
@@ -373,20 +363,22 @@ function Signup() {
               </a>
               에 모두 동의합니다.
             </span>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <input
-                className="CheckboxStyle"
-                type="checkbox"
-                id="check"
-                onChange={(e) => onChecked(e.currentTarget.checked)}
-                checked={isAgree}
-                required
-              />
-              <label defaultValue="check" htmlFor="check">
-                동의함
-              </label>
-            </div>
           </div>
+          <div style={{ display: "flex" }}>
+            <input
+              className="CheckboxStyle"
+              type="checkbox"
+              id="check"
+              onChange={(e) => onChecked(e.currentTarget.checked)}
+              checked={isAgree}
+              required
+            />
+            <br />
+            <label defaultValue="check" htmlFor="check">
+              동의함
+            </label>
+          </div>
+          <br />
           <div style={{ display: "flex", gap: "12px" }}>
             <button
               className="SignupWhiteButton"
@@ -405,6 +397,20 @@ function Signup() {
     </>
   );
 }
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SignupInputBox = styled.input`
+  width: 400px;
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #e3e5e9;
+  border-radius: 4px;
+  margin: 6px 0px;
+  padding-left: 1%;
+`;
 
 const Check = styled.div`
   color: red;
