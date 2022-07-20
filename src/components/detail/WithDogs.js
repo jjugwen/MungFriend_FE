@@ -19,7 +19,7 @@ function DogList() {
   return (
     <Container>
       <div className="header">
-        <h1 className="DetailTitle">함께하는 멍친구</h1>
+        <h1 className="DetailTitle">함께하는 반려견</h1>
       </div>
       <ListOutterBox>
         {detailList?.dogList?.map((dog) => {
