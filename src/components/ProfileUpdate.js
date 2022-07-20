@@ -17,7 +17,7 @@ function ProfileUpdate(props) {
   const [lon, setLon] = useState(null);
   const [lat, setLat] = useState(null);
   const [address, setAddress] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState();
+  // const [phoneNumber, setPhoneNumber] = useState();
 
   const info = useSelector((state) => state.myPageSlice.mypage);
   // console.log(info)
@@ -44,7 +44,7 @@ function ProfileUpdate(props) {
       latitude: info?.latitude?info?.latitude:lat,
       longitude: info?.longitude ? info?.longitude:lon,
       introduce: introduceRef.current.value,
-      phoneNum: phoneNumber,
+      phoneNum: phoneNumRef.current.value,
       isAgree,
     };
     console.log(update_data);
