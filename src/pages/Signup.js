@@ -4,6 +4,8 @@ import DaumPostCode from "react-daum-postcode";
 import instance from "../redux/modules/instance";
 import { useNavigate } from "react-router-dom";
 import checkblue from "../assets/images/Signup/check_blue.svg";
+import checkred from "../assets/images/Signup/check_no_red.svg";
+import Button from "../elements/Button";
 
 function Signup() {
   const navigate = useNavigate();
@@ -203,12 +205,9 @@ function Signup() {
 
   return (
     <>
-      <div className="SignupOutterBox">
+      <SignupOutterBox>
         <div>
-          <label htmlFor="id" className="SignupText">
-            아이디
-          </label>
-          <br />
+          <SignupText htmlFor="id">아이디</SignupText>
           <SignupInputBox
             naem="username"
             type="text"
@@ -218,9 +217,7 @@ function Signup() {
           />
           <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
           <br />
-          <label htmlFor="password" className="SignupText">
-            비밀번호
-          </label>
+          <SignupText htmlFor="password">비밀번호</SignupText>
           <br />
           <SignupInputBox
             type="password"
@@ -232,9 +229,7 @@ function Signup() {
           />
           <br />
           <br />
-          <label htmlFor="passwordCheck" className="SignupText">
-            비밀번호 확인
-          </label>
+          <SignupText htmlFor="passwordCheck">비밀번호 확인</SignupText>
           <br />
           <div style={{ display: "flex", gap: "2%" }}>
             <SignupInputBox
@@ -245,16 +240,27 @@ function Signup() {
               placeholder="비밀번호를 한번 더 입력해주세요."
               required
             />
-            {/* <Check>{pwDubleCheck() ? "" : "*비밀번호를 확인해주세요"}</Check> */}
+            {pwDubleCheck() ? (
+              ""
+            ) : (
+              <img
+                width="20px"
+                style={{
+                  position: "relative",
+                  right: "40px",
+                }}
+                src={checkred}
+                alt=""
+              />
+            )}
             {pwDubleCheck() ? <img width="20px" src={checkblue} alt="" /> : ""}
           </div>
           <br />
-          <label htmlFor="email" className="SignupText">
-            이메일
-          </label>
+          <SignupText htmlFor="email">이메일</SignupText>
           <br />
           <div style={{ display: "flex" }}>
             <SignupInputBox
+              type="email"
               name="email"
               placeholder="이메일을 입력해주세요."
               onChange={emailCheck}
@@ -277,9 +283,7 @@ function Signup() {
           {/* <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check> */}
           <Check2>{emailcheck ? "사용가능한 형식입니다" : ""}</Check2>
           <br />
-          <label htmlFor="nickname" className="SignupText">
-            닉네임
-          </label>
+          <SignupText htmlFor="nickname">닉네임</SignupText>
           <SignupInputBox
             name="nickname"
             onChange={nickCheck}
@@ -288,9 +292,7 @@ function Signup() {
           />
           <Check2>{nicknamecheck ? "사용가능한 형식입니다" : ""}</Check2>
           <br />
-          <label htmlFor="adress" className="SignupText">
-            주소
-          </label>
+          <SignupText htmlFor="adress">주소</SignupText>
           <div style={{ display: "flex", alignItems: "center", gap: "2%" }}>
             <SignupInputBox
               style={{ width: "260px" }}
@@ -313,7 +315,6 @@ function Signup() {
               }}
             >
               <p
-                className="SignupText"
                 style={{
                   textAlign: "center",
                   margin: "17px",
@@ -334,7 +335,7 @@ function Signup() {
               display: "flex",
               justifyContent: "space-between",
               width: "430px",
-              margin: "2% 1%",
+              margin: "3% 1.2%",
               fontWeight: "600",
             }}
           >
@@ -364,7 +365,14 @@ function Signup() {
               에 모두 동의합니다.
             </span>
           </div>
-          <div style={{ display: "flex" }}>
+          <div
+            style={{
+              display: "flex",
+              margin: "0 0.5%",
+              height: "20px",
+              alignItems: "center",
+            }}
+          >
             <input
               className="CheckboxStyle"
               type="checkbox"
@@ -374,32 +382,49 @@ function Signup() {
               required
             />
             <br />
-            <label defaultValue="check" htmlFor="check">
+            <label defaultValue="check" htmlFor="check" style={{ margin: "0" }}>
               동의함
             </label>
           </div>
           <br />
           <div style={{ display: "flex", gap: "12px" }}>
-            <button
-              className="SignupWhiteButton"
-              onClick={() => {
+            <Button
+              white_medium
+              _onClick={() => {
                 navigate("/");
               }}
             >
-              <div className="SignupButtonText">취소</div>
-            </button>
-            <button className="SignupGrayButton" onClick={signup}>
-              <div className="SignupButtonText">회원가입</div>
-            </button>
+              취소
+            </Button>
+            <Button orange_medium _onClick={signup}>
+              회원가입
+            </Button>
           </div>
         </div>
-      </div>
+      </SignupOutterBox>
     </>
   );
 }
-const FlexColumn = styled.div`
+
+const SignupOutterBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 5% 0%;
+  width: 100%;
+  /* height: 52em; */
+  margin: auto;
+`;
+
+const SignupText = styled.label`
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #121212;
+  margin-left: 1.2%;
 `;
 
 const SignupInputBox = styled.input`
@@ -409,13 +434,10 @@ const SignupInputBox = styled.input`
   border: 1px solid #e3e5e9;
   border-radius: 4px;
   margin: 6px 0px;
-  padding-left: 1%;
+  padding-left: 3%;
+  box-sizing: border-box;
 `;
 
-const Check = styled.div`
-  color: red;
-  font-size: 13px;
-`;
 const Check2 = styled.div`
   color: green;
   font-size: 13px;
@@ -427,11 +449,9 @@ const postCodeStyle = {
   padding: "30px",
   background: "white",
   width: "40%",
-  // maxWidth: "300px",
   height: "500px",
   border: "2px solid #d2d2d2",
   position: "absolute",
-  // backgroundColor: "orange",
   zIndex: "3",
 };
 
