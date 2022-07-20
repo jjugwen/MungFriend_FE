@@ -8,6 +8,7 @@ import WriteModal from "../components/detail/WriteModal";
 import MatchingProfile from "../components/detail/MatchingProfile";
 import UserModal from "../components/detail/userModal/UserModal";
 import { betweenTime } from "../components/detail/TimeCalculator";
+import Map from "../components/detail/Map";
 //CSS
 import styled from "styled-components";
 import "../elements/postDetailStyle.css";
@@ -24,10 +25,9 @@ function PostDetail() {
   const postId = Number(params.id); //숫자로 변환해야 읽힘.
   // console.log(postId);
   const dispatch = useDispatch();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
-  
 
   //신청하기 모달창 여닫기
   const [applyModal, setApplyModal] = useState(false);
@@ -150,6 +150,18 @@ function PostDetail() {
         <Hr />
         <div className="DetailBodyBox" style={{ height: "300px" }}>
           {detailList?.content}
+          {/* 지도 */}
+          {/* <div
+            id="map"
+            style={{
+              width: "960px",
+              height: "480px",
+              filter: "brightness(107%) saturate(140%) hue-rotate(-10deg)",
+              marginBottom: "3%",
+            }}
+          >
+            <Map />
+          </div> */}
         </div>
         <Hr />
         <WithDogs />
@@ -197,9 +209,12 @@ function PostDetail() {
               <Button grey_small _onClick={deletePost}>
                 삭제하기
               </Button>
-              <Button orange_small _onClick={() => {
-                navigate(`/postcreate/${postId}`)
-              }}>
+              <Button
+                orange_small
+                _onClick={() => {
+                  navigate(`/postcreate/${postId}`);
+                }}
+              >
                 수정하기
               </Button>
             </div>

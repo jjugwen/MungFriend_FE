@@ -1,13 +1,15 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import "../elements/LoginSignupStyle.css";
 import { loginDB } from "../redux/modules/loginAxios";
+
+//css
+import styled from "styled-components";
 import kakaoIcon from "../assets/images/login/kakao_icon.svg";
 import googleIcon from "../assets/images/login/google_icon.svg";
 import Logo from "../assets/images/login/mungfreindLogo.svg";
 import MungImg from "../assets/images/login/login_Mung_img.svg";
+
 function Login() {
   const dispatch = useDispatch();
   const username = useRef(null);
@@ -39,34 +41,26 @@ function Login() {
 
   return (
     <>
-      <div className="LoginOutterBox">
-        <img
-          src={Logo}
-          alt="logo"
-          style={{
-            marginBottom: "4%", //50px
-          }}
-        />
+      <LoginOutterBox>
+        <LogoImg src={Logo} alt="logo" />
         <div
           style={{
             display: "flex",
             flexDirection: "column",
           }}
         >
-          <input
-            className="LoginInputBox"
+          <LoginInputBox
             placeholder="아이디를 입력해주세요."
             ref={username}
             onChange={onChange}
-          ></input>
-          <input
-            className="LoginInputBox"
+          />
+          <LoginInputBox
             type="password"
             placeholder="비밀번호를 입력해주세요."
             ref={password}
             onChange={onChange}
             onKeyPress={onKeyPress}
-          ></input>
+          />
           <LoginButton
             isActive={btnState}
             disabled={!btnState}
@@ -74,27 +68,59 @@ function Login() {
           >
             <span>로그인</span>
           </LoginButton>
-          <Link to="/signup">
-            <p className="RequestSignupText">회원이 아니신가요?</p>
-          </Link>
+          <RequestSignupText>
+            <Link
+              to="/signup"
+              style={{ color: "#7a7a80", textDecoration: "underline" }}
+            >
+              회원이 아니신가요?
+            </Link>
+          </RequestSignupText>
         </div>
-        <a href="http://3.39.6.175/oauth2/authorization/kakao">
+        <a href="https://hjkim-sparta.shop/oauth2/authorization/kakao">
           <KakaoLoginBtn>
             <img src={kakaoIcon} alt="kakaoIcon" />
-            <span className="LoginButtonText">카카오 아이디로 로그인 하기</span>
+            <span>카카오 아이디로 로그인 하기</span>
           </KakaoLoginBtn>
         </a>
-        <a href="http://ec2-3-39-6-175.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google">
+        {/* <a href="http://ec2-3-39-6-175.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google"> */}
+        <a href="https://hjkim-sparta.shop/oauth2/authorization/google">
           <GoogleLoginBtn>
             <img src={googleIcon} alt="googleIcon" />
-            <span className="LoginButtonText">구글 아이디로 로그인 하기</span>
+            <span>구글 아이디로 로그인 하기</span>
           </GoogleLoginBtn>
         </a>
         <Img src={MungImg} alt="MungImg" />
-      </div>
+      </LoginOutterBox>
     </>
   );
 }
+const LoginOutterBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 660px;
+  margin: 5% auto;
+  margin-bottom: 0;
+
+  & a {
+    text-decoration: none;
+  }
+`;
+
+const LogoImg = styled.img`
+  margin-bottom: 4%; //50px
+`;
+
+const LoginInputBox = styled.input`
+  width: 400px;
+  height: 52px;
+  background: #ffffff;
+  border: 2px solid #eeeeee;
+  border-radius: 8px;
+  margin: 6px 0px;
+  padding-left: 1%;
+`;
 
 const LoginButton = styled.button`
   margin-top: 12px;
@@ -119,9 +145,16 @@ const LoginButton = styled.button`
     font-size: 18px;
     line-height: 21px;
     text-align: right;
-
     color: #ffffff;
   }
+`;
+
+const RequestSignupText = styled.div`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  margin: 4% 0 15% 0; /* 60px */
 `;
 
 const KakaoLoginBtn = styled.button`
@@ -135,6 +168,14 @@ const KakaoLoginBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1%;
+  cursor: pointer;
+
+  span {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+  }
 `;
 
 const GoogleLoginBtn = styled.button`
@@ -148,6 +189,14 @@ const GoogleLoginBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1%;
+  cursor: pointer;
+
+  span {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+  }
 `;
 
 const Img = styled.img`

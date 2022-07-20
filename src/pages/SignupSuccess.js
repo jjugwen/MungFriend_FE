@@ -29,6 +29,7 @@ function SignupSuccess() {
             메인으로
           </Button>
           <Button
+            width="194px"
             orange_medium
             _onClick={() => {
               navigate("/login");
