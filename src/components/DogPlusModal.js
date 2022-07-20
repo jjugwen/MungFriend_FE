@@ -52,7 +52,7 @@ function DogPlusModal(props) {
     // for (const value of formData) console.log(value);
     dispatch(createMungAX(formData));
     props.setMungModal(!props.modal)
-    navigate(`/mypage`)
+    // window.location.replace('/mypage')
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
     setMungImage({
       image: "",
