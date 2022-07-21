@@ -21,16 +21,14 @@ function GiverReview() {
   return (
     <>
       <ReviewList className="column-box">
-        <div className="title">내가 작성한 후기</div>
+        <div className="title">작성한 후기</div>
         <div className="count">
           총<div className="orange-color">{info?.giverReviewList.length}</div>건
         </div>
-        <div className="row-box">
+        <GridBox>
           {info?.giverReviewList.map((review, i) => {
             return (
               <ReviewBox key={i}>
-               
-                 
                   <div className="row-box">
                     <GiverImg src={review.giverDogProfileImgUrl} alt="" />
                     <div className="name-box">
@@ -47,7 +45,7 @@ function GiverReview() {
               </ReviewBox>
             );
           })}
-        </div>
+        </GridBox>
       </ReviewList>
     </>
   );
@@ -70,8 +68,16 @@ const ReviewList = styled.div`
   }
   margin-bottom: 100px;
 `;
+
+const GridBox = styled.div`
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2%;
+`
+
 const ReviewBox = styled.div`
-  width: 48%;
+
   height: 216px;
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
