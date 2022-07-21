@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as Actions } from "../../redux/modules/postDetailSlice";
+import { actionCreators as Actions } from "../../../redux/modules/postDetailSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -19,7 +19,7 @@ function DogList() {
   return (
     <Container>
       <div className="header">
-        <h1 className="DetailTitle">함께하는 반려견</h1>
+        <h1 className="DetailTitle">함께하는 멍멍이</h1>
       </div>
       <ListOutterBox>
         {detailList?.dogList?.map((dog) => {
@@ -40,6 +40,9 @@ function DogList() {
                     {dog.age}세, {dog.size}견
                   </span>
                 </div>
+              </div>
+              <div>
+                <MungProfileBtn>프로필</MungProfileBtn>
               </div>
             </Listbox>
           );
@@ -76,9 +79,23 @@ const Listbox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 
   box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
   border-radius: 8px;
+`;
+
+const MungProfileBtn = styled.button`
+  background: #ffffff;
+  border: 1px solid #e3e5e9;
+  border-radius: 4px;
+  width: 65px;
+  height: 30px;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
 `;
 
 export default DogList;

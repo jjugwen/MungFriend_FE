@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 //컴포넌트
 import ApplyComment from "../components/detail/ApplyComment";
-import WithDogs from "../components/detail/WithDogs";
+import WithDogs from "../components/detail/withdog/WithDogs";
 import WriteModal from "../components/detail/WriteModal";
 import MatchingProfile from "../components/detail/MatchingProfile";
 import UserModal from "../components/detail/userModal/UserModal";
@@ -48,8 +48,9 @@ function PostDetail() {
   };
 
   //작성자 확인 및 정보 모달 확인 시 필요
-  // const myinfo = useSelector((state) => state.userInfoSlice.myInfo); //로컬스토리지로 닉네임 가져오기로. MockAPI test 시에는 myinfo 정보 필요할 수도.
-  const loginNickname = localStorage.getItem("nickname");
+  const loginNickname = useSelector(
+    (state) => state.userInfoSlice.myInfo.nickname
+  ); //로컬스토리지로 닉네임 가져오기로. MockAPI test 시에는 myinfo 정보 필요할 수도.
   // console.log(loginNickname);
 
   const deletePost = () => {
@@ -59,6 +60,10 @@ function PostDetail() {
   useEffect(() => {
     dispatch(postActions.getDetailDB(postId));
   }, [dispatch, postId]);
+
+  useEffect(() => {
+    dispatch(userActions.myinfoDB());
+  }, [dispatch]);
 
   return (
     <>
@@ -150,20 +155,10 @@ function PostDetail() {
         <Hr />
         <div className="DetailBodyBox" style={{ height: "300px" }}>
           {detailList?.content}
-          {/* 지도 */}
-          {/* <div
-            id="map"
-            style={{
-              width: "960px",
-              height: "480px",
-              filter: "brightness(107%) saturate(140%) hue-rotate(-10deg)",
-              marginBottom: "3%",
-            }}
-          >
-            <Map />
-          </div> */}
         </div>
         <Hr />
+        {/* 지도 */}
+        <Map />
         <WithDogs />
         {loginNickname !== detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
@@ -223,7 +218,8 @@ function PostDetail() {
         ) : (
           //모집 완료(isComplete가 false)면 매칭 프로필 보이기
           <>
-            <MatchingProfile />
+            {/* 매칭된 닉네임이 있을 때만 매칭 프로필 보이기 */}
+            {detailList?.matchedNickname !== null ? <MatchingProfile /> : ""}
             <ApplyComment />
           </>
         )}

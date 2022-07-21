@@ -52,6 +52,7 @@ const Chat = (props) => {
     setCateActive(activeCheck);
     navigate(link);
   };
+
   return (
     <React.Fragment>
       <Container>
@@ -72,7 +73,7 @@ const Chat = (props) => {
                     <ChannelListBox
                       props={cateActive}
                       id={list.id}
-                      key={list.id}
+                      key={index}
                       btnActiveHandler={btnActiveHandler}
                       cateActive={cateActive}
                       onClick={() => {
