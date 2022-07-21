@@ -150,20 +150,10 @@ function PostDetail() {
         <Hr />
         <div className="DetailBodyBox" style={{ height: "300px" }}>
           {detailList?.content}
-          {/* 지도 */}
-          {/* <div
-            id="map"
-            style={{
-              width: "960px",
-              height: "480px",
-              filter: "brightness(107%) saturate(140%) hue-rotate(-10deg)",
-              marginBottom: "3%",
-            }}
-          >
-            <Map />
-          </div> */}
         </div>
         <Hr />
+        {/* 지도 */}
+        <Map />
         <WithDogs />
         {loginNickname !== detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기

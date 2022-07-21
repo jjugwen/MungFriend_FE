@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "../components/shared/Header";
 import Main from "../pages/Main";
@@ -29,28 +29,35 @@ import ErrorNoAccess from "../components/shared/errors/ErrorNoAccess";
 import ErrorNotFound from "../components/shared/errors/ErrorNotFound";
 import ErrorPage from "../components/shared/errors/ErrorPage";
 import Preparing from "../components/shared/errors/Preparing";
-import HeaderModal from '../components/shared/HeaderModal';
-import styled from 'styled-components';
+import NeedLogin from "../components/shared/errors/NeedLogin";
+import HeaderModal from "../components/shared/HeaderModal";
+import styled from "styled-components";
 
 function App() {
   const token = localStorage.getItem("token");
 
-  const[headerModal, setHeaderModal] =useState(false);
+  const [headerModal, setHeaderModal] = useState(false);
   // const outSection = useRef();
   return (
     <div className="App">
-      <Header modal={headerModal} setModal={setHeaderModal}/>
-      {headerModal && <HeaderModal modal={headerModal} setModal={setHeaderModal}/>}
-      {headerModal &&<OutSection onClick={()=>{
-        setHeaderModal(false);
-      }}/>}
+      <Header modal={headerModal} setModal={setHeaderModal} />
+      {headerModal && (
+        <HeaderModal modal={headerModal} setModal={setHeaderModal} />
+      )}
+      {headerModal && (
+        <OutSection
+          onClick={() => {
+            setHeaderModal(false);
+          }}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupsuccess" element={<SignupSuccess />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/posts" element={token ? <Posts /> : <ErrorNoAccess />} />
+        <Route path="/posts" element={token ? <Posts /> : <NeedLogin />} />
         <Route path="/postcreate" element={<PostCreate />} />
         <Route path="/postcreate/:id" element={<PostCreate />} />
         <Route path="/posts/:id" element={<PostDetail />} />
@@ -69,12 +76,12 @@ function App() {
 }
 
 const OutSection = styled.div`
-position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   /* background: rgba(0, 0, 0, 0.8); */
   z-index: 2;
-`
+`;
 export default App;
