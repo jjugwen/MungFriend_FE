@@ -26,7 +26,7 @@ function GiverReview() {
           총<div className="orange-color">{info?.giverReviewList.length}</div>건
         </div>
         <div className="row-box">
-          {info?.giverReviewListt.map((review, i) => {
+          {info?.giverReviewList.map((review, i) => {
             return (
               <ReviewBox key={i}>
                
