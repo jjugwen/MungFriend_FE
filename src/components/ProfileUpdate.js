@@ -34,8 +34,11 @@ function ProfileUpdate(props) {
   };
 
   const updateMypage = () => {
-    if(isAgree===false){
+    if(info?.isAgree===false){
       alert('동의함에 체크해주세요!')
+      if(isAgree===false){
+        alert('동의함에 체크해주세요!')
+      }
     }
     let update_data = {
       nickname: nicknameRef.current.value,
@@ -45,7 +48,7 @@ function ProfileUpdate(props) {
       longitude: info?.longitude ? info?.longitude:lon,
       introduce: introduceRef.current.value,
       phoneNum: phoneNumRef.current.value,
-      isAgree,
+      isAgree: info?.isAgree?info?.isAgree:isAgree,
     };
     console.log(update_data);
     instance.post(`/mypage`, update_data).then((response) => {
@@ -98,7 +101,7 @@ function ProfileUpdate(props) {
               >이용약관</a>, <a href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
               >개인정보</a> 취급방침에 모두 동의합니다.</TextBox>
       <RowBox>
-      <CheckInput type="checkbox" required onClick={()=>{setIsAgree(true)}}/> <TextBox>동의함</TextBox></RowBox></>}
+      <CheckInput type="checkbox" value={info?.isAgree} required onClick={()=>{setIsAgree(true)}}/> <TextBox>동의함</TextBox></RowBox></>}
       
 
       <textarea
