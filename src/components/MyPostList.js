@@ -25,7 +25,7 @@ function MyPostList() {
       </Count>
       <hr />
       <PostList>
-        {info?.myPostList.map((mypost, i) => {
+        {info?.myPostList.slice(0).reverse().map((mypost, i) => {
           return (
             <RowBox
               key={i}
