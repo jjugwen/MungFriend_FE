@@ -4,40 +4,33 @@ import styled from "styled-components";
 import ReviewDetailModal from "./ReviewDetailModal";
 import { actionCreators as reviewActions } from "../redux/modules/reviewSlice";
 
-function MyReviewList() {
+function GiverReview() {
   const dispatch = useDispatch();
   //모달창 여닫기
-  const [reviewModal, setReviewModal] = useState(false);
-  const openReviewModal = () => {
-    setReviewModal(true);
-  };
-  const closeReviewModal = () => {
-    setReviewModal(false);
-  };
+  // const [reviewModal, setReviewModal] = useState(false);
+  // const openReviewModal = () => {
+  //   setReviewModal(true);
+  // };
+  // const closeReviewModal = () => {
+  //   setReviewModal(false);
+  // };
 
   const info = useSelector((state) => state.myPageSlice.mypage);
-  console.log(info?.takerReviewList);
+  // console.log(info?.giverReviewList);
 
   return (
     <>
       <ReviewList className="column-box">
         <div className="title">내가 받은 후기</div>
         <div className="count">
-          총<div className="orange-color">{info?.takerReviewList.length}</div>건
+          총<div className="orange-color">{info?.giverReviewList.length}</div>건
         </div>
         <div className="row-box">
-          {info?.takerReviewList.map((review, i) => {
+          {info?.giverReviewListt.map((review, i) => {
             return (
               <ReviewBox key={i}>
-                <button
-                  style={{ background: "none", border: "none" }}
-                  onClick={() => {
-                    dispatch(reviewActions.loadReviewDetailDB(review.id));
-                    setTimeout(() => {
-                      openReviewModal();
-                    }, 500);
-                  }}
-                >
+               
+                 
                   <div className="row-box">
                     <GiverImg src={review.giverDogProfileImgUrl} alt="" />
                     <div className="name-box">
@@ -46,11 +39,11 @@ function MyReviewList() {
                     </div>
                   </div>
                   <div className="review-box">{review.comment}</div>
-                </button>
-                <ReviewDetailModal
+           
+                {/* <ReviewDetailModal
                   open={reviewModal}
                   close={closeReviewModal}
-                />
+                /> */}
               </ReviewBox>
             );
           })}
@@ -96,4 +89,4 @@ const GiverImg = styled.img`
   height: 48px;
   border-radius: 50%;
 `;
-export default MyReviewList;
+export default GiverReview;
