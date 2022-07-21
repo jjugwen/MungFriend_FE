@@ -38,8 +38,7 @@ function Posts() {
   // console.log("Posts1", Posts);
 
   //로그인 닉네임
-  const loginNickname = localStorage.getItem("nickname");
-  // console.log(loginNickname)
+  const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
 
   //거리순 조회 글
   const distancePosts = useSelector((state) =>
@@ -72,7 +71,7 @@ function Posts() {
     <All>
       <Box className="row-box">
         <h1 className="name">
-          {loginNickname}
+          {myinfo?.nickname}
           <span>님의</span> <br />
           {myMung?.length !== 0 ? (
             <span>멍친구는</span>
