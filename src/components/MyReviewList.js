@@ -16,17 +16,17 @@ function MyReviewList() {
   };
 
   const info = useSelector((state) => state.myPageSlice.mypage);
-  console.log(info?.reviewList);
+  console.log(info?.takerReviewList);
 
   return (
     <>
       <ReviewList className="column-box">
         <div className="title">내가 받은 후기</div>
         <div className="count">
-          총<div className="orange-color">{info?.reviewList.length}</div>건
+          총<div className="orange-color">{info?.takerReviewList.length}</div>건
         </div>
         <div className="row-box">
-          {info?.reviewList.map((review, i) => {
+          {info?.takerReviewList.map((review, i) => {
             return (
               <ReviewBox key={i}>
                 <button
