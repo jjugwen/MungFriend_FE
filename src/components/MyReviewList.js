@@ -9,10 +9,10 @@ function MyReviewList() {
   //모달창 여닫기
   const [reviewModal, setReviewModal] = useState(false);
   const openReviewModal = () => {
-    setReviewModal(!reviewModal);
+    setReviewModal(true);
   };
   const closeReviewModal = () => {
-    setReviewModal(!reviewModal);
+    setReviewModal(false);
   };
 
   const info = useSelector((state) => state.myPageSlice.mypage);
@@ -21,7 +21,7 @@ function MyReviewList() {
   return (
     <>
       <ReviewList className="column-box">
-        <div className="title">받은 후기</div>
+        <div className="title">내가 받은 후기</div>
         <div className="count">
           총<div className="orange-color">{info?.takerReviewList.length}</div>건
         </div>
@@ -30,10 +30,15 @@ function MyReviewList() {
             return (
               <ReviewBox key={i}   onClick={() => {
                     dispatch(reviewActions.loadReviewDetailDB(review.id));
-                      openReviewModal();   
-                  }} >
-             
-                 <div className="row-box">
+                    setTimeout(() => {
+                      openReviewModal();
+                    }, 500);
+                  }}>
+                <button
+                  style={{ background: "none", border: "none" }}
+                
+                >
+                  <div className="row-box">
                     <GiverImg src={review.giverDogProfileImgUrl} alt="" />
                     <div className="name-box">
                       <div>{review.giverNickname}</div>
@@ -41,7 +46,7 @@ function MyReviewList() {
                     </div>
                   </div>
                   <div className="review-box">{review.comment}</div>
-          
+                </button>
                 <ReviewDetailModal
                   open={reviewModal}
                   close={closeReviewModal}
@@ -67,7 +72,6 @@ const ReviewList = styled.div`
   .count {
     display: flex;
     font-weight: 500;
-
     .orange-color {
       color: #fa5a30;
     }
@@ -79,6 +83,9 @@ const GridBox = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2%;
+  button{
+    font-size: 16px;
+  }
 `
 const ReviewBox = styled.div`
 
