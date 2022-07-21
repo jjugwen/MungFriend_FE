@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 //컴포넌트
 import ApplyComment from "../components/detail/ApplyComment";
-import WithDogs from "../components/detail/WithDogs";
+import WithDogs from "../components/detail/withdog/WithDogs";
 import WriteModal from "../components/detail/WriteModal";
 import MatchingProfile from "../components/detail/MatchingProfile";
 import UserModal from "../components/detail/userModal/UserModal";

@@ -9,15 +9,19 @@ import {
 import Ing from "../assets/images/IsComplete/모집중.svg";
 import Done from "../assets/images/IsComplete/모집종료.svg";
 import { useNavigate } from "react-router-dom";
+import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
 
 function Posts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    dispatch(loadMyMungAX());
-    dispatch(loadPostListAX());
-    dispatch(loadDistancePostListAX());
+    dispatch(
+      loadMyMungAX(),
+      loadPostListAX(),
+      loadDistancePostListAX(),
+      userActions.myinfoDB()
+    );
   }, [dispatch]);
 
   const myMung = useSelector((state) => state.mungSlice.mung);
@@ -39,7 +43,7 @@ function Posts() {
 
   //로그인 닉네임
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
-
+  console.log(myinfo);
   //거리순 조회 글
   const distancePosts = useSelector((state) =>
     state.postSlice.distancePost.filter((v) => v.isComplete !== true)

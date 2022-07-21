@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as Actions } from "../../redux/modules/postDetailSlice";
+import { actionCreators as Actions } from "../../../redux/modules/postDetailSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
