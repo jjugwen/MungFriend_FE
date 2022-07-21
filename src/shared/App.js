@@ -34,7 +34,7 @@ import HeaderModal from "../components/shared/HeaderModal";
 import styled from "styled-components";
 
 function App() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const [headerModal, setHeaderModal] = useState(false);
   // const outSection = useRef();
