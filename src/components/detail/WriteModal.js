@@ -7,6 +7,7 @@ import { actionCreators as reviewActions } from "../../redux/modules/reviewSlice
 import "../../elements/modalStyle.css";
 import ReviewImgUpload from "./review/ReviewImgUpload";
 import Button from "../../elements/Button";
+// import CountText from "../shared/CountText";
 
 function WriteModal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -36,6 +37,8 @@ function WriteModal(props) {
     dispatch(reviewActions.createReviewDB(formData));
     // for (const value of formData) console.log(value);
   };
+
+  //글자수세기
 
   return (
     <div className={open ? "openModalcss" : null}>
