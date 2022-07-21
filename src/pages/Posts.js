@@ -26,9 +26,9 @@ function Posts() {
   // console.log(myMung);
 
   //대표멍멍이 프로필사진
-  const fristMung = myMung.filter((v) => v.isRepresentative === true)[0]
+  const firstMung = myMung.filter((v) => v.isRepresentative === true)[0]
     ?.dogImageFiles[0]?.imageUrl;
-  // console.log(fristMung);
+  // console.log(firstMung);
 
   const Posts = useSelector((state) =>
     state.postSlice.post.filter((v) => v.isComplete === false)
@@ -90,7 +90,7 @@ function Posts() {
           {myMung?.map((dog, i) => {
             return (
               <div key={i}>
-                <Kingimg src={fristMung} alt="fristMung" />
+                <Kingimg src={firstMung} alt="firstMung" />
                 <p className="dogname">
                   {dog.name} {dog.age}살
                   <span style={{ marginRight: "10px" }}> </span>
@@ -120,7 +120,7 @@ function Posts() {
         }}
       >
         <h2>산책모집</h2>
-        <select name="게시글" onChange={handleSelect}>
+        <select name="게시글" onChange={handleSelect} defaultValue="Posts">
           <option value="Posts" key="1">
             전체 게시글
           </option>
@@ -134,62 +134,123 @@ function Posts() {
       </div>
 
       <Container>
-        {Posts &&
-          selected.map((post, i) => {
-            // console.log(post.imagePath)
-            // console.log(post.content.length);
-            return (
-              <PostBox
-                key={i}
-                onClick={() => {
-                  navigate(`/posts/${post.id}`);
-                }}
-              >
-                <div className="row-box">
-                  {post.imagePath?.map((image, i) => (
-                    <PostImg key={i} src={image} alt="" />
-                  ))}
-                  <div className="name-box">
-                    <span className="name">{post.nickname} </span>
-                    {post.distance ? (
-                      <span className="name" style={{ color: "#FA5A30" }}>
-                        {post.distance?.toFixed(1)}km
-                      </span>
-                    ) : null}
-                    <div className="date">
-                      {post.requestStartDate.substring(0, 10)}
+        {selected.length === 0 ? (
+          <>
+            {Posts.map((post, i) => {
+              // console.log(post.imagePath)
+              // console.log(post.content.length);
+              return (
+                <PostBox
+                  key={i}
+                  onClick={() => {
+                    navigate(`/posts/${post.id}`);
+                  }}
+                >
+                  <div className="row-box">
+                    {post.imagePath?.map((image, i) => (
+                      <PostImg key={i} src={image} alt="" />
+                    ))}
+                    <div className="name-box">
+                      <span className="name">{post.nickname} </span>
+                      {post.distance ? (
+                        <span className="name" style={{ color: "#FA5A30" }}>
+                          {post.distance?.toFixed(1)}km
+                        </span>
+                      ) : null}
+                      <div className="date">
+                        {post.requestStartDate.substring(0, 10)}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="title">{post.title}</div>
-                <div className="content">
-                  {post.content.length > 40
-                    ? post.content.substr(0, 33)
-                    : post.content}
-                </div>
-                <div className="footer">
-                  <hr />
-                  <div className="row-box b-box">
-                    <div className="font-14 applyCount">
-                      <img
-                        className="applyCountImg"
-                        src="https://ifh.cc/g/dHor7J.png"
-                        alt=""
-                      />
-                      신청자 {post.applyCount}
-                    </div>
-                    <div>
-                      {post.isComplete ? (
-                        <img src={Done} alt="" />
-                      ) : (
-                        <img src={Ing} alt="" />
-                      )}
+                  <div className="title">{post.title}</div>
+                  <div className="content">
+                    {post.content.length > 40
+                      ? post.content.substr(0, 33)
+                      : post.content}
+                  </div>
+                  <div className="footer">
+                    <hr />
+                    <div className="row-box b-box">
+                      <div className="font-14 applyCount">
+                        <img
+                          className="applyCountImg"
+                          src="https://ifh.cc/g/dHor7J.png"
+                          alt=""
+                        />
+                        신청자 {post.applyCount}
+                      </div>
+                      <div>
+                        {post.isComplete ? (
+                          <img src={Done} alt="" />
+                        ) : (
+                          <img src={Ing} alt="" />
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </PostBox>
-            );
-          })}
+                </PostBox>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            {selected.map((post, i) => {
+              // console.log(post.imagePath)
+              // console.log(post.content.length);
+              return (
+                <PostBox
+                  key={i}
+                  onClick={() => {
+                    navigate(`/posts/${post.id}`);
+                  }}
+                >
+                  <div className="row-box">
+                    {post.imagePath?.map((image, i) => (
+                      <PostImg key={i} src={image} alt="" />
+                    ))}
+                    <div className="name-box">
+                      <span className="name">{post.nickname} </span>
+                      {post.distance ? (
+                        <span className="name" style={{ color: "#FA5A30" }}>
+                          {post.distance?.toFixed(1)}km
+                        </span>
+                      ) : null}
+                      <div className="date">
+                        {post.requestStartDate.substring(0, 10)}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="title">{post.title}</div>
+                  <div className="content">
+                    {post.content.length > 40
+                      ? post.content.substr(0, 33)
+                      : post.content}
+                  </div>
+                  <div className="footer">
+                    <hr />
+                    <div className="row-box b-box">
+                      <div className="font-14 applyCount">
+                        <img
+                          className="applyCountImg"
+                          src="https://ifh.cc/g/dHor7J.png"
+                          alt=""
+                        />
+                        신청자 {post.applyCount}
+                      </div>
+                      <div>
+                        {post.isComplete ? (
+                          <img src={Done} alt="" />
+                        ) : (
+                          <img src={Ing} alt="" />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </PostBox>
+              );
+            })}
+          </>
+        )}
       </Container>
       <AddPostButton
         onClick={() => {
