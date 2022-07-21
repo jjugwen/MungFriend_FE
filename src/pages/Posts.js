@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
 import styled from "styled-components";
@@ -30,18 +30,15 @@ function Posts() {
     ?.dogImageFiles[0]?.imageUrl;
   // console.log(fristMung);
 
-  // const Posts1 = useSelector((state) => state.postSlice.post);
-  // console.log(Posts1);
-
-  //전체 조회(모집중 글만)
   const Posts = useSelector((state) =>
     state.postSlice.post.filter((v) => v.isComplete === false)
   );
-  // console.log("Posts1", Posts);
+  // console.log("모집중 전체 글 조회", Posts);
 
-  //로그인 닉네임
+  //로그인 유저 닉네임 얻기
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
-  console.log(myinfo);
+  // console.log(myinfo);
+
   //거리순 조회 글
   const distancePosts = useSelector((state) =>
     state.postSlice.distancePost.filter((v) => v.isComplete !== true)
