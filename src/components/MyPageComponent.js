@@ -97,7 +97,7 @@ const UpdateButton = styled.button`
     margin-right: 8px;
   }
   position: absolute;
-  right: 5%;
+  right: 0%;
   background: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 4px;

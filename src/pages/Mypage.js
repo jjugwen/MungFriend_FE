@@ -108,17 +108,17 @@ const Mypage = () => {
           마이페이지
         </button>
         <button id="2" onClick={getClick} ref={mypostRef}>
-          내가 작성한 게시글
+           작성한 게시글
         </button>
         <button id="3" onClick={getClick} ref={myapplypostRef}>
-          내가 신청한 게시글
+           신청한 게시글
         </button>
         <button id="4" onClick={getClick} ref={takerReviewRef}>
-          내가 받은 후기
+           받은 후기
         </button>
 
         <button id="5" onClick={getClick} ref={giverReviewRef}>
-          내가 작성한 후기
+           작성한 후기
         </button>
       </ListBar>
       {change}

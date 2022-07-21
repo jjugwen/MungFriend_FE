@@ -34,29 +34,32 @@ function ProfileUpdate(props) {
   };
 
   const updateMypage = () => {
-    if(info?.isAgree===false){
-      alert('동의함에 체크해주세요!')
-      if(isAgree===false){
-        alert('동의함에 체크해주세요!')
-      }
-    }
+
     let update_data = {
       nickname: nicknameRef.current.value,
       email: emailRef.current.value,
-      address: info?.address? info?.address:address,
-      latitude: info?.latitude?info?.latitude:lat,
-      longitude: info?.longitude ? info?.longitude:lon,
+      address: address? address: info?.address,
+      latitude: lat? lat: info?.latitude,
+      longitude: lon? lon: info?.longitude,
       introduce: introduceRef.current.value,
       phoneNum: phoneNumRef.current.value,
       isAgree: info?.isAgree?info?.isAgree:isAgree,
     };
+
     console.log(update_data);
+
     instance.post(`/mypage`, update_data).then((response) => {
       props.setProfileModal(!props.modal);
-      console.log(response);
+      //리덕스 데이터로 바꿔줘야함!
+      dispatch(loadMyPageAX())
+      alert(response.data.message);
+      if(response.data.message==="약관 동의 후 정보 수정이 가능합니다."){
+        props.setProfileModal(props.modal);
+      }
     }).catch(error=>{
       alert(error)
     });
+
   };
   let [isAgree,setIsAgree] = useState(false);
   // console.log(isAgree)
@@ -66,9 +69,9 @@ function ProfileUpdate(props) {
     <Container>
       <Title>프로필 수정</Title>
       <TextBox>닉네임</TextBox>
-      <OneInput defaultValue={info?.nickname} ref={nicknameRef}></OneInput>
+      <OneInput defaultValue={info?.nickname?info?.nickname:""} ref={nicknameRef}></OneInput>
       <TextBox>이메일</TextBox>
-      <OneInput defaultValue={info?.email} ref={emailRef}></OneInput>
+      <OneInput defaultValue={info?.email?info?.email:""} ref={emailRef}></OneInput>
       {/* <select>
       <option>직접입력</option>
       <option>naver.com</option>
@@ -77,14 +80,14 @@ function ProfileUpdate(props) {
 
       <TextBox>휴대폰번호</TextBox>
       <RowBox>
-        <TwoInput defaultValue={info?.phoneNum} ref={phoneNumRef}></TwoInput>
+        <TwoInput defaultValue={info?.phoneNum?info?.phoneNum:""} ref={phoneNumRef}></TwoInput>
         <TwoButton type="button" onClick={()=>{
           instance.get('/phone/auth').then(res=>console.log(res))
         }}>입력</TwoButton>
       </RowBox>
       <TextBox>주소</TextBox>
       <RowBox>
-        <TwoInput value={address} defaultValue={info?.address}></TwoInput>
+        <TwoInput value={address? address: info?.address}></TwoInput>
         <TwoButton onClick={Popup} type="button">우편번호 찾기</TwoButton>
         {popup && (
           <Address
@@ -101,12 +104,12 @@ function ProfileUpdate(props) {
               >이용약관</a>, <a href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
               >개인정보</a> 취급방침에 모두 동의합니다.</TextBox>
       <RowBox>
-      <CheckInput type="checkbox" value={info?.isAgree} required onClick={()=>{setIsAgree(true)}}/> <TextBox>동의함</TextBox></RowBox></>}
+      <CheckInput type="checkbox" defaultValue={isAgree} required onClick={()=>{setIsAgree(true)}}/> <TextBox>동의함</TextBox></RowBox></>}
       
 
       <textarea
         placeholder="자기소개 255자"
-        defaultValue={info?.introduce}
+        defaultValue={info?.introduce?info?.introduce:""}
         ref={introduceRef}
       ></textarea>
 
@@ -139,7 +142,7 @@ function Address(props) {
         const { address } = data;
 
         return new Promise((resolve, reject) => {
-          const geocoder = new window.daum.maps.services.Geocoder();
+          const geocoder =new window.daum.maps.services.Geocoder() ;
 
           geocoder.addressSearch(address, (result, status) => {
             if (status === window.daum.maps.services.Status.OK) {
@@ -170,7 +173,7 @@ function Address(props) {
   );
 }
 
-const Container = styled.form`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 37%;

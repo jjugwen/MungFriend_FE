@@ -206,6 +206,9 @@ const All = styled.div`
   height: 100%;
   width: 65%;
   margin: 50px auto auto auto;
+  @media screen and (max-width: 960px) {
+    width: 90%;
+  }
 `;
 
 const Box = styled.div`

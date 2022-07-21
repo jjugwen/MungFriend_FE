@@ -25,10 +25,10 @@ function MyReviewList() {
         <div className="count">
           총<div className="orange-color">{info?.takerReviewList.length}</div>건
         </div>
-        <div className="row-box">
+        <GridBox>
           {info?.takerReviewList.map((review, i) => {
             return (
-              <ReviewBox key={i}>
+              <ReviewBox key={i} >
                 <button
                   style={{ background: "none", border: "none" }}
                   onClick={() => {
@@ -54,7 +54,7 @@ function MyReviewList() {
               </ReviewBox>
             );
           })}
-        </div>
+        </GridBox>
       </ReviewList>
     </>
   );
@@ -62,6 +62,7 @@ function MyReviewList() {
 
 const ReviewList = styled.div`
   width: 90%;
+  margin-bottom: 100px;
   gap: 4%;
   .title {
     font-weight: 600;
@@ -75,10 +76,16 @@ const ReviewList = styled.div`
       color: #fa5a30;
     }
   }
-  margin-bottom: 100px;
+ 
+   
 `;
+const GridBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2%;
+`
 const ReviewBox = styled.div`
-  width: 48%;
+
   height: 216px;
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
@@ -89,6 +96,9 @@ const ReviewBox = styled.div`
   }
   .review-box {
     margin-top: 10px;
+  }
+  button{
+    font-size: 16px;
   }
 `;
 const GiverImg = styled.img`

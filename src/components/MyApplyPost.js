@@ -16,7 +16,7 @@ function MyApplyPost() {
 
   return (
     <Container>
-      <Title >내가 신청한 게시글</Title>
+      <Title >신청한 게시글</Title>
       <Count >
         총
         <OrangeColor >
@@ -26,7 +26,7 @@ function MyApplyPost() {
       </Count>
       <hr />
       <PostList>
-        {info?.applyPostList.map((apply, i) => {
+        {info?.applyPostList.slice(0).reverse().map((apply, i) => {
           return (
             <RowBox
               key={i}
