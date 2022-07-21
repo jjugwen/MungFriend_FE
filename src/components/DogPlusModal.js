@@ -62,7 +62,7 @@ function DogPlusModal(props) {
   return (
     <Container>
       <p className="font-24">
-        <b>멍멍이 등록</b>
+        <b>멍프로필 등록</b>
       </p>
       <PreviewImg
         src={
