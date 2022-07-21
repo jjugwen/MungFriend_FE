@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import GiverReview from "../components/GiverReview";
 import MyApplyPost from "../components/MyApplyPost";
 //컴포넌트
 import MyPageComponent from "../components/MyPageComponent";
@@ -25,9 +26,10 @@ const Mypage = () => {
   }, []);
   let [change, setChange] = useState(<MyPageComponent />);
   const pageRef = useRef();
-  const reviewRef = useRef();
+  const takerReviewRef = useRef();
   const mypostRef = useRef();
-  const myapplypostRef =useRef();
+  const myapplypostRef = useRef();
+  const giverReviewRef = useRef();
 
   const getClick = (e) => {
     const id = e.target.id;
@@ -37,33 +39,45 @@ const Mypage = () => {
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2)`;
       mypostRef.current.style = "";
-      reviewRef.current.style = "";
-      myapplypostRef.current.style="";
+      takerReviewRef.current.style = "";
+      myapplypostRef.current.style = "";
+      giverReviewRef.current.style = "";
     } else if (id === "2") {
       setChange(<MyPostList />);
       pageRef.current.style = "";
       mypostRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      reviewRef.current.style = "";
-      myapplypostRef.current.style="";
+      takerReviewRef.current.style = "";
+      myapplypostRef.current.style = "";
+      giverReviewRef.current.style = "";
     } else if (id === "3") {
       setChange(<MyReviewList />);
       pageRef.current.style = "";
       mypostRef.current.style = "";
-      reviewRef.current.style = `color :white; 
+      takerReviewRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      myapplypostRef.current.style="";
-    }else{
+      myapplypostRef.current.style = "";
+      giverReviewRef.current.style = "";
+    } else if (id === "4") {
       setChange(<MyApplyPost />);
       pageRef.current.style = "";
       mypostRef.current.style = "";
-      reviewRef.current.style = "";
-      myapplypostRef.current.style=`color :white; 
+      takerReviewRef.current.style = "";
+      myapplypostRef.current.style = `color :white; 
       background :#FA5A30; 
-      boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;;
-
+      boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
+      giverReviewRef.current.style = "";
+    } else {
+      setChange(<GiverReview />);
+      pageRef.current.style = "";
+      mypostRef.current.style = "";
+      takerReviewRef.current.style = "";
+      myapplypostRef.current.style = "";
+      giverReviewRef.current.style = `color :white; 
+      background :#FA5A30; 
+      boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
     }
   };
 
@@ -96,11 +110,16 @@ const Mypage = () => {
         <button id="2" onClick={getClick} ref={mypostRef}>
           내가 작성한 게시글
         </button>
-        <button id="3" onClick={getClick} ref={reviewRef}>
-          후기 리스트
-        </button>
+
         <button id="4" onClick={getClick} ref={myapplypostRef}>
           내가 신청한 게시글
+        </button>
+        <button id="3" onClick={getClick} ref={takerReviewRef}>
+          내가 작성한 후기
+        </button>
+
+        <button id="5" onClick={getClick} ref={myapplypostRef}>
+          내가 받은 후기
         </button>
       </ListBar>
       {change}
