@@ -35,7 +35,7 @@ function DogList(props) {
   return (
     <Container>
       <RowBox>
-        <TextBox20>멍친구</TextBox20>
+        <TextBox20>멍멍이</TextBox20>
         <TextBox14>
           * 대표 멍프로필을 선택해주세요. 최대 3마리까지 등록가능합니다.
         </TextBox14>
