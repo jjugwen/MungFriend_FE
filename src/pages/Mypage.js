@@ -39,8 +39,8 @@ const Mypage = () => {
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2)`;
       mypostRef.current.style = "";
-      takerReviewRef.current.style = "";
       myapplypostRef.current.style = "";
+      takerReviewRef.current.style = "";
       giverReviewRef.current.style = "";
     } else if (id === "2") {
       setChange(<MyPostList />);
@@ -48,19 +48,10 @@ const Mypage = () => {
       mypostRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
+      myapplypostRef.current.style = "";
       takerReviewRef.current.style = "";
-      myapplypostRef.current.style = "";
       giverReviewRef.current.style = "";
-    } else if (id === "3") {
-      setChange(<MyReviewList />);
-      pageRef.current.style = "";
-      mypostRef.current.style = "";
-      takerReviewRef.current.style = `color :white; 
-        background :#FA5A30; 
-        boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      myapplypostRef.current.style = "";
-      giverReviewRef.current.style = "";
-    } else if (id === "4") {
+    }  else if (id === "3") {
       setChange(<MyApplyPost />);
       pageRef.current.style = "";
       mypostRef.current.style = "";
@@ -69,12 +60,21 @@ const Mypage = () => {
       background :#FA5A30; 
       boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
       giverReviewRef.current.style = "";
-    } else {
+    } else if (id === "4") {
+      setChange(<MyReviewList />);
+      pageRef.current.style = "";
+      mypostRef.current.style = "";
+      myapplypostRef.current.style = "";
+      takerReviewRef.current.style = `color :white; 
+        background :#FA5A30; 
+        boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
+      giverReviewRef.current.style = "";
+    }else {
       setChange(<GiverReview />);
       pageRef.current.style = "";
       mypostRef.current.style = "";
+      myapplypostRef.current.style = ""
       takerReviewRef.current.style = "";
-      myapplypostRef.current.style = "";
       giverReviewRef.current.style = `color :white; 
       background :#FA5A30; 
       boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
@@ -110,15 +110,14 @@ const Mypage = () => {
         <button id="2" onClick={getClick} ref={mypostRef}>
           내가 작성한 게시글
         </button>
-
-        <button id="4" onClick={getClick} ref={myapplypostRef}>
+        <button id="3" onClick={getClick} ref={myapplypostRef}>
           내가 신청한 게시글
         </button>
-        <button id="3" onClick={getClick} ref={takerReviewRef}>
+        <button id="4" onClick={getClick} ref={takerReviewRef}>
           내가 작성한 후기
         </button>
 
-        <button id="5" onClick={getClick} ref={myapplypostRef}>
+        <button id="5" onClick={getClick} ref={giverReviewRef}>
           내가 받은 후기
         </button>
       </ListBar>
