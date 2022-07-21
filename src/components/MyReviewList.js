@@ -28,15 +28,15 @@ function MyReviewList() {
         <GridBox>
           {info?.takerReviewList.map((review, i) => {
             return (
-              <ReviewBox key={i}   onClick={() => {
+              <ReviewBox key={i} >
+                <button
+                  style={{ background: "none", border: "none" }}
+                  onClick={() => {
                     dispatch(reviewActions.loadReviewDetailDB(review.id));
                     setTimeout(() => {
                       openReviewModal();
                     }, 500);
-                  }}>
-                <button
-                  style={{ background: "none", border: "none" }}
-                
+                  }}
                 >
                   <div className="row-box">
                     <GiverImg src={review.giverDogProfileImgUrl} alt="" />
@@ -83,9 +83,6 @@ const GridBox = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2%;
-  button{
-    font-size: 16px;
-  }
 `
 const ReviewBox = styled.div`
 
@@ -99,6 +96,9 @@ const ReviewBox = styled.div`
   }
   .review-box {
     margin-top: 10px;
+  }
+  button{
+    font-size: 16px;
   }
 `;
 const GiverImg = styled.img`

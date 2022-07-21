@@ -175,7 +175,7 @@ const DelButton = styled.button`
 `;
 const AddButton = styled.button`
   position: absolute;
-  right: 2%;
+  right: 0%;
   height: 40px;
   width: 104px;
   img {
