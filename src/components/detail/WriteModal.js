@@ -91,14 +91,10 @@ function WriteModal(props) {
                   }, 400);
                 }
                 if (children === "후기작성") {
-                  // if (image.length >= 3) {
-                  //   alert("사진은 최대 3장만 올릴 수 있어요 :)");
-                  // } else {
                   addReview();
                   setTimeout(() => {
                     close();
                   }, 300);
-                  // }
                 }
               }}
             >
