@@ -48,8 +48,9 @@ function PostDetail() {
   };
 
   //작성자 확인 및 정보 모달 확인 시 필요
-  // const myinfo = useSelector((state) => state.userInfoSlice.myInfo); //로컬스토리지로 닉네임 가져오기로. MockAPI test 시에는 myinfo 정보 필요할 수도.
-  const loginNickname = localStorage.getItem("nickname");
+  const loginNickname = useSelector(
+    (state) => state.userInfoSlice.myInfo.nickname
+  ); //로컬스토리지로 닉네임 가져오기로. MockAPI test 시에는 myinfo 정보 필요할 수도.
   // console.log(loginNickname);
 
   const deletePost = () => {
@@ -59,6 +60,10 @@ function PostDetail() {
   useEffect(() => {
     dispatch(postActions.getDetailDB(postId));
   }, [dispatch, postId]);
+
+  useEffect(() => {
+    dispatch(userActions.myinfoDB());
+  }, [dispatch]);
 
   return (
     <>
