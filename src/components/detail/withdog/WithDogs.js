@@ -1,10 +1,11 @@
 //게시글 상세페이지 함께하는 멍친구 , 매칭한 프로필 멍멍이 정보 컴포넌트
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as Actions } from "../../../redux/modules/postDetailSlice";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import DogProfileViewModal from "./DogProfileViewModal";
 
 function DogList() {
   const params = useParams();
@@ -16,13 +17,25 @@ function DogList() {
     dispatch(Actions.getDetailDB(postId));
   }, []);
 
+  //함께하는 멍멍이 '멍프로필' 모달창 여닫기
+  const [mungModal, setMungModal] = useState(false);
+  const openMungModal = () => {
+    setMungModal(true);
+  };
+  const closeMungModal = () => {
+    setMungModal(false);
+  };
+
+  //멍프로필 조회 인덱스값 넘겨주기
+  const [idx, setIdx] = useState(0);
+
   return (
     <Container>
       <div className="header">
         <h1 className="DetailTitle">함께하는 멍멍이</h1>
       </div>
       <ListOutterBox>
-        {detailList?.dogList?.map((dog) => {
+        {detailList?.dogList?.map((dog, index) => {
           return (
             <Listbox key={dog.id}>
               <div className="betweenDogPicAndDogInfo">
@@ -42,7 +55,21 @@ function DogList() {
                 </div>
               </div>
               <div>
-                <MungProfileBtn>프로필</MungProfileBtn>
+                <MungProfileBtn
+                  onClick={() => {
+                    setIdx(index);
+                    setTimeout(() => {
+                      openMungModal();
+                    }, 500);
+                  }}
+                >
+                  프로필
+                </MungProfileBtn>
+                <DogProfileViewModal
+                  open={mungModal}
+                  close={closeMungModal}
+                  index={idx}
+                />
               </div>
             </Listbox>
           );

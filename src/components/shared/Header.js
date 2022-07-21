@@ -10,14 +10,13 @@ import chatting from "../../assets/images/Header/chatIcon.svg";
 
 function Header(props) {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   // const [opened, setOpened] = useState(false);
   // const modalClose = useCallback(() => {
   //   setOpened(!opened);
   // }, [opened]);
 
- 
   // 메뉴 버튼 클릭했을 때 클릭한 버튼 상태 변화 유지하기
   const mainRef = useRef();
   const postsRef = useRef();
@@ -121,11 +120,12 @@ function Header(props) {
                 <img src={noticeicon} alt="noticeicon" />
               </HeadButton>
 
-              <HeadButton onClick={()=>{
-                props.setModal(!props.modal)
-              }}>
-
-              {/* {/* //   onClick={() => {
+              <HeadButton
+                onClick={() => {
+                  props.setModal(!props.modal);
+                }}
+              >
+                {/* {/* //   onClick={() => {
               //     modalClose();
               //   }}
               // >

@@ -5,7 +5,7 @@ const instance = axios.create({
   baseURL: "https://hjkim-sparta.shop",
 });
 
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 
 // 인스턴스가 생성 된 후 기본값 변경
 instance.defaults.headers.common["Authorization"] = token

@@ -18,9 +18,9 @@ export const loginDB = (username, password) => {
       .then((response) => {
         if (response.data.status === "true") {
           // console.log(response);
-          localStorage.setItem("token", response.data.accessToken);
-          localStorage.setItem("nickname", response.data.nickname);
-          localStorage.setItem("memberId", response.data.memberId);
+          sessionStorage.setItem("token", response.data.accessToken);
+          sessionStorage.setItem("nickname", response.data.nickname);
+          sessionStorage.setItem("memberId", response.data.memberId);
           // window.alert(response.data.message);
           window.location.replace("/");
         } else if (response.data.status === "false") {

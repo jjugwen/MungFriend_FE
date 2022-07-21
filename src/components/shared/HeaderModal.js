@@ -10,11 +10,11 @@ function HeaderModal(props) {
   //로그인 유저
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
   // console.log(myinfo);
-  // const nickname = localStorage.getItem("nickname");
+  // const nickname = sessionStorage.getItem("nickname");
   // console.log(myinfo);
 
   const Logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     setTimeout(() => {
       navigate("/");
     }, 500);
@@ -32,7 +32,7 @@ function HeaderModal(props) {
           <span
             onClick={() => {
               navigate("/mypage?value=mypage");
-              props.setModal(!props.modal)
+              props.setModal(!props.modal);
             }}
           >
             마이페이지
@@ -40,7 +40,7 @@ function HeaderModal(props) {
           <span
             onClick={() => {
               navigate("/mypage?value=mypost");
-              props.setModal(!props.modal)
+              props.setModal(!props.modal);
             }}
           >
             작성한 게시글
@@ -48,7 +48,7 @@ function HeaderModal(props) {
           <span
             onClick={() => {
               navigate("/mypage?value=myreview");
-              props.setModal(!props.modal)
+              props.setModal(!props.modal);
             }}
           >
             내가 받은 후기
@@ -61,7 +61,7 @@ function HeaderModal(props) {
           onClick={() => {
             console.log("로그아웃!");
             Logout();
-            props.setModal(!props.modal)
+            props.setModal(!props.modal);
           }}
         >
           로그아웃

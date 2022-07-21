@@ -18,9 +18,9 @@ export const loadPostListAX = () => {
   return async function (dispatch) {
     // await axios
     //   .get(`http://localhost:5001/post`)
-    await instance
-      .get(`/api/posts`)
-      .then((response) => dispatch(loadPost(response.data)));
+    await instance.get(`/api/posts`).then((response) => {
+      dispatch(loadPost(response.data));
+    });
   };
 };
 

@@ -36,15 +36,15 @@ const Chatting = (props) => {
   const ws = Stomp.over(sock);
 
   // 토큰
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   // sender 정보 가져오기
-  const sender = localStorage.getItem("nickname");
+  const sender = sessionStorage.getItem("nickname");
   // console.log(`token: ${token}`);
   // console.log(`sender: ${sender}`);
 
   // MemberId 정보 가져오기. 편도랑 2022-07-07
-  const memberId = localStorage.getItem("memberId");
+  const memberId = sessionStorage.getItem("memberId");
   // console.log("memberId" + memberId);
 
   // 렌더링 될 때마다 연결, 구독 다른 방으로 옮길 때 연결, 구독 해제
@@ -65,14 +65,14 @@ const Chatting = (props) => {
         () => {
           ws.subscribe(
             `/sub/api/chat/rooms/${parseInt(props.id)}`,
-            // `/sub/api/chat/rooms/${localStorage.getItem('channelId')}`,
+            // `/sub/api/chat/rooms/${sessionStorage.getItem('channelId')}`,
             (data) => {
               const newMessage = JSON.parse(data.body);
               // console.log(newMessage);
               // console.log("props.id :" + props.id);
               // console.log("웹소켓 연결 구독 : " + newMessage.roomId);
               dispatch(loadChat(newMessage.roomId));
-              // dispatch(loadChat(localStorage.getItem('channleId')));
+              // dispatch(loadChat(sessionStorage.getItem('channleId')));
             },
             { token: token }
           );
