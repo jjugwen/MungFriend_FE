@@ -144,7 +144,7 @@ function DogPlusModal(props) {
         </p>
         <textarea
           onChange={handleChange("info")}
-          placeholder="내용을 입력해주세요."
+          placeholder="멍친구의 유의사항을 알려주세요!&#13;&#10;(Ex. '입질 때문에 다른 강아지 근처에 가지 못하게 주의해주세요', '예방 접종을 마쳤습니다.')"
         />
       </div>
       <div className="btn-box">
@@ -191,6 +191,7 @@ top: 73px; */
       font-size: 16px;
       padding: 10px;
       resize: none;
+      line-height: 25px;
       :focus {
         outline: none;
       }
