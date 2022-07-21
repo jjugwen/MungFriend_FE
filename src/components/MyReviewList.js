@@ -9,10 +9,10 @@ function MyReviewList() {
   //모달창 여닫기
   const [reviewModal, setReviewModal] = useState(false);
   const openReviewModal = () => {
-    setReviewModal(true);
+    setReviewModal(!reviewModal);
   };
   const closeReviewModal = () => {
-    setReviewModal(false);
+    setReviewModal(!reviewModal);
   };
 
   const info = useSelector((state) => state.myPageSlice.mypage);
@@ -21,24 +21,19 @@ function MyReviewList() {
   return (
     <>
       <ReviewList className="column-box">
-        <div className="title">내가 받은 후기</div>
+        <div className="title">받은 후기</div>
         <div className="count">
           총<div className="orange-color">{info?.takerReviewList.length}</div>건
         </div>
-        <div className="row-box">
+        <GridBox>
           {info?.takerReviewList.map((review, i) => {
             return (
-              <ReviewBox key={i}>
-                <button
-                  style={{ background: "none", border: "none" }}
-                  onClick={() => {
+              <ReviewBox key={i}   onClick={() => {
                     dispatch(reviewActions.loadReviewDetailDB(review.id));
-                    setTimeout(() => {
-                      openReviewModal();
-                    }, 500);
-                  }}
-                >
-                  <div className="row-box">
+                      openReviewModal();   
+                  }} >
+             
+                 <div className="row-box">
                     <GiverImg src={review.giverDogProfileImgUrl} alt="" />
                     <div className="name-box">
                       <div>{review.giverNickname}</div>
@@ -46,7 +41,7 @@ function MyReviewList() {
                     </div>
                   </div>
                   <div className="review-box">{review.comment}</div>
-                </button>
+          
                 <ReviewDetailModal
                   open={reviewModal}
                   close={closeReviewModal}
@@ -54,7 +49,7 @@ function MyReviewList() {
               </ReviewBox>
             );
           })}
-        </div>
+        </GridBox>
       </ReviewList>
     </>
   );
@@ -62,6 +57,7 @@ function MyReviewList() {
 
 const ReviewList = styled.div`
   width: 90%;
+  margin-bottom: 100px;
   gap: 4%;
   .title {
     font-weight: 600;
@@ -71,14 +67,21 @@ const ReviewList = styled.div`
   .count {
     display: flex;
     font-weight: 500;
+
     .orange-color {
       color: #fa5a30;
     }
   }
-  margin-bottom: 100px;
+ 
+   
 `;
+const GridBox = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2%;
+`
 const ReviewBox = styled.div`
-  width: 48%;
+
   height: 216px;
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
