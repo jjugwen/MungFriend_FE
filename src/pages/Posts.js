@@ -16,12 +16,10 @@ function Posts() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    dispatch(
-      loadMyMungAX(),
-      loadPostListAX(),
-      loadDistancePostListAX(),
-      userActions.myinfoDB()
-    );
+    dispatch(loadMyMungAX());
+    dispatch(loadPostListAX());
+    dispatch(loadDistancePostListAX());
+    dispatch(userActions.myinfoDB());
   }, [dispatch]);
 
   const myMung = useSelector((state) => state.mungSlice.mung);
