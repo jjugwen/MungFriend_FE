@@ -21,7 +21,7 @@ function GiverReview() {
   return (
     <>
       <ReviewList className="column-box">
-        <div className="title">내가 받은 후기</div>
+        <div className="title">내가 작성한 후기</div>
         <div className="count">
           총<div className="orange-color">{info?.giverReviewList.length}</div>건
         </div>

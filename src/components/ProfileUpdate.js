@@ -60,9 +60,7 @@ function ProfileUpdate(props) {
 
 
   return (
-    <Container onSubmit={(e) => {
-      e.preventDefault(); // 이걸 통해 페이지 새로고침을 막아서 해결
-    }}>
+    <Container>
       <Title>프로필 수정</Title>
       <TextBox>닉네임</TextBox>
       <OneInput defaultValue={info?.nickname} ref={nicknameRef}></OneInput>
@@ -100,7 +98,7 @@ function ProfileUpdate(props) {
               >이용약관</a>, <a href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
               >개인정보</a> 취급방침에 모두 동의합니다.</TextBox>
       <RowBox>
-      <CheckInput type="checkbox" required onClick={()=>{setIsAgree(!isAgree)}}/> <TextBox>동의함</TextBox></RowBox></>}
+      <CheckInput type="checkbox" required onClick={()=>{setIsAgree(true)}}/> <TextBox>동의함</TextBox></RowBox></>}
       
 
       <textarea
