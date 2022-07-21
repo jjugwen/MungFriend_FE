@@ -43,6 +43,13 @@ function PostCreate() {
 
   //작성버튼
   const click = () => {
+    if(selectDog.length===0){
+      alert('멍 프로필을 선택해 주세요!')
+      window.addEventListener((e)=>{
+        e.preventDefault();
+      })
+    }
+
     let startHour = startHourRef.current.value;
     if (startHour.length === 1) {
       startHour = 0 + startHour;
@@ -81,13 +88,20 @@ function PostCreate() {
     }
   }, []);
 
-  let startHour = isNew ? null : Number(updatePost?.requestStartDate.split('T')[1].split(':')[0]);
-   let startMinute = isNew ? null : Number(updatePost?.requestStartDate.split('T')[1].split(':')[1]);
-   let endHour = isNew ? null : Number(updatePost?.requestEndDate.split('T')[1].split(':')[0]);
-   let endMinute = isNew ? null : Number(updatePost?.requestEndDate.split('T')[1].split(':')[1]);
-
+  let startHour = isNew ? "123" : Number(updatePost?.requestStartDate.split('T')[1].split(':')[0]);
+   let startMinute = isNew ? "123" : Number(updatePost?.requestStartDate.split('T')[1].split(':')[1]);
+   let endHour = isNew ? "123" : Number(updatePost?.requestEndDate.split('T')[1].split(':')[0]);
+   let endMinute = isNew ? "123" : Number(updatePost?.requestEndDate.split('T')[1].split(':')[1]);
+console.log(updatePost?.requestEndDate.split('T')[1].split(':'))
   //수정버튼
   const updateClick = () => {
+    if(selectDog.length===0){
+      alert('멍 프로필을 선택해 주세요!')
+      window.addEventListener((e)=>{
+        e.preventDefault();
+      })
+    }
+
     let startHour = startHourRef.current.value;
     if (startHour.length === 1) {
       startHour = 0 + startHour;
@@ -146,16 +160,14 @@ function PostCreate() {
 
 
   return (
-    <Container onSubmit={(e) => {
-      e.preventDefault(); // 이걸 통해 페이지 새로고침을 막아서 해결
-    }}>
-      <div>
-        <div >게시글 작성</div>
+    <Container>
+     
+        <Title>게시글 작성</Title>
         <RowBox>
-        <div>멍 프로필 선택</div>
-        <div>* 다중선택 가능합니다.</div>
+        <SubText>멍 프로필 선택</SubText>
+        <MiniText>* 다중선택 가능합니다.</MiniText>
         </RowBox>
-      </div>
+      
       <RowBox>
         {dogList?.map((dog, index) => {
       
@@ -187,13 +199,14 @@ function PostCreate() {
           );
         })}
       </RowBox>
-      <div>신청날짜</div>
+      <SubText>신청날짜</SubText>
       <RowBox>
+      <InputBox>
       <input type="date" ref={dateRef}  defaultValue={updatePost?.requestStartDate.split('T')[0]}/>
       {/*시작시간*/}
       {startHour && (
       <select ref={startHourRef} defaultValue={startHour}>
-        <option value={null}>시간</option>
+        <option value="123">시간</option>
           {time.hour.map((hour, index) => {
             return (
               <option key={index} value={hour}>
@@ -206,7 +219,7 @@ function PostCreate() {
        {/*시작분*/}
        {startHour && (
       <select ref={startMinuteRef} defaultValue={startMinute}>
-      <option value={null}>분</option>
+      <option value="123">분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
@@ -219,7 +232,7 @@ function PostCreate() {
       <div>~</div>
       {/*끝시간*/}
       { endHour && (<select ref={endHourRef} defaultValue={endHour}>
-        <option value={null}>시간</option>
+        <option value="123">시간</option>
         {time.hour.map((hour, index) => {
           return (
             <option key={index} value={hour}>
@@ -231,8 +244,8 @@ function PostCreate() {
       )}
       
       {/*끝분*/}
-      {endMinute && (<select ref={endMinuteRef} defaultValue={endMinute}>
-      <option value={null}>분</option>
+      {endHour && (<select ref={endMinuteRef} defaultValue={endMinute}>
+      <option value="123">분</option>
         {time.minute.map((minute, index) => {
           return (
             <option key={index} value={minute}>
@@ -242,10 +255,10 @@ function PostCreate() {
         })}
       </select>)}
       
-      
+      </InputBox>
       </RowBox>
       
-      <div>내용입력</div>
+      <SubText>내용입력</SubText>
      <hr />
      <CoulmnBox >
       <input
@@ -266,51 +279,73 @@ function PostCreate() {
         navigate('/posts')
       }}>취소</button>
       {isNew ? (
-        <button  onClick={click}>등록</button>
+        <AddButton  onClick={click}>등록</AddButton >
       ) : (
-        <button  onClick={updateClick}>수정</button>
+        <AddButton   onClick={updateClick}>수정</AddButton>
       )}
       </ButtonBox>
     </Container>
   );
 }
 const Container=styled.form`
-width: 70%;
+width: 65%;
 margin: auto;
 justify-content: center;
 align-items: center;
-
+margin-top: 100px;
 hr{
   border: 1px solid black;
 }
 
-textarea{
-  border: none;
-  border-bottom: 1px solid #E3E5E9;
-  font-family: 'Pretendard';
-  resize : none;
-  height: 200px;
-}
+@media screen and (max-width: 960px) {
+    width: 90%;
+  }
 
 `
-const DogImg = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 50px;
-`;
+const Title= styled.div`
+font-weight: 600;
+font-size: 30px;
+margin-bottom: 50px;
+`
+const SubText= styled.div`
+font-weight: 600;
+font-size: 20px;
+margin-right: 13px;
+margin-bottom: 23px;
 
+`
+const MiniText= styled.div`
+margin-top: 5px;
+color: #7A7A80;
+font-size: 14px;
+`
+
+
+
+const RowBox = styled.div`
+  display: flex;
+  flex-direction: row;
+
+
+`;
 const Listbox = styled.div`
   width: 330px;
   height: 100px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 80px; 
   :hover {
     border: 2px solid #FA5A30;
   }
+  
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
 `;
+
+
+
+
 
 const CheckBox = styled.input`
     margin: 18px;
@@ -327,17 +362,17 @@ const CheckBox = styled.input`
       background-position: 50%;
       background-repeat: no-repeat;
       background-color: #FA5A30;
+      
     }
   
 `;
-const RowBox = styled.div`
-  display: flex;
-  flex-direction: row;
+
+const DogImg = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
 `;
-const CoulmnBox= styled.div`
-display: flex;
-flex-direction: column;
-`
+
 const TextBox16 = styled.div`
   font-weight: 600;
   font-size: 16px;
@@ -354,20 +389,72 @@ const TextBox14 = styled.div`
   padding: 5px;
   margin-top: 5px;
 `;
+const InputBox= styled.div`
+display: flex;
+flex-direction: row;
+width: 100%;
+gap: 1.5%;
+font-size: 30px;
+margin-bottom: 80px; 
+input{
+  font-family: 'Pretendard';
+  font-size: 16px;
+  width: 48%;
+  height: 48px;
+}
+select{
+  font-family: 'Pretendard';
+  font-size: 16px;
+  width: 12.5%;
+height: 48px;
+
+}
+`
+const CoulmnBox= styled.div`
+display: flex;
+flex-direction: column;
+input{
+  border: none;
+  border-bottom: 1px solid #E3E5E9;
+  font-family: 'Pretendard';
+  font-size: 16px;
+  height: 61px;
+}
+textarea{
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #E3E5E9;
+  font-family: 'Pretendard';
+  font-size: 16px;
+  resize : none;
+  height: 279px;
+  padding-top: 30px;
+}
+
+`
 
 const ButtonBox =styled.div`
 align-items: center;
+
+display: flex;
 justify-content: center;
+width: 40%;
+margin: auto;
 button{
+  
   border-radius: 4px;
   font-weight: 500;
 font-size: 16px;
-  width: 180px;
+  width:48%;
 margin: 10px;
 height: 48px;
 border: none;
-
 }
 
+`
+
+const AddButton= styled.button`
+background: #FA5A30;
+color: white;
 `
 export default PostCreate;

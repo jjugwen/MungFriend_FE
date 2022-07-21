@@ -1,20 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import instance from "./instance";
-import { deleteMyMung } from "./myPageSlice";
+
 
 //axios
 //나중에 멤버 아이디값 받아와서 넘겨주기
+
+//멍친구 등록은 formData 이기 때문에 리덕스 사용해서 load하면 오류가 난다.
 export const createMungAX = (mung) => {
   return async function (dispatch) {
-    // console.log(mung)
+    console.log(mung)
     // for (const value of mung) console.log(value);
-    await instance
-      .post(`/api/dogs`, mung)
+   try{
+     await instance.post(`/api/dogs`, mung);
       // await axios
-      // .post(`http://localhost:5001/dogList`, mung)
-      .then(() => dispatch(createMung(mung)));
-  };
+      // .post(`http://localhost:5001/dogList`, mung);
+      dispatch(loadMyMungAX())
+      } 
+     catch(err){
+      console.log(err)
+     }
+  }
+  
+  ;
 };
 export const loadMyMungAX = () => {
   return async function (dispatch) {
@@ -42,14 +50,22 @@ const mungSlice = createSlice({
   name: "mung",
   initialState: { mung: [] },
   reducers: {
-    createMung(state, action) {
-      state.mung.push(action.payload);
-    },
+  
     loadMyMung(state, action) {
       state.mung = action.payload;
+    },
+    deleteMyMung(state, action) {
+      // console.log(action.payload);
+      state.mung  = state.mung.filter((element) => {
+        if (element.id !== action.payload) {
+          return true;
+        } else {
+          return false;
+        }
+      });
     },
   },
 });
 
-export const { createMung, loadMyMung } = mungSlice.actions;
+export const {loadMyMung,deleteMyMung } = mungSlice.actions;
 export default mungSlice.reducer;

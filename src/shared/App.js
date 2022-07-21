@@ -56,8 +56,7 @@ function App() {
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/oauth" element={<KakaoLoginRedirect />} />
         <Route path="/oauth" element={<GoogleLoginRedirect />} />
-        <Route path="/test" element={<DogPlusModal />} />
-        <Route path="/test2" element={<ProfileUpdate />} />
+        <Route path="/test" element={<Test />} />
         <Route path="/reviews/:id" element={<ReviewDetailModal />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/chat/:id" element={<Chat />} />

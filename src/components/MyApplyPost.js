@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
 
-function MyPostList() {
+function MyApplyPost() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -12,31 +12,32 @@ function MyPostList() {
     dispatch(loadMyPageAX());
   }, []);
   const info = useSelector((state) => state.myPageSlice.mypage);
+  console.log(info);
 
   return (
     <Container>
-      <Title >작성한 게시글</Title>
+      <Title >내가 신청한 게시글</Title>
       <Count >
         총
         <OrangeColor >
-          {info?.myPostList.length}
+          {info?.applyPostList.length}
         </OrangeColor>
         건
       </Count>
       <hr />
       <PostList>
-        {info?.myPostList.map((mypost, i) => {
+        {info?.applyPostList.map((apply, i) => {
           return (
             <RowBox
               key={i}
-              
+      
               onClick={() => {
-                navigate(`/posts/${mypost.id}`);
+                navigate(`/posts/${apply.id}`);
               }}
             >
-              <PostTitle >{mypost.title}</PostTitle>
+              <PostTitle >{apply.title}</PostTitle>
               <ModifiedAt>
-                {mypost.modifiedAt.split("T")[0]}
+                {apply.modifiedAt.split("T")[0]}
               </ModifiedAt>
             </RowBox>
           );
@@ -86,4 +87,4 @@ const ModifiedAt = styled.div`
   font-size: 14px;
   color: #7a7a80;
 `;
-export default MyPostList;
+export default  MyApplyPost;

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import MyApplyPost from "../components/MyApplyPost";
 //컴포넌트
 import MyPageComponent from "../components/MyPageComponent";
 import MyPostList from "../components/MyPostList";
@@ -16,7 +17,6 @@ const Mypage = () => {
   }, []);
 
   //사용자 정보 불러오기
-  //사용자 정보 불러오기
   const [user, setUser] = useState(null);
   React.useEffect(() => {
     instance.get(`/myinfo`).then((res) => {
@@ -27,6 +27,7 @@ const Mypage = () => {
   const pageRef = useRef();
   const reviewRef = useRef();
   const mypostRef = useRef();
+  const myapplypostRef =useRef();
 
   const getClick = (e) => {
     const id = e.target.id;
@@ -37,6 +38,7 @@ const Mypage = () => {
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2)`;
       mypostRef.current.style = "";
       reviewRef.current.style = "";
+      myapplypostRef.current.style="";
     } else if (id === "2") {
       setChange(<MyPostList />);
       pageRef.current.style = "";
@@ -44,13 +46,24 @@ const Mypage = () => {
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
       reviewRef.current.style = "";
-    } else {
+      myapplypostRef.current.style="";
+    } else if (id === "3") {
       setChange(<MyReviewList />);
       pageRef.current.style = "";
       mypostRef.current.style = "";
       reviewRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
+      myapplypostRef.current.style="";
+    }else{
+      setChange(<MyApplyPost />);
+      pageRef.current.style = "";
+      mypostRef.current.style = "";
+      reviewRef.current.style = "";
+      myapplypostRef.current.style=`color :white; 
+      background :#FA5A30; 
+      boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;;
+
     }
   };
 
@@ -81,10 +94,13 @@ const Mypage = () => {
           마이페이지
         </button>
         <button id="2" onClick={getClick} ref={mypostRef}>
-          작성한 게시글
+          내가 작성한 게시글
         </button>
         <button id="3" onClick={getClick} ref={reviewRef}>
           후기 리스트
+        </button>
+        <button id="4" onClick={getClick} ref={myapplypostRef}>
+          내가 신청한 게시글
         </button>
       </ListBar>
       {change}
@@ -120,6 +136,7 @@ const ListBar = styled.div`
     background-color: transparent;
     border-radius: 8px;
     padding: 10px;
+    text-align: left;
   }
 `;
 

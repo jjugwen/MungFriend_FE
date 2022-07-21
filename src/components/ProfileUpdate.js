@@ -20,7 +20,7 @@ function ProfileUpdate(props) {
   // const [phoneNumber, setPhoneNumber] = useState();
 
   const info = useSelector((state) => state.myPageSlice.mypage);
-  // console.log(info)
+  console.log(info)
   //이메일 가공하기
   // const email = info?.email.split('@')[0]
   React.useEffect(() => {
@@ -77,7 +77,9 @@ function ProfileUpdate(props) {
       <TextBox>휴대폰번호</TextBox>
       <RowBox>
         <TwoInput defaultValue={info?.phoneNum} ref={phoneNumRef}></TwoInput>
-        <TwoButton type="button">입력</TwoButton>
+        <TwoButton type="button" onClick={()=>{
+          instance.get('/phone/auth').then(res=>console.log(res))
+        }}>입력</TwoButton>
       </RowBox>
       <TextBox>주소</TextBox>
       <RowBox>
@@ -93,10 +95,14 @@ function ProfileUpdate(props) {
         )}
       </RowBox>
       
-     
-      <TextBox>멍친구 이용약관, 개인정보 취급방침에 모두 동의합니다.</TextBox>
+     {info?.isAgree===true? "":<>
+     <TextBox>멍친구 <a href="https://protective-iodine-bc7.notion.site/bbd8abbf735140109899396c1c87dc61"
+              >이용약관</a>, <a href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
+              >개인정보</a> 취급방침에 모두 동의합니다.</TextBox>
       <RowBox>
-      <CheckInput type="checkbox" required onClick={()=>{setIsAgree(!isAgree)}}/> <TextBox>동의함</TextBox></RowBox>
+      <CheckInput type="checkbox" required onClick={()=>{setIsAgree(!isAgree)}}/> <TextBox>동의함</TextBox></RowBox></>}
+      
+
       <textarea
         placeholder="자기소개 255자"
         defaultValue={info?.introduce}
@@ -197,6 +203,9 @@ const TextBox = styled.div`
   font-weight: 600;
   font-size: 16px;
   margin: 20px 0 8px 0;
+  a{
+    color: black;
+  }
 `;
 
 const OneInput = styled.input`
