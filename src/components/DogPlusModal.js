@@ -62,13 +62,13 @@ function DogPlusModal(props) {
   return (
     <Container>
       <p className="font-24">
-        <b>멍친구 등록</b>
+        <b>멍프로필 등록</b>
       </p>
       <PreviewImg
         src={
           mungImage.previewUrl
             ? mungImage.previewUrl
-            : "https://ifh.cc/g/87kbto.png"
+            : "https://ifh.cc/g/LTOpv8.png"
         }
         alt=""
       />
@@ -144,14 +144,14 @@ function DogPlusModal(props) {
         </p>
         <textarea
           onChange={handleChange("info")}
-          placeholder="멍친구의 유의사항을 알려주세요!&#13;&#10;(Ex. '입질 때문에 다른 강아지 근처에 가지 못하게 주의해주세요', '예방 접종을 마쳤습니다.')"
+          placeholder="멍멍이의 유의사항을 알려주세요!&#13;&#10;(Ex. '입질 때문에 다른 강아지 근처에 가지 못하게 주의해주세요', '예방 접종을 마쳤습니다.')"
         />
       </div>
       <div className="btn-box">
         <button onClick={()=>{
           props.setMungModal(!props.modal)
         }}> 취소 </button>
-        <button type="submit" onClick={signUp}>
+        <button className="okbutton" type="submit" onClick={signUp}>
           확인
         </button>
       </div>
@@ -224,7 +224,15 @@ top: 73px; */
       border: none;
       font-size: 16px;
       font-weight: 500;
+      border-radius: 4px;
+      font-weight: 500;
+font-size: 16px;
     }
+.okbutton{
+        background-color: #FA5A30;
+    color: #efefef;
+      }
+
   }
 `;
 
@@ -237,8 +245,8 @@ const PreviewImg = styled.img`
 `;
 const PreviewBtn = styled.div`
   position: absolute;
-  left: 55%;
-  top: 20%;
+  left: 57%;
+  top: 21%;
 
   img {
     width: 20px;
@@ -249,8 +257,8 @@ const PreviewBtn = styled.div`
     line-height: 40px;
     padding: 13px 9px 4px 9px;
     background-color: #FA5A30;;
-    border: 1px solid ;
     border-radius: 50%;
+
     /* cursor: pointer; */
   }
   .filebtn {
