@@ -1,4 +1,3 @@
-// import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 // import axios from "axios";
 
@@ -43,19 +42,4 @@ export const deleteMatchingDB = (postId) => {
   };
 };
 
-//리덕스 toolkit
-// export const matchingSlice = createSlice({
-//   name: "match",
-//   initialState: { id: "" },
-//   reducers: {
-//     matchCreate(state, action) {
-//       console.log(action.payload);
-//       state.id = action.payload;
-//       console.log(state.id);
-//     },
-//   },
-// });
-
-// export const { matchCreate } = matchingSlice.actions;
 export const actionCreators = { createMatchingDB, deleteMatchingDB };
-// export default matchingSlice.reducer;
