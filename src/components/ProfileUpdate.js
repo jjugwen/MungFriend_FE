@@ -32,7 +32,7 @@ function ProfileUpdate(props) {
   const Popup = () => {
     setPopup(!popup);
   };
-
+  
   const updateMypage = () => {
 
     let update_data = {
@@ -42,7 +42,7 @@ function ProfileUpdate(props) {
       latitude: lat? lat: info?.latitude,
       longitude: lon? lon: info?.longitude,
       introduce: introduceRef.current.value,
-      phoneNum: phoneNumRef.current.value,
+      // phoneNum: phoneNumRef.current.value,
       isAgree: info?.isAgree?info?.isAgree:isAgree,
     };
 
@@ -61,9 +61,16 @@ function ProfileUpdate(props) {
     });
 
   };
-  let [isAgree,setIsAgree] = useState(false);
-  // console.log(isAgree)
+  const [isAgree,setIsAgree] = useState(false);
 
+  const [firstAuth, setFirstAuth]= useState({});
+  // console.log(isAgree)
+  //핸드폰 인증하기
+  const phoneCheck=()=>{
+    const phoneNum={phoneNum:phoneNumRef.current.value}
+    instance.post('/phone/auth',phoneNum).then(res=>setFirstAuth(res.status))
+    // res.status=>200 시 성공
+  }
 
   return (
     <Container>
@@ -81,9 +88,8 @@ function ProfileUpdate(props) {
       <TextBox>휴대폰번호</TextBox>
       <RowBox>
         <TwoInput defaultValue={info?.phoneNum?info?.phoneNum:""} ref={phoneNumRef}></TwoInput>
-        <TwoButton type="button" onClick={()=>{
-          instance.get('/phone/auth').then(res=>console.log(res))
-        }}>입력</TwoButton>
+        <TwoButton type="button" onClick={phoneCheck}>입력</TwoButton>
+        {firstAuth===200?<div><input></input></div> :""}
       </RowBox>
       <TextBox>주소</TextBox>
       <RowBox>
