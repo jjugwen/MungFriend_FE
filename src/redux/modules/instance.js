@@ -39,14 +39,15 @@ instance.interceptors.response.use(
     // 응답 오류가 있는 작업 수행
     if (error.response.status === 400) {
       window.alert(error.response.data.errorMessage);
-      console.log("interceptor 400!");
+      // console.log("interceptor 400!");
     }
     if (error.response.status === 401) {
-      // window.alert(error.response.data.errorMessage);
-      console.log("인터셉터 401!", error.response.data.errorMessage);
+      window.alert(error.response.data.errorMessage);
+      // console.log("인터셉터 401!", error.response.data.errorMessage);
     }
-    if (error.response.status === 404) {
-      console.log("인터셉터 404!", error);
+    if (error.response.status === 403) {
+      window.alert(error.response.data.errorMessage);
+      // console.log("인터셉터 403!", error);
     }
 
     return Promise.reject(error);
