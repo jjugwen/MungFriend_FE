@@ -58,13 +58,13 @@ function Posts() {
     const value = e.target.value;
     if (value === "Posts") {
       setSelected(Posts);
+    } else if (value === "donePosts") {
+      setSelected(donePosts);
     } else if (value === "distancePosts") {
       dispatch(loadDistancePostListAX());
       setTimeout(() => {
         setSelected(distancePosts);
       }, 500);
-    } else if (value === "donePosts") {
-      setSelected(donePosts);
     }
   };
   // console.log(selected);
