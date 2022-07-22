@@ -11,6 +11,7 @@ import Done from "../assets/images/IsComplete/모집종료.svg";
 import { useNavigate } from "react-router-dom";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
 import Sppiner from "../components/shared/Spinner";
+import instance from "../redux/modules/instance";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -58,18 +59,16 @@ function Posts() {
     const value = e.target.value;
     if (value === "Posts") {
       setSelected(Posts);
+    } else if (value === "distancePosts") {
+      instance.get(`/api/posts/distance`).then((response) => {
+        console.log(response.data);
+        setSelected(response.data.filter((v) => v.isComplete !== true));
+      });
     } else if (value === "donePosts") {
       setSelected(donePosts);
-    } else if (value === "distancePosts") {
-      dispatch(loadDistancePostListAX());
-      setTimeout(() => {
-        console.log(selected);
-        setSelected(distancePosts);
-      }, 3000);
-      console.log(selected);
     }
   };
-  console.log(selected);
+  // console.log(selected);
   // console.log(Posts);
   // 로딩중일때 sppinner추가
   let isLoding = false;
