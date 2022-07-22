@@ -68,7 +68,7 @@ const ErrorTextArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 23.625%;
+  width: 41%;
 
   h1 {
     font-family: "Pretendard";
