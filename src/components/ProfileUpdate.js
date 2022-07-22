@@ -65,7 +65,7 @@ function ProfileUpdate(props) {
 
   React.useEffect(() => {}, []);
   const [firstAuth, setFirstAuth] = useState(false);
-  const [secondAuth, setSecondAuth]=useState(false);
+  const [secondAuth, setSecondAuth] = useState(false);
   // console.log(isAgree)
   //핸드폰 인증하기
   const phoneCheck = () => {
@@ -78,19 +78,25 @@ function ProfileUpdate(props) {
   //인증번호 ref
   const authNumRef = useRef();
   const authCheck = () => {
-   
-    const data ={
+    const data = {
       phoneNum: phoneNumRef.current.value,
-      code: authNumRef.current.value
-    }
-     console.log(data)
-      instance
-      .post("/phone/auth/ok", data).then((res)=> {setSecondAuth(res.data)
-      }
-      )
-  
-     console.log(secondAuth)
-};
+      code: authNumRef.current.value,
+    };
+    console.log(data);
+    instance.post("/phone/auth/ok", data).then((res) => {
+      setSecondAuth(res.data);
+    });
+
+    console.log(secondAuth);
+  };
+
+  //글자수 세기
+  const [text, setText] = useState("");
+
+  const onChangeText = (e) => {
+    return setText(e.target.value);
+  };
+
   return (
     <Container>
       <Title>프로필 수정</Title>
@@ -121,16 +127,23 @@ function ProfileUpdate(props) {
         </TwoButton>
       </RowBox>
       {firstAuth === true ? (
-      <>
-
-        <RowBox>
-          <TwoInput
-            placeholder="인증번호를 입력해 주세요"
-            ref={authNumRef}
-          ></TwoInput>
-          {secondAuth===true ?<TwoButton style={{backgroundColor:"#fa5a30"}}>완료</TwoButton>  :<TwoButton onClick={authCheck}>인증하기</TwoButton>}
-        </RowBox>
-        {secondAuth===true ? <AuthOk>인증이 완료되었습니다</AuthOk>:<AuthNo>인증번호를 입력해 주세요</AuthNo>}
+        <>
+          <RowBox>
+            <TwoInput
+              placeholder="인증번호를 입력해 주세요"
+              ref={authNumRef}
+            ></TwoInput>
+            {secondAuth === true ? (
+              <TwoButton style={{ backgroundColor: "#fa5a30" }}>완료</TwoButton>
+            ) : (
+              <TwoButton onClick={authCheck}>인증하기</TwoButton>
+            )}
+          </RowBox>
+          {secondAuth === true ? (
+            <AuthOk>인증이 완료되었습니다</AuthOk>
+          ) : (
+            <AuthNo>인증번호를 입력해 주세요</AuthNo>
+          )}
         </>
       ) : (
         ""
@@ -184,8 +197,10 @@ function ProfileUpdate(props) {
         placeholder="자기소개 255자"
         defaultValue={info?.introduce ? info?.introduce : ""}
         ref={introduceRef}
-      ></textarea>
-
+        onChange={onChangeText}
+        maxLength="255" //255자 제한
+      />
+      <CountText>{text.length}/255</CountText>
       <RowBox>
         <CancleBtn
           onClick={() => {
@@ -245,14 +260,14 @@ function Address(props) {
   );
 }
 
-const AuthOk =styled.div`
-color: green;
-font-size: 14px;
-`
-const AuthNo =styled.div`
-color: gray;
-font-size: 14px;
-`
+const AuthOk = styled.div`
+  color: green;
+  font-size: 14px;
+`;
+const AuthNo = styled.div`
+  color: gray;
+  font-size: 14px;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -370,4 +385,12 @@ const UpdateBtn = styled.button`
   color: #ffffff;
 `;
 
+const CountText = styled.span`
+  position: absolute;
+  right: 5%;
+  bottom: 12%;
+  font-weight: 400;
+  font-size: 16px;
+  color: #7a7a80;
+`;
 export default ProfileUpdate;
