@@ -95,24 +95,32 @@ function WriteModal(props) {
               _onClick={(e) => {
                 // console.log(applyText.current.value);
                 if (children === "신청하기") {
-                  dispatch(
-                    applyActions.createApplyDB({
-                      comment: applyText.current.value,
-                      id: postId,
-                    })
-                  );
-                  setTimeout(() => {
+                  if (applyText.current.value === "") {
+                    window.alert("신청 글을 간단히 작성해 주세요.");
+                  } else {
+                    dispatch(
+                      applyActions.createApplyDB({
+                        comment: applyText.current.value,
+                        id: postId,
+                      })
+                    );
                     setTimeout(() => {
-                      window.location.reload();
-                    }, 200);
-                    close();
-                  }, 400);
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 200);
+                      close();
+                    }, 400);
+                  }
                 }
                 if (children === "후기작성") {
-                  addReview();
-                  setTimeout(() => {
-                    close();
-                  }, 300);
+                  if (applyText.current.value === "") {
+                    window.alert("후기를 작성해 주세요.");
+                  } else {
+                    addReview();
+                    setTimeout(() => {
+                      close();
+                    }, 300);
+                  }
                 }
               }}
             >
