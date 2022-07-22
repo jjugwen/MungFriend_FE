@@ -14,7 +14,7 @@ function ErrorNoAccess() {
         <Body>
           <Img src={dogError} alt="dogError" />
           <ErrorTextArea>
-            <h1>403</h1>
+            <h1>401</h1>
             <h2>페이지 접근 권한</h2>
             <span>요청하신 페이지를 보실 권한이 없습니다.</span>
             <span>
