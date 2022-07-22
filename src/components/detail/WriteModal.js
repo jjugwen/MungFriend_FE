@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -7,6 +7,8 @@ import { actionCreators as reviewActions } from "../../redux/modules/reviewSlice
 import "../../elements/modalStyle.css";
 import ReviewImgUpload from "./review/ReviewImgUpload";
 import Button from "../../elements/Button";
+import CautionButton from "../../elements/CautionButton";
+// import CountText from "../shared/CountText";
 // import CountText from "../shared/CountText";
 
 function WriteModal(props) {
@@ -17,14 +19,13 @@ function WriteModal(props) {
   const params = useParams();
   const postId = Number(params.id);
   const image = useSelector((state) => state.reviewSlice.image);
-  // console.log(image);
   const detailList = useSelector((state) => state.postDetailSlice.list);
-  // console.log(detailList);
+
   // 데이터 formData로 보내기
   const addReview = async () => {
     const formData = new FormData();
     image.forEach((image) => formData.append("image", image));
-    // console.log(image);
+
     const data = {
       postId: postId,
       applicantNickname: detailList?.matchedNickname,
@@ -37,8 +38,6 @@ function WriteModal(props) {
     dispatch(reviewActions.createReviewDB(formData));
     // for (const value of formData) console.log(value);
   };
-
-  //글자수세기
 
   return (
     <div className={open ? "openModalcss" : null}>
@@ -53,8 +52,19 @@ function WriteModal(props) {
               height: "3px",
             }}
           />
-          {children === "후기작성" ? <ReviewImgUpload /> : null}
-          {children === "후기작성" ? <Hr /> : null}
+          {children === "신청하기" ? (
+            <>
+              <CautionButton margin="0 0 0 -225%" />
+              <Hr />
+            </>
+          ) : null}
+
+          {children === "후기작성" ? (
+            <>
+              <ReviewImgUpload />
+              <Hr />
+            </>
+          ) : null}
           <ModalInput
             type="text"
             placeholder="내용을 입력해주세요."
@@ -75,7 +85,7 @@ function WriteModal(props) {
               width="214px"
               orange_large
               _onClick={(e) => {
-                console.log(applyText.current.value);
+                // console.log(applyText.current.value);
                 if (children === "신청하기") {
                   dispatch(
                     applyActions.createApplyDB({
