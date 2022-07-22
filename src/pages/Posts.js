@@ -44,7 +44,7 @@ function Posts() {
   const distancePosts = useSelector((state) =>
     state.postSlice.distancePost.filter((v) => v.isComplete !== true)
   );
-  console.log("거리순조회", distancePosts);
+  // console.log("거리순조회", distancePosts);
   //모집종료 글만
   const donePosts = useSelector((state) =>
     state.postSlice.post.filter((v) => v.isComplete === true)
