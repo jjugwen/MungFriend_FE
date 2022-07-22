@@ -6,7 +6,7 @@ function Sppiner() {
 
   return(
   <Container>
-    <div> 잠시만 기다려주세요</div>
+
   <MungFriendloading src={loadingGIF} alt="loading" />
   </Container>
   ) 
@@ -18,12 +18,7 @@ position: absolute;
   left: 50%;
   transform: translate(-50%, -100%);
   z-index: 4;
-div{
- font-size: 30px;
- font-weight: 600;
- text-align: center;
 
-}
 `
 
 const MungFriendloading = styled.img`
