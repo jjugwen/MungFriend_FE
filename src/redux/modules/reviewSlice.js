@@ -13,6 +13,7 @@ export const createReviewDB = (formData) => {
       });
       if (response.data.staus === "true") {
         dispatch(reviewCreate(response.data));
+        window.alert("후기 작성이 완료되었습니다.");
         // window.location.replace('/');
       } else if (response.data.staus === "false") {
         console.log(response.data.message);
