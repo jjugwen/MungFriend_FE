@@ -74,8 +74,8 @@ function PostCreate() {
     };
     // console.log(post);
     dispatch(createPostAX(post));
-    navigate(`/posts`);
-    window.location.reload();
+    // navigate(`/posts`);
+    // window.location.reload();
   };
   //  수정 게시글 데이터 가져오기
   React.useEffect(() => {
@@ -136,9 +136,9 @@ function PostCreate() {
 
     instance
       .put(`/api/posts/${params.id}`, newUpdatePost)
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         navigate(`/posts`);
+        window.location.reload();
       })
       .catch((error) => {
         alert(error);
@@ -291,9 +291,9 @@ function PostCreate() {
           취소
         </button>
         {isNew ? (
-          <AddButton onClick={click}>등록</AddButton>
+          <AddButton onClick={click} type="button">등록</AddButton>
         ) : (
-          <AddButton onClick={updateClick}>수정</AddButton>
+          <AddButton onClick={updateClick} type="button">수정</AddButton>
         )}
       </ButtonBox>
     </Container>
