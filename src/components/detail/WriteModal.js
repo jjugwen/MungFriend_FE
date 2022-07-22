@@ -39,10 +39,16 @@ function WriteModal(props) {
     // for (const value of formData) console.log(value);
   };
 
+  //글자수 세기
+  const [text, setText] = useState("");
+
+  const onChangeText = (e) => {
+    return setText(e.target.value);
+  };
   return (
     <div className={open ? "openModalcss" : null}>
       {open ? (
-        <div className="Reviewmodal">
+        <Reviewmodal>
           <ModalTitle>{children}</ModalTitle>
           <hr
             style={{
@@ -58,7 +64,6 @@ function WriteModal(props) {
               <Hr />
             </>
           ) : null}
-
           {children === "후기작성" ? (
             <>
               <ReviewImgUpload />
@@ -69,7 +74,10 @@ function WriteModal(props) {
             type="text"
             placeholder="내용을 입력해주세요."
             ref={applyText}
+            onChange={onChangeText}
+            maxLength="255" //255자 제한
           />
+          <span>{text.length}/255</span>
           <Hr />
           <div style={{ display: "flex", gap: "12px", padding: "40px" }}>
             <Button
@@ -111,20 +119,24 @@ function WriteModal(props) {
               확인
             </Button>
           </div>
-        </div>
+        </Reviewmodal>
       ) : null}
     </div>
   );
 }
 
 const ModalInput = styled.textarea`
-  width: 90%;
-  height: 345px;
+  width: 88%;
+  /* max-width: 0px; */
+  /* width: 560px; */
+  /* height: 345px; */
+  height: 50%;
   border: none;
   vertical-align: top;
   text-align: left;
-  padding: 3% 0%;
+  padding: 3% 1%;
   outline: none;
+  resize: none;
 `;
 
 const ModalTitle = styled.h1`
@@ -138,6 +150,28 @@ const ModalTitle = styled.h1`
 const Hr = styled.hr`
   width: 90%;
   border: 1px solid #e5e5e5;
+`;
+
+const Reviewmodal = styled.div`
+  position: absolute;
+  top: calc(50vh - 350px);
+  left: calc(50vw - 350px);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 640px;
+  height: 645px;
+
+  span {
+    margin-left: 78%;
+    font-weight: 400;
+    font-size: 16px;
+    color: #7a7a80;
+  }
 `;
 
 export default WriteModal;

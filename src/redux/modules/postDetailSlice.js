@@ -5,35 +5,31 @@ import instance from "./instance";
 //axios
 export const getDetailDB = (id) => {
   return async function (dispatch) {
-    await instance.get(`/api/posts/${id}`).then((response) => {
-      // await axios.get(`http://localhost:5002/detail/`).then((response) => {
-      // console.log(response.data);
+    try {
+      const response = await instance.get(`/api/posts/${id}`);
       dispatch(loadPostDetail(response.data));
-    });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
 export const deleteDetailDB = (id) => {
   return async function (dispatch) {
-    await instance
-      .delete(`/api/posts/${id}`)
-      // await axios
-      //   .delete(`http://localhost:5002/detail/${id}`)
-      .then((response) => {
-        if (response.data.status === "true") {
-          // console.log(response);
-          dispatch(deletePostDetail(response.data));
-          setTimeout(() => {
-            window.location.replace("/posts");
-          }, 100);
-        } else if (response.data.status === "false") {
-          console.log(response.data.status, response.data.message);
-        }
-      })
-      .catch((err) => {
-        window.alert("에러가 발생했어요!");
-        console.log(err);
-      });
+    try {
+      const response = await instance.delete(`/api/posts/${id}`);
+      if (response.data.status === "true") {
+        // console.log(response);
+        dispatch(deletePostDetail(response.data));
+        setTimeout(() => {
+          window.location.replace("/posts");
+        }, 100);
+      } else if (response.data.status === "false") {
+        console.log(response.data.status, response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
