@@ -14,21 +14,21 @@ function ErrorNoAccess() {
         <Body>
           <Img src={dogError} alt="dogError" />
           <ErrorTextArea>
-            <h1>401</h1>
+            <h1>403</h1>
             <h2>페이지 접근 권한</h2>
             <span>요청하신 페이지를 보실 권한이 없습니다.</span>
             <span>
-              방문하시려는 페이지의 권한이 있는 회원만 보실 수 있습니다.
+              마이페이지 프로필 수정에서 필수 정보(핸드폰 번호, 주소) 입력 후
+              이용해 주세요.
             </span>
             <Button
               orange_medium
               margin="40px 0 0 0"
               _onClick={() => {
-                navigate("/");
-                window.location.reload();
+                navigate("/mypage");
               }}
             >
-              홈으로
+              마이페이지 이동
             </Button>
           </ErrorTextArea>
         </Body>
