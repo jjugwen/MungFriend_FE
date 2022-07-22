@@ -15,6 +15,7 @@ export const loginDB = (username, password) => {
           },
         }
       );
+      console.log(response);
       if (response.data.status === "true") {
         // console.log(response);
         sessionStorage.setItem("token", response.data.accessToken);
