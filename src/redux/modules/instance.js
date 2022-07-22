@@ -40,7 +40,7 @@ instance.interceptors.response.use(
       sessionStorage.clear();
       window.location.replace("/needlogin");
     } else if (error.response.status === 403) {
-      window.alert(error.response.data.errorMessage);
+      // window.alert(error.response.data.errorMessage);
       window.location.replace("/noaccess");
     } else {
       window.alert(error.response.data.errorMessage);
