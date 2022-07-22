@@ -305,6 +305,7 @@ const Chatting = (props) => {
             type="text"
             placeholder="멍친구에게 메시지 보내기"
             onKeyPress={onKeyPress}
+            maxLength="300"
           />
           <ChatToolDown>
             <button type="button" onClick={messageOnClick}>
