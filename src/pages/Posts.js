@@ -64,19 +64,19 @@ function Posts() {
       setSelected(donePosts);
     }
   };
-  console.log(selected);
+  // console.log(selected);
   // console.log(Posts);
- // 로딩중일때 sppinner추가
-let isLoding = false;
- if(Posts.length===0){
-isLoding =true;
- }
- 
-console.log(Posts.length===0)
+  // 로딩중일때 sppinner추가
+  let isLoding = false;
+  if (Posts.length === 0) {
+    isLoding = true;
+  }
+
+  // console.log(Posts.length === 0);
   return (
     <All>
-      {isLoding && <Sppiner/>} 
-      {isLoding && <Test/>}
+      {isLoding && <Sppiner />}
+      {isLoding && <Test />}
       <Box className="row-box">
         <h1 className="name">
           {myinfo?.nickname}
@@ -287,7 +287,7 @@ const Test = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(255,255,255, 1);
+  background: rgba(255, 255, 255, 1);
   z-index: 2;
 `;
 
@@ -417,7 +417,7 @@ const AddPostButton = styled.button`
   position: fixed;
   bottom: 30px;
   right: 3%;
-  z-index: 3;
+  z-index: 2;
   width: 80px;
   height: 80px;
   border: none;
