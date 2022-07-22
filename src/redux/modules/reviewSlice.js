@@ -23,7 +23,7 @@ export const createReviewDB = (formData) => {
         }
       })
       .catch((err) => {
-        window.alert("에러가 발생했어요!");
+        // window.alert("에러가 발생했어요!");
         console.log(err);
       });
   };
