@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
+import { loadPostListAX } from "../redux/modules/postSlice";
+import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
+import instance from "../redux/modules/instance";
+import Sppiner from "../components/shared/Spinner";
 import styled from "styled-components";
-import {
-  loadDistancePostListAX,
-  loadPostListAX,
-} from "../redux/modules/postSlice";
 import Ing from "../assets/images/IsComplete/모집중.svg";
 import Done from "../assets/images/IsComplete/모집종료.svg";
-import { useNavigate } from "react-router-dom";
-import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
-import Sppiner from "../components/shared/Spinner";
-import instance from "../redux/modules/instance";
 
 function Posts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(loadMyMungAX());
     dispatch(loadPostListAX());
     dispatch(userActions.myinfoDB());
@@ -40,11 +37,6 @@ function Posts() {
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
   // console.log(myinfo);
 
-  //거리순 조회 글
-  const distancePosts = useSelector((state) =>
-    state.postSlice.distancePost.filter((v) => v.isComplete !== true)
-  );
-  // console.log("거리순조회", distancePosts);
   //모집종료 글만
   const donePosts = useSelector((state) =>
     state.postSlice.post
@@ -60,8 +52,8 @@ function Posts() {
     if (value === "Posts") {
       setSelected(Posts);
     } else if (value === "distancePosts") {
+      //거리순 조회
       instance.get(`/api/posts/distance`).then((response) => {
-        console.log(response.data);
         setSelected(response.data.filter((v) => v.isComplete !== true));
       });
     } else if (value === "donePosts") {

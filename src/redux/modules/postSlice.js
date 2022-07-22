@@ -10,8 +10,9 @@ export const createPostAX = (post) => {
       .post(`/api/posts`, post)
       // await axios
       //   .post(`http://localhost:5001/post`, post)
-      .then(() => {dispatch(createPost(post))
-        window.location.replace('/posts')
+      .then(() => {
+        dispatch(createPost(post));
+        window.location.replace("/posts");
       });
   };
 };
@@ -35,18 +36,10 @@ export const loadPostListAX = () => {
 //   }
 // }
 
-export const loadDistancePostListAX = () => {
-  return async function (dispatch) {
-    await instance.get(`/api/posts/distance`).then((response) => {
-      dispatch(loadDistancePost(response.data));
-    });
-  };
-};
-
 //툴킷
 const postSlice = createSlice({
   name: "post",
-  initialState: { post: [], distancePost: [] },
+  initialState: { post: [] },
   reducers: {
     createPost(state, action) {
       state.post.push(action.payload);
@@ -54,12 +47,8 @@ const postSlice = createSlice({
     loadPost(state, action) {
       state.post = action.payload;
     },
-    loadDistancePost(state, action) {
-      state.distancePost = action.payload;
-    },
   },
 });
 
-export const { createPost, loadPost, updatePost, loadDistancePost } =
-  postSlice.actions;
+export const { createPost, loadPost, updatePost } = postSlice.actions;
 export default postSlice.reducer;
