@@ -10,7 +10,9 @@ export const createPostAX = (post) => {
       .post(`/api/posts`, post)
       // await axios
       //   .post(`http://localhost:5001/post`, post)
-      .then(() => dispatch(createPost(post)));
+      .then(() => {dispatch(createPost(post))
+        window.location.replace('/posts')
+      });
   };
 };
 

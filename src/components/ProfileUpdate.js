@@ -34,10 +34,6 @@ function ProfileUpdate(props) {
   };
 
   const updateMypage = () => {
-    let phoneNum = phoneNumRef.current.value
-    if(secondAuth===false){
-      phoneNum = null
-    }
     let update_data = {
       nickname: nicknameRef.current.value,
       email: emailRef.current.value,
@@ -45,7 +41,6 @@ function ProfileUpdate(props) {
       latitude: lat ? lat : info?.latitude,
       longitude: lon ? lon : info?.longitude,
       introduce: introduceRef.current.value,
-      phoneNum: phoneNum,
       isAgree: info?.isAgree ? info?.isAgree : isAgree,
     };
 
@@ -90,10 +85,12 @@ function ProfileUpdate(props) {
     }
      console.log(data)
       instance
-      .post("/phone/auth/ok", data).then(res=> setSecondAuth(res.data).catch(err=> console.log(err)))
-  };
-
+      .post("/phone/auth/ok", data).then((res)=> {setSecondAuth(res.data)
+      }
+      )
   
+     console.log(secondAuth)
+};
   return (
     <Container>
       <Title>프로필 수정</Title>
@@ -124,13 +121,17 @@ function ProfileUpdate(props) {
         </TwoButton>
       </RowBox>
       {firstAuth === true ? (
+      <>
+
         <RowBox>
           <TwoInput
             placeholder="인증번호를 입력해 주세요"
             ref={authNumRef}
           ></TwoInput>
-          <TwoButton onClick={authCheck}>인증번호</TwoButton>
+          {secondAuth===true ?<TwoButton style={{backgroundColor:"#fa5a30"}}>완료</TwoButton>  :<TwoButton onClick={authCheck}>인증하기</TwoButton>}
         </RowBox>
+        {secondAuth===true ? <AuthOk>인증이 완료되었습니다</AuthOk>:<AuthNo>인증번호를 입력해 주세요</AuthNo>}
+        </>
       ) : (
         ""
       )}
@@ -240,11 +241,18 @@ function Address(props) {
   return (
     <AddressBox>
       <DaumPostcode onComplete={onCompletePost} />
-      {/* <button type='button' onClick={() => {props.onClose()}}>닫기</button> */}
     </AddressBox>
   );
 }
 
+const AuthOk =styled.div`
+color: green;
+font-size: 14px;
+`
+const AuthNo =styled.div`
+color: gray;
+font-size: 14px;
+`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
