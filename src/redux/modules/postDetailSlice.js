@@ -24,8 +24,8 @@ export const deleteDetailDB = (id) => {
           // console.log(response);
           dispatch(deletePostDetail(response.data));
           setTimeout(() => {
-            window.location.replace("/");
-          }, 500);
+            window.location.replace("/posts");
+          }, 100);
         } else if (response.data.status === "false") {
           console.log(response.data.status, response.data.message);
         }
@@ -48,7 +48,6 @@ export const postDetailSlice = createSlice({
       state.list = action.payload;
     },
     deletePostDetail(state, action) {
-      // const new_list = state.list.filter((v) => v.id !== action.payload.id);
       state.list = action.payload;
     },
   },
