@@ -3,9 +3,9 @@ import axios from "axios";
 //axios
 export const loginDB = (username, password) => {
   // console.log(username, password);
-  return function () {
+  return async function () {
     try {
-      const response = axios.post(
+      const response = await axios.post(
         `https://hjkim-sparta.shop/member/login`,
         { username, password },
         {
@@ -15,7 +15,6 @@ export const loginDB = (username, password) => {
           },
         }
       );
-      console.log(response);
       if (response.data.status === "true") {
         // console.log(response);
         sessionStorage.setItem("token", response.data.accessToken);
