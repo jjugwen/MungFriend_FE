@@ -63,7 +63,7 @@ function Posts() {
       dispatch(loadDistancePostListAX());
       setTimeout(() => {
         setSelected(distancePosts);
-      }, 500);
+      }, 2000);
     }
     if (value === "donePosts") {
       setSelected(donePosts);
