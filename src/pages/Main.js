@@ -113,9 +113,11 @@ function Main() {
             }}
           >
             <h1>주인아 월!른 산책 나가개!</h1>
-            <span>반려견들은 하루종일 보호자를 기다리며 하루를 보냅니다.</span>
+            <span>
+              반려견은 집 안에 갇혀 있으면 답답함과 우울함을 느끼게 됩니다.
+            </span>
             <br />
-            <span>기다리는 반려견을 위해 산책 서비스를 신청해보세요.</span>
+            <span>매일 산책을 나가기 힘들다면, 멍친구에게 부탁해 보세요!</span>
           </div>
           <img src={bannerWalk} alt="sadDog" style={{ width: "30em" }} />
         </div>

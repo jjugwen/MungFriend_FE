@@ -94,7 +94,9 @@ function ReviewDetailModal(props) {
                 className="close"
                 _onClick={() => {
                   setSlide(1);
-                  close();
+                  setTimeout(() => {
+                    close();
+                  }, 100);
                 }}
                 position="absolute"
                 bottom="19px"
