@@ -1,49 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-// import axios from "axios";
 
 //axios
 export const createApplyDB = (data) => {
   return async function (dispatch) {
-    // await axios
-    //   .post(`http://localhost:5002/applies`, {
-    //     comment: data.comment,
-    //   })
-    await instance
-      .post(`/api/applies/${data.id}`, {
+    try {
+      const response = await instance.post(`/api/applies/${data.id}`, {
         comment: data.comment,
-      })
-      .then((response) => {
-        if (response.data.staus === "true") {
-          dispatch(applyCreate(response.data));
-        } else if (response.data.staus === "false") {
-          console.log(response.data.status, response.data.message);
-        }
-      })
-      .catch((err) => {
-        window.alert("에러가 발생했어요!");
-        console.log(err);
       });
+      if (response.data.staus === "true") {
+        dispatch(applyCreate(response.data));
+      } else if (response.data.staus === "false") {
+        console.log(response.data.status, response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
 export const deleteApplyDB = (id) => {
   return async function (dispatch) {
-    await instance
-      .delete(`/api/applies/${id}`)
-      // await axios
-      //   .delete(`http://localhost:5002/applies/${id}`)
-      .then((response) => {
-        if (response.data.status === "true") {
-          dispatch(applyDelete(response.data));
-        } else if (response.data.staus === "false") {
-          console.log(response.data.status, response.data.message);
-        }
-      })
-      .catch((err) => {
-        window.alert("에러가 발생했어요!");
-        console.log(err);
-      });
+    try {
+      const response = await instance.delete(`/api/applies/${id}`);
+      if (response.data.status === "true") {
+        dispatch(applyDelete(response.data));
+      } else if (response.data.staus === "false") {
+        console.log(response.data.status, response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
