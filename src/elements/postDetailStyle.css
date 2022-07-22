@@ -33,7 +33,7 @@
   display: flex;
   gap: 1%;
   width: 100%;
-  min-width: 300px;
+  min-width: 30%;
   justify-content: flex-end;
   align-items: flex-end;
   margin-bottom: 7px;

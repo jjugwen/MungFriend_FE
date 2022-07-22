@@ -19,7 +19,6 @@ function Posts() {
   React.useEffect(() => {
     dispatch(loadMyMungAX());
     dispatch(loadPostListAX());
-    dispatch(loadDistancePostListAX());
     dispatch(userActions.myinfoDB());
   }, [dispatch]);
 
@@ -61,6 +60,7 @@ function Posts() {
       setSelected(Posts);
     }
     if (value === "distancePosts") {
+      dispatch(loadDistancePostListAX());
       setSelected(distancePosts);
     }
     if (value === "donePosts") {

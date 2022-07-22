@@ -24,11 +24,17 @@ const CautionButton = (props) => {
     bottom,
   };
   return (
-    <div style={{ margin: "8px 0 40px 0" }}>
-      <CautionBtn {...styles} disabled={_disabled} onClick={_onClick}>
-        <img src={noticeIcon} alt="noticeIcon" />
-        유의사항
-      </CautionBtn>
+    <div>
+      <a
+        href="https://protective-iodine-bc7.notion.site/1e0b7cd43c3d4f9fa50498074088e09a"
+        style={{ textDecoration: "none" }}
+        target="blank"
+      >
+        <CautionBtn {...styles} disabled={_disabled} onClick={_onClick}>
+          <img src={noticeIcon} alt="noticeIcon" />
+          유의사항
+        </CautionBtn>
+      </a>
     </div>
   );
 };
@@ -49,7 +55,8 @@ const CautionBtn = styled.button`
   border: 1px solid #e3e5e9;
   border-radius: 4px;
   background: none;
-
+  cursor: pointer;
+  margin: ${(props) => props.margin};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,6 +67,9 @@ const CautionBtn = styled.button`
   font-weight: 500;
   font-size: 14px;
   line-height: 100%;
+  :hover {
+    color: #fa5a30;
+  }
 `;
 
 export default CautionButton;

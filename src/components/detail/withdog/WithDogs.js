@@ -60,7 +60,7 @@ function DogList() {
                     setIdx(index);
                     setTimeout(() => {
                       openMungModal();
-                    }, 500);
+                    }, 100);
                   }}
                 >
                   프로필
