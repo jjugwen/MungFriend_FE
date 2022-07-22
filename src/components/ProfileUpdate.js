@@ -20,7 +20,7 @@ function ProfileUpdate(props) {
   const [address, setAddress] = useState(null);
 
   const info = useSelector((state) => state.myPageSlice.mypage);
-  console.log(info);
+  // console.log(info);
   //이메일 가공하기
   // const email = info?.email.split('@')[0]
   React.useEffect(() => {
@@ -44,7 +44,7 @@ function ProfileUpdate(props) {
       isAgree: info?.isAgree ? info?.isAgree : isAgree,
     };
 
-    console.log(update_data);
+    // console.log(update_data);
 
     instance
       .post(`/mypage`, update_data)
@@ -53,9 +53,7 @@ function ProfileUpdate(props) {
         //리덕스 데이터로 바꿔줘야함!
         dispatch(loadMyPageAX());
         alert(response.data.message);
-        if (response.data.message === "약관 동의 후 정보 수정이 가능합니다.") {
-          props.setProfileModal(props.modal);
-        }
+        sessionStorage.setItem("token",response.data.accessToken);
       })
       .catch((error) => {
         alert(error);
