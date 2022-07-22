@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -24,7 +23,7 @@ function PostCreate() {
   const dogList = useSelector((state) => state.mungSlice.mung);
   // console.log(dogList)
   const [updatePost, setUpdatePost] = useState(null);
-  console.log(updatePost);
+  // console.log(updatePost);
 
   const dateRef = useRef();
   const time = {
@@ -141,7 +140,7 @@ function PostCreate() {
         window.location.reload();
       })
       .catch((error) => {
-        alert(error);
+        alert(error.data.message);
       });
     console.log(newUpdatePost);
   };
@@ -160,7 +159,7 @@ function PostCreate() {
     }
 
     // console.log(e.target.value);
-    console.log(selectDog);
+    // console.log(selectDog);
   };
 
   return (
