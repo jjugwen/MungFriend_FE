@@ -47,7 +47,10 @@ function Posts() {
   // console.log("거리순조회", distancePosts);
   //모집종료 글만
   const donePosts = useSelector((state) =>
-    state.postSlice.post.filter((v) => v.isComplete === true)
+    state.postSlice.post
+      .filter((v) => v.isComplete === true)
+      .slice(0)
+      .reverse()
   );
 
   //게시글 정렬
