@@ -61,7 +61,9 @@ function Posts() {
     }
     if (value === "distancePosts") {
       dispatch(loadDistancePostListAX());
-      setSelected(distancePosts);
+      setTimeout(() => {
+        setSelected(distancePosts);
+      }, 500);
     }
     if (value === "donePosts") {
       setSelected(donePosts);
