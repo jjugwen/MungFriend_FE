@@ -10,6 +10,7 @@ import Ing from "../assets/images/IsComplete/모집중.svg";
 import Done from "../assets/images/IsComplete/모집종료.svg";
 import { useNavigate } from "react-router-dom";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
+import Sppiner from "../components/shared/Spinner";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ function Posts() {
   const distancePosts = useSelector((state) =>
     state.postSlice.distancePost.filter((v) => v.isComplete !== true)
   );
-  // console.log("거리순조회", distancePosts);
+  console.log("거리순조회", distancePosts);
   //모집종료 글만
   const donePosts = useSelector((state) =>
     state.postSlice.post.filter((v) => v.isComplete === true)
@@ -65,9 +66,17 @@ function Posts() {
   };
   console.log(selected);
   // console.log(Posts);
-
+ // 로딩중일때 sppinner추가
+let isLoding = false;
+ if(Posts.length===0){
+isLoding =true;
+ }
+ 
+console.log(Posts.length===0)
   return (
     <All>
+      {isLoding && <Sppiner/>} 
+      {isLoding && <Test/>}
       <Box className="row-box">
         <h1 className="name">
           {myinfo?.nickname}
@@ -270,6 +279,16 @@ const All = styled.div`
   @media screen and (max-width: 960px) {
     width: 90%;
   }
+`;
+
+const Test = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(255,255,255, 1);
+  z-index: 2;
 `;
 
 const Box = styled.div`
