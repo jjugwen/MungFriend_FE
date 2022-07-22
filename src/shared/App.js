@@ -28,6 +28,7 @@ import KakaoLoginRedirect from "./KakaoLoginRedirect";
 import GoogleLoginRedirect from "./GoogleLoginRedirect";
 
 //에러 페이지
+import ErrorNotFound from "../components/shared/errors/ErrorNotFound";
 import ErrorNoAccess from "../components/shared/errors/ErrorNoAccess";
 import ErrorPage from "../components/shared/errors/ErrorPage";
 import Preparing from "../components/shared/errors/Preparing";
@@ -76,6 +77,7 @@ function App() {
         <Route path="/error" element={<ErrorPage />} /> {/* 500 */}
         <Route path="/noaccess" element={<ErrorNoAccess />} /> {/* 403 */}
         <Route path="/preparing" element={<Preparing />} />
+        <Route path="*" element={<ErrorNotFound />} />
       </Routes>
       <Footer />
     </div>
