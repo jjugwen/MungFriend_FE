@@ -12,13 +12,14 @@ export const createMungAX = (mung) => {
     console.log(mung)
     // for (const value of mung) console.log(value);
    try{
-     await instance.post(`/api/dogs`, mung);
+     const res = await instance.post(`/api/dogs`, mung);
       // await axios
       // .post(`http://localhost:5001/dogList`, mung);
       dispatch(loadMyMungAX())
+      alert(res.data.message)
       } 
      catch(err){
-      console.log(err)
+     console.log(err)
      }
   }
   
@@ -26,11 +27,15 @@ export const createMungAX = (mung) => {
 };
 export const loadMyMungAX = () => {
   return async function (dispatch) {
-    await instance
+   try{ 
+   const res = await instance
       .get(`/api/dogs`)
       // await axios
       // .get(`http://localhost:5001/dogList`)
-      .then((res) => dispatch(loadMyMung(res.data)));
+       dispatch(loadMyMung(res.data));
+   }catch(err){
+    console.log(err)
+   }
   };
 };
 
