@@ -47,7 +47,9 @@ export const deleteMyMungAX = (id) => {
       .delete(`/api/dogs/${id}`)
       // await axios
       // .delete(`http://localhost:5001/dogList/${id}`)
-      .then(() => dispatch(deleteMyMung(id)));
+      .then(() => {dispatch(deleteMyMung(id))
+      window.location.reload();
+      });
       // 삭제리듀서는 mypageSlice에
     // dispatch(deleteMyMung(id))
   };
