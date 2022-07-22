@@ -164,11 +164,11 @@ const HeaderBox = styled.div`
 const HeadButton = styled.button`
   border: none;
   background-color: transparent;
-  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
+  cursor: pointer;
 `;
 
 const AfterLogin = {

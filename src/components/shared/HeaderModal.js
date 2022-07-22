@@ -106,6 +106,7 @@ const UpperBox = styled.div`
     margin: 10px 0%;
     /* font-weight: ${(props) => props.fontWeight || "600"}; */
     font-weight: 600;
+    cursor: pointer;
   }
   hr {
     width: 200px;
@@ -142,6 +143,7 @@ const Logoutbtn = styled.div`
   line-height: 100%;
   padding: 16px 95px 16px 95px;
   color: #747474;
+  cursor: pointer;
 `;
 
 export default HeaderModal;

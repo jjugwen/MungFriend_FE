@@ -113,7 +113,6 @@ function ReviewDetailModal(props) {
 }
 
 const ModalTitle = styled.h1`
-  font-family: "Pretendard";
   font-style: normal;
   font-weight: 600;
   font-size: 24px;

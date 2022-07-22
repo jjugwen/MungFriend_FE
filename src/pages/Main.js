@@ -159,7 +159,6 @@ const MainBox1 = styled.div`
   margin-bottom: 7.5%;
 
   h1 {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 600;
     font-size: 48px;
@@ -167,7 +166,6 @@ const MainBox1 = styled.div`
     margin-bottom: 20px;
   }
   span {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -180,7 +178,6 @@ const MainBox2 = styled.div`
   margin: 0% 17.36%;
 
   h1 {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 600;
     font-size: 48px;
@@ -188,7 +185,6 @@ const MainBox2 = styled.div`
     margin-bottom: 20px;
   }
   span {
-    font-family: "Pretendard";
     text-align: center;
     font-style: normal;
     font-weight: 400;
@@ -243,7 +239,6 @@ const CardOne = styled.div`
   border-radius: 12px;
 
   p {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -252,7 +247,6 @@ const CardOne = styled.div`
   }
 
   span {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -282,14 +276,12 @@ const MainBox3 = styled.div`
   background-color: #f2f3f6;
 
   h1 {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 600;
     font-size: 30px;
     line-height: 42px;
   }
   span {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -312,7 +304,6 @@ const MainBox5 = styled.div`
   background-color: #4e4e56;
 
   h1 {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 600;
     font-size: 30px;
