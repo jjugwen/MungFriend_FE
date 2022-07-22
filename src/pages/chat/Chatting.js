@@ -17,6 +17,7 @@ import { deleteChannel } from "../../redux/modules/chat/channelSlice";
 import chatroomOut from "../../assets/images/Chatting/chatroomOut.svg";
 import noticeIcon from "../../assets/images/Chatting/noticeIcon.svg";
 import airplain from "../../assets/images/Chatting/airplain.svg";
+import CautionButton from "../../elements/CautionButton";
 
 const Chatting = (props) => {
   const chat_data = useSelector((state) => state.chat.list);
@@ -196,10 +197,7 @@ const Chatting = (props) => {
             gap: "4%",
           }}
         >
-          <button>
-            <img src={noticeIcon} alt="noticeIcon" />
-            유의사항
-          </button>
+          <CautionButton />
           <button
             style={{ cursor: "pointer" }}
             onClick={() => {
@@ -219,35 +217,78 @@ const Chatting = (props) => {
               return (
                 <ChatContent key={list.id}>
                   <p>
-                    {/* userID : {list.id} */}
-                    <span
-                      style={{
-                        fontWeight: "500",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {" "}
-                      {list?.sender}
-                    </span>
-                    {list.createdAt ? (
-                      <span
-                        style={{
-                          color: "#747474",
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          paddingLeft: "5px",
-                        }}
-                      >
-                        {list?.createdAt?.slice(5, 7)}월
-                        {list?.createdAt?.slice(8, 10)}일{" "}
-                        {list?.createdAt?.slice(11, 16)}
-                      </span>
-                    ) : null}
-                    <br />
                     {list.sender === "[알림]" ? (
-                      <span style={{ color: "#7A7A80" }}>{list?.message}</span>
+                      <div style={{ textAlign: "center" }}>
+                        <span style={{ color: "#7A7A80" }}>
+                          <span
+                            style={{
+                              fontWeight: "500",
+                              fontSize: "14px",
+                            }}
+                          >
+                            {list?.sender}
+                          </span>{" "}
+                          {list?.message}
+                        </span>
+                      </div>
                     ) : (
-                      <span>{list?.message}</span>
+                      <>
+                        {list.sender === sender ? (
+                          <div style={{ textAlign: "right" }}>
+                            <span
+                              style={{
+                                fontWeight: "500",
+                                fontSize: "14px",
+                              }}
+                            >
+                              {list?.sender}
+                            </span>
+                            {list.createdAt ? (
+                              <span
+                                style={{
+                                  color: "#747474",
+                                  fontWeight: "400",
+                                  fontSize: "12px",
+                                  paddingLeft: "5px",
+                                }}
+                              >
+                                {list?.createdAt?.slice(5, 7)}월
+                                {list?.createdAt?.slice(8, 10)}일{" "}
+                                {list?.createdAt?.slice(11, 16)}
+                              </span>
+                            ) : null}
+                            <br />
+                            <span>{list?.message}</span>
+                          </div>
+                        ) : (
+                          <>
+                            <span
+                              style={{
+                                fontWeight: "500",
+                                fontSize: "14px",
+                              }}
+                            >
+                              {list?.sender}
+                            </span>
+                            {list.createdAt ? (
+                              <span
+                                style={{
+                                  color: "#747474",
+                                  fontWeight: "400",
+                                  fontSize: "12px",
+                                  paddingLeft: "5px",
+                                }}
+                              >
+                                {list?.createdAt?.slice(5, 7)}월
+                                {list?.createdAt?.slice(8, 10)}일{" "}
+                                {list?.createdAt?.slice(11, 16)}
+                              </span>
+                            ) : null}
+                            <br />
+                            <span>{list?.message}</span>
+                          </>
+                        )}
+                      </>
                     )}
                   </p>
                 </ChatContent>
@@ -300,10 +341,10 @@ const ChatList = styled.div`
 `;
 
 const ChatContent = styled.div`
-  width: 81%;
+  width: 100%;
   background-color: #ffffff;
   flex-direction: column;
-  margin: 5px 0 auto;
+  margin: 5px 0;
   & p {
     color: black;
     padding: 15px;
@@ -312,6 +353,7 @@ const ChatContent = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
+    margin: 0 1% auto;
   }
 `;
 
@@ -337,6 +379,7 @@ const ChatPost = styled.div`
     height: 40px;
     border: 1px solid #e3e5e9;
     border-radius: 4px;
+    padding-left: 1%;
   }
 `;
 
