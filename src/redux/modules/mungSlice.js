@@ -17,9 +17,11 @@ export const createMungAX = (mung) => {
       // .post(`http://localhost:5001/dogList`, mung);
       dispatch(loadMyMungAX())
       alert(res.data.message)
+      window.location.reload('/mypage');
       } 
      catch(err){
      console.log(err)
+     
      }
   }
   
