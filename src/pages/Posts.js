@@ -63,11 +63,13 @@ function Posts() {
     } else if (value === "distancePosts") {
       dispatch(loadDistancePostListAX());
       setTimeout(() => {
+        console.log(selected);
         setSelected(distancePosts);
       }, 500);
+      console.log(selected);
     }
   };
-  // console.log(selected);
+  console.log(selected);
   // console.log(Posts);
   // 로딩중일때 sppinner추가
   let isLoding = false;
