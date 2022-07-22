@@ -78,7 +78,21 @@ function Posts() {
           {myinfo?.nickname}
           <span>님의</span> <br />
           {myMung?.length !== 0 ? (
-            <span>멍멍이는</span>
+            <div
+              style={{
+                display: "flex",
+                width: "110%",
+              }}
+            >
+              <span style={{ marginRight: "1%" }}>멍멍이는</span>
+              {myMung?.map((dog, i) => {
+                return (
+                  <span className="dogname">
+                    {dog.name} {dog.age}살{i - (myMung.length - 1) ? "," : null}
+                  </span>
+                );
+              })}
+            </div>
           ) : (
             <span>멍멍이를 등록해주세요!</span>
           )}
@@ -91,18 +105,11 @@ function Posts() {
             marginTop: "10%",
           }}
         >
-          <Kingimg src="https://ifh.cc/g/X36LNp.png" alt="" />
-          {myMung?.map((dog, i) => {
-            return (
-              <div key={i}>
-                <Kingimg src={firstMung} alt="firstMung" />
-                <p className="dogname">
-                  {dog.name} {dog.age}살
-                  <span style={{ marginRight: "10px" }}> </span>
-                </p>
-              </div>
-            );
-          })}
+          {myMung?.length !== 0 ? (
+            <Kingimg src={firstMung} alt="firstMung" />
+          ) : (
+            <Kingimg src="https://ifh.cc/g/X36LNp.png" alt="" />
+          )}
         </div>
         <SSub>
           {myMung?.map((dog, i) => {
@@ -307,7 +314,7 @@ const Box = styled.div`
   .name {
     position: absolute;
     padding-left: 8%;
-    padding-top: 10%;
+    padding-top: 15%;
     font-size: 30px;
     font-weight: 600;
     /* line-height: 40px; */
@@ -315,12 +322,12 @@ const Box = styled.div`
   }
   .dogname {
     position: relative;
-    padding-left: 8%;
-    font-size: 30px;
+    padding-right: 1%;
+    font-size: 100%;
     font-weight: 600;
     /* line-height: 40px; */
+    min-width: fit-content;
     color: #ffffff;
-    width: 100%;
   }
 `;
 const Kingimg = styled.img`
