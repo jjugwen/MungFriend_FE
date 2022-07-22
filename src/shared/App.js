@@ -67,7 +67,8 @@ function App() {
         <Route path="/reviews/:id" element={<ReviewDetailModal />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/chat/:id" element={<Chat />} />
-        <Route path="/errornoaccess" element={<ErrorNoAccess />} />
+        <Route path="/noaccess" element={<NeedLogin />} />
+        <Route path="/error" element={<ErrorPage />} />
         <Route path="/preparing" element={<Preparing />} />
       </Routes>
       <Footer />
