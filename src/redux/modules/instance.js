@@ -38,13 +38,15 @@ instance.interceptors.response.use(
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
     if (error.response.status === 400) {
-      window.alert("인터셉터 400!", error);
+      window.alert(error.response.data.errorMessage);
+      console.log("interceptor 400!");
     }
     if (error.response.status === 401) {
-      window.alert("인터셉터 401!", error);
+      // window.alert(error.response.data.errorMessage);
+      console.log("인터셉터 401!", error.response.data.errorMessage);
     }
     if (error.response.status === 404) {
-      window.alert("인터셉터 404!", error);
+      console.log("인터셉터 404!", error);
     }
 
     return Promise.reject(error);
