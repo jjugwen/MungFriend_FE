@@ -93,6 +93,7 @@ function ReviewDetailModal(props) {
                 orange_large
                 className="close"
                 _onClick={() => {
+                  setSlide(1);
                   close();
                 }}
                 position="absolute"
@@ -101,7 +102,6 @@ function ReviewDetailModal(props) {
                 확인
               </Button>
             </>
-            );
           </div>
         ) : null}
       </div>

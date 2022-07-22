@@ -82,9 +82,9 @@ console.log(Posts.length===0)
           {myinfo?.nickname}
           <span>님의</span> <br />
           {myMung?.length !== 0 ? (
-            <span>멍친구는</span>
+            <span>멍멍이는</span>
           ) : (
-            <span>멍친구를 등록해주세요!</span>
+            <span>멍멍이를 등록해주세요!</span>
           )}
         </h1>
         <div
