@@ -65,7 +65,7 @@ function Posts() {
       setTimeout(() => {
         console.log(selected);
         setSelected(distancePosts);
-      }, 500);
+      }, 3000);
       console.log(selected);
     }
   };
