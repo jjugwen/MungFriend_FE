@@ -9,6 +9,7 @@ import Button from "../../elements/Button";
 import { timeForToday } from "./TimeCalculator";
 //chat
 import { createChannel } from "../../redux/modules/chat/channelSlice";
+import CautionButton from "../../elements/CautionButton";
 
 function ApplyComment() {
   const params = useParams();
@@ -28,7 +29,15 @@ function ApplyComment() {
 
   return (
     <>
-      <h1 className="DetailTitle">신청자 댓글</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <h1 className="DetailTitle">신청자 댓글</h1>
+        <CautionButton />
+      </div>
       <span>
         총 <span style={{ color: "#FA5A30" }}>{detailList?.applyCount}</span>개
       </span>
