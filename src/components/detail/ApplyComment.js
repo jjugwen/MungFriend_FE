@@ -36,7 +36,7 @@ function ApplyComment() {
         }}
       >
         <h1 className="DetailTitle">신청자 댓글</h1>
-        <CautionButton />
+        <CautionButton margin="8px 0 40px 0" />
       </div>
       <span>
         총 <span style={{ color: "#FA5A30" }}>{detailList?.applyCount}</span>개
@@ -73,7 +73,7 @@ function ApplyComment() {
                 close={closeApplyModal}
               />
 
-              <div className="ApplyCommentText">{value.comment}</div>
+              <p className="ApplyCommentText">{value.comment}</p>
               {/* isComplete가 false면 매칭하기 버튼 활성화 / true면 비활성화 */}
               {detailList?.isComplete ? (
                 <Button MatchingBtn _disabled>
