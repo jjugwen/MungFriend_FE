@@ -1,44 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
-// import axios from "axios";
 
 //axios
 export const createReviewDB = (formData) => {
-  console.log(formData);
+  // console.log(formData);
   return async function (dispatch) {
-    await instance
-      .post("/api/reviews", formData, {
+    try {
+      const response = await instance.post("/api/reviews", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      })
-      // await axios
-      //   .post(`http://localhost:5002/reviews`, formData)
-      .then((response) => {
-        if (response.data.staus === "true") {
-          dispatch(reviewCreate(response.data));
-          // window.location.replace('/');
-        } else if (response.data.staus === "false") {
-          console.log(response.data.message);
-        }
-      })
-      .catch((err) => {
-        // window.alert("에러가 발생했어요!");
-        console.log(err);
       });
+      if (response.data.staus === "true") {
+        dispatch(reviewCreate(response.data));
+        // window.location.replace('/');
+      } else if (response.data.staus === "false") {
+        console.log(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
 export const loadReviewDetailDB = (id) => {
-  console.log(id);
+  // console.log(id);
   return async function (dispatch) {
-    await instance
-      .get(`/api/reviews/${id}`)
-      // await axios.get(`http://localhost:5002/reviewdetail`)
-      .then((response) => {
-        // console.log(response.data);
-        dispatch(reviewDetailLoad(response.data));
-      });
+    try {
+      const response = await instance.get(`/api/reviews/${id}`);
+      dispatch(reviewDetailLoad(response.data));
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
