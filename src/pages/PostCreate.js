@@ -74,8 +74,8 @@ function PostCreate() {
     };
     // console.log(post);
     dispatch(createPostAX(post));
-    navigate(`/posts`);
-    window.location.reload();
+    // navigate(`/posts`);
+    // window.location.reload();
   };
   //  수정 게시글 데이터 가져오기
   React.useEffect(() => {
