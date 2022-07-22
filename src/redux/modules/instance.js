@@ -34,6 +34,7 @@ instance.interceptors.response.use(
   function (error) {
     // 응답 오류가 있는 작업 수행
     if (error.response.status === 400) {
+      // console.log(error.response.data);
       window.alert(error.response.data.errorMessage);
     } else if (error.response.status === 401) {
       sessionStorage.clear();
