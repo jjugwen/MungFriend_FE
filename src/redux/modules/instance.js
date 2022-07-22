@@ -39,18 +39,18 @@ instance.interceptors.response.use(
     if (error.response.status === 400) {
       window.alert(error.response.data.errorMessage);
       // console.log("interceptor 400!");
-    }
-    if (error.response.status === 401) {
+    } else if (error.response.status === 401) {
       // window.alert(error.response.data.errorMessage);
       sessionStorage.clear();
-      window.location.replace("/errornoaccess");
+      window.location.replace("/noaccess");
       // console.log("인터셉터 401!", error.response.data.errorMessage);
-    }
-    if (error.response.status === 403) {
+    } else if (error.response.status === 403) {
       window.alert(error.response.data.errorMessage);
       // console.log("인터셉터 403!", error);
+    } else {
+      window.alert(error.response.data.errorMessage);
+      window.location.replace("/error");
     }
-
     return Promise.reject(error);
   }
 );
