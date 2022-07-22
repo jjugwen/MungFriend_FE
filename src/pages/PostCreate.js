@@ -6,7 +6,7 @@ import styled from "styled-components";
 import instance from "../redux/modules/instance";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
 import {useNavigate} from 'react-router-dom';
-import { createPostAX} from "../redux/modules/postSlice";
+import { createPostAX, loadPostListAX} from "../redux/modules/postSlice";
 
 const selectDog = [];
 function PostCreate() {
@@ -76,7 +76,8 @@ function PostCreate() {
     };
     // console.log(post);
     dispatch(createPostAX(post));
-    window.location.replace('/posts')
+    dispatch(loadPostListAX());
+    navigate(`/posts`)
   };
   //  수정 게시글 데이터 가져오기
   React.useEffect(() => {
