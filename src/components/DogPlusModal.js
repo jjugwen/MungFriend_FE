@@ -51,7 +51,9 @@ function DogPlusModal(props) {
     // console.log(formData);
     // for (const value of formData) console.log(value);
     dispatch(createMungAX(formData));
-    props.setMungModal(!props.modal)
+    
+    // 에러 발생시 창이 닫기지 않아야 하므로 주석처리
+    // props.setMungModal(!props.modal)
     // window.location.replace('/mypage')
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
     setMungImage({
@@ -151,7 +153,7 @@ function DogPlusModal(props) {
         <button onClick={()=>{
           props.setMungModal(!props.modal)
         }}> 취소 </button>
-        <button className="okbutton" type="submit" onClick={signUp}>
+        <button className="okbutton" type="button" onClick={signUp}>
           확인
         </button>
       </div>
