@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Button from "../../../elements/Button";
 import closeBtn from "../../../assets/images/Mypage/reviewDetailModal_closeBtn.svg";
-
+import defaultImg from "../../../assets/images/Chatting/img-dog-chat.png";
 function ReviewDetailModal(props) {
   const { open, close } = props;
   // const dispatch = useDispatch();
@@ -67,6 +67,10 @@ function ReviewDetailModal(props) {
                           slide === index + 1 ? "slide active-anim" : "slide"
                         }
                       >
+                        {/* <img
+                          src={image ? { image } : { defaultImg }} //테스트해야함
+                          alt="reviewImages"
+                        /> */}
                         <img src={image} alt="reviewImages" />
                       </div>
                       <ContainerDots>
