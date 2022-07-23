@@ -121,6 +121,7 @@ const LeftContainer = styled.div`
   background: #f2f3f6;
   min-width: 274px; //19.05%
   max-width: 15%;
+  overflow-y: scroll;
 `;
 
 const ChannelList2 = styled.div`

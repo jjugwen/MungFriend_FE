@@ -9,6 +9,8 @@ import Sppiner from "../components/shared/Spinner";
 import styled from "styled-components";
 import Ing from "../assets/images/IsComplete/모집중.svg";
 import Done from "../assets/images/IsComplete/모집종료.svg";
+import WithmeTrue from "../assets/images/Withme/같이해요.svg";
+import WithmeFalse from "../assets/images/Withme/부탁해요.svg";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -31,8 +33,10 @@ function Posts() {
   const Posts = useSelector((state) =>
     state.postSlice.post.filter((v) => v.isComplete === false)
   );
-  // console.log("모집중 전체 글 조회", Posts);
 
+  console.log("모집중 전체 글 조회", Posts);
+  // const Posts1 = useSelector((state) => state.postSlice.post);
+  // console.log("모집중 전체 글 조회 no filter", Posts1);
   //로그인 유저 닉네임 얻기
   const myinfo = useSelector((state) => state.userInfoSlice.myInfo);
   // console.log(myinfo);
@@ -65,7 +69,7 @@ function Posts() {
   // 로딩중일때 sppinner추가
   let isLoding = false;
   if (Posts.length === 0) {
-    isLoding = true;
+    // isLoding = true;
   }
 
   // console.log(Posts.length === 0);
@@ -78,7 +82,21 @@ function Posts() {
           {myinfo?.nickname}
           <span>님의</span> <br />
           {myMung?.length !== 0 ? (
-            <span>멍멍이는</span>
+            <div
+              style={{
+                display: "flex",
+                width: "110%",
+              }}
+            >
+              <span style={{ marginRight: "1%" }}>멍멍이는</span>
+              {myMung?.map((dog, i) => {
+                return (
+                  <span key={i} className="dogname">
+                    {dog.name} {dog.age}살{i - (myMung.length - 1) ? "," : null}
+                  </span>
+                );
+              })}
+            </div>
           ) : (
             <span>멍멍이를 등록해주세요!</span>
           )}
@@ -91,18 +109,11 @@ function Posts() {
             marginTop: "10%",
           }}
         >
-          <Kingimg src="https://ifh.cc/g/X36LNp.png" alt="" />
-          {myMung?.map((dog, i) => {
-            return (
-              <div key={i}>
-                <Kingimg src={firstMung} alt="firstMung" />
-                <p className="dogname">
-                  {dog.name} {dog.age}살
-                  <span style={{ marginRight: "10px" }}> </span>
-                </p>
-              </div>
-            );
-          })}
+          {myMung?.length !== 0 ? (
+            <Kingimg src={firstMung} alt="firstMung" />
+          ) : (
+            <Kingimg src="https://ifh.cc/g/X36LNp.png" alt="" />
+          )}
         </div>
         <SSub>
           {myMung?.map((dog, i) => {
@@ -151,21 +162,31 @@ function Posts() {
                     navigate(`/posts/${post.id}`);
                   }}
                 >
-                  <div className="row-box">
-                    {post.imagePath?.map((image, i) => (
-                      <PostImg key={i} src={image} alt="" />
-                    ))}
-                    <div className="name-box">
-                      <span className="name">{post.nickname} </span>
-                      {post.distance ? (
-                        <span className="name" style={{ color: "#FA5A30" }}>
-                          {post.distance?.toFixed(1)}km
-                        </span>
-                      ) : null}
-                      <div className="date">
-                        {post.requestStartDate.substring(0, 10)}
+                  <div
+                    className="row-box"
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <div className="row-box" style={{ alignItems: "center" }}>
+                      {post.imagePath?.map((image, i) => (
+                        <PostImg key={i} src={image} alt="" />
+                      ))}
+                      <div className="name-box">
+                        <span className="name">{post.nickname} </span>
+                        {post.distance ? (
+                          <span className="name" style={{ color: "#FA5A30" }}>
+                            {post.distance?.toFixed(1)}km
+                          </span>
+                        ) : null}
+                        <div className="date">
+                          {post.requestStartDate.substring(0, 10)}
+                        </div>
                       </div>
                     </div>
+                    {post.withMe ? (
+                      <img src={WithmeTrue} alt="withmetrue" />
+                    ) : (
+                      <img src={WithmeFalse} alt="withmefalse" />
+                    )}
                   </div>
                   <div className="title">{post.title}</div>
                   <div className="content">
@@ -184,6 +205,7 @@ function Posts() {
                         />
                         신청자 {post.applyCount}
                       </div>
+
                       <div>
                         {post.isComplete ? (
                           <img src={Done} alt="" />
@@ -209,21 +231,31 @@ function Posts() {
                     navigate(`/posts/${post.id}`);
                   }}
                 >
-                  <div className="row-box">
-                    {post.imagePath?.map((image, i) => (
-                      <PostImg key={i} src={image} alt="" />
-                    ))}
-                    <div className="name-box">
-                      <span className="name">{post.nickname} </span>
-                      {post.distance ? (
-                        <span className="name" style={{ color: "#FA5A30" }}>
-                          {post.distance?.toFixed(1)}km
-                        </span>
-                      ) : null}
-                      <div className="date">
-                        {post.requestStartDate.substring(0, 10)}
+                  <div
+                    className="row-box"
+                    style={{ justifyContent: "space-between" }}
+                  >
+                    <div className="row-box" style={{ alignItems: "center" }}>
+                      {post.imagePath?.map((image, i) => (
+                        <PostImg key={i} src={image} alt="" />
+                      ))}
+                      <div className="name-box">
+                        <span className="name">{post.nickname} </span>
+                        {post.distance ? (
+                          <span className="name" style={{ color: "#FA5A30" }}>
+                            {post.distance?.toFixed(1)}km
+                          </span>
+                        ) : null}
+                        <div className="date">
+                          {post.requestStartDate.substring(0, 10)}
+                        </div>
                       </div>
                     </div>
+                    {post.withMe ? (
+                      <img src={WithmeTrue} alt="withmetrue" />
+                    ) : (
+                      <img src={WithmeFalse} alt="withmefalse" />
+                    )}
                   </div>
                   <div className="title">{post.title}</div>
                   <div className="content">
@@ -315,12 +347,12 @@ const Box = styled.div`
   }
   .dogname {
     position: relative;
-    padding-left: 8%;
-    font-size: 30px;
+    padding-right: 1%;
+    font-size: 100%;
     font-weight: 600;
     /* line-height: 40px; */
+    min-width: fit-content;
     color: #ffffff;
-    width: 100%;
   }
 `;
 const Kingimg = styled.img`

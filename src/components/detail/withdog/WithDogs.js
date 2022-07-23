@@ -38,7 +38,7 @@ function DogList() {
         {detailList?.dogList?.map((dog, index) => {
           return (
             <Listbox key={dog.id}>
-              <div className="betweenDogPicAndDogInfo">
+              <BetweenDogPicAndDogInfo>
                 <DogImg src={dog.dogImageFiles[0].imageUrl} alt="dogUrl" />
                 <div style={{ width: "100%", minWidth: "80px" }}>
                   <div className="WithDogsDogName">
@@ -53,7 +53,7 @@ function DogList() {
                     {dog.age}세, {dog.size}견
                   </span>
                 </div>
-              </div>
+              </BetweenDogPicAndDogInfo>
               <div>
                 <MungProfileBtn
                   onClick={() => {
@@ -90,9 +90,17 @@ const ListOutterBox = styled.div`
   gap: 2%;
   justify-content: flex-start;
 `;
+const BetweenDogPicAndDogInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3%;
+  width: max-content;
+  box-sizing: content-box;
+`;
 
 const DogImg = styled.img`
-  width: 100px;
+  width: 60px;
   height: 60px;
   border-radius: 50%;
 `;
@@ -118,7 +126,6 @@ const MungProfileBtn = styled.button`
   border-radius: 4px;
   width: 65px;
   height: 30px;
-  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

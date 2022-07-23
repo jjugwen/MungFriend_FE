@@ -14,7 +14,7 @@ export const myinfoDB = () => {
 };
 
 export const userinfoDB = (nickname) => {
-  console.log(nickname);
+  // console.log(nickname);
   return async function (dispatch) {
     try {
       const response = await instance.post(`/userinfo`, { nickname: nickname });

@@ -8,7 +8,14 @@ function ReviewImgUpload() {
   const dispatch = useDispatch();
 
   const [preview, setPreview] = useState([]);
-  const [image, setImage] = useState([]);
+
+  //이미지 없을 때 디폴트 파일 생성
+  const defaulfileImg = new File([], "img-profile-no-32.png", {
+    type: "image/png",
+    lastModified: 1658306462480,
+  });
+
+  const [image, setImage] = useState([defaulfileImg]); //디폴프 파일 기본값으로 넣기
 
   const uploadImage = (e) => {
     let imagelist = [];

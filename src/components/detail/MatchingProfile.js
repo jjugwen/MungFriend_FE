@@ -91,7 +91,6 @@ const Listbox = styled.div`
 
   p {
     margin: 0 30% 0 12px;
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -108,7 +107,6 @@ const ReviewBtn = styled.button`
   border: none;
   width: 65px;
   height: 30px;
-  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -121,7 +119,6 @@ const CancleBtn = styled.button`
   border: none;
   width: 65px;
   height: 30px;
-  font-family: "Pretendard";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

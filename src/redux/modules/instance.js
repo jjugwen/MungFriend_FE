@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://hjkim-sparta.shop",
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 2000,
 });
 

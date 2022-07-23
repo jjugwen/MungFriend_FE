@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import ReviewDetailModal from "./ReviewDetailModal";
+import ReviewDetailModal from "./detail/review/ReviewDetailModal";
 import { actionCreators as reviewActions } from "../redux/modules/reviewSlice";
 
 function MyReviewList() {
@@ -28,7 +28,7 @@ function MyReviewList() {
         <GridBox>
           {info?.takerReviewList.map((review, i) => {
             return (
-              <ReviewBox key={i} >
+              <ReviewBox key={i}>
                 <button
                   style={{ background: "none", border: "none" }}
                   onClick={() => {
@@ -76,16 +76,13 @@ const ReviewList = styled.div`
       color: #fa5a30;
     }
   }
- 
-   
 `;
 const GridBox = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2%;
-`
+`;
 const ReviewBox = styled.div`
-
   height: 216px;
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
@@ -97,7 +94,7 @@ const ReviewBox = styled.div`
   .review-box {
     margin-top: 10px;
   }
-  button{
+  button {
     font-size: 16px;
   }
 `;

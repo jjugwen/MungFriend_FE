@@ -80,7 +80,6 @@ const FooterLogo = styled.img`
 `;
 
 const copyright = {
-  fontFamily: "Pretendard",
   fontStyle: "normal",
   fontWeight: "400",
   fontSize: "14px",
@@ -90,7 +89,6 @@ const copyright = {
 };
 
 const sitePromise = {
-  fontFamily: "Pretendard",
   fontStyle: "normal",
   fontWeight: "500",
   fontSize: "16px",

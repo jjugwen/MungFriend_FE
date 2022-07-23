@@ -17,7 +17,7 @@ import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
 import DogPlusModal from "../components/DogPlusModal";
 import ProfileUpdate from "../components/ProfileUpdate";
-import ReviewDetailModal from "../components/ReviewDetailModal";
+import ReviewDetailModal from "../components/detail/review/ReviewDetailModal";
 import HeaderModal from "../components/shared/HeaderModal";
 
 //채팅

@@ -117,7 +117,6 @@ const UserModalBtn = styled.button`
 
   p {
     margin: 0;
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
@@ -125,7 +124,6 @@ const UserModalBtn = styled.button`
   }
 
   span {
-    font-family: "Pretendard";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
