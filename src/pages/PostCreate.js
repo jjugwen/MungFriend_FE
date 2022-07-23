@@ -12,7 +12,7 @@ function PostCreate() {
   const params = useParams();
   //id값으로 게시글 판별
   const isNew = params.id === undefined;
-  console.log(params.id);
+  // console.log(params.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ function PostCreate() {
   let endMinute = isNew
     ? "123"
     : Number(updatePost?.requestEndDate.split("T")[1].split(":")[1]);
-  console.log(updatePost?.requestEndDate.split("T")[1].split(":"));
+
   //수정버튼
   const updateClick = () => {
     if (selectDog.length === 0) {
@@ -150,7 +150,7 @@ function PostCreate() {
     selectDog.length = 0;
   }
 
-  const a = (e) => {
+  const dogClick = (e) => {
     let index = selectDog.indexOf(Number(e.target.value));
     if (selectDog.includes(Number(e.target.value)) === true) {
       selectDog.splice(index, 1);
@@ -165,6 +165,13 @@ function PostCreate() {
   return (
     <Container>
       <Title>게시글 작성</Title>
+      <WithMeBox> 카테고리 선택</WithMeBox>
+      <RowBox>
+        <CheckBox type="radio" name="test"/>
+        <WithMe>같이해요</WithMe>
+      <CheckBox type="radio" name="test"/>
+      <WithMe>부탁해요</WithMe>
+      </RowBox>
       <RowBox>
         <SubText>멍 프로필 선택</SubText>
         <MiniText>* 다중선택 가능합니다.</MiniText>
@@ -175,7 +182,7 @@ function PostCreate() {
           return (
             <Listbox key={index}>
               <CheckBox
-                onClick={a}
+                onClick={dogClick}
                 value={dog.id}
                 type="checkbox"
                 name="isRepresentative"
@@ -317,6 +324,18 @@ const Title = styled.div`
   font-size: 30px;
   margin-bottom: 50px;
 `;
+const WithMeBox = styled.div`
+ font-weight: 600;
+  font-size: 20px;
+  margin-right: 13px;
+`
+const WithMe = styled.div`
+box-sizing: border-box;
+padding-top: 17px;
+font-weight: 600;
+font-size: 16px;
+margin-bottom: 50px;
+`
 const SubText = styled.div`
   font-weight: 600;
   font-size: 20px;
