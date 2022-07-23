@@ -62,6 +62,7 @@ function HeaderModal(props) {
             console.log("로그아웃!");
             Logout();
             props.setModal(!props.modal);
+            window.location.reload();
           }}
         >
           로그아웃
