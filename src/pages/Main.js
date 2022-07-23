@@ -77,24 +77,26 @@ function Main() {
           <CardOne>
             <Stepbox style={{ backgroundImage: `url(${Step1})` }} />
             <p>STEP 1</p>
-            <span style={{ marginTop: "4%" }}>회원가입을 완료하세요.</span>
+            <span style={{ marginBottom: "2%" }}>마이페이지에서</span>
+            <span>본인 인증, 멍프로필 등록하기</span>
           </CardOne>
           <CardOne>
             <Stepbox style={{ backgroundImage: `url(${Step2})` }} />
             <p>STEP 2</p>
-            <span style={{ marginBottom: "2%" }}>산책 페이지로 이동 후</span>
-            <span> 글쓰기 버튼을 클릭해주세요.</span>
+            <span style={{ marginBottom: "2%" }}>산책 페이지에서</span>
+            <span>모집글 작성하기</span>
           </CardOne>
           <CardOne>
             <Stepbox style={{ backgroundImage: `url(${Step3})` }} />
             <p>STEP 3</p>
-            <span style={{ marginBottom: "2%" }}>글 작성 후, 신청자</span>
-            <span> 한 명을 매칭해주세요.</span>
+            <span style={{ marginBottom: "2%" }}>신청한 멍친구 중</span>
+            <span>한 명과 매칭하기</span>
           </CardOne>
           <CardOne>
             <Stepbox style={{ backgroundImage: `url(${Step4})` }} />
             <p>STEP 4</p>
-            <span style={{ marginTop: "4%" }}>완료!</span>
+            <span style={{ marginBottom: "2%" }}>매칭된 멍친구와</span>
+            <span>채팅으로 시간/장소 조율하기</span>
           </CardOne>
         </CardBox>
       </MainBox2>
