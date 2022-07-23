@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import ReviewDetailModal from "./ReviewDetailModal";
+import ReviewDetailModal from "./detail/review/ReviewDetailModal";
 import { actionCreators as reviewActions } from "../redux/modules/reviewSlice";
 
 function GiverReview() {
@@ -29,15 +29,15 @@ function GiverReview() {
           {info?.giverReviewList.map((review, i) => {
             return (
               <ReviewBox key={i}>
-                  <div className="row-box">
-                    <GiverImg src={review.giverDogProfileImgUrl} alt="" />
-                    <div className="name-box">
-                      <div>{review.giverNickname}</div>
-                      <div>{review.createdAt.split("T")[0]}</div>
-                    </div>
+                <div className="row-box">
+                  <GiverImg src={review.giverDogProfileImgUrl} alt="" />
+                  <div className="name-box">
+                    <div>{review.giverNickname}</div>
+                    <div>{review.createdAt.split("T")[0]}</div>
                   </div>
-                  <div className="review-box">{review.comment}</div>
-           
+                </div>
+                <div className="review-box">{review.comment}</div>
+
                 {/* <ReviewDetailModal
                   open={reviewModal}
                   close={closeReviewModal}
@@ -74,10 +74,9 @@ const GridBox = styled.div`
 
   grid-template-columns: repeat(2, 1fr);
   gap: 2%;
-`
+`;
 
 const ReviewBox = styled.div`
-
   height: 216px;
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);

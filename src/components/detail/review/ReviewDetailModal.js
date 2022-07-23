@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 
 // style
 import styled from "styled-components";
-import Button from "../elements/Button";
-import closeBtn from "../assets/images/Mypage/reviewDetailModal_closeBtn.svg";
+import Button from "../../../elements/Button";
+import closeBtn from "../../../assets/images/Mypage/reviewDetailModal_closeBtn.svg";
 
 function ReviewDetailModal(props) {
   const { open, close } = props;
@@ -25,7 +25,7 @@ function ReviewDetailModal(props) {
       <div className={open ? "openModalcss" : null}>
         {open ? (
           <div className="modal" style={{ height: "750px", padding: "0.7%" }}>
-            <div className="revieweDetailTitle">
+            <RevieweDetailTitle>
               <ModalTitle style={{ textAlign: "center" }}>후기상세</ModalTitle>
               <button
                 onClick={() => {
@@ -38,9 +38,9 @@ function ReviewDetailModal(props) {
               >
                 <img src={closeBtn} alt="closeBtn" />
               </button>
-            </div>
+            </RevieweDetailTitle>
             <>
-              <div key={reviewDetail.giverNickname} className="reviewerInfo">
+              <ReviewerInfo key={reviewDetail.giverNickname}>
                 <div
                   className="MungProfileImgCircle"
                   style={{
@@ -55,9 +55,9 @@ function ReviewDetailModal(props) {
                     {reviewDetail.createdAt?.slice(0, 10).replace(/\-/g, ".")}
                   </span>
                 </div>
-              </div>
+              </ReviewerInfo>
               <HrBlack />
-              <div className="imgBox">
+              <ImgBox>
                 {reviewDetail.reviewImgList?.map((image, index) => {
                   return (
                     <>
@@ -69,7 +69,7 @@ function ReviewDetailModal(props) {
                       >
                         <img src={image} alt="reviewImages" />
                       </div>
-                      <div className="containerDots">
+                      <ContainerDots>
                         {Array.from({
                           length: reviewDetail.reviewImgList.length,
                         }).map((item, index) => (
@@ -81,12 +81,12 @@ function ReviewDetailModal(props) {
                             }
                           ></div>
                         ))}
-                      </div>
+                      </ContainerDots>
                     </>
                   );
                 })}
-              </div>
-              <div className="reviewTextBox">{reviewDetail.comment}</div>
+              </ImgBox>
+              <ReviewTextBox>{reviewDetail.comment}</ReviewTextBox>
               <Hr />
               <Button
                 width="214px"
@@ -134,5 +134,51 @@ const Hr = styled.hr`
   border: 1px solid #e5e5e5;
   position: absolute;
   bottom: 75px;
+`;
+
+/* 후기 상세 모달창 ReviewDetailModal CSS */
+const RevieweDetailTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 330px;
+  margin-left: 230px;
+  position: absolute;
+  top: 20px;
+`;
+
+const ReviewerInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 85%;
+  min-width: 180px;
+  /* gap: 2%; */
+  gap: 12px;
+  position: absolute;
+  top: 80px;
+`;
+
+const ImgBox = styled.div`
+  display: flex;
+  width: 560px;
+`;
+
+const ContainerDots = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: 245px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+const ReviewTextBox = styled.div`
+  width: 85%;
+  position: absolute;
+  bottom: 91px;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
 `;
 export default ReviewDetailModal;
