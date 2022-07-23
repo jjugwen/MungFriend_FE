@@ -19,6 +19,8 @@ import applyEnd from "../assets/images/IsComplete/모집종료.svg";
 import { actionCreators as postActions } from "../redux/modules/postDetailSlice";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
 import { actionCreators as applyActions } from "../redux/modules/applySlice";
+import WithmeTrue from "../assets/images/Withme/같이해요.svg";
+import WithmeFalse from "../assets/images/Withme/부탁해요.svg";
 
 function PostDetail() {
   const params = useParams();
@@ -69,11 +71,16 @@ function PostDetail() {
     <>
       <div className="DetailOutterBox">
         <div className="DetailTitleBox">
-          <div>
+          <div style={{ display: "flex", gap: "1%" }}>
             {detailList?.isComplete ? (
               <img src={applyEnd} alt="applyEnd" />
             ) : (
               <img src={applyIng} alt="applyIng" />
+            )}
+            {detailList.withMe ? (
+              <img src={WithmeTrue} alt="withmetrue" />
+            ) : (
+              <img src={WithmeFalse} alt="withmefalse" />
             )}
           </div>
 
