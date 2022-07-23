@@ -8,8 +8,6 @@ import "../../elements/modalStyle.css";
 import ReviewImgUpload from "./review/ReviewImgUpload";
 import Button from "../../elements/Button";
 import CautionButton from "../../elements/CautionButton";
-// import CountText from "../shared/CountText";
-// import CountText from "../shared/CountText";
 
 function WriteModal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -25,7 +23,6 @@ function WriteModal(props) {
   const addReview = async () => {
     const formData = new FormData();
     image.forEach((image) => formData.append("image", image));
-
     const data = {
       postId: postId,
       applicantNickname: detailList?.matchedNickname,
@@ -37,6 +34,7 @@ function WriteModal(props) {
     formData.append("infos", blob);
     dispatch(reviewActions.createReviewDB(formData));
     // for (const value of formData) console.log(value);
+    // window.alert("후기 작성이 완료되었습니다.");
   };
 
   //글자수 세기
@@ -118,6 +116,7 @@ function WriteModal(props) {
                   } else {
                     addReview();
                     setTimeout(() => {
+                      window.alert("후기 작성이 완료되었습니다.");
                       close();
                     }, 300);
                   }
@@ -148,7 +147,6 @@ const ModalInput = styled.textarea`
 `;
 
 const ModalTitle = styled.h1`
-  font-family: "Pretendard";
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
