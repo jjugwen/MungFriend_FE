@@ -29,7 +29,7 @@ function MyPageComponent() {
           src={
             info?.dogProfileImgUrl
               ? info?.dogProfileImgUrl
-              : "https://ifh.cc/g/xNyzTw.png"
+              : "https://ifh.cc/g/rsQtyQ.png"
           }
           alt=""
         />
