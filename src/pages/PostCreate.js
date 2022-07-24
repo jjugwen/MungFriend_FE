@@ -37,15 +37,21 @@ function PostCreate() {
   const startMinuteRef = useRef(null);
   const endHourRef = useRef(null);
   const endMinuteRef = useRef(null);
-  // const withMeRef = useRef(null);
-  // const pleaseRef = useRef(null);
 
-  const [withMe, setWithMe] =useState(false);
-  const a = (e)=> {
+  const [withMe, setWithMe] = useState(false);
+  const clickCategory = (e)=> {
     setWithMe(e.target.value)
-    
-  }
 
+  }  
+
+  const dogClick = (e) => {
+    let index = selectDog.indexOf(Number(e.target.value));
+    if (selectDog.includes(Number(e.target.value)) === true) {
+      selectDog.splice(index, 1);
+    } else {
+      selectDog.push(Number(e.target.value));
+    }
+  };
 
   //작성버튼
   const click = () => {
@@ -112,7 +118,7 @@ function PostCreate() {
         e.preventDefault();
       });
     }
-
+    
     let startHour = startHourRef.current.value;
     if (startHour.length === 1) {
       startHour = 0 + startHour;
@@ -147,26 +153,10 @@ function PostCreate() {
       .catch((error) => {
         alert(error.data.message);
       });
-    console.log(newUpdatePost);
+ 
+    // console.log(newUpdatePost);
   };
-  // 수정이라면, dogList 초기화 해주기
-  // 두번째 수정때 dogList가 배열에서 빠지는 오류 때문에추가
-  if (!isNew) {
-    selectDog.length = 0;
-  }
-
-  const dogClick = (e) => {
-    let index = selectDog.indexOf(Number(e.target.value));
-    if (selectDog.includes(Number(e.target.value)) === true) {
-      selectDog.splice(index, 1);
-    } else {
-      selectDog.push(Number(e.target.value));
-    }
-
-    // console.log(e.target.value);
-    // console.log(selectDog);
-  };
-
+  
 
   const checkStyle={
     borderColor: "transparent",
@@ -177,20 +167,21 @@ function PostCreate() {
     backgroundColor: "#fa5a30"
   }
 
-const b = (e)=>{
-
-}
-
+  const test = () =>{
+    // console.log(selectDog)
+  }
+  
+  // React.memo(selectDog);
   return (
     <Container>
       <Title>게시글 작성</Title>
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
-        <CheckBox type="radio" name="test" onClick={a} value={true} />
+        <CheckBox type="radio" name="test" onClick={clickCategory} value={true} />
         <WithMe style={withMe? {color:"#FA5A30"}:{}}>같이해요</WithMe>
-      <CheckBox type="radio" name="test" onClick={a} value=""  style={withMe? {}:checkStyle}/>
-      <WithMe style={withMe? {}:{color:"#FA5A30"}}>부탁해요</WithMe>
-      {withMe?<InfoBox>같이 산책을 시킬때 보일 글</InfoBox>:<InfoBox> 산책을 부탁할 때 보일 글</InfoBox>}
+      <CheckBox type="radio" name="test" onClick={clickCategory} value=""  style={withMe? {}:checkStyle}/>
+      <WithMe style={withMe? {}:{color:"#FA5A30"}} >부탁해요</WithMe>
+      {withMe?<InfoBox>산책을 같이 할 멍친구를 모집합니다.</InfoBox>:<InfoBox> 멍멍이를 산책시켜줄 멍친구를 모집합니다.</InfoBox>}
       </RowBox>
       <RowBox>
         <SubText>멍 프로필 선택</SubText>
@@ -200,7 +191,7 @@ const b = (e)=>{
       <RowBox>
         {dogList?.map((dog, index) => {
           return (
-            <Listbox key={index}>
+            <Listbox key={index} >
               <CheckBox
                 onClick={dogClick}
                 value={dog.id}
