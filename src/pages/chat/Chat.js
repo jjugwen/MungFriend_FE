@@ -1,5 +1,5 @@
 // react
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 // style
 import styled from "styled-components";
@@ -23,10 +23,8 @@ const Chat = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const chatroom = useRef("");
-
   // state에 axiso get한 데이터 불러오기
   const channel_data = useSelector((state) => state.channel.list);
-
   //매칭하기 눌렀을 때의 신청자 nickname
 
   // 첫 렌더링
@@ -40,18 +38,6 @@ const Chat = (props) => {
       dispatch(loadChat(id));
     }
   }, [dispatch, id]);
-
-  //채팅방 색깔 바꾸기
-  const [cateActive, setCateActive] = useState(
-    Array(channel_data.length).fill(false)
-  );
-  const btnActiveHandler = (id, link) => {
-    const activeCheck = cateActive.map((el, index) => {
-      return index === id - 1;
-    });
-    setCateActive(activeCheck);
-    navigate(link);
-  };
 
   return (
     <React.Fragment>
@@ -70,20 +56,33 @@ const Chat = (props) => {
               {channel_data &&
                 channel_data.map((list, index) => {
                   return (
-                    <ChannelListBox
-                      props={cateActive}
-                      id={list.id}
-                      key={index}
-                      btnActiveHandler={btnActiveHandler}
-                      cateActive={cateActive}
-                      onClick={() => {
-                        navigate(`/chat/${list.id}`);
-                        // clearStorage('channelId');
-                        // setStorage('channelId', `${list.id}`);
-                      }}
-                    >
-                      <p ref={chatroom}>{list.channel}</p>
-                    </ChannelListBox>
+                    <>
+                      {Number(id) === list.id ? (
+                        <SelectedChannelListBox
+                          // id={list.id}
+                          key={index}
+                          onClick={() => {
+                            navigate(`/chat/${list.id}`);
+                            // clearStorage('channelId');
+                            // setStorage('channelId', `${list.id}`);
+                          }}
+                        >
+                          <p ref={chatroom}>{list.channel}</p>
+                        </SelectedChannelListBox>
+                      ) : (
+                        <ChannelListBox
+                          // id={list.id}
+                          key={index}
+                          onClick={() => {
+                            navigate(`/chat/${list.id}`);
+                            // clearStorage('channelId');
+                            // setStorage('channelId', `${list.id}`);
+                          }}
+                        >
+                          <p ref={chatroom}>{list.channel}</p>
+                        </ChannelListBox>
+                      )}
+                    </>
                   );
                 })}
             </ChannelList2>
@@ -135,6 +134,38 @@ const ChannelList2 = styled.div`
     margin: 2% 0 10% 0;
   }
 `;
+
+const SelectedChannelListBox = styled.div`
+  width: 100%;
+  min-width: 205px;
+  max-width: 15%;
+  margin: 4% 8%;
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding: 1% 5%;
+  background-color: #fa5a30;
+  & p {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: white;
+  }
+  & div {
+    cursor: pointer;
+    top: 0;
+    right: 0px;
+  }
+  & img {
+    width: 25px;
+    margin-top: 7px;
+  }
+`;
 const ChannelListBox = styled.div`
   width: 100%;
   min-width: 205px;
@@ -147,14 +178,14 @@ const ChannelListBox = styled.div`
   cursor: pointer;
   position: relative;
   padding: 1% 5%;
-  background-color: ${({ props, id }) => (props[id - 1] ? "#fa5a30" : "#fff")};
+  background-color: #fff;
   & p {
     font-family: "Pretendard";
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 100%;
-    color: ${({ props, id }) => (props[id - 1] ? "white" : "black")};
+    color: black;
   }
   & div {
     cursor: pointer;
