@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createMungAX } from "../redux/modules/mungSlice";
 import styled from "styled-components";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 function DogPlusModal(props) {
   //이미지를 한번 추가해볼게요
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const [mungImage, setMungImage] = useState({
     image: "",
     previewUrl: "",
@@ -51,7 +51,7 @@ function DogPlusModal(props) {
     // console.log(formData);
     // for (const value of formData) console.log(value);
     dispatch(createMungAX(formData));
-    
+
     // 에러 발생시 창이 닫기지 않아야 하므로 주석처리
     // props.setMungModal(!props.modal)
     // window.location.replace('/mypage')
@@ -61,6 +61,14 @@ function DogPlusModal(props) {
       previewUrl: "",
     });
   };
+
+  //글자수 세기
+  const [text, setText] = useState("");
+
+  const onChangeText = (e) => {
+    return setText(e.target.value);
+  };
+
   return (
     <Container>
       <p className="font-24">
@@ -76,10 +84,7 @@ function DogPlusModal(props) {
       />
       <PreviewBtn>
         <label className="input-button" htmlFor="input-file">
-          <img
-            src="https://ifh.cc/g/ZfSpJc.png"
-            alt=""
-          />
+          <img src="https://ifh.cc/g/ZfSpJc.png" alt="" />
         </label>
         <input
           type="file"
@@ -116,6 +121,7 @@ function DogPlusModal(props) {
               className="box-size"
               type="number"
               max="30"
+              min="0"
               onChange={handleChange("age")}
               placeholder="나이를 입력해주세요."
             />
@@ -145,14 +151,26 @@ function DogPlusModal(props) {
           <b>견종이나 유의사항 등 추가할 정보</b>
         </p>
         <textarea
-          onChange={handleChange("info")}
+          onChange={
+            // () => {
+            handleChange("info")
+            // onChangeText(e);
+            // }
+          }
           placeholder="멍멍이의 유의사항을 알려주세요!&#13;&#10;(Ex. '입질 때문에 다른 강아지 근처에 가지 못하게 주의해주세요', '예방 접종을 마쳤습니다.')"
+          maxLength="255" //255자 제한
         />
+        {/* <CountText>{text.length}/255</CountText> */}
       </div>
       <div className="btn-box">
-        <button onClick={()=>{
-          props.setMungModal(!props.modal)
-        }}> 취소 </button>
+        <button
+          onClick={() => {
+            props.setMungModal(!props.modal);
+          }}
+        >
+          {" "}
+          취소{" "}
+        </button>
         <button className="okbutton" type="button" onClick={signUp}>
           확인
         </button>
@@ -165,7 +183,7 @@ const Container = styled.div`
   padding: 20px;
   width: 520px;
   position: fixed;
-  top:50%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
@@ -228,13 +246,12 @@ top: 73px; */
       font-weight: 500;
       border-radius: 4px;
       font-weight: 500;
-font-size: 16px;
+      font-size: 16px;
     }
-.okbutton{
-        background-color: #FA5A30;
-    color: #efefef;
-      }
-
+    .okbutton {
+      background-color: #fa5a30;
+      color: #efefef;
+    }
   }
 `;
 
@@ -258,7 +275,7 @@ const PreviewBtn = styled.div`
     width: 40px;
     line-height: 40px;
     padding: 13px 9px 4px 9px;
-    background-color: #FA5A30;;
+    background-color: #fa5a30;
     border-radius: 50%;
 
     /* cursor: pointer; */
@@ -266,6 +283,15 @@ const PreviewBtn = styled.div`
   .filebtn {
     display: none;
   }
+`;
+
+const CountText = styled.span`
+  position: absolute;
+  right: 9%;
+  bottom: 13.5%;
+  font-weight: 400;
+  font-size: 16px;
+  color: #7a7a80;
 `;
 
 export default DogPlusModal;
