@@ -23,7 +23,7 @@ function DogPlusModal(props) {
         image: event.target.files[0],
         previewUrl: e.target.result,
       });
-      console.log(event.target.files[0]);
+      // console.log(event.target.files[0]);
     };
   };
   const dispatch = useDispatch();
@@ -56,10 +56,10 @@ function DogPlusModal(props) {
     // props.setMungModal(!props.modal)
     // window.location.replace('/mypage')
     //이미지 서버에 다 보내고 나서 다시 초기값 만들기
-    setMungImage({
-      image: "",
-      previewUrl: "",
-    });
+    // setMungImage({
+    //   image: "",
+    //   previewUrl: "",
+    // });
   };
 
   //글자수 세기
@@ -168,8 +168,7 @@ function DogPlusModal(props) {
             props.setMungModal(!props.modal);
           }}
         >
-          {" "}
-          취소{" "}
+          취소
         </button>
         <button className="okbutton" type="button" onClick={signUp}>
           확인

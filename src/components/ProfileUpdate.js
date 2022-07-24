@@ -345,6 +345,7 @@ const AddressBox = styled.div`
   left: 50%;
   margin-top: 40px;
   background-color: white;
+  z-index: 1;
 `;
 const CheckInput = styled.input`
   margin: 18px;

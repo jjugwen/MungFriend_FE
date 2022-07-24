@@ -37,12 +37,16 @@ function PostCreate() {
   const startMinuteRef = useRef(null);
   const endHourRef = useRef(null);
   const endMinuteRef = useRef(null);
-  // const withMeRef = useRef(false);
+  const withMeRef = useRef(null);
+  const pleaseRef = useRef(null);
+
   const [withMe, setWithMe] =useState(false);
   const a = (e)=> {
     setWithMe(e.target.value)
     
   }
+
+
   //작성버튼
   const click = () => {
     if (selectDog.length === 0) {
@@ -163,15 +167,33 @@ function PostCreate() {
     // console.log(selectDog);
   };
 
+
+  const checkStyle={
+    borderColor: "transparent",
+    backgroundImage: `url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e")`,
+    backgroundSize: "100% 100%",
+    backgroundPosition: "50%",
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "#fa5a30"
+  }
+
+const b = (e)=>{
+  console.log(e.target.id)
+if(e.target.id==="1"){
+  withMeRef.current.style=`color:#FA5A30;`
+}
+}
+
   return (
     <Container>
       <Title>게시글 작성</Title>
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
-        <CheckBox type="radio" name="test" onClick={a} value={true}/>
-        <WithMe>같이해요</WithMe>
-      <CheckBox type="radio" name="test" onClick={a} value=""/>
-      <WithMe>부탁해요</WithMe>
+        <CheckBox type="radio" name="test" onClick={a} value={true} />
+        <WithMe ref={withMeRef} onClick={b} id="1">같이해요</WithMe>
+      <CheckBox type="radio" name="test" onClick={a} value=""  style={withMe===false? checkStyle:{}}/>
+      <WithMe ref={pleaseRef} onClick={b} id="2">부탁해요</WithMe>
+      {withMe===false?<div>부탁해요</div>:<div>같이해요</div>}
       </RowBox>
       <RowBox>
         <SubText>멍 프로필 선택</SubText>
