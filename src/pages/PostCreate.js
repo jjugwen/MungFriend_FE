@@ -37,14 +37,16 @@ function PostCreate() {
   const startMinuteRef = useRef(null);
   const endHourRef = useRef(null);
   const endMinuteRef = useRef(null);
-
+  // const withMeRef = useRef(false);
+  const [withMe, setWithMe] =useState(false);
+  const a = (e)=> {
+    setWithMe(e.target.value)
+    
+  }
   //작성버튼
   const click = () => {
     if (selectDog.length === 0) {
       alert("멍 프로필을 선택해 주세요!");
-      window.addEventListener((e) => {
-        e.preventDefault();
-      });
     }
 
     let startHour = startHourRef.current.value;
@@ -70,11 +72,10 @@ function PostCreate() {
       requestStartDate:
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
+      withMe:Boolean(withMe)
     };
-    // console.log(post);
+    // console.log(post)
     dispatch(createPostAX(post));
-    // navigate(`/posts`);
-    // window.location.reload();
   };
   //  수정 게시글 데이터 가져오기
   React.useEffect(() => {
@@ -128,11 +129,11 @@ function PostCreate() {
       title: titleRef.current.value,
       content: contentRef.current.value,
       dogIdList: selectDog,
+      withMe:Boolean(withMe),
       requestStartDate:
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
     };
-
     instance
       .put(`/api/posts/${params.id}`, newUpdatePost)
       .then(() => {
@@ -167,9 +168,9 @@ function PostCreate() {
       <Title>게시글 작성</Title>
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
-        <CheckBox type="radio" name="test"/>
+        <CheckBox type="radio" name="test" onClick={a} value={true}/>
         <WithMe>같이해요</WithMe>
-      <CheckBox type="radio" name="test"/>
+      <CheckBox type="radio" name="test" onClick={a} value=""/>
       <WithMe>부탁해요</WithMe>
       </RowBox>
       <RowBox>
@@ -305,7 +306,7 @@ function PostCreate() {
     </Container>
   );
 }
-const Container = styled.form`
+const Container = styled.div`
   width: 65%;
   margin: auto;
   justify-content: center;
