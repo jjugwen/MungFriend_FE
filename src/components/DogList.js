@@ -25,8 +25,9 @@ function DogList(props) {
   };
   const ChoiceRep = (e) => {
     const id = e.target.value;
-    instance.put(`api/dogs/${id}`).then((res) => {alert(res.data.message)
-    window.location.reload(); 
+    instance.put(`api/dogs/${id}`).then((res) => {
+      alert(res.data.message)
+      window.location.reload(); 
     }); 
                                
     // console.log(id)
