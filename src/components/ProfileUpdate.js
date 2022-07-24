@@ -53,7 +53,7 @@ function ProfileUpdate(props) {
         //리덕스 데이터로 바꿔줘야함!
         dispatch(loadMyPageAX());
         alert(response.data.message);
-        sessionStorage.setItem("token",response.data.accessToken);
+        sessionStorage.setItem("token", response.data.accessToken);
       })
       .catch((error) => {
         alert(error);
