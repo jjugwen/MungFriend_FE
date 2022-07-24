@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Button from "../../../elements/Button";
 import closeBtn from "../../../assets/images/Mypage/reviewDetailModal_closeBtn.svg";
-import defaultImg from "../../../assets/images/Chatting/img-dog-chat.png";
 function ReviewDetailModal(props) {
   const { open, close } = props;
   // const dispatch = useDispatch();
@@ -17,11 +16,10 @@ function ReviewDetailModal(props) {
   };
 
   const reviewDetail = useSelector((state) => state.reviewSlice.list);
-  // console.log(reviewDetail);
+  console.log(reviewDetail);
 
   return (
     <>
-      {/* <div className="openModalcss"> */}
       <div className={open ? "openModalcss" : null}>
         {open ? (
           <div className="modal" style={{ height: "750px", padding: "0.7%" }}>
@@ -59,18 +57,15 @@ function ReviewDetailModal(props) {
               <HrBlack />
               <ImgBox>
                 {reviewDetail.reviewImgList?.map((image, index) => {
+                  console.log(image);
                   return (
                     <>
                       <div
-                        key={image.id}
+                        key={index}
                         className={
                           slide === index + 1 ? "slide active-anim" : "slide"
                         }
                       >
-                        {/* <img
-                          src={image ? { image } : { defaultImg }} //테스트해야함
-                          alt="reviewImages"
-                        /> */}
                         <img src={image} alt="reviewImages" />
                       </div>
                       <ContainerDots>

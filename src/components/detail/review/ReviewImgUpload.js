@@ -10,7 +10,7 @@ function ReviewImgUpload() {
   const [preview, setPreview] = useState([]);
 
   //이미지 없을 때 디폴트 파일 생성
-  const defaulfileImg = new File([], "img-profile-no-32.png", {
+  const defaulfileImg = new File([], "mungfriendDefaultImage.png", {
     type: "image/png",
     lastModified: 1658306462480,
   });

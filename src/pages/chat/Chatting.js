@@ -1,21 +1,17 @@
 import React, { useEffect, useRef } from "react";
-
-import styled from "styled-components";
-
-// 리덕스 = history가 browser_router느낌
 import { useDispatch, useSelector } from "react-redux";
 
 // 소켓 통신
 import Stomp from "stompjs";
 import SockJS from "sockjs-client";
 
-// components  = Notfound
+// 리덕스
 import { loadChat } from "../../redux/modules/chat/chatSlice";
-
 import { deleteChannel } from "../../redux/modules/chat/channelSlice";
 
+// 스타일
+import styled from "styled-components";
 import chatroomOut from "../../assets/images/Chatting/chatroomOut.svg";
-import noticeIcon from "../../assets/images/Chatting/noticeIcon.svg";
 import airplain from "../../assets/images/Chatting/airplain.svg";
 import CautionButton from "../../elements/CautionButton";
 
@@ -233,7 +229,7 @@ const Chatting = (props) => {
                       </div>
                     ) : (
                       <>
-                        {list.sender === sender ? (
+                        {list.sender === sender ? ( //로그인한 사람 = 메시지 보내는 입장이면 메시지 내용 오른쪽에
                           <div style={{ textAlign: "right" }}>
                             <span
                               style={{
@@ -325,7 +321,7 @@ const ChatListContainer = styled.div`
   z-index: 6;
   background-color: white;
   width: 95%;
-  max-height: 77%;
+  max-height: 105%;
   overflow-y: auto !important;
   overflow-x: hidden;
   height: auto;
