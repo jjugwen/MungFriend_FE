@@ -49,11 +49,11 @@ function ProfileUpdate(props) {
     instance
       .post(`/mypage`, update_data)
       .then((response) => {
-        props.setProfileModal(!props.modal);
-        //리덕스 데이터로 바꿔줘야함!
+        // props.setProfileModal(!props.modal);
         dispatch(loadMyPageAX());
         alert(response.data.message);
-        sessionStorage.setItem("token",response.data.accessToken);
+        if(response.data.accessToken !== null){
+        sessionStorage.setItem("token",response.data.accessToken);}
       })
       .catch((error) => {
         alert(error);
@@ -168,14 +168,14 @@ function ProfileUpdate(props) {
         <>
           <TextBox>
             멍친구{" "}
-            <a href="https://protective-iodine-bc7.notion.site/bbd8abbf735140109899396c1c87dc61">
+            <a href="https://protective-iodine-bc7.notion.site/bbd8abbf735140109899396c1c87dc61" target='blank'>
               이용약관
             </a>
             ,{" "}
-            <a href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0">
-              개인정보
+            <a href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0" target='blank'>
+              개인정보 취급방침
             </a>{" "}
-            취급방침에 모두 동의합니다.
+            에 모두 동의합니다.
           </TextBox>
           <RowBox>
             <CheckInput
