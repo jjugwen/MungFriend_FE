@@ -12,7 +12,7 @@ export const loadMyPageAX = () => {
       .get(`/mypage`)
       .then((response) => {
         dispatch(loadMyPage(response.data))
-        window.location.reload();
+  
       });
   };
 };
