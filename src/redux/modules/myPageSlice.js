@@ -10,7 +10,10 @@ export const loadMyPageAX = () => {
       // await axios.get(`http://localhost:5001/mypage`)
       // await instance
       .get(`/mypage`)
-      .then((response) => dispatch(loadMyPage(response.data)));
+      .then((response) => {
+        dispatch(loadMyPage(response.data))
+  
+      });
   };
 };
 
