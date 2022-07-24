@@ -37,8 +37,8 @@ function PostCreate() {
   const startMinuteRef = useRef(null);
   const endHourRef = useRef(null);
   const endMinuteRef = useRef(null);
-  const withMeRef = useRef(null);
-  const pleaseRef = useRef(null);
+  // const withMeRef = useRef(null);
+  // const pleaseRef = useRef(null);
 
   const [withMe, setWithMe] =useState(false);
   const a = (e)=> {
@@ -178,10 +178,7 @@ function PostCreate() {
   }
 
 const b = (e)=>{
-  console.log(e.target.id)
-if(e.target.id==="1"){
-  withMeRef.current.style=`color:#FA5A30;`
-}
+
 }
 
   return (
@@ -190,10 +187,10 @@ if(e.target.id==="1"){
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
         <CheckBox type="radio" name="test" onClick={a} value={true} />
-        <WithMe ref={withMeRef} onClick={b} id="1">같이해요</WithMe>
-      <CheckBox type="radio" name="test" onClick={a} value=""  style={withMe===false? checkStyle:{}}/>
-      <WithMe ref={pleaseRef} onClick={b} id="2">부탁해요</WithMe>
-      {withMe===false?<div>부탁해요</div>:<div>같이해요</div>}
+        <WithMe style={withMe? {color:"#FA5A30"}:{}}>같이해요</WithMe>
+      <CheckBox type="radio" name="test" onClick={a} value=""  style={withMe? {}:checkStyle}/>
+      <WithMe style={withMe? {}:{color:"#FA5A30"}}>부탁해요</WithMe>
+      {withMe?<InfoBox>같이 산책을 시킬때 보일 글</InfoBox>:<InfoBox> 산책을 부탁할 때 보일 글</InfoBox>}
       </RowBox>
       <RowBox>
         <SubText>멍 프로필 선택</SubText>
@@ -358,6 +355,13 @@ padding-top: 17px;
 font-weight: 600;
 font-size: 16px;
 margin-bottom: 50px;
+/* color: ${(props)=>props.withMe? "black":"#FA5A30"} */
+`
+
+const InfoBox= styled.div`
+color: gray;
+font-size: 14px;
+padding: 18px;
 `
 const SubText = styled.div`
   font-weight: 600;

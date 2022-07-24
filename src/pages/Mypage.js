@@ -30,7 +30,7 @@ const Mypage = () => {
   const mypostRef = useRef();
   const myapplypostRef = useRef();
   const giverReviewRef = useRef();
-
+// console.log(change.type.name)
   const getClick = (e) => {
     const id = e.target.id;
     if (id === "1") {
