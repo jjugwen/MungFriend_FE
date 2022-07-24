@@ -49,15 +49,12 @@ function ProfileUpdate(props) {
     instance
       .post(`/mypage`, update_data)
       .then((response) => {
-        // props.setProfileModal(!props.modal);
+        props.setProfileModal(!props.modal);
         dispatch(loadMyPageAX());
         alert(response.data.message);
         if(response.data.accessToken !== null){
         sessionStorage.setItem("token",response.data.accessToken);}
       })
-      .catch((error) => {
-        alert(error);
-      });
   };
   const [isAgree, setIsAgree] = useState(false);
 
