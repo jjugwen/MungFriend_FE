@@ -20,6 +20,10 @@ const GoogleLoginRedirect = () => {
     // console.log(decodeName, "닉네임");
     sessionStorage.setItem("nickname", decodeName);
 
+    //memeberId get
+    const memberId = new URL(window.location.href).searchParams.get("memberId");
+    sessionStorage.setItem("memberId", memberId);
+
     //profile 이미지 get
     // const profileImage = new URL(window.location.href).searchParams.get(
     //   "profile"
