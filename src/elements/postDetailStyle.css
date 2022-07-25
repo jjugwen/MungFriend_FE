@@ -4,12 +4,13 @@
   box-sizing: border-box;
   display: block;
   position: relative;
+  margin-top: 80px;
 }
 
 .DetailTitleBox {
   margin-top: 2%;
   min-width: 940px;
-  margin: 0% 17.36%;
+  margin: 0% 17.36% 20px 17.36%;
 }
 
 .DetailTitleBottom {
@@ -33,6 +34,7 @@
 .NickAndDistanceAndDate {
   display: flex;
   flex-direction: column;
+  gap: 1px;
 }
 
 .betweenNickAndDistance {
@@ -144,6 +146,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 22px 0;
 }
 
 .ApplyCommentText {

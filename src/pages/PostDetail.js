@@ -159,8 +159,9 @@ function PostDetail() {
             </div>
           </div>
         </div>
-        <Hr />
+
         <div className="DetailBodyBox" style={{ height: "300px" }}>
+          <Hr />
           {detailList?.content}
         </div>
         <div className="DetailBodyBox">
@@ -224,14 +225,18 @@ function PostDetail() {
                 수정하기
               </Button>
             </div>
-            <ApplyComment />
+            <div className="DetailBodyBox">
+              <ApplyComment />
+            </div>
           </div>
         ) : (
           //모집 완료(isComplete가 false)면 매칭 프로필 보이기
           <>
             {/* 매칭된 닉네임이 있을 때만 매칭 프로필 보이기 */}
             {detailList?.matchedNickname !== null ? <MatchingProfile /> : ""}
-            <ApplyComment />
+            <div className="DetailBodyBox">
+              <ApplyComment />
+            </div>
           </>
         )}
       </div>
@@ -250,6 +255,7 @@ const MungProfileImgCircle = styled.div`
 const UserModalBtn = styled.button`
   border: none;
   background: none;
+  padding: 0;
 `;
 
 const Hr = styled.hr`
