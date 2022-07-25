@@ -55,7 +55,6 @@ const CautionBtn = styled.button`
   border: 1px solid #e3e5e9;
   border-radius: 4px;
   background: none;
-  cursor: pointer;
   margin: ${(props) => props.margin};
   display: flex;
   align-items: center;

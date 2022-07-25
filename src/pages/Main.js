@@ -42,65 +42,68 @@ function Main() {
           </div>
         </div>
       </MainBox1>
-
-      <MainBox2>
-        <div
-          style={{
-            marginBottom: "80px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+      <div style={{ minWidth: "1440px" }}>
+        <MainBox2>
           <div
             style={{
+              marginBottom: "80px",
               display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
+              justifyContent: "space-between",
             }}
           >
-            <h1>
-              산책을 시켜줄 <br />
-              보호자를 찾고 있다면?
-            </h1>
-            <span>멍친구에서 산책 매칭을 통해 안심하고 맡겨보세요!</span>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <h1>
+                산책을 시켜줄 <br />
+                보호자를 찾고 있다면?
+              </h1>
+              <span>멍친구에서 산책 매칭을 통해 안심하고 맡겨보세요!</span>
+            </div>
+            <TextCircle>
+              <Textrotate />
+              <img
+                src={MungFootPrint}
+                alt="MungFootPrint"
+                style={{ position: "absolute" }}
+              />
+            </TextCircle>
           </div>
-          <TextCircle>
-            <Textrotate />
-            <img
-              src={MungFootPrint}
-              alt="MungFootPrint"
-              style={{ position: "absolute" }}
-            />
-          </TextCircle>
-        </div>
-        <CardBox>
-          <CardOne>
-            <Stepbox style={{ backgroundImage: `url(${Step1})` }} />
-            <p>STEP 1</p>
-            <span style={{ marginBottom: "2%" }}>마이페이지에서</span>
-            <span>본인 인증, 멍프로필 등록하기</span>
-          </CardOne>
-          <CardOne>
-            <Stepbox style={{ backgroundImage: `url(${Step2})` }} />
-            <p>STEP 2</p>
-            <span style={{ marginBottom: "2%" }}>산책 페이지에서</span>
-            <span>모집글 작성하기</span>
-          </CardOne>
-          <CardOne>
-            <Stepbox style={{ backgroundImage: `url(${Step3})` }} />
-            <p>STEP 3</p>
-            <span style={{ marginBottom: "2%" }}>신청한 멍친구 중</span>
-            <span>한 명과 매칭하기</span>
-          </CardOne>
-          <CardOne>
-            <Stepbox style={{ backgroundImage: `url(${Step4})` }} />
-            <p>STEP 4</p>
-            <span style={{ marginBottom: "2%" }}>매칭된 멍친구와</span>
-            <span>채팅으로 시간/장소 조율하기</span>
-          </CardOne>
-        </CardBox>
-      </MainBox2>
-      <Banner style={{ backgroundImage: `url(${bannerHeart})` }} />
+          <CardBox>
+            <CardOne>
+              <Stepbox style={{ backgroundImage: `url(${Step4})` }} />
+              <p>STEP 1</p>
+              <span style={{ marginBottom: "2%" }}>마이페이지에서</span>
+              <span>본인 인증, 멍프로필 등록하기</span>
+            </CardOne>
+            <CardOne>
+              <Stepbox style={{ backgroundImage: `url(${Step2})` }} />
+              <p>STEP 2</p>
+              <span style={{ marginBottom: "2%" }}>산책 페이지에서</span>
+              <span>모집글 작성하기</span>
+            </CardOne>
+            <CardOne>
+              <Stepbox style={{ backgroundImage: `url(${Step3})` }} />
+              <p>STEP 3</p>
+              <span style={{ marginBottom: "2%" }}>신청한 멍친구 중</span>
+              <span>한 명과 매칭하기</span>
+            </CardOne>
+            <CardOne>
+              <Stepbox style={{ backgroundImage: `url(${Step1})` }} />
+              <p>STEP 4</p>
+              <span style={{ marginBottom: "2%" }}>매칭된 멍친구와</span>
+              <span>채팅으로 시간/장소 조율하기</span>
+            </CardOne>
+          </CardBox>
+        </MainBox2>
+      </div>
+      <div style={{ minWidth: "1440px" }}>
+        <Banner style={{ backgroundImage: `url(${bannerHeart})` }} />
+      </div>
       <MainBox3>
         <div
           style={{
@@ -109,11 +112,7 @@ function Main() {
             alignItems: "center",
           }}
         >
-          <div
-            style={{
-              margin: "0 0 0 17.36%",
-            }}
-          >
+          <div>
             <h1>주인아 월!른 산책 나가개!</h1>
             <span>
               반려견은 집 안에 갇혀 있으면 답답함과 우울함을 느끼게 됩니다.
@@ -133,11 +132,7 @@ function Main() {
             alignItems: "center",
           }}
         >
-          <div
-            style={{
-              margin: "0 0 0 17.36%",
-            }}
-          >
+          <div>
             <h1>멍친구는</h1>
             <h1>반려견, 반려인들의 행복을</h1>
             <h1>위해 함께합니다.</h1>
@@ -151,11 +146,15 @@ function Main() {
 
 const MainBox1 = styled.div`
   /* position: fixed; */
-  height: 40em;
+  height: 100%;
+  min-height: 40em;
   width: 100%;
-
-  /* background-color: #fbf1e8; */
-  background-size: cover;
+  min-width: 1440px;
+  /* min-width: 100%; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fbf1e8;
+  background-size: contain;
   position: relative;
   /* margin-bottom: 115px; */
   margin-bottom: 7.5%;
@@ -178,7 +177,9 @@ const MainBox1 = styled.div`
 
 const MainBox2 = styled.div`
   margin: 0% 17.36%;
-
+  min-width: 940px;
+  box-sizing: border-box;
+  background-position: center;
   h1 {
     font-style: normal;
     font-weight: 600;
@@ -233,7 +234,8 @@ const CardBox = styled.div`
 const CardOne = styled.div`
   width: 100%;
   min-width: 6.54%;
-  height: 16em;
+  /* height: 16em; */
+  padding-bottom: 2.4%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -262,6 +264,7 @@ const Stepbox = styled.div`
   margin: 1.5em;
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
 `;
 
 const Banner = styled.div`
@@ -269,13 +272,21 @@ const Banner = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   margin: 7.5% 17.36%;
+  min-width: 940px;
+  background-position: center;
 `;
 
 const MainBox3 = styled.div`
   height: 22em;
+  width: 100%;
+  min-width: 1440px;
   background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   margin-bottom: 7.5%;
   background-color: #f2f3f6;
+  display: flex;
+  justify-content: center;
 
   h1 {
     font-style: normal;
@@ -296,21 +307,28 @@ const MainBox4 = styled.div`
   /* height: 792px; */
   height: 47em;
   background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
   margin: 7.5% 17.36%;
+  min-width: 960px;
 `;
 
 const MainBox5 = styled.div`
   height: 22em;
   background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: #4e4e56;
-
+  min-width: 1440px;
+  display: flex;
+  justify-content: center;
   h1 {
     font-style: normal;
     font-weight: 600;
     font-size: 30px;
     line-height: 25px;
     color: white;
+    width: max-content;
   }
 `;
 export default Main;

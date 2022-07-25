@@ -133,7 +133,6 @@ Button.defaultProps = {
 
 const OrangeBtn = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   width: ${(props) => props.width};
   height: 3em;
@@ -155,7 +154,6 @@ const OrangeBtn = styled.button`
 
 const WhiteBtn180 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   min-width: 180px;
   height: 3em;
@@ -176,7 +174,6 @@ const WhiteBtn180 = styled.button`
 `;
 const WhiteBtn194 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   min-width: 194px;
   height: 3em;
@@ -197,7 +194,6 @@ const WhiteBtn194 = styled.button`
 `;
 const WhiteBtn214 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   min-width: 214px;
   height: 3em;
@@ -219,7 +215,6 @@ const WhiteBtn214 = styled.button`
 
 const OrangeBtn180 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   min-width: 180px;
   height: 3em;
@@ -240,7 +235,6 @@ const OrangeBtn180 = styled.button`
 `;
 const OrangeBtn194 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   width: ${(props) => props.width};
   min-width: 100px;
@@ -263,7 +257,6 @@ const OrangeBtn194 = styled.button`
 `;
 const OrangeBtn214 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   width: ${(props) => props.width};
   min-width: 214px;
@@ -310,7 +303,6 @@ const GreyBtn180 = styled.button`
 
 const BlueBtn65 = styled.button`
   font-family: "Pretendard";
-  cursor: pointer;
   box-sizing: border-box;
   min-width: 65px;
   height: 30px;
@@ -333,7 +325,6 @@ const PlusBtn = styled.button`
   /* position: fixed; */
   bottom: 20px;
   right: 30px;
-  cursor: pointer;
   box-sizing: border-box;
   /* width: ${(props) => props.width}; */
   width: 48px;

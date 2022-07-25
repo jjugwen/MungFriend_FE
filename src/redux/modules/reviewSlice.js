@@ -55,7 +55,9 @@ export const reviewSlice = createSlice({
       console.log(state.image);
     },
     reviewImgDelete(state, action) {
-      state.image = action.payload;
+      console.log(action.payload);
+      state.image -= action.payload;
+      console.log(state.image);
     },
     reviewDetailLoad(state, action) {
       state.list = action.payload;

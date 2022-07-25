@@ -18,7 +18,7 @@ function WriteModal(props) {
   const postId = Number(params.id);
   const image = useSelector((state) => state.reviewSlice.image);
   const detailList = useSelector((state) => state.postDetailSlice.list);
-
+  console.log(image);
   // 데이터 formData로 보내기
   const addReview = async () => {
     const formData = new FormData();
@@ -81,8 +81,9 @@ function WriteModal(props) {
             <Button
               white_large
               className="close"
-              _onClick={() => {
-                close();
+              _onClick={(e) => {
+                e.preventDefault();
+                close(e);
               }}
             >
               취소
