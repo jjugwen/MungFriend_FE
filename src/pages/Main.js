@@ -110,6 +110,8 @@ function Main() {
             display: "flex",
             gap: "6.5em",
             alignItems: "center",
+            justifyContent: "space-between",
+            margin: "0% 17.36%",
           }}
         >
           <div>
@@ -130,6 +132,8 @@ function Main() {
             display: "flex",
             gap: "6.5em",
             alignItems: "center",
+            justifyContent: "space-between",
+            margin: "0% 17.36%",
           }}
         >
           <div>
@@ -271,7 +275,7 @@ const Banner = styled.div`
   height: 12.5em;
   background-size: contain;
   background-repeat: no-repeat;
-  margin: 7.5% 17.36%;
+  margin: 7.5% 0;
   min-width: 940px;
   background-position: center;
 `;
@@ -285,8 +289,8 @@ const MainBox3 = styled.div`
   background-repeat: no-repeat;
   margin-bottom: 7.5%;
   background-color: #f2f3f6;
-  display: flex;
-  justify-content: center;
+  box-sizing: border-box;
+  display: block;
 
   h1 {
     font-style: normal;
@@ -309,8 +313,8 @@ const MainBox4 = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  margin: 7.5% 17.36%;
-  min-width: 960px;
+  margin: 7.5% 0;
+  min-width: 1440px;
 `;
 
 const MainBox5 = styled.div`
@@ -320,8 +324,9 @@ const MainBox5 = styled.div`
   background-repeat: no-repeat;
   background-color: #4e4e56;
   min-width: 1440px;
-  display: flex;
-  justify-content: center;
+  box-sizing: border-box;
+  display: block;
+
   h1 {
     font-style: normal;
     font-weight: 600;
