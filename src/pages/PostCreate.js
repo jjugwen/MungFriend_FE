@@ -167,20 +167,16 @@ function PostCreate() {
     backgroundColor: "#fa5a30"
   }
 
-  const test = () =>{
-    // console.log(selectDog)
-  }
-  
-  // React.memo(selectDog);
+
   return (
     <Container>
       <Title>게시글 작성</Title>
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
-        <CheckBox type="radio" name="test" onClick={clickCategory} value={true} />
-        <WithMe style={withMe? {color:"#FA5A30"}:{}}>같이해요</WithMe>
+        <CheckBox className="radiotype" type="radio" name="test" onClick={clickCategory} value={true} />
+        <WithMeTextBox style={withMe? {color:"#FA5A30"}:{}}>같이해요</WithMeTextBox>
       <CheckBox type="radio" name="test" onClick={clickCategory} value=""  style={withMe? {}:checkStyle}/>
-      <WithMe style={withMe? {}:{color:"#FA5A30"}} >부탁해요</WithMe>
+      <WithMeTextBox style={withMe? {}:{color:"#FA5A30"}} >부탁해요</WithMeTextBox>
       {withMe?<InfoBox>산책을 같이 할 멍친구를 모집합니다.</InfoBox>:<InfoBox> 멍멍이를 산책시켜줄 멍친구를 모집합니다.</InfoBox>}
       </RowBox>
       <RowBox>
@@ -222,6 +218,7 @@ function PostCreate() {
       <RowBox>
         <InputBox>
           <input
+            data-placeholder="날짜선택"
             type="date"
             ref={dateRef}
             defaultValue={updatePost?.requestStartDate.split("T")[0]}
@@ -340,7 +337,7 @@ const WithMeBox = styled.div`
   font-size: 20px;
   margin-right: 13px;
 `
-const WithMe = styled.div`
+const WithMeTextBox = styled.div`
 box-sizing: border-box;
 padding-top: 17px;
 font-weight: 600;
@@ -367,6 +364,9 @@ const MiniText = styled.div`
 `;
 
 const RowBox = styled.div`
+  .radiotype{
+    margin: 18px 18px 18px 0px;
+  }
   display: flex;
   flex-direction: row;
 `;
@@ -386,6 +386,7 @@ const Listbox = styled.div`
 `;
 
 const CheckBox = styled.input`
+
   margin: 18px;
   appearance: none;
   width: 1.2rem;
@@ -437,12 +438,15 @@ const InputBox = styled.div`
     font-size: 16px;
     width: 48%;
     height: 48px;
+    border: 1px solid #E3E5E9;
   }
+
   select {
     font-family: "Pretendard";
     font-size: 16px;
     width: 12.5%;
-    height: 48px;
+    height: 52px;
+    border: 1px solid #E3E5E9;
   }
 `;
 const CoulmnBox = styled.div`
