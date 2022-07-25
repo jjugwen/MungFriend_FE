@@ -42,6 +42,7 @@ const Wrap = styled.div`
   /* width: 100%; */
   margin: auto;
   text-align: center;
+  min-width: 1440px;
 `;
 
 const Img = styled.img`

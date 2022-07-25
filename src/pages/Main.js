@@ -11,6 +11,7 @@ import bannerHeart from "../assets/images/Main/img-banner-heart.png";
 import bannerWalk from "../assets/images/Main/img-dog-sad.png";
 import bannerhands from "../assets/images/Main/img-hands.png";
 import together from "../assets/images/Main/함께.png";
+import Button from "../elements/Button";
 
 function Main() {
   return (
@@ -144,6 +145,16 @@ function Main() {
           <img src={bannerhands} alt="hands" style={{ width: "29.4em" }} />
         </div>
       </MainBox5>
+      <a
+        target="blank"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSfLguQ7YNHIWtGHVjHyDBm0V4XL9rv026hwwhvVgIKE_MgKWg/viewform"
+      >
+        <Button is_circle type="button">
+          event
+          <br />
+          (~8/2)
+        </Button>
+      </a>
     </div>
   );
 }

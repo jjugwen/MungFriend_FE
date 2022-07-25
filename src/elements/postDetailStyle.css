@@ -1,9 +1,15 @@
 .DetailOutterBox {
-  margin: 0% 17.36%;
+  width: 100%;
+  min-width: 1440px;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
 }
 
 .DetailTitleBox {
   margin-top: 2%;
+  min-width: 940px;
+  margin: 0% 17.36%;
 }
 
 .DetailTitleBottom {
@@ -16,6 +22,12 @@
   align-items: center;
   width: 250px;
   gap: 2%;
+}
+
+.DetailBodyBox {
+  margin-top: 2%;
+  min-width: 940px;
+  margin: 0% 17.36%;
 }
 
 .NickAndDistanceAndDate {

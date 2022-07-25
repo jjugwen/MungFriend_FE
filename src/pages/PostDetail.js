@@ -71,7 +71,7 @@ function PostDetail() {
     <>
       <div className="DetailOutterBox">
         <div className="DetailTitleBox">
-          <div style={{ display: "flex", gap: "1%" }}>
+          <div style={{ display: "flex", gap: "4px" }}>
             {detailList?.isComplete ? (
               <img src={applyEnd} alt="applyEnd" />
             ) : (
@@ -163,10 +163,14 @@ function PostDetail() {
         <div className="DetailBodyBox" style={{ height: "300px" }}>
           {detailList?.content}
         </div>
-        <Hr />
-        {/* 지도 */}
-        <Map />
-        <WithDogs />
+        <div className="DetailBodyBox">
+          <Hr />
+          {/* 지도 */}
+          <Map />
+        </div>
+        <div className="DetailBodyBox">
+          <WithDogs />
+        </div>
         {loginNickname !== detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
             <div style={{ display: "flex", justifyContent: "center" }}>

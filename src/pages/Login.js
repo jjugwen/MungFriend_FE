@@ -99,9 +99,9 @@ const LoginOutterBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 660px;
-  margin: 5% auto;
-  margin-bottom: 0;
+  min-width: 1440px;
+  height: fit-content;
+  margin-bottom: -120px;
 
   & a {
     text-decoration: none;
@@ -109,7 +109,7 @@ const LoginOutterBox = styled.div`
 `;
 
 const LogoImg = styled.img`
-  margin-bottom: 4%; //50px
+  margin: 120px 0 4% 0; //50px
 `;
 
 const LoginInputBox = styled.input`
@@ -201,9 +201,9 @@ const Img = styled.img`
   position: relative;
   width: 10%;
   min-width: 171.5px;
-  height: 258.08px;
-  right: -33%;
-  bottom: 177px;
+  z-index: -1;
+  bottom: 120px;
+  right: -30%;
 `;
 
 export default Login;

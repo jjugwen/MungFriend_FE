@@ -411,10 +411,10 @@ const SignupOutterBox = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: #f5f5f5;
+  min-width: 1440px;
   padding: 5% 0%;
   width: 100%;
   /* height: 52em; */
-  margin: auto;
 `;
 
 const SignupText = styled.label`

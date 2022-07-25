@@ -77,7 +77,7 @@ function Posts() {
     <All>
       {isLoding && <Sppiner />}
       {isLoding && <Test />}
-      <Box className="row-box">
+      <Box>
         <h1 className="name">
           {myinfo?.nickname}
           <span>님의</span> <br />
@@ -119,22 +119,13 @@ function Posts() {
           {myMung?.map((dog, i) => {
             return (
               <div key={i}>
-                <div className="test"></div>
                 <Subimg src={dog.dogImageFiles[0].imageUrl} />
               </div>
             );
           })}
         </SSub>
       </Box>
-      <div
-        style={{
-          marginTop: "3%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: "40px",
-        }}
-      >
+      <TitelSelectBox>
         <h2>산책모집</h2>
         <select name="게시글" onChange={handleSelect} defaultValue="Posts">
           <option value="Posts" key="1">
@@ -147,7 +138,7 @@ function Posts() {
             모집종료된 글
           </option>
         </select>
-      </div>
+      </TitelSelectBox>
 
       <Container>
         {selected.length === 0 ? (
@@ -196,8 +187,22 @@ function Posts() {
                   </div>
                   <div className="footer">
                     <hr />
-                    <div className="row-box b-box">
-                      <div className="font-14 applyCount">
+                    <div
+                      className="row-box"
+                      style={{
+                        alignItmes: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItmes: "center",
+                          fontSize: "14px",
+                          width: "100%",
+                          gap: "1%",
+                        }}
+                      >
                         <img
                           className="applyCountImg"
                           src="https://ifh.cc/g/dHor7J.png"
@@ -205,7 +210,6 @@ function Posts() {
                         />
                         신청자 {post.applyCount}
                       </div>
-
                       <div>
                         {post.isComplete ? (
                           <img src={Done} alt="" />
@@ -265,8 +269,22 @@ function Posts() {
                   </div>
                   <div className="footer">
                     <hr />
-                    <div className="row-box b-box">
-                      <div className="font-14 applyCount">
+                    <div
+                      className="row-box"
+                      style={{
+                        alignItmes: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItmes: "center",
+                          fontSize: "14px",
+                          width: "100%",
+                          gap: "1%",
+                        }}
+                      >
                         <img
                           className="applyCountImg"
                           src="https://ifh.cc/g/dHor7J.png"
@@ -302,11 +320,14 @@ function Posts() {
 
 const All = styled.div`
   height: 100%;
-  width: 65%;
-  margin: 50px auto auto auto;
-  @media screen and (max-width: 960px) {
-    width: 90%;
-  }
+  min-width: 1440px;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  width: 100%;
+  /* @media screen and (max-width: 960px) {
+    width: 100%;
+  } */
 `;
 
 const Test = styled.div`
@@ -320,28 +341,32 @@ const Test = styled.div`
 `;
 
 const Box = styled.div`
+  display: flex;
+  flex-direction: row;
   box-sizing: border-box;
   align-items: center;
   background: #fa5a30;
   box-shadow: 4px 4px 20px rgba(250, 90, 48, 0.2);
   border-radius: 20px;
   position: relative;
-  gap: 13%;
+  /* gap: 13%; */
+  min-width: 940px;
+  margin: 0% 17.36%;
   height: 228px;
-  padding: 50px 0 20% 0;
-  @media screen and (max-width: 960px) {
+  margin-top: 85px;
+  /* @media screen and (max-width: 960px) {
     gap: 20%;
-  }
+  } */
   /* padding-top: 50px; */
   span {
     font-weight: 400;
   }
   .name {
     position: absolute;
-    padding-left: 8%;
-    padding-top: 10%;
+    padding-left: 40px;
     font-size: 30px;
     font-weight: 600;
+    margin-top: -3%;
     /* line-height: 40px; */
     color: #ffffff;
   }
@@ -369,7 +394,7 @@ const SSub = styled.div`
   flex-direction: row;
   position: absolute;
   gap: 10%;
-  padding-left: 8%;
+  padding-left: 40px;
   padding-bottom: 3%;
   bottom: 0;
 `;
@@ -379,12 +404,22 @@ const Subimg = styled.img`
   height: 48px;
 `;
 
+const TitelSelectBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  min-width: 940px;
+  margin: 122px 17.36% 0 17.36%;
+`;
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2%;
-  margin-bottom: 200px;
-  margin-top: 50px;
+  min-width: 940px;
+  margin: 40px 17.36% 200px 17.36%;
+
   /* width: 66%; */
 `;
 const PostBox = styled.div`
@@ -394,6 +429,9 @@ const PostBox = styled.div`
   position: relative;
   box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
   border-radius: 12px;
+  :hover {
+    transform: perspective(500px) translateZ(30px);
+  }
   .name-box {
     margin-left: 10px;
   }
@@ -418,7 +456,7 @@ const PostBox = styled.div`
   }
   .footer {
     position: absolute;
-    width: 80%;
+    width: 88%;
     bottom: 10px;
     hr {
       border: 1px solid #e3e5e9;
@@ -427,7 +465,6 @@ const PostBox = styled.div`
       width: 20px;
       height: 20px;
       position: relative;
-      top: 5px;
     }
 
     .b-box {
