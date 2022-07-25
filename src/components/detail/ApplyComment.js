@@ -33,6 +33,7 @@ function ApplyComment() {
         style={{
           display: "flex",
           justifyContent: "space-between",
+          marginTop: "8.4%",
         }}
       >
         <h1 className="DetailTitle">신청자 댓글</h1>
@@ -41,7 +42,7 @@ function ApplyComment() {
       <span>
         총 <span style={{ color: "#FA5A30" }}>{detailList?.applyCount}</span>개
       </span>
-      <hr />
+      <hr style={{ border: "1px solid black" }} />
       {detailList?.applyList?.map((value) => {
         return (
           <div key={value.id}>
@@ -133,7 +134,7 @@ const UserModalBtn = styled.button`
 `;
 
 const Hr = styled.hr`
-  border: 0.1px solid #e3e5e9;
+  border: 1px solid #e3e5e9;
   width: 100%;
 `;
 

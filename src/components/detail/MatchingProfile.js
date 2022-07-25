@@ -90,6 +90,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 8.4% 0; //80px
+  min-width: 940px;
+  margin: 0% 17.36%;
 `;
 
 const DogImg = styled.img`
@@ -126,7 +128,7 @@ const CancleReviewBtn = styled.button`
   background-color: #b8bbc0;
   border-radius: 4px;
   border: none;
-  min-width: 65px;
+  min-width: 67px;
   height: 30px;
   font-style: normal;
   font-weight: 500;

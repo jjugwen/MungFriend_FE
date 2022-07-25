@@ -429,6 +429,7 @@ const PostBox = styled.div`
   position: relative;
   box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
   border-radius: 12px;
+  cursor: pointer;
   :hover {
     transform: perspective(500px) translateZ(30px);
   }
