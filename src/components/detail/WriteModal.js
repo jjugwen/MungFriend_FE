@@ -160,9 +160,10 @@ const Hr = styled.hr`
 `;
 
 const Reviewmodal = styled.div`
-  position: absolute;
-  top: calc(50vh - 350px);
-  left: calc(50vw - 350px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
   display: flex;
   flex-direction: column;

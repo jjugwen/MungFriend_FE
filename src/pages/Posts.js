@@ -34,7 +34,7 @@ function Posts() {
     state.postSlice.post.filter((v) => v.isComplete === false)
   );
 
-  console.log("모집중 전체 글 조회", Posts);
+  // console.log("모집중 전체 글 조회", Posts);
   // const Posts1 = useSelector((state) => state.postSlice.post);
   // console.log("모집중 전체 글 조회 no filter", Posts1);
   //로그인 유저 닉네임 얻기

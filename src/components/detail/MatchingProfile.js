@@ -128,7 +128,7 @@ const CancleReviewBtn = styled.button`
   background-color: #b8bbc0;
   border-radius: 4px;
   border: none;
-  min-width: 67px;
+  min-width: 70px;
   height: 30px;
   font-style: normal;
   font-weight: 500;

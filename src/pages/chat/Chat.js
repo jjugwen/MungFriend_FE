@@ -5,7 +5,7 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 
 // pages
-import Chatting from "./Chatting";
+import { Chatting } from "./Chatting";
 import NoRoom from "./NoRoom";
 
 // redux
@@ -111,16 +111,36 @@ const Container = styled.div`
   /* background-color: #f2f3f6; */
   /* height: 100%; */
   height: 610px;
-  margin: auto;
+  width: 100%;
 `;
 
 const LeftContainer = styled.div`
-  /* position: relative;
-  z-index: 6; */
+  position: relative;
+  /* z-index: 6; */
   background: #f2f3f6;
   min-width: 274px; //19.05%
-  max-width: 15%;
+  /* max-width: 15%; */
   overflow-y: scroll;
+
+  /* 스크롤바 설정*/
+  ::-webkit-scrollbar {
+    /*  스크롤바 막대 너비 설정 */
+    width: 8px;
+  }
+
+  /* 스크롤바 막대 설정*/
+  ::-webkit-scrollbar-thumb {
+    /* 스크롤바 막대 높이 설정    */
+    height: 16%;
+    background-color: #fa5a30;
+    border-radius: 10px;
+  }
+  /* 스크롤바 뒷 배경 설정*/
+  ::-webkit-scrollbar-track {
+    background-color: #f2f3f6;
+  }
+
+  /* width: 100%; */
 `;
 
 const ChannelList2 = styled.div`
@@ -212,6 +232,8 @@ const ChatBox = styled.div`
 const ChatList = styled.div`
   bottom: 0;
   width: 100%;
+  box-sizing: border-box;
+  min-width: 1166px;
   height: 600px;
 
   & p {

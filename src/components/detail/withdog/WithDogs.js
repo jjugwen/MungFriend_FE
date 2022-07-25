@@ -124,7 +124,7 @@ const MungProfileBtn = styled.button`
   background: #ffffff;
   border: 1px solid #e3e5e9;
   border-radius: 4px;
-  width: 65px;
+  width: 70px;
   height: 30px;
   font-style: normal;
   font-weight: 500;

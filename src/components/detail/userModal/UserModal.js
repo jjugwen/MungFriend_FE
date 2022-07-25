@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { actionCreators as userActions } from "../../../redux/modules/userInfoSlice";
 import Button from "../../../elements/Button";
 
 function UserModal(props) {
