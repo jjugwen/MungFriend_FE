@@ -42,6 +42,7 @@ const Wrap = styled.div`
   top: -4.5em;
   background-color: white;
   width: 100%;
+  min-width: 1440px;
   z-index: 5;
 `;
 const Wrap2 = styled.div`

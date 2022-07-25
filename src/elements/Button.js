@@ -322,20 +322,25 @@ const BlueBtn65 = styled.button`
   }
 `;
 const PlusBtn = styled.button`
-  /* position: fixed; */
-  bottom: 20px;
-  right: 30px;
+  position: fixed;
+  bottom: 40px;
+  right: 3%;
+  z-index: 2;
   box-sizing: border-box;
   /* width: ${(props) => props.width}; */
-  width: 48px;
-  height: 48px;
-  background-color: ${(props) => (props.disabled ? "#1b9cfc8c" : "#1B9CFC")};
+  width: 80px;
+  height: 80px;
+  background-color: ${(props) => (props.disabled ? "#B8BBC0" : "#FA5A30")};
   border: none;
   border-radius: 50%;
   color: white;
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
   ${(props) => (props.font_size ? `font-size: ${props.font_size};` : "")};
+
+  :hover {
+    font-size: x-large;
+  }
 `;
 
 export default Button;
