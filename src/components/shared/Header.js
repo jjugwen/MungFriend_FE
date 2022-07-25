@@ -31,9 +31,6 @@ function Header(props) {
         font-weight: 600;`;
       postsRef.current.style = "";
       communityRef.current.style = "";
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
     } else if (id === "posts") {
       mainRef.current.style = "";
       postsRef.current.style = `
@@ -57,8 +54,7 @@ function Header(props) {
     <>
       <HeaderOutterBox>
         <HeaderBox>
-          <div
-            className="HeaderLogo"
+          <HeaderLogo
             onClick={() => {
               navigate("/");
               setTimeout(() => {
@@ -67,7 +63,7 @@ function Header(props) {
             }}
           >
             <img src={logo} alt={logo} />
-          </div>
+          </HeaderLogo>
           <div
             style={{
               width: "100%",
@@ -87,7 +83,7 @@ function Header(props) {
             </HeadButton>
           </div>
           {!token ? (
-            <div className="beforeLogin">
+            <BeforeLogin>
               <HeadButton
                 onClick={() => {
                   navigate("/login");
@@ -102,7 +98,7 @@ function Header(props) {
               >
                 회원가입
               </HeadButton>
-            </div>
+            </BeforeLogin>
           ) : (
             <div style={AfterLogin}>
               <HeadButton
@@ -148,7 +144,8 @@ function Header(props) {
 const HeaderOutterBox = styled.div`
   width: 100% !important;
   box-sizing: border-box;
-  display: block;
+  min-width: 1440px;
+  display: inline-block;
   position: relative;
   bottom: 0;
 `;
@@ -157,10 +154,14 @@ const HeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 940px;
   height: 72px;
   margin: 0% 17.36%;
 `;
 
+const HeaderLogo = styled.div`
+  min-width: max-content;
+`;
 const HeadButton = styled.button`
   border: none;
   background-color: transparent;
@@ -168,9 +169,13 @@ const HeadButton = styled.button`
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
-  cursor: pointer;
+  min-width: fit-content;
 `;
 
+const BeforeLogin = styled.div`
+  display: "flex";
+  min-width: fit-content;
+`;
 const AfterLogin = {
   display: "flex",
   alignItems: "center",

@@ -168,7 +168,6 @@ const KakaoLoginBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1%;
-  cursor: pointer;
 
   span {
     font-weight: 500;
@@ -189,7 +188,6 @@ const GoogleLoginBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1%;
-  cursor: pointer;
 
   span {
     font-weight: 500;

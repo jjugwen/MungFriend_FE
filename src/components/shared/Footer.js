@@ -57,6 +57,7 @@ function Footer() {
 
 const FooterOutterBox = styled.div`
   width: 100% !important;
+  min-width: 1440px;
   height: 170px;
   border: 1px solid #e5e5e5;
   box-sizing: border-box;

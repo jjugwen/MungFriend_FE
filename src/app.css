@@ -1,23 +1,28 @@
-.font-14{
+.font-14 {
   font-size: 14px;
 }
-.font-16{
+.font-16 {
   font-size: 16px;
 }
-.font-18{
+.font-18 {
   font-size: 18px;
 }
-.font-20{
+.font-20 {
   font-size: 20px;
 }
-.font-24{
+.font-24 {
   font-size: 24px;
 }
-.row-box{
+.row-box {
   display: flex;
   flex-direction: row;
 }
-.column-box{
+.column-box {
   display: flex;
   flex-direction: column;
+}
+
+button {
+  font-family: "Pretendard";
+  cursor: pointer;
 }

@@ -42,7 +42,7 @@ function Matching(props) {
           <DogImg src={detailList?.matchedDogProfileImgUrl} alt="dogimg" />
           <p>{detailList?.matchedNickname}</p>
           {nowMinusEndTime() ? ( //산책종료 시간 - 현재시간 >= 0 이면 매칭취소 버튼
-            <CancleBtn
+            <CancleReviewBtn
               onClick={() => {
                 dispatch(matchActions.deleteMatchingDB(postId));
                 setTimeout(() => {
@@ -51,13 +51,35 @@ function Matching(props) {
               }}
             >
               매칭취소
-            </CancleBtn>
+            </CancleReviewBtn>
           ) : (
             // 시간 지났으면 후기작성
-            <div>
-              <ReviewBtn onClick={openModal}>후기작성</ReviewBtn>
-              <WriteModal children="후기작성" open={Modal} close={closeModal} />
-            </div>
+            <>
+              {detailList?.reviewCount === null ? ( //후기작성했으면 reviewCount === 1
+                <div>
+                  <CancleReviewBtn
+                    style={{ backgroundColor: "#fa5a30" }}
+                    onClick={openModal}
+                  >
+                    후기작성
+                  </CancleReviewBtn>
+                  <WriteModal
+                    children="후기작성"
+                    open={Modal}
+                    close={closeModal}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <CancleReviewBtn
+                    style={{ backgroundColor: "#b8bbc0", cursor: "no-drop" }}
+                    disabled
+                  >
+                    후기작성
+                  </CancleReviewBtn>
+                </div>
+              )}
+            </>
           )}
         </Listbox>
       </Container>
@@ -100,24 +122,11 @@ const Listbox = styled.div`
   }
 `;
 
-const ReviewBtn = styled.button`
-  background-color: #fa5a30;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  width: 65px;
-  height: 30px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 100%;
-`;
-
-const CancleBtn = styled.button`
+const CancleReviewBtn = styled.button`
   background-color: #b8bbc0;
   border-radius: 4px;
   border: none;
-  width: 65px;
+  min-width: 65px;
   height: 30px;
   font-style: normal;
   font-weight: 500;
@@ -125,4 +134,5 @@ const CancleBtn = styled.button`
   line-height: 100%;
   color: white;
 `;
+
 export default Matching;
