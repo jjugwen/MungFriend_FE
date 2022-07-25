@@ -212,7 +212,7 @@ const Chatting = (props) => {
             chat_data?.map((list, index) => {
               return (
                 <ChatContent key={list.id}>
-                  <p>
+                  <p style={{ padding: "1.5%" }}>
                     {list.sender === "[알림]" ? (
                       <div style={{ textAlign: "center" }}>
                         <span style={{ color: "#7A7A80" }}>
@@ -222,7 +222,7 @@ const Chatting = (props) => {
                               fontSize: "14px",
                             }}
                           >
-                            {list?.sender}
+                            {/* {list?.sender} */}
                           </span>{" "}
                           {list?.message}
                         </span>
@@ -230,7 +230,25 @@ const Chatting = (props) => {
                     ) : (
                       <>
                         {list.sender === sender ? ( //로그인한 사람 = 메시지 보내는 입장이면 메시지 내용 오른쪽에
-                          <div style={{ textAlign: "right" }}>
+                          <div
+                            style={{
+                              textAlign: "right",
+                            }}
+                          >
+                            {list.createdAt ? (
+                              <span
+                                style={{
+                                  color: "#747474",
+                                  fontWeight: "400",
+                                  fontSize: "12px",
+                                  paddingRight: "5px",
+                                }}
+                              >
+                                {list?.createdAt?.slice(5, 7)}월
+                                {list?.createdAt?.slice(8, 10)}일{" "}
+                                {list?.createdAt?.slice(11, 16)}
+                              </span>
+                            ) : null}
                             <span
                               style={{
                                 fontWeight: "500",
@@ -239,22 +257,15 @@ const Chatting = (props) => {
                             >
                               {list?.sender}
                             </span>
-                            {list.createdAt ? (
-                              <span
-                                style={{
-                                  color: "#747474",
-                                  fontWeight: "400",
-                                  fontSize: "12px",
-                                  paddingLeft: "5px",
-                                }}
-                              >
-                                {list?.createdAt?.slice(5, 7)}월
-                                {list?.createdAt?.slice(8, 10)}일{" "}
-                                {list?.createdAt?.slice(11, 16)}
-                              </span>
-                            ) : null}
                             <br />
-                            <span>{list?.message}</span>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "right",
+                              }}
+                            >
+                              <SenderMessage>{list?.message}</SenderMessage>
+                            </div>
                           </div>
                         ) : (
                           <>
@@ -281,7 +292,15 @@ const Chatting = (props) => {
                               </span>
                             ) : null}
                             <br />
-                            <span>{list?.message}</span>
+                            <SenderMessage
+                              style={{
+                                background: "#F2F3F6",
+                                color: "black",
+                                borderRadius: "0px 8px 8px 8px",
+                              }}
+                            >
+                              {list?.message}
+                            </SenderMessage>
                           </>
                         )}
                       </>
@@ -320,17 +339,34 @@ const ChatListContainer = styled.div`
   position: relative;
   z-index: 6;
   background-color: white;
-  width: 95%;
+  width: 100%;
   max-height: 105%;
   overflow-y: auto !important;
   overflow-x: hidden;
   height: auto;
   /* margin-bottom: 0.2%; */
+
+  /* 스크롤바 설정*/
+  ::-webkit-scrollbar {
+    /*  스크롤바 막대 너비 설정 */
+    width: 8px;
+  }
+
+  /* 스크롤바 막대 설정*/
+  ::-webkit-scrollbar-thumb {
+    /* 스크롤바 막대 높이 설정    */
+    height: 16%;
+    background-color: #fa5a30;
+    border-radius: 10px;
+  }
+  /* 스크롤바 뒷 배경 설정*/
+  ::-webkit-scrollbar-track {
+    background-color: white;
+  }
 `;
 
 const ChatList = styled.div`
   min-height: 100%;
-
   & p {
     color: black;
     padding: 15px;
@@ -361,8 +397,9 @@ const ChatPost = styled.div`
   box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
   display: grid;
   align-items: center;
-  width: 95%;
-
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 1140px;
   & form {
     margin: 1% 0;
     display: flex;
@@ -382,6 +419,7 @@ const ChatPost = styled.div`
 
 const ChatToolDown = styled.div`
   border-radius: 0px 0px 10px 10px;
+
   & p {
     color: black;
     padding: 7px;
@@ -432,4 +470,16 @@ const ChannelTitle = styled.div`
     line-height: 100%;
   }
 `;
-export default Chatting;
+
+const SenderMessage = styled.div`
+  width: fit-content;
+  box-sizing: border-box;
+  margin-top: 12px;
+  padding: 1.5%;
+  max-width: 45%;
+  background: #fa5a30;
+  border-radius: 8px 0px 8px 8px;
+  color: white;
+  text-align: left;
+`;
+export { ChannelTitle, CautionButton, Chatting };

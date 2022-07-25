@@ -78,7 +78,7 @@ const HeaderModalbox = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   right: 17.5%;
   top: 65px;
 

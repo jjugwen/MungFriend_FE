@@ -304,7 +304,7 @@ const GreyBtn180 = styled.button`
 const BlueBtn65 = styled.button`
   font-family: "Pretendard";
   box-sizing: border-box;
-  min-width: 65px;
+  min-width: 70px;
   height: 30px;
   background-color: ${(props) => (props.disabled ? "#FFFFFF" : "#4F65FF")};
   border: ${(props) => (props.disabled ? "1px solid #E3E5E9" : "none")};

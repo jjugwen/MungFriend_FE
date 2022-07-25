@@ -25,9 +25,10 @@
 
 /* 유저 모달 창 CSS */
 .userModal {
-  position: absolute;
-  top: calc(50vh - 430px);
-  left: calc(50vw - 250px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #fff;
   display: wrap;
   /* align-items: flex-start; */
