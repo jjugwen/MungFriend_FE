@@ -50,6 +50,7 @@ function ProfileUpdate(props) {
       props.setProfileModal(!props.modal);
       dispatch(loadMyPageAX());
       alert(response.data.message);
+      sessionStorage.setItem("nickname", update_data.nickname);
       if (response.data.accessToken !== null) {
         sessionStorage.setItem("token", response.data.accessToken);
       }
