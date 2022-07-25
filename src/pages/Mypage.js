@@ -30,7 +30,13 @@ const Mypage = () => {
   const mypostRef = useRef();
   const myapplypostRef = useRef();
   const giverReviewRef = useRef();
-// console.log(change.type.name)
+  const initialValue= change.type.name === "MyPageComponent"
+  const initialStyle={
+        color :"white" ,
+        background :"#FA5A30" ,
+        boxShadow :"04px 4px 20px rgba(250, 90, 48, 0.2)"
+  }
+// console.log(firstStyle)
   const getClick = (e) => {
     const id = e.target.id;
     if (id === "1") {
@@ -104,7 +110,7 @@ const Mypage = () => {
   return (
     <Container>
       <ListBar>
-        <button id="1" onClick={getClick} ref={pageRef}>
+        <button id="1" onClick={getClick} ref={pageRef} style={initialValue? initialStyle:{}}>
           마이페이지
         </button>
         <button id="2" onClick={getClick} ref={mypostRef}>
