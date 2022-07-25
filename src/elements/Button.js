@@ -339,7 +339,11 @@ const PlusBtn = styled.button`
   ${(props) => (props.font_size ? `font-size: ${props.font_size};` : "")};
 
   :hover {
-    font-size: x-large;
+    background-image: url("https://ifh.cc/g/yGpWmn.png");
+    background-position: center;
+    background-size: cover;
+    font-size: 0;
+    background-color: transparent;
   }
 `;
 

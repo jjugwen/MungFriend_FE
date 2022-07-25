@@ -212,7 +212,7 @@ const Chatting = (props) => {
             chat_data?.map((list, index) => {
               return (
                 <ChatContent key={list.id}>
-                  <p style={{ padding: "1.5%" }}>
+                  <p style={{ padding: "0.5%" }}>
                     {list.sender === "[알림]" ? (
                       <div style={{ textAlign: "center" }}>
                         <span style={{ color: "#7A7A80" }}>
@@ -229,7 +229,7 @@ const Chatting = (props) => {
                       </div>
                     ) : (
                       <>
-                        {list.sender === sender ? ( //로그인한 사람 = 메시지 보내는 입장이면 메시지 내용 오른쪽에
+                        {list.memberId === Number(memberId) ? ( //로그인한 사람 = 메시지 보내는 입장이면 메시지 내용 오른쪽에
                           <div
                             style={{
                               textAlign: "right",
@@ -474,8 +474,8 @@ const ChannelTitle = styled.div`
 const SenderMessage = styled.div`
   width: fit-content;
   box-sizing: border-box;
-  margin-top: 12px;
-  padding: 1.5%;
+  margin-top: 6px;
+  padding: 1%;
   max-width: 45%;
   background: #fa5a30;
   border-radius: 8px 0px 8px 8px;
