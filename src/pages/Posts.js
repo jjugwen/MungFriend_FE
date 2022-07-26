@@ -177,16 +177,12 @@ function Posts() {
                       <img src={WithmeFalse} alt="withmefalse" />
                     )}
                   </div>
-                  <div className="title">
-                    {post.title.length > 35
-                      ? post.title.substr(0, 35)
-                      : post.title}
-                  </div>
-                  <div className="content">
-                    {post.content.length > 44
-                      ? post.content.substr(0, 44)
-                      : post.content}
-                  </div>
+
+                  <div className="title">{post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
+                  <textarea className="content" readOnly>
+                    {post.content}
+                  </textarea>
+
                   <div className="footer">
                     <hr />
                     <div
@@ -261,16 +257,13 @@ function Posts() {
                       <img src={WithmeFalse} alt="withmefalse" />
                     )}
                   </div>
-                  <div className="title">
-                    {post.title.length > 35
-                      ? post.title.substr(0, 35)
-                      : post.title}
-                  </div>
-                  <div className="content">
-                    {post.content.length > 44
-                      ? post.content.substr(0, 44)
-                      : post.content}
-                  </div>
+
+                  <div className="title">{
+                  post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
+                  <textarea className="content" readOnly>
+                    {post.content}
+                  </textarea>
+
                   <div className="footer">
                     <hr />
                     <div
@@ -432,7 +425,7 @@ const Container = styled.div`
 const PostBox = styled.div`
   box-sizing: border-box;
   padding: 20px;
-  height: 250px;
+  height: 330px;
   position: relative;
   box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
   border-radius: 12px;
@@ -455,12 +448,24 @@ const PostBox = styled.div`
     font-weight: 600;
     font-size: 20px;
     line-height: 28px;
-    padding: 10px 0;
+    margin: 20px 0;
   }
-  .content {
+  textarea{
+    font-family: 'Pretendard';
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+    color: #747474;
+    border: none;
+    width: 100%;
+    resize : none;
+    overflow:hidden;
+    height: 96px;
+    /* position: relative;
+    bottom:-8%; */
+    :focus{
+      outline: none;
+    }
   }
   .footer {
     position: absolute;
@@ -502,13 +507,24 @@ const AddPostButton = styled.button`
     height: 40px;
   }
 
+
+
 `; 
 const UpBox= styled.div`
 position: fixed;
 bottom: 40%;
 right: 8%;
 
+:hover{
+  div{
+    opacity: 100; 
+    transition: 0.5s;
+  }
+}
 div{
+  :hover{
+    opacity: 0;
+  }
   opacity: 0;
   position: fixed;
   right: 9%;
@@ -522,13 +538,7 @@ div{
   color: white;
   background: rgba(0, 0, 0, 0.75);
 }
-:hover{
-  div{
-    opacity: 100;
-    transition: 0.5s;
-  }
-  
-}
+
 `
   
 export default Posts;

@@ -271,12 +271,15 @@ const AuthNo = styled.div`
   font-size: 14px;
 `;
 const Container = styled.div`
+
   display: flex;
   flex-direction: column;
-  width: 37%;
+  width: 520px;
   padding: 20px;
   border-radius: 20px;
   //모달 css
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
   position: fixed;
   top: 50%;
   left: 50%;
