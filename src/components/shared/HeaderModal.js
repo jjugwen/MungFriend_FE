@@ -59,7 +59,7 @@ function HeaderModal(props) {
 
         <Logoutbtn
           onClick={() => {
-            console.log("로그아웃!");
+            // console.log("로그아웃!");
             Logout();
             props.setModal(!props.modal);
             window.location.reload();

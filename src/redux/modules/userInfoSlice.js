@@ -8,7 +8,7 @@ export const myinfoDB = () => {
       const response = await instance.get(`/myinfo`);
       dispatch(MyInfoLoad(response.data));
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 };
@@ -20,7 +20,7 @@ export const userinfoDB = (nickname) => {
       const response = await instance.post(`/userinfo`, { nickname: nickname });
       dispatch(UserInfoLoad(response.data));
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 };

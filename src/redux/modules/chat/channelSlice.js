@@ -21,7 +21,7 @@ const channelSlice = createSlice({
       state.list.push(action.payload);
     },
     deleteChannelAction: (state, action) => {
-      console.log("삭제하기");
+      // console.log("삭제하기");
       const newChannel = state.list.filter(
         (channel) => channel.id !== action.payload
       );
@@ -36,7 +36,7 @@ export const loadChannel = () => async (dispatch) => {
     const res = await chatAPI.loadChannel();
     dispatch(loadChannelAction(res.data));
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -46,7 +46,7 @@ export const createChannel = (channel) => async (dispatch) => {
     const res = await chatAPI.createChannel(channel);
     dispatch(createChannelAction(res.data));
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -58,7 +58,7 @@ export const deleteChannel = (list) => async (dispatch) => {
     dispatch(deleteChannelAction(list.id));
     window.location.replace("/chat");
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 

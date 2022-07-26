@@ -9,12 +9,12 @@ export const createMatchingDB = (id, postId) => {
         postId: postId,
       });
       if (response.data.staus === "true") {
-        console.log(response.data.status, response.data.message);
+        // console.log(response.data.status, response.data.message);
       } else if (response.data.staus === "false") {
-        console.log(response.data.status, response.data.message);
+        // console.log(response.data.status, response.data.message);
       }
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 };
@@ -26,9 +26,9 @@ export const deleteMatchingDB = (postId) => {
       const response = await instance.post(`/api/match/cancel`, {
         postId: postId,
       });
-      console.log(response.data.status, response.data.message);
+      // console.log(response.data.status, response.data.message);
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 };

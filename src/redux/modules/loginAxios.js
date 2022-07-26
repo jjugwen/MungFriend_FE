@@ -23,11 +23,11 @@ export const loginDB = (username, password) => {
         // window.alert(response.data.message);
         window.location.replace("/");
       } else if (response.data.status === "false") {
-        console.log(response.data.status);
+        // console.log(response.data.status);
         window.alert(response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
