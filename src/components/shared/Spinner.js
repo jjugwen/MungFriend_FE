@@ -11,14 +11,10 @@ function Sppiner() {
 }
 const Container = styled.div`
   position: absolute;
-  /* top: 50%; */
-  left: 40%;
-  /* transform: translate(-50%, -100%); */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
   z-index: 4;
-  margin: 10% 5% auto;
-  width: 55%;
-  height: 80%;
-  background-color: white;
 `;
 
 const MungFriendloading = styled.img`
