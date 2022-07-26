@@ -166,35 +166,6 @@ const UserModalStyle = styled.div`
       display: none;
     }
   }
-
-  @media (max-height: 636px) {
-    width: 100%;
-    max-width: 700px;
-    height: 500px;
-    .reviewTitle {
-      position: absolute;
-      right: 22%;
-      bottom: 78%;
-    }
-    .reviewList {
-      position: absolute;
-      padding: 2%;
-      right: 3%;
-      bottom: 52.5%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 190px;
-
-      & p {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 20px;
-        color: #4e4e56;
-      }
-    }
-  }
 `;
 
 const ModalTitle = styled.h1`
