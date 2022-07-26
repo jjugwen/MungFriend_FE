@@ -226,7 +226,7 @@ function PostCreate() {
           {/*시작시간*/}
           {startHour && (
             <select ref={startHourRef} defaultValue={startHour}>
-              <option value="123">시간</option>
+              <option value="123">시</option>
               {time.hour.map((hour, index) => {
                 return (
                   <option key={index} value={hour}>
@@ -253,7 +253,7 @@ function PostCreate() {
           {/*끝시간*/}
           {endHour && (
             <select ref={endHourRef} defaultValue={endHour}>
-              <option value="123">시간</option>
+              <option value="123">시</option>
               {time.hour.map((hour, index) => {
                 return (
                   <option key={index} value={hour}>
