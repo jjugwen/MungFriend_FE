@@ -67,7 +67,7 @@ function Posts() {
   // console.log(selected);
   // console.log(Posts);
   // 로딩중일때 sppinner추가
-  let isLoding = false;
+  let isLoding = true;
   if (donePosts.length === 0) {
     isLoding = true;
   }
@@ -481,9 +481,8 @@ const PostImg = styled.img`
 `;
 const AddPostButton = styled.button`
   position: fixed;
-  bottom: 30px;
+  bottom: 20%;
   right: 3%;
-  z-index: 2;
   width: 80px;
   height: 80px;
   border: none;
