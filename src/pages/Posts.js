@@ -164,8 +164,6 @@ function Posts() {
         {selected.length === 0 ? (
           <>
             {Posts.map((post, i) => {
-              // console.log(post.imagePath)
-              // console.log(post.content.length);
               return (
                 <PostBox
                   key={i}
@@ -199,6 +197,7 @@ function Posts() {
                       <img src={WithmeFalse} alt="withmefalse" />
                     )}
                   </div>
+
                   <div className="title">{post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
                   <textarea className="content" readOnly value={post.content}/>
                   <div className="footer">
@@ -242,8 +241,6 @@ function Posts() {
         ) : (
           <>
             {selected.map((post, i) => {
-              // console.log(post.imagePath)
-              // console.log(post.content.length);
               return (
                 <PostBox
                   key={i}
@@ -277,6 +274,7 @@ function Posts() {
                       <img src={WithmeFalse} alt="withmefalse" />
                     )}
                   </div>
+
                   <div className="title">{
                   post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
                   <textarea className="content" readOnly value={post.content}/>
