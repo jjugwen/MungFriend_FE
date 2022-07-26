@@ -12,7 +12,7 @@ function MyApplyPost() {
     dispatch(loadMyPageAX());
   }, []);
   const info = useSelector((state) => state.myPageSlice.mypage);
-  console.log(info);
+  // console.log(info);
 
   return (
     <Container>
