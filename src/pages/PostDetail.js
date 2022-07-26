@@ -165,7 +165,12 @@ function PostDetail() {
         </div>
         <div className="DetailBodyBox" style={{ height: "300px" }}>
           <Hr />
-          <DetailContent readOnly>{detailList?.content}</DetailContent>
+          <DetailContent
+            value={detailList?.content ? detailList?.content : ""}
+            readOnly
+          >
+            {detailList?.content}
+          </DetailContent>
         </div>
         <div className="DetailBodyBox">
           <Hr />
