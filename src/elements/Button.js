@@ -323,7 +323,7 @@ const BlueBtn65 = styled.button`
 `;
 const PlusBtn = styled.button`
   position: fixed;
-  bottom: 40px;
+  bottom: 20%;
   right: 3%;
   z-index: 2;
   box-sizing: border-box;

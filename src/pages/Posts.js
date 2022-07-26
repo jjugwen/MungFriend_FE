@@ -67,7 +67,7 @@ function Posts() {
   // console.log(selected);
   // console.log(Posts);
   // 로딩중일때 sppinner추가
-  let isLoding = true;
+  let isLoding = false;
   if (donePosts.length === 0) {
     isLoding = true;
   }
