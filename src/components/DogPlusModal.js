@@ -120,6 +120,7 @@ function DogPlusModal(props) {
             <input
               className="box-size"
               type="number"
+              maxLength="999"
               max="30"
               min="0"
               onChange={handleChange("age")}

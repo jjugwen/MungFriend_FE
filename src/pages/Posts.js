@@ -431,7 +431,7 @@ const PostBox = styled.div`
   border-radius: 12px;
   cursor: pointer;
   :hover {
-    transform: perspective(500px) translateZ(30px);
+    transform: translateY(-10px);
   }
   .name-box {
     margin-left: 10px;

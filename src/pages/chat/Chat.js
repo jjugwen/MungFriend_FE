@@ -1,5 +1,5 @@
 // react
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 // style
 import styled from "styled-components";
@@ -25,14 +25,13 @@ const Chat = (props) => {
   const chatroom = useRef("");
   // state에 axiso get한 데이터 불러오기
   const channel_data = useSelector((state) => state.channel.list);
-  //매칭하기 눌렀을 때의 신청자 nickname
 
   // 첫 렌더링
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(loadChannel());
   }, [dispatch]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (id) {
       // console.log("useEffect >> LoadChat넘기기전 id : " + id);
       dispatch(loadChat(id));
@@ -42,41 +41,32 @@ const Chat = (props) => {
   return (
     <React.Fragment>
       <Container>
-        <div
-          style={{
-            display: "flex",
-            position: "relative",
-            height: "133%",
-            background: "white",
-          }}
-        >
+        <LineupLeftAndRightContainer>
+          {/* 왼쪽 채널 화면 */}
           <LeftContainer>
-            <ChannelList2>
+            <ChannelList>
               <h1>개설된 채팅방</h1>
               {channel_data &&
                 channel_data.map((list, index) => {
                   return (
                     <>
                       {Number(id) === list.id ? (
-                        <SelectedChannelListBox
-                          // id={list.id}
+                        <ChannelListBox
+                          style={{ backgroundColor: "#fa5a30" }}
                           key={index}
                           onClick={() => {
                             navigate(`/chat/${list.id}`);
-                            // clearStorage('channelId');
-                            // setStorage('channelId', `${list.id}`);
                           }}
                         >
-                          <p ref={chatroom}>{list.channel}</p>
-                        </SelectedChannelListBox>
+                          <p style={{ color: "white" }} ref={chatroom}>
+                            {list.channel}
+                          </p>
+                        </ChannelListBox>
                       ) : (
                         <ChannelListBox
-                          // id={list.id}
                           key={index}
                           onClick={() => {
                             navigate(`/chat/${list.id}`);
-                            // clearStorage('channelId');
-                            // setStorage('channelId', `${list.id}`);
                           }}
                         >
                           <p ref={chatroom}>{list.channel}</p>
@@ -85,7 +75,7 @@ const Chat = (props) => {
                     </>
                   );
                 })}
-            </ChannelList2>
+            </ChannelList>
           </LeftContainer>
 
           {/* 우측 메인 화면 */}
@@ -99,51 +89,49 @@ const Chat = (props) => {
               </ChatList>
             </ChatBox>
           </div>
-        </div>
+        </LineupLeftAndRightContainer>
       </Container>
     </React.Fragment>
   );
 };
+
 const Container = styled.div`
-  /* padding: 0 0 12.18em 0%; */
   position: relative;
   z-index: 2;
-  /* background-color: #f2f3f6; */
-  /* height: 100%; */
   height: 610px;
-  width: 100%;
+  width: 99%;
+`;
+
+const LineupLeftAndRightContainer = styled.div`
+  display: flex;
+  position: relative;
+  height: 133%;
+  background: white;
 `;
 
 const LeftContainer = styled.div`
   position: relative;
-  /* z-index: 6; */
   background: #f2f3f6;
   min-width: 274px; //19.05%
-  /* max-width: 15%; */
   overflow-y: scroll;
 
   /* 스크롤바 설정*/
   ::-webkit-scrollbar {
-    /*  스크롤바 막대 너비 설정 */
-    width: 8px;
+    width: 8px; //스크롤바 막대 너비 설정
   }
 
   /* 스크롤바 막대 설정*/
   ::-webkit-scrollbar-thumb {
-    /* 스크롤바 막대 높이 설정    */
-    height: 16%;
+    height: 16%; //스크롤바 막대 높이 설정
     background-color: #fa5a30;
     border-radius: 10px;
   }
-  /* 스크롤바 뒷 배경 설정*/
   ::-webkit-scrollbar-track {
-    background-color: #f2f3f6;
+    background-color: #f2f3f6; //스크롤바 뒷 배경 설정
   }
-
-  /* width: 100%; */
 `;
 
-const ChannelList2 = styled.div`
+const ChannelList = styled.div`
   & h1 {
     font-family: "Pretendard";
     font-style: normal;
@@ -155,37 +143,6 @@ const ChannelList2 = styled.div`
   }
 `;
 
-const SelectedChannelListBox = styled.div`
-  width: 100%;
-  min-width: 205px;
-  max-width: 15%;
-  margin: 4% 8%;
-  height: 50px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  padding: 1% 5%;
-  background-color: #fa5a30;
-  & p {
-    font-family: "Pretendard";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 100%;
-    color: white;
-  }
-  & div {
-    cursor: pointer;
-    top: 0;
-    right: 0px;
-  }
-  & img {
-    width: 25px;
-    margin-top: 7px;
-  }
-`;
 const ChannelListBox = styled.div`
   width: 100%;
   min-width: 205px;
@@ -207,11 +164,6 @@ const ChannelListBox = styled.div`
     line-height: 100%;
     color: black;
   }
-  & div {
-    cursor: pointer;
-    top: 0;
-    right: 0px;
-  }
   & img {
     width: 25px;
     margin-top: 7px;
@@ -219,11 +171,12 @@ const ChannelListBox = styled.div`
 `;
 
 const ChatBox = styled.div`
-  /* position: relative; */
   width: 100%;
   height: 600px;
   background-color: #ffffff;
-  margin: 5px & p {
+  margin: 5px;
+
+  & p {
     color: black;
     padding: 15px;
   }

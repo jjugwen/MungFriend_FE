@@ -12,6 +12,8 @@ import bannerWalk from "../assets/images/Main/img-dog-sad.png";
 import bannerhands from "../assets/images/Main/img-hands.png";
 import together from "../assets/images/Main/함께.png";
 import Button from "../elements/Button";
+import eventGiftBtn from "../assets/images/Main/event_gift.svg";
+import eventCoffeeBtn from "../assets/images/Main/event_coffee.svg";
 
 function Main() {
   return (
@@ -150,9 +152,8 @@ function Main() {
         href="https://docs.google.com/forms/d/e/1FAIpQLSfLguQ7YNHIWtGHVjHyDBm0V4XL9rv026hwwhvVgIKE_MgKWg/viewform"
       >
         <Button is_circle type="button">
-          EVENT
-          <br />
-          (~8/2)
+          <img src={eventGiftBtn} alt="eventgift" className="origin" />
+          <img src={eventCoffeeBtn} alt="eventcoffee" className="hover" />
         </Button>
       </a>
     </div>

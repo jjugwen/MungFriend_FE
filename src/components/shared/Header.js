@@ -1,12 +1,11 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import HeaderModal from "./HeaderModal";
-import noticeicon from "../../assets/images/Header/noticeicon.svg";
-import mymenu from "../../assets/images/Header/mymenu.svg";
-import openmenuarrow from "../../assets/images/Header/openmenuarrow.svg";
-import logo from "../../assets/images/Header/logo.svg";
 import chatting from "../../assets/images/Header/chatIcon.svg";
+import logo from "../../assets/images/Header/logo.svg";
+import mymenu from "../../assets/images/Header/mymenu.svg";
+import noticeicon from "../../assets/images/Header/noticeicon.svg";
+import openmenuarrow from "../../assets/images/Header/openmenuarrow.svg";
 
 function Header(props) {
   const navigate = useNavigate();
@@ -57,9 +56,7 @@ function Header(props) {
           <HeaderLogo
             onClick={() => {
               navigate("/");
-              setTimeout(() => {
-                window.location.reload();
-              }, 100);
+              window.location.reload();
             }}
           >
             <img src={logo} alt={logo} />
@@ -161,6 +158,7 @@ const HeaderBox = styled.div`
 
 const HeaderLogo = styled.div`
   min-width: max-content;
+  cursor: pointer;
 `;
 const HeadButton = styled.button`
   border: none;
