@@ -175,7 +175,7 @@ function PostDetail() {
         {loginNickname !== detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
             <div style={{ display: "flex", justifyContent: "center" }}>
-              {!detailList?.isComplete ? (
+              {!detailList?.isComplete ? ( //모집종료되면
                 <Button
                   grey_small
                   margin="0 0 4.9em 0"
@@ -193,15 +193,17 @@ function PostDetail() {
           ) : (
             //applyByMe가 false면 신청한 상태 : 신청하기 버튼 보이기
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button
-                orange_small
-                margin="0 0 4.9em 0"
-                _onClick={() => {
-                  openApplyModal();
-                }}
-              >
-                신청하기
-              </Button>
+              {!detailList?.isComplete ? ( //모집종료되면
+                <Button
+                  orange_small
+                  margin="0 0 4.9em 0"
+                  _onClick={() => {
+                    openApplyModal();
+                  }}
+                >
+                  신청하기
+                </Button>
+              ) : null}
               <WriteModal
                 children="신청하기"
                 open={applyModal}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import DaumPostCode from "react-daum-postcode";
 import instance from "../redux/modules/instance";
@@ -66,7 +66,7 @@ function Signup() {
     } else {
       setUsernameCheck(true);
     }
-    setUsername(e.target.value);
+    return setUsername(e.target.value);
     // console.log(setUsername(e.target.value));
   };
 
@@ -203,20 +203,41 @@ function Signup() {
   // console.log(`${email}@${sel_email}`);
   // console.log(email);
 
+  //아이디 인풋창 입력 시 유효성 나타내기
+  const [text, setText] = useState("");
+  const onChangeText = (e) => {
+    return setText(e.target.value);
+  };
+
   return (
     <>
       <SignupOutterBox>
         <div>
           <SignupText htmlFor="id">아이디</SignupText>
+          <br />
           <SignupInputBox
-            naem="username"
+            name="username"
             type="text"
-            placeholder="아이디(3~15자리 영어 소문자 및 숫자)를 입력해주세요."
-            onChange={IdCheck}
+            placeholder="아이디를 입력해주세요."
+            onChange={(e) => {
+              IdCheck(e);
+              onChangeText(e);
+            }}
             required
           />
-          <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
-          <br />
+          {text ? (
+            <>
+              <Check>
+                {usernameCheck
+                  ? ""
+                  : "*아이디는 3자리 이상 15자리 이하 영어 소문자 및 숫자입니다"}
+              </Check>
+              <Check2>{usernameCheck ? "사용가능한 형식입니다" : ""}</Check2>
+            </>
+          ) : (
+            <p />
+          )}
+          <p />
           <SignupText htmlFor="password">비밀번호</SignupText>
           <br />
           <SignupInputBox
@@ -227,8 +248,8 @@ function Signup() {
             placeholder="비밀번호(8~20자리)를 입력해주세요"
             required
           />
-          <br />
-          <br />
+          <p />
+          <p />
           <SignupText htmlFor="passwordCheck">비밀번호 확인</SignupText>
           <br />
           <div style={{ display: "flex", gap: "2%" }}>
@@ -240,22 +261,32 @@ function Signup() {
               placeholder="비밀번호를 한번 더 입력해주세요."
               required
             />
-            {pwDubleCheck() ? (
-              " "
+            {pwcheck ? (
+              <>
+                {pwDubleCheck() ? (
+                  " "
+                ) : (
+                  <img
+                    width="20px"
+                    style={{
+                      position: "relative",
+                      right: "40px",
+                    }}
+                    src={checkred}
+                    alt=""
+                  />
+                )}
+                {pwDubleCheck() ? (
+                  <img width="20px" src={checkblue} alt="" />
+                ) : (
+                  ""
+                )}
+              </>
             ) : (
-              <img
-                width="20px"
-                style={{
-                  position: "relative",
-                  right: "40px",
-                }}
-                src={checkred}
-                alt=""
-              />
+              <p />
             )}
-            {pwDubleCheck() ? <img width="20px" src={checkblue} alt="" /> : ""}
           </div>
-          <br />
+          <p />
           <SignupText htmlFor="email">이메일</SignupText>
           <br />
           <div style={{ display: "flex" }}>
@@ -263,7 +294,11 @@ function Signup() {
               type="email"
               name="email"
               placeholder="이메일을 입력해주세요."
-              onChange={emailCheck}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                emailCheck(e);
+              }}
+              // onChange={emailCheck}
               required
             />
             {/* <span>
@@ -280,18 +315,38 @@ function Signup() {
               </select>
             </span> */}
           </div>
-          {/* <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check> */}
-          <Check2>{emailcheck ? "사용가능한 형식입니다" : ""}</Check2>
-          <br />
+          {email ? (
+            <>
+              <Check>{emailcheck ? "" : "*이메일 형식이 아닙니다"}</Check>
+              <Check2>{emailcheck ? "사용가능한 형식입니다" : ""}</Check2>
+            </>
+          ) : (
+            <p />
+          )}
+          <p />
           <SignupText htmlFor="nickname">닉네임</SignupText>
           <SignupInputBox
             name="nickname"
-            onChange={nickCheck}
+            onChange={(e) => {
+              setNickname(e.target.value);
+              nickCheck(e);
+            }}
             placeholder="닉네임(3~9자리)을 입력해주세요."
             required
           />
-          <Check2>{nicknamecheck ? "사용가능한 형식입니다" : ""}</Check2>
-          <br />
+          {nickname ? (
+            <>
+              <Check>
+                {nicknamecheck
+                  ? ""
+                  : "*닉네임은 3자리 이상 9자리 이하 한글, 영문, 숫자입니다. "}
+              </Check>
+              <Check2>{nicknamecheck ? "사용가능한 형식입니다" : ""}</Check2>
+            </>
+          ) : (
+            <p />
+          )}
+          <p />
           <SignupText htmlFor="adress">주소</SignupText>
           <div style={{ display: "flex", alignItems: "center", gap: "2%" }}>
             <SignupInputBox
@@ -437,8 +492,14 @@ const SignupInputBox = styled.input`
   box-sizing: border-box;
 `;
 
+const Check = styled.div`
+  color: #fa5a30;
+  font-size: 13px;
+  margin-left: 1%;
+`;
+
 const Check2 = styled.div`
-  color: green;
+  color: #4f65ff;
   font-size: 13px;
   margin-left: 1%;
 `;

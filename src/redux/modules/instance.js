@@ -40,8 +40,10 @@ instance.interceptors.response.use(
       sessionStorage.clear();
       window.location.replace("/needlogin");
     } else if (error.response.status === 403) {
-      // window.alert(error.response.data.errorMessage);
-      window.location.replace("/noaccess");
+      alert(
+        "필수 정보 입력 후, 사용 가능한 기능입니다. 마이페이지 프로필 수정에서 필수 정보(핸드폰 번호, 주소) 입력 후 이용해 주세요. "
+      );
+      window.location.replace("/mypage");
     } else {
       window.alert(error.response.data.errorMessage);
       window.location.replace("/error");
