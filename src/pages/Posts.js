@@ -177,10 +177,14 @@ function Posts() {
                       <img src={WithmeFalse} alt="withmefalse" />
                     )}
                   </div>
-                  <div className="title">{post.title}</div>
+                  <div className="title">
+                    {post.title.length > 35
+                      ? post.title.substr(0, 35)
+                      : post.title}
+                  </div>
                   <div className="content">
-                    {post.content.length > 40
-                      ? post.content.substr(0, 33)
+                    {post.content.length > 44
+                      ? post.content.substr(0, 44)
                       : post.content}
                   </div>
                   <div className="footer">
@@ -257,10 +261,14 @@ function Posts() {
                       <img src={WithmeFalse} alt="withmefalse" />
                     )}
                   </div>
-                  <div className="title">{post.title}</div>
+                  <div className="title">
+                    {post.title.length > 35
+                      ? post.title.substr(0, 35)
+                      : post.title}
+                  </div>
                   <div className="content">
-                    {post.content.length > 40
-                      ? post.content.substr(0, 33)
+                    {post.content.length > 44
+                      ? post.content.substr(0, 44)
                       : post.content}
                   </div>
                   <div className="footer">

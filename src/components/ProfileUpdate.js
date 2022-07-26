@@ -54,6 +54,7 @@ function ProfileUpdate(props) {
       if (response.data.accessToken !== null) {
         sessionStorage.setItem("token", response.data.accessToken);
       }
+      window.location.reload();
     });
   };
   const [isAgree, setIsAgree] = useState(false);
