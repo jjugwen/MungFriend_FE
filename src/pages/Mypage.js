@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import GiverReview from "../components/GiverReview";
 import MyApplyPost from "../components/MyApplyPost";
@@ -9,7 +9,7 @@ import MyPostList from "../components/MyPostList";
 import MyReviewList from "../components/MyReviewList";
 import instance from "../redux/modules/instance";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
-import { userinfoDB } from "../redux/modules/userInfoSlice";
+
 
 const Mypage = () => {
   const dispatch = useDispatch();
@@ -25,20 +25,14 @@ const Mypage = () => {
     });
   }, []);
   let [change, setChange] = useState(<MyPageComponent />);
+  const[id, setId] = useState("1")
   const pageRef = useRef();
   const takerReviewRef = useRef();
   const mypostRef = useRef();
   const myapplypostRef = useRef();
   const giverReviewRef = useRef();
-  const initialValue= change.type.name === "MyPageComponent"
-  const initialStyle={
-        color :"white" ,
-        background :"#FA5A30" ,
-        boxShadow :"04px 4px 20px rgba(250, 90, 48, 0.2)"
-  }
-// console.log(firstStyle)
-  const getClick = (e) => {
-    const id = e.target.id;
+  
+  React.useEffect(()=>{
     if (id === "1") {
       setChange(<MyPageComponent />);
       pageRef.current.style = `color :white; 
@@ -85,6 +79,11 @@ const Mypage = () => {
       background :#FA5A30; 
       boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
     }
+  },[id])
+
+// console.log(firstStyle)
+  const getClick = (e) => {
+    setId(e.target.id) ;
   };
 
   //헤더 모달창 컴포넌트 연결
@@ -110,7 +109,7 @@ const Mypage = () => {
   return (
     <Container>
       <ListBar>
-        <button id="1" onClick={getClick} ref={pageRef} style={initialValue? initialStyle:{}}>
+        <button id="1" onClick={getClick} ref={pageRef} >
           마이페이지
         </button>
         <button id="2" onClick={getClick} ref={mypostRef}>
