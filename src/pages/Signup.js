@@ -241,7 +241,7 @@ function Signup() {
               required
             />
             {pwDubleCheck() ? (
-              ""
+              " "
             ) : (
               <img
                 width="20px"

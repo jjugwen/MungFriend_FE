@@ -330,7 +330,7 @@ const PlusBtn = styled.button`
   /* width: ${(props) => props.width}; */
   width: 80px;
   height: 80px;
-  background-color: ${(props) => (props.disabled ? "#B8BBC0" : "#FA5A30")};
+  background-color: ${(props) => (props.disabled ? "#B8BBC0" : "#4F65FF")};
   border: none;
   border-radius: 50%;
   color: white;
@@ -338,12 +338,18 @@ const PlusBtn = styled.button`
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
   ${(props) => (props.font_size ? `font-size: ${props.font_size};` : "")};
 
-  :hover {
-    background-image: url("https://ifh.cc/g/yGpWmn.png");
-    background-position: center;
-    background-size: cover;
-    font-size: 0;
-    background-color: transparent;
+  .hover {
+    position: absolute;
+    right: 27%;
+    opacity: 0;
+  }
+  :hover .hover {
+    opacity: 1;
+    /* transition: opacity 0.5s linear; */
+  }
+
+  :hover .origin {
+    opacity: 0;
   }
 `;
 
