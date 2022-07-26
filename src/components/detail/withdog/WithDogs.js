@@ -1,13 +1,11 @@
 //게시글 상세페이지 함께하는 멍친구 , 매칭한 프로필 멍멍이 정보 컴포넌트
 
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import DogProfileViewModal from "./DogProfileViewModal";
 
 function DogList() {
-  const params = useParams();
   const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
 
