@@ -11,6 +11,7 @@ import Ing from "../assets/images/IsComplete/모집중.svg";
 import Done from "../assets/images/IsComplete/모집종료.svg";
 import WithmeTrue from "../assets/images/Withme/같이해요.svg";
 import WithmeFalse from "../assets/images/Withme/부탁해요.svg";
+import DogPlusModal from "../components/DogPlusModal";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -66,17 +67,22 @@ function Posts() {
   };
   // console.log(selected);
   // console.log(Posts);
+  
   // 로딩중일때 sppinner추가
   let isLoding = false;
   if (donePosts.length === 0) {
     isLoding = true;
   }
-
   // console.log(Posts.length === 0);
+
+  // 멍프로필 등록모달
+  const[mung, setMung] = useState(false);
   return (
     <All>
       {isLoding && <Sppiner />}
-      {isLoding && <Test />}
+      {isLoding && <SppinerOutsession/>}
+      {mung && <DogPlusModal modal={mung} setMungModal={setMung}/>}
+      {mung && <DogPlusOutsession onClick={()=>{setMung(!mung)}}/>}
       <Box>
         <h1 className="name">
           {myinfo?.nickname}
@@ -92,13 +98,22 @@ function Posts() {
               {myMung?.map((dog, i) => {
                 return (
                   <span key={i} className="dogname">
-                    {dog.name} {dog.age}살{i - (myMung.length - 1) ? "," : null}
+                    {dog.name}{" "}{dog.age}살{i - (myMung.length - 1) ? "," : null}
                   </span>
                 );
               })}
             </div>
           ) : (
+            <>
             <span>멍멍이를 등록해주세요!</span>
+            <br/>
+            <RowBox>
+            <AddMungFBtn className="mungfalse" onClick={()=>{
+              setMung(!mung)
+            }}><img src="https://ifh.cc/g/h0kWOv.png" alt=""/></AddMungFBtn>
+            <AddText>등록하기</AddText>
+            </RowBox>
+            </>
           )}
         </h1>
         <div
@@ -120,10 +135,15 @@ function Posts() {
             return (
               <div key={i}>
                 <Subimg src={dog.dogImageFiles[0].imageUrl} />
-              </div>
+              
+            </div>
             );
           })}
-        </SSub>
+          {myMung?.length !==0 ? <AddMungBtn onClick={()=>{
+              setMung(!mung)
+            }} ><img src="https://ifh.cc/g/h0kWOv.png" alt=""/></AddMungBtn>:""}
+          </SSub>
+        
       </Box>
       <TitelSelectBox>
         <h2>산책모집</h2>
@@ -180,9 +200,7 @@ function Posts() {
                     )}
                   </div>
                   <div className="title">{post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
-                  <textarea className="content" readOnly>
-                    {post.content}
-                  </textarea>
+                  <textarea className="content" readOnly value={post.content}/>
                   <div className="footer">
                     <hr />
                     <div
@@ -261,9 +279,7 @@ function Posts() {
                   </div>
                   <div className="title">{
                   post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
-                  <textarea className="content" readOnly>
-                    {post.content}
-                  </textarea>
+                  <textarea className="content" readOnly value={post.content}/>
                   <div className="footer">
                     <hr />
                     <div
@@ -330,7 +346,7 @@ const All = styled.div`
   } */
 `;
 
-const Test = styled.div`
+const SppinerOutsession= styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -339,7 +355,62 @@ const Test = styled.div`
   background: rgba(255, 255, 255, 1);
   z-index: 2;
 `;
+const DogPlusOutsession = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+`;
 
+const RowBox = styled.div`
+display: flex;
+flex-direction: row;
+`
+const AddMungFBtn =styled.button`
+width: 34px;
+height: 34px;
+border-radius: 50%;
+border: 1px solid #F78D70;
+background: #F67452;
+position: relative;
+top: 21px;
+img{
+  position: relative;
+  left: 5%;
+  top: 5%;
+  width: 15px; 
+  height: 15px;
+  
+}
+`
+const AddMungBtn = styled.button`
+width: 34px;
+height: 34px;
+border-radius: 50%;
+border: 1px solid #F78D70;
+background: #F67452;
+position: relative;
+top: 10px;
+left: 15px;
+img{
+  position: relative;
+  left: 5%;
+  top: 5%;
+  width: 15px; 
+  height: 15px;
+  
+}
+`
+const AddText = styled.div`
+font-weight: 500;
+font-size: 22px;
+position: relative;
+top: 25px;
+left: 10px;
+`
 const Box = styled.div`
   display: flex;
   flex-direction: row;
@@ -393,10 +464,12 @@ const SSub = styled.div`
   display: flex;
   flex-direction: row;
   position: absolute;
-  gap: 10%;
+  gap: 2%;
   padding-left: 40px;
   padding-bottom: 3%;
   bottom: 0;
+  width: 30%;
+  
 `;
 const Subimg = styled.img`
   border-radius: 50%;
@@ -461,8 +534,7 @@ const PostBox = styled.div`
     resize : none;
     overflow:hidden;
     height: 96px;
-    /* position: relative;
-    bottom:-8%; */
+    cursor: pointer;
     :focus{
       outline: none;
     }
