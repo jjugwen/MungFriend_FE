@@ -83,7 +83,6 @@ function Login() {
             <span>카카오 아이디로 로그인 하기</span>
           </KakaoLoginBtn>
         </a>
-        {/* <a href="http://ec2-3-39-6-175.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google"> */}
         <a href="https://hjkim-sparta.shop/oauth2/authorization/google">
           <GoogleLoginBtn>
             <img src={googleIcon} alt="googleIcon" />
