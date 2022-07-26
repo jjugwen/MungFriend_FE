@@ -1,21 +1,15 @@
 //게시글 상세페이지 함께하는 멍친구 , 매칭한 프로필 멍멍이 정보 컴포넌트
 
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as Actions } from "../../../redux/modules/postDetailSlice";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import DogProfileViewModal from "./DogProfileViewModal";
 
 function DogList() {
   const params = useParams();
-  const postId = Number(params.id);
-  const dispatch = useDispatch();
   const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
-  useEffect(() => {
-    dispatch(Actions.getDetailDB(postId));
-  }, []);
 
   //함께하는 멍멍이 '멍프로필' 모달창 여닫기
   const [mungModal, setMungModal] = useState(false);
