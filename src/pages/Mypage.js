@@ -36,6 +36,7 @@ const Mypage = () => {
         background :"#FA5A30" ,
         boxShadow :"04px 4px 20px rgba(250, 90, 48, 0.2)"
   }
+  console.log(change)
 // console.log(firstStyle)
   const getClick = (e) => {
     const id = e.target.id;
