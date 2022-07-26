@@ -323,8 +323,8 @@ const BlueBtn65 = styled.button`
 `;
 const PlusBtn = styled.button`
   position: fixed;
-  bottom: 20%;
-  right: 3%;
+  /* bottom: 20%; */
+  /* right: 3%; */
   z-index: 2;
   box-sizing: border-box;
   /* width: ${(props) => props.width}; */
@@ -338,6 +338,11 @@ const PlusBtn = styled.button`
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
   ${(props) => (props.font_size ? `font-size: ${props.font_size};` : "")};
 
+  transform: translateY(30%);
+  transition: 0.5s;
+  :hover {
+    transform: translateY(0);
+  }
   .hover {
     position: absolute;
     right: 27%;

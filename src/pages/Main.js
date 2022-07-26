@@ -147,12 +147,15 @@ function Main() {
           <img src={bannerhands} alt="hands" style={{ width: "29.4em" }} />
         </div>
       </MainBox5>
-      <a target="blank" href="https://forms.gle/Hhwau4RGSA3c1Mt38">
-        <Button is_circle type="button">
-          <img src={eventGiftBtn} alt="eventgift" className="origin" />
-          <img src={eventCoffeeBtn} alt="eventcoffee" className="hover" />
-        </Button>
-      </a>
+      <UpBox>
+        <a target="blank" href="https://forms.gle/Hhwau4RGSA3c1Mt38">
+          <Button is_circle type="button">
+            <img src={eventGiftBtn} alt="eventgift" className="origin" />
+            <img src={eventCoffeeBtn} alt="eventcoffee" className="hover" />
+          </Button>
+        </a>
+        <div>설문조사 이벤트 참여</div>
+      </UpBox>
     </div>
   );
 }
@@ -343,6 +346,37 @@ const MainBox5 = styled.div`
     line-height: 25px;
     color: white;
     width: max-content;
+  }
+`;
+
+const UpBox = styled.div`
+  position: fixed;
+  bottom: 40%;
+  right: 8%;
+
+  :hover {
+    & div {
+      opacity: 100;
+      transition: 0.5s;
+    }
+  }
+
+  & div {
+    :hover {
+      opacity: 0;
+    }
+    opacity: 0;
+    position: fixed;
+    right: 9%;
+    bottom: 33%;
+    height: 50px;
+    width: 170px;
+    border-radius: 12px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 15px;
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
   }
 `;
 export default Main;
