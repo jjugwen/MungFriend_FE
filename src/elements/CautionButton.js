@@ -69,6 +69,14 @@ const CautionBtn = styled.button`
   :hover {
     color: #fa5a30;
   }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+
+  @media ${({ theme }) => theme.device.tabletV} {
+    display: none;
+  }
 `;
 
 export default CautionButton;

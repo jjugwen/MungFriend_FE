@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 //컴포넌트
@@ -67,6 +67,9 @@ function PostDetail() {
     dispatch(userActions.myinfoDB());
   }, [dispatch]);
 
+  //모달창 밖 영역 클릭 시 닫기
+  const outSection = useRef();
+
   return (
     <>
       <div className="DetailOutterBox">
@@ -127,6 +130,7 @@ function PostDetail() {
                   close={closeUserModal}
                 />
               </div>
+
               <div className="DetailTitleBottomEnd">
                 <span>
                   신청자{" "}
@@ -159,10 +163,14 @@ function PostDetail() {
             </div>
           </div>
         </div>
-
         <div className="DetailBodyBox" style={{ height: "300px" }}>
           <Hr />
-          {detailList?.content}
+          <DetailContent
+            value={detailList?.content ? detailList?.content : ""}
+            readOnly
+          >
+            {detailList?.content}
+          </DetailContent>
         </div>
         <div className="DetailBodyBox">
           <Hr />
@@ -263,5 +271,19 @@ const UserModalBtn = styled.button`
 const Hr = styled.hr`
   border: 0.1px solid #e3e5e9;
   width: 100%;
+`;
+
+const DetailContent = styled.textarea`
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: none;
+  width: 100%;
+  resize: none;
+  height: 284px;
+  :focus {
+    outline: none;
+  }
 `;
 export default PostDetail;

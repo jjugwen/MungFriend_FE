@@ -39,10 +39,10 @@ function WriteModal(props) {
 
   //글자수 세기
   const [text, setText] = useState("");
-
   const onChangeText = (e) => {
     return setText(e.target.value);
   };
+
   return (
     <div className={open ? "openModalcss" : null}>
       {open ? (
@@ -59,7 +59,7 @@ function WriteModal(props) {
           {children === "신청하기" ? (
             <>
               <CautionButton margin="0 0 0 -225%" />
-              <Hr />
+              <HrSecond />
             </>
           ) : null}
           {children === "후기작성" ? (
@@ -89,7 +89,6 @@ function WriteModal(props) {
               취소
             </Button>
             <Button
-              width="214px"
               orange_large
               _onClick={(e) => {
                 // console.log(applyText.current.value);
@@ -159,6 +158,18 @@ const Hr = styled.hr`
   border: 1px solid #e5e5e5;
 `;
 
+const HrSecond = styled.hr`
+  width: 90%;
+  border: 1px solid #e5e5e5;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
+  @media ${({ theme }) => theme.device.tabletV} {
+    display: none;
+  }
+`;
+
 const Reviewmodal = styled.div`
   position: fixed;
   top: 50%;
@@ -179,6 +190,33 @@ const Reviewmodal = styled.div`
     font-weight: 400;
     font-size: 16px;
     color: #7a7a80;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    position: fixed;
+    width: 100%;
+    max-width: 335px;
+    height: 486px;
+
+    span {
+      margin-left: 78%;
+      font-weight: 400;
+      font-size: 12px;
+      color: #7a7a80;
+    }
+  }
+
+  @media ${({ theme }) => theme.device.tabletV} {
+    width: 100%;
+    max-width: 470px;
+    height: 530px;
+
+    span {
+      margin-left: 78%;
+      font-weight: 400;
+      font-size: 12px;
+      color: #7a7a80;
+    }
   }
 `;
 

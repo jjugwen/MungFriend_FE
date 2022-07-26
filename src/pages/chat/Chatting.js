@@ -195,6 +195,7 @@ const Chatting = (props) => {
         >
           <CautionButton />
           <button
+            className="roomout"
             style={{ cursor: "pointer" }}
             onClick={() => {
               dispatch(deleteChannel(channel_data[0]));
@@ -467,6 +468,12 @@ const ChannelTitle = styled.div`
     font-size: 14px;
     line-height: 100%;
   }
+
+  /* .roomout {
+    @media ${({ theme }) => theme.device.tabletV} {
+      margin: 0 0 0 -76%;
+    }
+  } */
 `;
 
 const SenderMessage = styled.div`
