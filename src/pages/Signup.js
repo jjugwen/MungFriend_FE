@@ -183,16 +183,16 @@ function Signup() {
         .then((response) => {
           // console.log(response.data);
           if (response.data.status === "true") {
-            console.log(response.data.message);
+            // console.log(response.data.message);
             navigate("/signupsuccess");
           } else if (response.data.status === "false") {
-            console.log(response.data.status);
+            // console.log(response.data.status);
             window.alert(response.data.message);
           }
         })
         .catch((err) => {
           window.alert("에러가 발생했어요!");
-          console.log(err);
+          // console.log(err);
         });
     }
   };

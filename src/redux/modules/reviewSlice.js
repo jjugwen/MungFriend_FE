@@ -15,10 +15,10 @@ export const createReviewDB = (formData) => {
         dispatch(reviewCreate(response.data));
         // window.location.replace('/');
       } else if (response.data.staus === "false") {
-        console.log(response.data.message);
+        // console.log(response.data.message);
       }
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 };
@@ -30,7 +30,7 @@ export const loadReviewDetailDB = (id) => {
       const response = await instance.get(`/api/reviews/${id}`);
       dispatch(reviewDetailLoad(response.data));
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 };
@@ -45,19 +45,19 @@ export const reviewSlice = createSlice({
   },
   reducers: {
     reviewCreate(state, action) {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.infos.push(action.payload);
     },
     reviewImgCreate(state, action) {
-      console.log(action.payload);
+      // console.log(action.payload);
       // state.image.push(action.payload);
       state.image = action.payload;
-      console.log(state.image);
+      // console.log(state.image);
     },
     reviewImgDelete(state, action) {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.image -= action.payload;
-      console.log(state.image);
+      // console.log(state.image);
     },
     reviewDetailLoad(state, action) {
       state.list = action.payload;

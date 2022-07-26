@@ -77,12 +77,12 @@ function ProfileUpdate(props) {
       phoneNum: phoneNumRef.current.value,
       code: authNumRef.current.value,
     };
-    console.log(data);
+    // console.log(data);
     instance.post("/phone/auth/ok", data).then((res) => {
       setSecondAuth(res.data);
     });
 
-    console.log(secondAuth);
+    // console.log(secondAuth);
   };
 
   //글자수 세기

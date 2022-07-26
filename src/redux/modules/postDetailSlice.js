@@ -9,7 +9,7 @@ export const getDetailDB = (id) => {
       const response = await instance.get(`/api/posts/${id}`);
       dispatch(loadPostDetail(response.data));
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 };
@@ -25,10 +25,10 @@ export const deleteDetailDB = (id) => {
           window.location.replace("/posts");
         }, 100);
       } else if (response.data.status === "false") {
-        console.log(response.data.status, response.data.message);
+        // console.log(response.data.status, response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };

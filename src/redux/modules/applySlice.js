@@ -11,10 +11,10 @@ export const createApplyDB = (data) => {
       if (response.data.staus === "true") {
         dispatch(applyCreate(response.data));
       } else if (response.data.staus === "false") {
-        console.log(response.data.status, response.data.message);
+        // console.log(response.data.status, response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -26,10 +26,10 @@ export const deleteApplyDB = (id) => {
       if (response.data.status === "true") {
         dispatch(applyDelete(response.data));
       } else if (response.data.staus === "false") {
-        console.log(response.data.status, response.data.message);
+        // console.log(response.data.status, response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };

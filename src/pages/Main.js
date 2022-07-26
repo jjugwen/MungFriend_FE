@@ -147,10 +147,7 @@ function Main() {
           <img src={bannerhands} alt="hands" style={{ width: "29.4em" }} />
         </div>
       </MainBox5>
-      <a
-        target="blank"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSfLguQ7YNHIWtGHVjHyDBm0V4XL9rv026hwwhvVgIKE_MgKWg/viewform"
-      >
+      <a target="blank" href="https://forms.gle/Hhwau4RGSA3c1Mt38">
         <Button is_circle type="button">
           <img src={eventGiftBtn} alt="eventgift" className="origin" />
           <img src={eventCoffeeBtn} alt="eventcoffee" className="hover" />

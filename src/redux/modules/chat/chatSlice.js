@@ -25,7 +25,7 @@ export const loadChat = (id) => async (dispatch) => {
     dispatch(loadChatAction(res.data));
     // console.log("채팅메시지 불러오기 콘솔 : " + res.data);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 

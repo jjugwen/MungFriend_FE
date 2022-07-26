@@ -76,7 +76,7 @@ const Chatting = (props) => {
         }
       );
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -90,7 +90,7 @@ const Chatting = (props) => {
         { token: token }
       );
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -148,7 +148,7 @@ const Chatting = (props) => {
         // dispatch(postChat(data.roomId, data.message));
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // console.log(ws.ws.readyState);
     }
   }

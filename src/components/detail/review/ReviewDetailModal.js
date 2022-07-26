@@ -16,7 +16,7 @@ function ReviewDetailModal(props) {
   };
 
   const reviewDetail = useSelector((state) => state.reviewSlice.list);
-  console.log(reviewDetail);
+  // console.log(reviewDetail);
 
   return (
     <>
@@ -57,7 +57,7 @@ function ReviewDetailModal(props) {
               <HrBlack />
               <ImgBox>
                 {reviewDetail.reviewImgList?.map((image, index) => {
-                  console.log(image);
+                  // console.log(image);
                   return (
                     <>
                       <div
