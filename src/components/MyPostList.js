@@ -77,6 +77,7 @@ const RowBox = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 67px;
+  cursor: pointer;
 `;
 const PostTitle = styled.div`
   font-weight: 500;
