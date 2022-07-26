@@ -22,7 +22,7 @@ function ReviewDetailModal(props) {
     <>
       <div className={open ? "openModalcss" : null}>
         {open ? (
-          <div className="modal" style={{ height: "750px", padding: "0.7%" }}>
+          <ReivewModal>
             <RevieweDetailTitle>
               <ModalTitle style={{ textAlign: "center" }}>후기상세</ModalTitle>
               <button
@@ -103,13 +103,30 @@ function ReviewDetailModal(props) {
                 확인
               </Button>
             </>
-          </div>
+          </ReivewModal>
         ) : null}
       </div>
       {/* </div> */}
     </>
   );
 }
+
+const ReivewModal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 640px;
+  height: 750px;
+  padding: 0.7%;
+`;
 
 const ModalTitle = styled.h1`
   font-style: normal;

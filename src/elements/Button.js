@@ -208,8 +208,10 @@ const WhiteBtn214 = styled.button`
   ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
   ${(props) => (props.font_size ? `font-size: ${props.font_size};` : "")};
 
-  @media (max-width: 280px) {
-    font-size: 11px;
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 144px;
+    height: 44px;
+    font-size: 14px;
   }
 `;
 
@@ -274,8 +276,10 @@ const OrangeBtn214 = styled.button`
   ${(props) => (props.position ? `position: ${props.position};` : "")};
   ${(props) => (props.bottom ? `bottom: ${props.bottom};` : "")};
 
-  @media (max-width: 280px) {
-    font-size: 11px;
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 144px;
+    height: 44px;
+    font-size: 14px;
   }
 `;
 
