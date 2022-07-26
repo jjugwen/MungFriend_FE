@@ -144,8 +144,6 @@ function Posts() {
         {selected.length === 0 ? (
           <>
             {Posts.map((post, i) => {
-              // console.log(post.imagePath)
-              // console.log(post.content.length);
               return (
                 <PostBox
                   key={i}
@@ -226,8 +224,6 @@ function Posts() {
         ) : (
           <>
             {selected.map((post, i) => {
-              // console.log(post.imagePath)
-              // console.log(post.content.length);
               return (
                 <PostBox
                   key={i}
