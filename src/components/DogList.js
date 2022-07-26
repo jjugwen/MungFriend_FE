@@ -118,6 +118,7 @@ const TextBox14 = styled.div`
   margin-top: 5px;
 `;
 const CheckBox = styled.input`
+  cursor: pointer;
   margin: 18px;
   appearance: none;
   width: 1.2rem;
