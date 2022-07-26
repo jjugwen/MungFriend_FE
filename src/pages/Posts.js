@@ -307,6 +307,7 @@ function Posts() {
           </>
         )}
       </Container>
+      <UpBox>
       <AddPostButton
         onClick={() => {
           navigate("/postcreate");
@@ -314,6 +315,8 @@ function Posts() {
       >
         <img src="https://ifh.cc/g/nW36zN.png" alt="" />
       </AddPostButton>
+      <div>게시글을 작성합니다.</div>
+      </UpBox>
     </All>
   );
 }
@@ -481,17 +484,47 @@ const PostImg = styled.img`
 `;
 const AddPostButton = styled.button`
   position: fixed;
-  bottom: 20%;
-  right: 3%;
+   transform: translateY(30%); transition: 0.5s;
+  :hover{
+    transform: translateY(0);
+  }
   width: 80px;
   height: 80px;
   border: none;
   background-color: #4f65ff;
   border-radius: 50%;
-
   img {
     width: 40px;
     height: 40px;
   }
-`;
+
+`; 
+const UpBox= styled.div`
+position: fixed;
+bottom: 40%;
+right: 8%;
+
+div{
+  opacity: 0;
+  position: fixed;
+  right: 9%;
+  bottom: 33%;
+  height: 50px;
+  width: 170px;
+  border-radius: 12px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 15px;
+  color: white;
+  background: rgba(0, 0, 0, 0.75);
+}
+:hover{
+  div{
+    opacity: 100;
+    transition: 0.5s;
+  }
+  
+}
+`
+  
 export default Posts;
