@@ -27,55 +27,57 @@ const Mypage = () => {
   let [change, setChange] = useState(<MyPageComponent />);
   const[id, setId] = useState("1")
   const pageRef = useRef();
-  const takerReviewRef = useRef();
-  const mypostRef = useRef();
-  const myapplypostRef = useRef();
-  const giverReviewRef = useRef();
+
+  const [post, setPost] = useState(false);
+  const allPostRef= useRef();
+
+  const [review, setReview] = useState(false);
+  const allReviewRef =useRef();
   
   React.useEffect(()=>{
     if (id === "1") {
       setChange(<MyPageComponent />);
+      setPost(false)
+      setReview(false)
       pageRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2)`;
-      mypostRef.current.style = "";
-      myapplypostRef.current.style = "";
-      takerReviewRef.current.style = "";
-      giverReviewRef.current.style = "";
+      allPostRef.current.style = "";
+      allReviewRef.current.style ="";
     } else if (id === "2") {
       setChange(<MyPostList />);
+      setPost(true)
+      setReview(false)
       pageRef.current.style = "";
-      mypostRef.current.style = `color :white; 
+      allPostRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      myapplypostRef.current.style = "";
-      takerReviewRef.current.style = "";
-      giverReviewRef.current.style = "";
+      allReviewRef.current.style ="";
     }  else if (id === "3") {
       setChange(<MyApplyPost />);
+      setPost(true)
+      setReview(false)
       pageRef.current.style = "";
-      mypostRef.current.style = "";
-      takerReviewRef.current.style = "";
-      myapplypostRef.current.style = `color :white; 
+      allPostRef.current.style = `color :white; 
       background :#FA5A30; 
       boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      giverReviewRef.current.style = "";
+      allReviewRef.current.style ="";
     } else if (id === "4") {
       setChange(<MyReviewList />);
+      setPost(false)
+      setReview(true)
       pageRef.current.style = "";
-      mypostRef.current.style = "";
-      myapplypostRef.current.style = "";
-      takerReviewRef.current.style = `color :white; 
+      allPostRef.current.style = ""; 
+      allReviewRef.current.style =`color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      giverReviewRef.current.style = "";
     }else {
       setChange(<GiverReview />);
+      setPost(false)
+      setReview(true)
       pageRef.current.style = "";
-      mypostRef.current.style = "";
-      myapplypostRef.current.style = ""
-      takerReviewRef.current.style = "";
-      giverReviewRef.current.style = `color :white; 
+      allPostRef.current.style = "";
+      allReviewRef.current.style = `color :white; 
       background :#FA5A30; 
       boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
     }
@@ -112,19 +114,24 @@ const Mypage = () => {
         <button id="1" onClick={getClick} ref={pageRef} >
           마이페이지
         </button>
-        <button id="2" onClick={getClick} ref={mypostRef}>
-           작성한 게시글
+        <button id="2" onClick={getClick} ref={allPostRef}>
+           내 게시글
         </button>
-        <button id="3" onClick={getClick} ref={myapplypostRef}>
+        {post && <><SubBtn id="2" onClick={getClick} style={id==="2"?{color:'#FA5A30'}:{}}>
+          작성한 게시글</SubBtn>
+        <SubBtn id="3" onClick={getClick} style={id==="3"?{color:'#FA5A30'}:{}}>
            신청한 게시글
+        </SubBtn></>}
+        <button id="4" onClick={getClick} ref={allReviewRef}>
+           후기
         </button>
-        <button id="4" onClick={getClick} ref={takerReviewRef}>
-           받은 후기
-        </button>
-
-        <button id="5" onClick={getClick} ref={giverReviewRef}>
+        {review && <><SubBtn id ="4" onClick={getClick} style={id==="4"?{color:'#FA5A30'}:{}}>
+          받은 후기
+        </SubBtn>
+        <SubBtn id="5" onClick={getClick} style={id==="5"?{color:'#FA5A30'}:{}}>
            작성한 후기
-        </button>
+        </SubBtn></>}
+        
       </ListBar>
       {change}
       <PageBox></PageBox>
@@ -143,7 +150,12 @@ const Container = styled.div`
     width: 90%;
   }
 `;
-
+const SubBtn= styled.button`
+font-weight: 500;
+margin-left: 10px;
+font-size: 16px;
+color: #B8BBC0;
+`
 const ListBar = styled.div`
   display: flex;
   flex-direction: column;
