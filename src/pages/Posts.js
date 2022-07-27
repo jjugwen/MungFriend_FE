@@ -191,7 +191,7 @@ function Posts() {
             ref={btnStyleWhole}
             key="1"
           >
-            전체
+            모집중
           </SelectBtn>
           <SelectBtn
             type="button"

@@ -40,10 +40,12 @@ instance.interceptors.response.use(
       sessionStorage.clear();
       window.location.replace("/needlogin");
     } else if (error.response.status === 403) {
-      alert(
-        "필수 정보 입력 후, 사용 가능한 기능입니다. 마이페이지 프로필 수정에서 필수 정보(핸드폰 번호, 주소) 입력 후 이용해 주세요. "
+      const result = window.confirm(
+        "해당 기능은 마이페이지 프로필 수정에서 \n필수 정보(핸드폰 번호, 주소) 입력 후 이용 가능합니다. \n마이페이지로 이동하시겠습니까?"
       );
-      window.location.replace("/mypage");
+      if (result) {
+        window.location.replace("/mypage");
+      }
     } else {
       window.alert(error.response.data.errorMessage);
       window.location.replace("/error");
