@@ -33,12 +33,16 @@ function betweenTime(data) {
   const exMinuteTime = () => {
     if (gapTime < 60) {
       return `${gapTime}분`;
+    } else if (gapTime > 60) {
+      return `${gapTime - betweenTimeHour * 60}분`;
     }
-    return "0분";
+    return "";
   };
   const exHourTime = () => {
-    if (betweenTimeHour < 24) {
+    if (betweenTimeHour < 24 && betweenTimeHour !== 0) {
       return `${betweenTimeHour}시간`;
+    } else if (betweenTimeHour === 0) {
+      return "";
     }
   };
 
