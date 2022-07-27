@@ -43,7 +43,9 @@ function Header(props) {
       color : #FA5A30;
       font-weight: 600;`;
     } else {
-      mainRef.current.style = "";
+      mainRef.current.style = `
+      color : black;
+      font-weight: 500;`;
       postsRef.current.style = "";
       communityRef.current.style = "";
     }
@@ -69,7 +71,12 @@ function Header(props) {
               justifyContent: "space-around",
             }}
           >
-            <HeadButton id="/" onClick={GetClick} ref={mainRef}>
+            <HeadButton
+              id="/"
+              onClick={GetClick}
+              ref={mainRef}
+              style={{ color: "#FA5A30", fontWeight: "600" }}
+            >
               서비스 소개
             </HeadButton>
             <HeadButton id="posts" onClick={GetClick} ref={postsRef}>
