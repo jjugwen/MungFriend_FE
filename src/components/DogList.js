@@ -1,9 +1,8 @@
-import React, { useRef} from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { deleteMyMungAX, loadMyMungAX } from "../redux/modules/mungSlice";
 import instance from "../redux/modules/instance";
-
 
 function DogList(props) {
   const dispatch = useDispatch();
@@ -15,9 +14,9 @@ function DogList(props) {
 
   const info = useSelector((state) => state.mungSlice.mung);
   // console.log(info)
- 
+
   const deleteDog = (e) => {
-    // console.log(typeof(e.target.value))
+    console.log(e.target.value);
     dispatch(deleteMyMungAX(Number(e.target.value)));
   };
   const modal = () => {
@@ -26,15 +25,54 @@ function DogList(props) {
   const ChoiceRep = (e) => {
     const id = e.target.value;
     instance.put(`api/dogs/${id}`).then((res) => {
-      alert(res.data.message)
-      window.location.reload(); 
-    }); 
-                               
+      alert(res.data.message);
+      window.location.reload();
+    });
+
     // console.log(id)
   };
- 
+  //삭제 모달창
+  const [delDog, setDelDog] = useState(false);
+  const [delDogId, setDelDogId] = useState();
   return (
     <Container>
+      {delDog && (
+        <Test
+          onClick={() => {
+            setDelDog(!delDog);
+          }}
+        />
+      )}
+      {delDog && (
+        <DelModal>
+          <XBtn
+            onClick={() => {
+              setDelDog(!delDog);
+            }}
+          >
+            X
+          </XBtn>
+          <DelText>
+            {" "}
+            멍멍이를 삭제하면 <br />
+            해당 멍멍이와 관련된 <b>모든 정보가 삭제됩니다.</b>
+            <br />
+            그래도 삭제 하시겠습니까?
+          </DelText>
+          <RowBox>
+            <NoBtn
+              onClick={() => {
+                setDelDog(!delDog);
+              }}
+            >
+              아니요. 삭제하지 않겠습니다
+            </NoBtn>
+            <OkBtn value={delDogId} onClick={deleteDog}>
+              네. 삭제하겠습니다
+            </OkBtn>
+          </RowBox>
+        </DelModal>
+      )}
       <RowBox>
         <TextBox20>멍프로필</TextBox20>
         <TextBox14>
@@ -47,13 +85,24 @@ function DogList(props) {
       </RowBox>
       {info?.map((dog, i) => {
         return (
-          <Listbox key={i}   style={ dog.isRepresentative === true? {border:'2px solid #fa5a30'}:{} }>
+          <Listbox
+            key={i}
+            style={
+              dog.isRepresentative === true
+                ? { border: "2px solid #fa5a30" }
+                : {}
+            }
+          >
             <CheckBox
               onClick={ChoiceRep}
               value={dog.id}
               type="radio"
               name="isRepresentative"
-              style={ dog.isRepresentative === true? {backgroundColor: '#fa5a30'}:{} }
+              style={
+                dog.isRepresentative === true
+                  ? { backgroundColor: "#fa5a30" }
+                  : {}
+              }
             />
             <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
             <div>
@@ -71,7 +120,13 @@ function DogList(props) {
                 {dog.age}세, {dog.size}견
               </TextBox14>
             </div>
-            <DelButton value={dog.id} onClick={deleteDog}>
+            <DelButton
+              value={dog.id}
+              onClick={() => {
+                setDelDog(!delDog);
+                setDelDogId(dog.id);
+              }}
+            >
               삭제
             </DelButton>
           </Listbox>
@@ -87,13 +142,6 @@ const Container = styled.div`
   left: 503px;
   box-sizing: border-box;
 
-  button {
-    font-weight: 500;
-    font-size: 14px;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-    background: #ffffff;
-  }
   div {
     margin-left: 5px;
   }
@@ -134,7 +182,6 @@ const CheckBox = styled.input`
     background-repeat: no-repeat;
     background-color: #fa5a30;
   }
-
 `;
 const DogImg = styled.img`
   width: 60px;
@@ -172,17 +219,93 @@ const DelButton = styled.button`
   font-size: 14px;
   width: 47px;
   height: 30px;
-  position:absolute;
+  position: absolute;
   right: 3%;
+  background: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
 `;
 const AddButton = styled.button`
   position: absolute;
   right: 0%;
   height: 40px;
   width: 104px;
+  background: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
   img {
     width: 12px;
     height: 12px;
   }
 `;
+//모달창 css
+const Test = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2;
+`;
+
+const DelModal = styled.div`
+  background-color: white;
+  width: 450px;
+  height: 200px;
+  border-radius: 14px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+`;
+const XBtn = styled.button`
+  border: none;
+  background-color: white;
+  font-size: 25px;
+  font-weight: 500;
+  position: fixed;
+  right: 3%;
+  top: 3%;
+`;
+
+const DelText = styled.div`
+  box-sizing: border-box;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  b {
+    color: red;
+  }
+`;
+const NoBtn = styled.button`
+  position: absolute;
+  bottom: 5%;
+  left: 2%;
+  width: 47%;
+  height: 48px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+`;
+const OkBtn = styled.button`
+  position: absolute;
+  bottom: 5%;
+  right: 2%;
+  width: 47%;
+  margin-left: 2%;
+  height: 48px;
+  color: white;
+  background-color: #fa5a30;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+`;
+
 export default DogList;

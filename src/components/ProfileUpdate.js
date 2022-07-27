@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import React, { useEffect, useRef, useState } from "react";
-import DaumPostcode from "react-daum-postcode";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -15,9 +14,9 @@ function ProfileUpdate(props) {
   const emailRef = useRef();
   const phoneNumRef = useRef();
   const introduceRef = useRef();
-  const [lon, setLon] = useState(null);
-  const [lat, setLat] = useState(null);
-  const [address, setAddress] = useState(null);
+  const lon= props.lon;
+  const lat = props.lat;
+  const address= props.address;
 
   const info = useSelector((state) => state.myPageSlice.mypage);
   // console.log(info);
@@ -28,9 +27,8 @@ function ProfileUpdate(props) {
   }, []);
 
   //주소창
-  const [popup, setPopup] = useState(false);
   const Popup = () => {
-    setPopup(!popup);
+    props.setPopup(!props.add);
   };
 
   const updateMypage = () => {
@@ -93,8 +91,13 @@ function ProfileUpdate(props) {
     return setText(e.target.value);
   };
 
+  
+
+
   return (
+    
     <Container>
+      
       <Title>프로필 수정</Title>
       <TextBox>닉네임</TextBox>
       <OneInput
@@ -150,14 +153,7 @@ function ProfileUpdate(props) {
         <TwoButton onClick={Popup} type="button">
           우편번호 찾기
         </TwoButton>
-        {popup && (
-          <Address
-            onClose={Popup}
-            setLon={setLon}
-            setLat={setLat}
-            setAddress={setAddress}
-          />
-        )}
+        
       </RowBox>
 
       {info?.isAgree === true ? (
@@ -220,48 +216,6 @@ function ProfileUpdate(props) {
   );
 }
 
-function Address(props) {
-  // 원인 : lat, lon에 값이 들어간건 맞음
-  // 리액트는 컴포넌트가 닫히면 안에 들어있는 useState값도 없어짐
-
-  const onCompletePost = (data) => {
-    // console.log(data.address)
-    props.setAddress(data.address);
-    Promise.resolve(data)
-      .then((o) => {
-        const { address } = data;
-
-        return new Promise((resolve, reject) => {
-          const geocoder = new window.daum.maps.services.Geocoder();
-
-          geocoder.addressSearch(address, (result, status) => {
-            if (status === window.daum.maps.services.Status.OK) {
-              const { x, y } = result[0];
-
-              resolve({ lat: y, lon: x });
-            } else {
-              reject();
-            }
-          });
-        });
-      })
-      .then((result) => {
-        // console.log(result); // 위, 경도 결과 값
-        //위도
-        props.setLat(result.lat);
-        //경도
-        props.setLon(result.lon);
-        props.onClose();
-      });
-  };
-
-  return (
-    <AddressBox>
-      <DaumPostcode onComplete={onCompletePost} />
-    </AddressBox>
-  );
-}
-
 const AuthOk = styled.div`
   color: green;
   font-size: 14px;
@@ -271,7 +225,14 @@ const AuthNo = styled.div`
   font-size: 14px;
 `;
 const Container = styled.div`
-
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #FA5A30;
+    border-radius: 15px;
+  }
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 520px;
@@ -345,13 +306,7 @@ const RowBox = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const AddressBox = styled.div`
-  position: fixed;
-  left: 50%;
-  margin-top: 40px;
-  background-color: white;
-  z-index: 1;
-`;
+
 const CheckInput = styled.input`
   margin: 18px;
   appearance: none;
