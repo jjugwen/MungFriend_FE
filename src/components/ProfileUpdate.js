@@ -278,7 +278,7 @@ const Container = styled.div`
   padding: 20px;
   border-radius: 20px;
   //모달 css
-  max-height: calc(100vh - 210px);
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
   position: fixed;
   top: 50%;
