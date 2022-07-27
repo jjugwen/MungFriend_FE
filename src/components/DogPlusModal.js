@@ -33,10 +33,11 @@ function DogPlusModal(props) {
   // 강아지 정보 input 입력값 넣어두기
   //나이는 숫자데이터 . if문 사용해서 숫자로 감싸주기
   const handleChange = (prop) => (e) => {
-    if (prop !== "age") {
-      setpuppy({ ...puppy, [prop]: e.target.value });
-    } else {
+    if (prop === "age") {
+    
       setpuppy({ ...puppy, [prop]: Number(e.target.value) });
+    } else {
+      setpuppy({ ...puppy, [prop]: e.target.value });
     }
     // console.log(puppy);
   };
@@ -69,6 +70,10 @@ function DogPlusModal(props) {
     return setText(e.target.value);
   };
 
+  //유효성 검사
+  const ageCheck =  /[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g || /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g
+  const nameCheck = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|]*$/;
+//  console.log(nameCheck.test(puppy.name))
   return (
     <Container>
       <p className="font-24">
@@ -98,7 +103,11 @@ function DogPlusModal(props) {
       <div className="wrap">
         <div className="row-box">
           <div className="column-box">
-            <b>이름</b>
+            <div className="row-box">
+              <b>이름</b>
+              {nameCheck.test(puppy.name) ? "":<ValidationText>이름은 한글과 영어만 가능해요!</ValidationText>}
+            </div>
+            
             <input
               className="box-size"
               onChange={handleChange("name")}
@@ -116,15 +125,17 @@ function DogPlusModal(props) {
         </div>
         <div className="row-box">
           <div className="column-box ">
+            <div className="row-box">
             <b>나이</b>
+            {ageCheck.test(puppy.age) && puppy.age !== undefined? <ValidationText>숫자만 입력 가능해요</ValidationText>:""}
+            {puppy.age > 30 ? <ValidationText >나이는 최대 30살 이에요!</ValidationText>:""}
+            </div>
             <input
               className="box-size"
-              type="number"
-              maxLength="999"
-              max="30"
-              min="0"
+              type="text"
               onChange={handleChange("age")}
               placeholder="나이를 입력해주세요."
+              maxLength={2}
             />
           </div>
           <div className="column-box">
@@ -137,9 +148,9 @@ function DogPlusModal(props) {
             </select>
           </div>
         </div>
-        <p>
+        
           <b>몸무게별 사이즈 안내</b>
-        </p>
+        
         <div className="info-box">
           ~10키로 : 소형견
           <br />
@@ -148,20 +159,19 @@ function DogPlusModal(props) {
           20키로 이상 : 대형견
           <br />
         </div>
-        <p>
+        <div className="row-box">
+        
           <b>견종이나 유의사항 등 추가할 정보</b>
-        </p>
+        
+        {puppy?.info?.length===255?<ValidationText> 최대 글자 수는 255자에요!</ValidationText>:""}
+        </div>
         <textarea
           onChange={
-            // () => {
             handleChange("info")
-            // onChangeText(e);
-            // }
           }
           placeholder="멍멍이의 유의사항을 알려주세요!&#13;&#10;(Ex. '입질 때문에 다른 강아지 근처에 가지 못하게 주의해주세요', '예방 접종을 마쳤습니다.')"
-          maxLength="255" //255자 제한
+          maxLength="255"
         />
-        {/* <CountText>{text.length}/255</CountText> */}
       </div>
       <div className="btn-box">
         <button
@@ -182,6 +192,16 @@ const Container = styled.div`
   box-sizing: border-box;
   padding: 20px;
   width: 520px;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #FA5A30;
+    border-radius: 15px;
+   
+  }
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -198,9 +218,7 @@ top: 73px; */
     width: 450px;
     margin: auto;
     text-align: left;
-    div {
-      margin-top: 10px;
-    }
+ 
     textarea {
       box-sizing: border-box;
       width: 445px;
@@ -212,6 +230,7 @@ top: 73px; */
       padding: 10px;
       resize: none;
       line-height: 25px;
+      margin: 15px 0px;
       :focus {
         outline: none;
       }
@@ -222,8 +241,14 @@ top: 73px; */
       height: 92px;
       background: #efefef;
       border-radius: 4px;
+      margin: 15px 0px;
     }
-
+    input{
+      margin-bottom: 15px;
+    }
+    select{
+      margin-bottom: 15px;
+    }
     .column-box {
       text-align: left;
       margin: auto;
@@ -239,7 +264,7 @@ top: 73px; */
     margin-top: 20px;
     button {
       margin: 10px;
-      width: 214px;
+      width: 45%;
       height: 48px;
       border: none;
       font-size: 16px;
@@ -260,6 +285,7 @@ const PreviewImg = styled.img`
   height: 140px;
   background-color: #d9d9d9;
   border-radius: 50%;
+  margin-bottom: 20px;
   /* border: none; */
 `;
 const PreviewBtn = styled.div`
@@ -284,6 +310,11 @@ const PreviewBtn = styled.div`
     display: none;
   }
 `;
+const ValidationText=styled.div`
+color: red;
+margin-left: 10px;
+font-size: 15px;
+`
 
 const CountText = styled.span`
   position: absolute;
