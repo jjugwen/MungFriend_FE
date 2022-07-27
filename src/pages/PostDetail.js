@@ -52,7 +52,7 @@ function PostDetail() {
   //작성자 확인 및 정보 모달 확인 시 필요
   const loginNickname = useSelector(
     (state) => state.userInfoSlice.myInfo.nickname
-  ); //로컬스토리지로 닉네임 가져오기로. MockAPI test 시에는 myinfo 정보 필요할 수도.
+  );
   // console.log(loginNickname);
 
   const deletePost = () => {
@@ -86,7 +86,6 @@ function PostDetail() {
               <img src={WithmeFalse} alt="withmefalse" />
             )}
           </div>
-
           <h1 className="DetailTitle">{detailList?.title}</h1>
           <div>
             <div className="DetailTitleBottom">
@@ -182,42 +181,52 @@ function PostDetail() {
         </div>
         {loginNickname !== detailList?.nickname ? ( //작성자 정보와 로그인한 유저가 같지 않으면서,
           detailList?.applyByMe ? ( //applyByMe(신청여부)가 true면 신청한 상태 : 신청취소 버튼 보이기
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              {!detailList?.isComplete ? ( //모집종료되면
-                <Button
-                  grey_small
-                  margin="0 0 4.9em 0"
-                  _onClick={() => {
-                    dispatch(applyActions.deleteApplyDB(postId));
-                    setTimeout(() => {
-                      window.location.reload();
-                    }, 500);
-                  }}
-                >
-                  신청취소
-                </Button>
-              ) : null}
-            </div>
+            <>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                {!detailList?.isComplete ? ( //모집종료되면
+                  <Button
+                    grey_small
+                    margin="0 0 4.9em 0"
+                    _onClick={() => {
+                      dispatch(applyActions.deleteApplyDB(postId));
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 500);
+                    }}
+                  >
+                    신청취소
+                  </Button>
+                ) : null}
+              </div>
+              <div className="DetailBodyBox">
+                <ApplyComment />
+              </div>
+            </>
           ) : (
             //applyByMe가 false면 신청한 상태 : 신청하기 버튼 보이기
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              {!detailList?.isComplete ? ( //모집종료되면
-                <Button
-                  orange_small
-                  margin="0 0 4.9em 0"
-                  _onClick={() => {
-                    openApplyModal();
-                  }}
-                >
-                  신청하기
-                </Button>
-              ) : null}
-              <WriteModal
-                children="신청하기"
-                open={applyModal}
-                close={closeApplyModal}
-              />
-            </div>
+            <>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                {!detailList?.isComplete ? ( //모집종료되면
+                  <Button
+                    orange_small
+                    margin="0 0 4.9em 0"
+                    _onClick={() => {
+                      openApplyModal();
+                    }}
+                  >
+                    신청하기
+                  </Button>
+                ) : null}
+                <WriteModal
+                  children="신청하기"
+                  open={applyModal}
+                  close={closeApplyModal}
+                />
+              </div>
+              <div className="DetailBodyBox">
+                <ApplyComment />
+              </div>
+            </>
           )
         ) : loginNickname === detailList?.nickname && //작성자 정보와 로그인한 유저가 같으면서,
           detailList?.isComplete === false ? ( //모집중이면(isComplete가 false) 게시글 수정/삭제 가능
