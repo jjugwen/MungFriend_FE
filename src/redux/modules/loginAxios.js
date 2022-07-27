@@ -20,6 +20,7 @@ export const loginDB = (username, password) => {
         sessionStorage.setItem("token", response.data.accessToken);
         sessionStorage.setItem("nickname", response.data.nickname);
         sessionStorage.setItem("memberId", response.data.memberId);
+        sessionStorage.setItem("refreshToken", response.data.refreshToken);
         // window.alert(response.data.message);
         window.location.replace("/");
       } else if (response.data.status === "false") {

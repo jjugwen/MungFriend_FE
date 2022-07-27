@@ -37,8 +37,31 @@ instance.interceptors.response.use(
       // console.log(error.response.data);
       window.alert(error.response.data.errorMessage);
     } else if (error.response.status === 401) {
-      sessionStorage.clear();
-      window.location.replace("/needlogin");
+      //악시오스를 보낸다
+      const refreshToken = sessionStorage.getItem("refreshToken");
+      axios
+        .post(
+          `https://hjkim-sparta.shop/member/reissue`,
+          {
+            accessToken: token,
+            refreshToken: refreshToken,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          sessionStorage.setItem("token", response.data.accessToken);
+          sessionStorage.setItem("refreshToken", response.data.refreshToken);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+          sessionStorage.clear();
+          window.location.replace("/needlogin");
+        });
     } else if (error.response.status === 403) {
       const result = window.confirm(
         "해당 기능은 마이페이지 프로필 수정에서 \n필수 정보(핸드폰 번호, 주소) 입력 후 이용 가능합니다. \n마이페이지로 이동하시겠습니까?"

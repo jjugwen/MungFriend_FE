@@ -24,6 +24,12 @@ const KakaoLoginRedirect = () => {
     const memberId = new URL(window.location.href).searchParams.get("memberId");
     sessionStorage.setItem("memberId", memberId);
 
+    //refreshToken get
+    const refreshToken = new URL(window.location.href).searchParams.get(
+      "refreshToken"
+    );
+    sessionStorage.setItem("refreshToken", refreshToken);
+
     //profile 이미지 get
     // const profileImage = new URL(window.location.href).searchParams.get(
     //   "profile"
