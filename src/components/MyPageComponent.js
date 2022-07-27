@@ -4,6 +4,7 @@ import styled from "styled-components";
 import DogList from "./DogList";
 import DogPlusModal from "../components/DogPlusModal";
 import ProfileUpdate from "./ProfileUpdate";
+import DaumPostcode from "react-daum-postcode";
 
 function MyPageComponent() {
   const info = useSelector((state) => state.myPageSlice.mypage);
@@ -11,18 +12,79 @@ function MyPageComponent() {
 
   const [mungModal, setMungModal] = useState();
   const [profileModal, setProfileModal] = useState();
+
+  const [addressPopup, setAddressPopup] = useState();
+  const [lon, setLon] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [address, setAddress] = useState(null);
+
+  //주소찾기 api
+  const onCompletePost = (data) => {
+    // console.log(data.address)
+    setAddress(data.address);
+    Promise.resolve(data)
+      .then((o) => {
+        const { address } = data;
+
+        return new Promise((resolve, reject) => {
+          const geocoder = new window.daum.maps.services.Geocoder();
+
+          geocoder.addressSearch(address, (result, status) => {
+            if (status === window.daum.maps.services.Status.OK) {
+              const { x, y } = result[0];
+
+              resolve({ lat: y, lon: x });
+            } else {
+              reject();
+            }
+          });
+        });
+      })
+      .then((result) => {
+        // console.log(result); // 위, 경도 결과 값
+        //위도
+        setLat(result.lat);
+        //경도
+        setLon(result.lon);
+        setAddressPopup(!addressPopup);
+      });
+  };
+
   return (
     <Container>
-      {mungModal && <Test onClick={(e)=>{
-        setMungModal(!mungModal)
-      }}/>}
+      {mungModal && (
+        <Test
+          onClick={(e) => {
+            setMungModal(!mungModal);
+          }}
+        />
+      )}
       {mungModal && (
         <DogPlusModal setMungModal={setMungModal} modal={mungModal} />
       )}
-      {profileModal && <Test onClick={(e)=>{
-        setProfileModal(!profileModal)}}/>}
       {profileModal && (
-        <ProfileUpdate setProfileModal={setProfileModal} modal={profileModal} />
+        <Test
+          onClick={(e) => {
+            setProfileModal(!profileModal);
+            setAddressPopup(false);
+          }}
+        />
+      )}
+      {profileModal && (
+        <ProfileUpdate
+          setProfileModal={setProfileModal}
+          modal={profileModal}
+          setPopup={setAddressPopup}
+          add={addressPopup}
+          lon={lon}
+          lat={lat}
+          address={address}
+        />
+      )}
+      {addressPopup && (
+        <AddressBox>
+          <DaumPostcode onComplete={onCompletePost} />
+        </AddressBox>
       )}
       <RowBox>
         <Profileimg
@@ -114,6 +176,17 @@ const Test = styled.div`
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
   z-index: 2;
+`;
+
+const AddressBox = styled.div`
+  width: 400px;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  background-color: white;
+  z-index: 5;
+ 
 `;
 export default MyPageComponent;
