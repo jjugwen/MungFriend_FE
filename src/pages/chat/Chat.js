@@ -49,11 +49,10 @@ const Chat = (props) => {
               {channel_data &&
                 channel_data.map((list, index) => {
                   return (
-                    <>
+                    <section key={list.id}>
                       {Number(id) === list.id ? (
                         <ChannelListBox
                           style={{ backgroundColor: "#fa5a30" }}
-                          key={index}
                           onClick={() => {
                             navigate(`/chat/${list.id}`);
                           }}
@@ -64,7 +63,6 @@ const Chat = (props) => {
                         </ChannelListBox>
                       ) : (
                         <ChannelListBox
-                          key={index}
                           onClick={() => {
                             navigate(`/chat/${list.id}`);
                           }}
@@ -72,7 +70,7 @@ const Chat = (props) => {
                           <p ref={chatroom}>{list.channel}</p>
                         </ChannelListBox>
                       )}
-                    </>
+                    </section>
                   );
                 })}
             </ChannelList>

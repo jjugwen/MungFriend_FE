@@ -20,6 +20,11 @@ function Header(props) {
   const mainRef = useRef();
   const postsRef = useRef();
   const communityRef = useRef();
+  const loginRef = useRef();
+  const signupRef = useRef();
+  const chatRef = useRef();
+  const noticeRef = useRef();
+
   const GetClick = (e) => {
     // console.log(e.target.id);
     const id = e.target.id;
@@ -42,8 +47,16 @@ function Header(props) {
       communityRef.current.style = `
       color : #FA5A30;
       font-weight: 600;`;
+    } else if (id === "login" || id === "signup" || id === "chat") {
+      mainRef.current.style = `
+      color : black;
+      font-weight: 500;`;
+      postsRef.current.style = "";
+      communityRef.current.style = "";
     } else {
-      mainRef.current.style = "";
+      mainRef.current.style = `
+      color : black;
+      font-weight: 500;`;
       postsRef.current.style = "";
       communityRef.current.style = "";
     }
@@ -69,7 +82,12 @@ function Header(props) {
               justifyContent: "space-around",
             }}
           >
-            <HeadButton id="/" onClick={GetClick} ref={mainRef}>
+            <HeadButton
+              id="/"
+              onClick={GetClick}
+              ref={mainRef}
+              style={{ color: "#FA5A30", fontWeight: "600" }}
+            >
               서비스 소개
             </HeadButton>
             <HeadButton id="posts" onClick={GetClick} ref={postsRef}>
@@ -81,37 +99,30 @@ function Header(props) {
           </div>
           {!token ? (
             <BeforeLogin>
-              <HeadButton
-                onClick={() => {
-                  navigate("/login");
-                }}
-              >
+              <HeadButton id="login" onClick={GetClick} ref={loginRef}>
                 로그인
               </HeadButton>
-              <HeadButton
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
+              <HeadButton id="signup" onClick={GetClick} ref={signupRef}>
                 회원가입
               </HeadButton>
             </BeforeLogin>
           ) : (
-            <div style={AfterLogin}>
-              <HeadButton
-                onClick={() => {
-                  navigate("/chat");
-                }}
-              >
-                <img src={chatting} alt="chatting" />
-              </HeadButton>
-              <HeadButton
-                onClick={() => {
-                  navigate("/preparing");
-                }}
-              >
-                <img src={noticeicon} alt="noticeicon" />
-              </HeadButton>
+            <AfterLogin>
+              <img
+                src={chatting}
+                alt="chatting"
+                id="chat"
+                onClick={GetClick}
+                ref={chatRef}
+                style={{ marginRight: "5%" }}
+              />
+              <img
+                src={noticeicon}
+                alt="noticeicon"
+                id="preparing"
+                onClick={GetClick}
+                ref={noticeRef}
+              />
 
               <HeadButton
                 onClick={() => {
@@ -130,7 +141,7 @@ function Header(props) {
                   <img src={openmenuarrow} alt="openmenuarrow" />
                 </div>
               </HeadButton>
-            </div>
+            </AfterLogin>
           )}
         </HeaderBox>
       </HeaderOutterBox>
@@ -174,8 +185,14 @@ const BeforeLogin = styled.div`
   display: "flex";
   min-width: fit-content;
 `;
-const AfterLogin = {
-  display: "flex",
-  alignItems: "center",
-};
+const AfterLogin = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 10%;
+  gap: 2%;
+  & img {
+    cursor: pointer;
+  }
+`;
 export default Header;
