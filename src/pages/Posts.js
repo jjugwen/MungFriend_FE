@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
@@ -52,22 +52,36 @@ function Posts() {
 
   //게시글 정렬
   const [selected, setSelected] = useState(Posts);
+  //스타일
+  const btnStyleWhole = useRef("");
+  const btnStyleDistance = useRef("");
+  const btnStyleDone = useRef("");
+
   const handleSelect = (e) => {
     const value = e.target.value;
     if (value === "Posts") {
       setSelected(Posts);
+      btnStyleWhole.current.style = `color: #FA5A30; text-decoration: 2px underline; text-underline-offset: 8px; `;
+      btnStyleDistance.current.style = `color: black`;
+      btnStyleDone.current.style = `color: black`;
     } else if (value === "distancePosts") {
       //거리순 조회
       instance.get(`/api/posts/distance`).then((response) => {
         setSelected(response.data.filter((v) => v.isComplete !== true));
+        btnStyleWhole.current.style = `color: black`;
+        btnStyleDistance.current.style = `color: #FA5A30; text-decoration: 2px underline; text-underline-offset: 8px;`;
+        btnStyleDone.current.style = `color: black`;
       });
     } else if (value === "donePosts") {
       setSelected(donePosts);
+      btnStyleWhole.current.style = `color: black`;
+      btnStyleDistance.current.style = `color: black`;
+      btnStyleDone.current.style = `color: #FA5A30; text-decoration: 2px underline; text-underline-offset: 8px;`;
     }
   };
   // console.log(selected);
   // console.log(Posts);
-  
+
   // 로딩중일때 sppinner추가
   let isLoding = false;
   if (donePosts.length === 0) {
@@ -76,13 +90,19 @@ function Posts() {
   // console.log(Posts.length === 0);
 
   // 멍프로필 등록모달
-  const[mung, setMung] = useState(false);
+  const [mung, setMung] = useState(false);
   return (
     <All>
       {isLoding && <Sppiner />}
-      {isLoding && <SppinerOutsession/>}
-      {mung && <DogPlusModal modal={mung} setMungModal={setMung}/>}
-      {mung && <DogPlusOutsession onClick={()=>{setMung(!mung)}}/>}
+      {isLoding && <SppinerOutsession />}
+      {mung && <DogPlusModal modal={mung} setMungModal={setMung} />}
+      {mung && (
+        <DogPlusOutsession
+          onClick={() => {
+            setMung(!mung);
+          }}
+        />
+      )}
       <Box>
         <h1 className="name">
           {myinfo?.nickname}
@@ -98,21 +118,26 @@ function Posts() {
               {myMung?.map((dog, i) => {
                 return (
                   <span key={i} className="dogname">
-                    {dog.name}{" "}{dog.age}살{i - (myMung.length - 1) ? "," : null}
+                    {dog.name} {dog.age}살{i - (myMung.length - 1) ? "," : null}
                   </span>
                 );
               })}
             </div>
           ) : (
             <>
-            <span>멍멍이를 등록해주세요!</span>
-            <br/>
-            <RowBox>
-            <AddMungFBtn className="mungfalse" onClick={()=>{
-              setMung(!mung)
-            }}><img src="https://ifh.cc/g/h0kWOv.png" alt=""/></AddMungFBtn>
-            <AddText>등록하기</AddText>
-            </RowBox>
+              <span>멍멍이를 등록해주세요!</span>
+              <br />
+              <RowBox>
+                <AddMungFBtn
+                  className="mungfalse"
+                  onClick={() => {
+                    setMung(!mung);
+                  }}
+                >
+                  <img src="https://ifh.cc/g/h0kWOv.png" alt="" />
+                </AddMungFBtn>
+                <AddText>등록하기</AddText>
+              </RowBox>
             </>
           )}
         </h1>
@@ -135,29 +160,58 @@ function Posts() {
             return (
               <div key={i}>
                 <Subimg src={dog.dogImageFiles[0].imageUrl} />
-              
-            </div>
+              </div>
             );
           })}
-          {myMung?.length !==0 ? <AddMungBtn onClick={()=>{
-              setMung(!mung)
-            }} ><img src="https://ifh.cc/g/h0kWOv.png" alt=""/></AddMungBtn>:""}
-          </SSub>
-        
+          {myMung?.length !== 0 ? (
+            <AddMungBtn
+              onClick={() => {
+                setMung(!mung);
+              }}
+            >
+              <img src="https://ifh.cc/g/h0kWOv.png" alt="" />
+            </AddMungBtn>
+          ) : (
+            ""
+          )}
+        </SSub>
       </Box>
       <TitelSelectBox>
         <h2>산책모집</h2>
-        <select name="게시글" onChange={handleSelect} defaultValue="Posts">
-          <option value="Posts" key="1">
-            전체 게시글
-          </option>
-          <option value="distancePosts" key="2">
+        <div>
+          <SelectBtn
+            type="button"
+            value="Posts"
+            onClick={handleSelect}
+            style={{
+              color: "#FA5A30",
+              textDecoration: "2px underline",
+              textUnderlineOffset: "8px",
+            }}
+            ref={btnStyleWhole}
+            key="1"
+          >
+            전체
+          </SelectBtn>
+          <SelectBtn
+            type="button"
+            value="distancePosts"
+            onClick={handleSelect}
+            ref={btnStyleDistance}
+            key="2"
+          >
             가까운 거리순
-          </option>
-          <option value="donePosts" key="3">
-            모집종료된 글
-          </option>
-        </select>
+          </SelectBtn>
+          <SelectBtn
+            type="button"
+            value="donePosts"
+            onClick={handleSelect}
+            ref={btnStyleDone}
+            key="3"
+          >
+            모집종료
+          </SelectBtn>
+        </div>
       </TitelSelectBox>
 
       <Container>
@@ -198,8 +252,12 @@ function Posts() {
                     )}
                   </div>
 
-                  <div className="title">{post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
-                  <textarea className="content" readOnly value={post.content}/>
+                  <div className="title">
+                    {post.title.length > 18
+                      ? post.title.substr(0, 16) + ` …`
+                      : post.title}
+                  </div>
+                  <textarea className="content" readOnly value={post.content} />
                   <div className="footer">
                     <hr />
                     <div
@@ -275,9 +333,12 @@ function Posts() {
                     )}
                   </div>
 
-                  <div className="title">{
-                  post.title.length > 18 ? post.title.substr(0,16)+` …`:post.title}</div>
-                  <textarea className="content" readOnly value={post.content}/>
+                  <div className="title">
+                    {post.title.length > 18
+                      ? post.title.substr(0, 16) + ` …`
+                      : post.title}
+                  </div>
+                  <textarea className="content" readOnly value={post.content} />
                   <div className="footer">
                     <hr />
                     <div
@@ -319,14 +380,14 @@ function Posts() {
         )}
       </Container>
       <UpBox>
-      <AddPostButton
-        onClick={() => {
-          navigate("/postcreate");
-        }}
-      >
-        <img src="https://ifh.cc/g/nW36zN.png" alt="" />
-      </AddPostButton>
-      <div>게시글을 작성합니다.</div>
+        <AddPostButton
+          onClick={() => {
+            navigate("/postcreate");
+          }}
+        >
+          <img src="https://ifh.cc/g/nW36zN.png" alt="" />
+        </AddPostButton>
+        <div>게시글을 작성합니다.</div>
       </UpBox>
     </All>
   );
@@ -344,7 +405,7 @@ const All = styled.div`
   } */
 `;
 
-const SppinerOutsession= styled.div`
+const SppinerOutsession = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -364,51 +425,49 @@ const DogPlusOutsession = styled.div`
 `;
 
 const RowBox = styled.div`
-display: flex;
-flex-direction: row;
-`
-const AddMungFBtn =styled.button`
-width: 34px;
-height: 34px;
-border-radius: 50%;
-border: 1px solid #F78D70;
-background: #F67452;
-position: relative;
-top: 21px;
-img{
+  display: flex;
+  flex-direction: row;
+`;
+const AddMungFBtn = styled.button`
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #f78d70;
+  background: #f67452;
   position: relative;
-  left: 5%;
-  top: 5%;
-  width: 15px; 
-  height: 15px;
-  
-}
-`
+  top: 21px;
+  img {
+    position: relative;
+    left: 5%;
+    top: 5%;
+    width: 15px;
+    height: 15px;
+  }
+`;
 const AddMungBtn = styled.button`
-width: 34px;
-height: 34px;
-border-radius: 50%;
-border: 1px solid #F78D70;
-background: #F67452;
-position: relative;
-top: 10px;
-left: 15px;
-img{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #f78d70;
+  background: #f67452;
   position: relative;
-  left: 5%;
-  top: 5%;
-  width: 15px; 
-  height: 15px;
-  
-}
-`
+  top: 10px;
+  left: 15px;
+  img {
+    position: relative;
+    left: 5%;
+    top: 5%;
+    width: 15px;
+    height: 15px;
+  }
+`;
 const AddText = styled.div`
-font-weight: 500;
-font-size: 22px;
-position: relative;
-top: 25px;
-left: 10px;
-`
+  font-weight: 500;
+  font-size: 22px;
+  position: relative;
+  top: 25px;
+  left: 10px;
+`;
 const Box = styled.div`
   display: flex;
   flex-direction: row;
@@ -467,7 +526,6 @@ const SSub = styled.div`
   padding-bottom: 3%;
   bottom: 0;
   width: 30%;
-  
 `;
 const Subimg = styled.img`
   border-radius: 50%;
@@ -482,6 +540,23 @@ const TitelSelectBox = styled.div`
   height: 40px;
   min-width: 940px;
   margin: 122px 17.36% 0 17.36%;
+
+  & div {
+    display: flex;
+    gap: 1%;
+    width: 500px;
+    justify-content: flex-end;
+  }
+`;
+
+const SelectBtn = styled.button`
+  border: none;
+  background: none;
+  padding: 1.5%;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
 `;
 
 const Container = styled.div`
@@ -521,19 +596,19 @@ const PostBox = styled.div`
     line-height: 28px;
     margin: 20px 0;
   }
-  textarea{
-    font-family: 'Pretendard';
+  textarea {
+    font-family: "Pretendard";
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     color: #747474;
     border: none;
     width: 100%;
-    resize : none;
-    overflow:hidden;
+    resize: none;
+    overflow: hidden;
     height: 96px;
     cursor: pointer;
-    :focus{
+    :focus {
       outline: none;
     }
   }
@@ -563,8 +638,9 @@ const PostImg = styled.img`
 `;
 const AddPostButton = styled.button`
   position: fixed;
-   transform: translateY(30%); transition: 0.5s;
-  :hover{
+  transform: translateY(30%);
+  transition: 0.5s;
+  :hover {
     transform: translateY(0);
   }
   width: 80px;
@@ -576,39 +652,35 @@ const AddPostButton = styled.button`
     width: 40px;
     height: 40px;
   }
-
-
-
-`; 
-const UpBox= styled.div`
-position: fixed;
-bottom: 40%;
-right: 8%;
-
-:hover{
-  div{
-    opacity: 100; 
-    transition: 0.5s;
-  }
-}
-div{
-  :hover{
-    opacity: 0;
-  }
-  opacity: 0;
+`;
+const UpBox = styled.div`
   position: fixed;
-  right: 9%;
-  bottom: 33%;
-  height: 50px;
-  width: 170px;
-  border-radius: 12px;
-  text-align: center;
-  box-sizing: border-box;
-  padding: 15px;
-  color: white;
-  background: rgba(0, 0, 0, 0.75);
-}
+  bottom: 40%;
+  right: 8%;
 
-`
-  
+  :hover {
+    div {
+      opacity: 100;
+      transition: 0.5s;
+    }
+  }
+  div {
+    :hover {
+      opacity: 0;
+    }
+    opacity: 0;
+    position: fixed;
+    right: 9%;
+    bottom: 33%;
+    height: 50px;
+    width: 170px;
+    border-radius: 12px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 15px;
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+  }
+`;
+
 export default Posts;
