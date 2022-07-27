@@ -33,7 +33,7 @@ function ApplyComment() {
 
   //신청글 더보기
   const [limit, setLimit] = useState(5);
-  const moreApply = detailList.applyList.slice(0, limit);
+  const moreApply = detailList?.applyList?.slice(0, limit);
 
   return (
     <>
@@ -51,7 +51,7 @@ function ApplyComment() {
         총 <span style={{ color: "#FA5A30" }}>{detailList?.applyCount}</span>개
       </span>
       <hr style={{ border: "1px solid black" }} />
-      {moreApply.map((value) => {
+      {moreApply?.map((value) => {
         return (
           <div key={value.id}>
             <div className="ApplyCommentBox">
@@ -74,9 +74,9 @@ function ApplyComment() {
                     <div className="NickAndDistanceAndDate">
                       {/* 닉네임 길면 뒤에 ..으로 대체 */}
                       <p>
-                        {value.nickname.slice(0, 11) +
+                        {value.nickname?.slice(0, 11) +
                           value.nickname
-                            .slice(11)
+                            ?.slice(11)
                             .replace(/[^]/gi, "..")
                             .slice(0, 2)}
                       </p>
