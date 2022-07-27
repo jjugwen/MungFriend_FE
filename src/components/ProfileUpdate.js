@@ -271,7 +271,7 @@ const AuthNo = styled.div`
   font-size: 14px;
 `;
 const Container = styled.div`
-
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 520px;
