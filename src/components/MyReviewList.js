@@ -21,7 +21,7 @@ function MyReviewList() {
   return (
     <>
       <ReviewList className="column-box">
-        <div className="title">내가 받은 후기</div>
+        <div className="title"> 받은 후기</div>
         <div className="count">
           총<div className="orange-color">{info?.takerReviewList.length}</div>건
         </div>
@@ -62,7 +62,7 @@ function MyReviewList() {
 
 const ReviewList = styled.div`
   width: 90%;
-  margin-bottom: 100px;
+  margin-bottom: 200px;
   gap: 4%;
   .title {
     font-weight: 600;
