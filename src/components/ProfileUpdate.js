@@ -14,9 +14,9 @@ function ProfileUpdate(props) {
   const emailRef = useRef();
   const phoneNumRef = useRef();
   const introduceRef = useRef();
-  const lon= props.lon;
+  const lon = props.lon;
   const lat = props.lat;
-  const address= props.address;
+  const address = props.address;
 
   const info = useSelector((state) => state.myPageSlice.mypage);
   // console.log(info);
@@ -91,13 +91,8 @@ function ProfileUpdate(props) {
     return setText(e.target.value);
   };
 
-  
-
-
   return (
-    
     <Container>
-      
       <Title>프로필 수정</Title>
       <TextBox>닉네임</TextBox>
       <OneInput
@@ -153,7 +148,6 @@ function ProfileUpdate(props) {
         <TwoButton onClick={Popup} type="button">
           우편번호 찾기
         </TwoButton>
-        
       </RowBox>
 
       {info?.isAgree === true ? (
@@ -229,7 +223,7 @@ const Container = styled.div`
     width: 10px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #FA5A30;
+    background-color: #fa5a30;
     border-radius: 15px;
   }
   box-sizing: border-box;

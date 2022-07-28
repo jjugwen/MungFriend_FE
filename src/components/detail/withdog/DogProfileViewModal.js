@@ -19,6 +19,13 @@ function DogProfileViewModal(props) {
           <p className="font-24">
             <b>멍프로필</b>
           </p>
+          <Button
+            top="1.8em"
+            closeBtn
+            _onClick={() => {
+              close();
+            }}
+          />
           <PreviewImg
             src={
               mung?.dogImageFiles[0]?.imageUrl
@@ -70,7 +77,9 @@ function DogProfileViewModal(props) {
             <p>
               <b>견종이나 유의사항 등 추가할 정보</b>
             </p>
-            <div className="munginfoText">{mung?.info}</div>
+            <MunginfoText readOnly value={mung?.info ? mung?.info : ""}>
+              {mung?.info}
+            </MunginfoText>
           </div>
           <div className="btn-box">
             <Button orange_large _onClick={close}>
@@ -95,6 +104,13 @@ const Container = styled.div`
   border-radius: 24px;
   align-items: center;
   text-align: center;
+  overflow-y: scroll;
+  max-height: calc(100vh - 50px);
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar {
+    display: none;
+  }
   /* position: absolute;
 left: 460px;
 top: 73px; */
@@ -105,20 +121,7 @@ top: 73px; */
     div {
       margin-top: 10px;
     }
-    .munginfoText {
-      box-sizing: border-box;
-      width: 445px;
-      height: 180px;
-      border-radius: 4px;
-      border: 1px solid #e5e5e5;
-      font-family: "Pretendard";
-      font-size: 16px;
-      padding: 10px;
-      resize: none;
-      :focus {
-        outline: none;
-      }
-    }
+
     .info-box {
       box-sizing: border-box;
       padding: 15px;
@@ -155,34 +158,32 @@ top: 73px; */
   }
 `;
 
+const MunginfoText = styled.textarea`
+  box-sizing: border-box;
+  width: 445px;
+  height: 180px;
+  border-radius: 4px;
+  border: 1px solid #e5e5e5;
+  font-family: "Pretendard";
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  :focus {
+    outline: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 const PreviewImg = styled.img`
   width: 140px;
   height: 140px;
   background-color: #d9d9d9;
   border-radius: 50%;
   /* border: none; */
-`;
-const PreviewBtn = styled.div`
-  position: absolute;
-  left: 55%;
-  top: 20%;
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
-  .input-button {
-    width: 40px;
-    line-height: 40px;
-    padding: 13px 9px 4px 9px;
-    background-color: #fa5a30;
-    border: 1px solid;
-    border-radius: 50%;
-    /* cursor: pointer; */
-  }
-  .filebtn {
-    display: none;
-  }
 `;
 
 export default DogProfileViewModal;
