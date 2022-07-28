@@ -173,19 +173,18 @@ function ProfileUpdate(props) {
               href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
               target="blank"
             >
-              개인정보 취급방침
+              개인정보 처리방침
             </a>{" "}
             에 모두 동의합니다.
           </TextBox>
-          <RowBox>
-            <CheckInput
+          <RowBox onClick={() => {
+                setIsAgree(!isAgree);
+              }}>
+              <CheckInput
               type="checkbox"
               defaultValue={isAgree}
-              required
-              onClick={() => {
-                setIsAgree(true);
-              }}
-            />{" "}
+              required 
+              isAgree={isAgree}/>
             <TextBox>동의함</TextBox>
           </RowBox>
         </>
@@ -265,9 +264,10 @@ const Title = styled.div`
   margin-bottom: 10px;
 `;
 const TextBox = styled.div`
+cursor: pointer;
   font-weight: 600;
   font-size: 16px;
-  margin-top: 20px;
+  margin-top: 17px;
   a {
     color: black;
   }
@@ -307,6 +307,7 @@ const RowBox = styled.div`
   flex-direction: row;
 `;
 
+
 const CheckInput = styled.input`
   margin: 18px;
   appearance: none;
@@ -314,7 +315,7 @@ const CheckInput = styled.input`
   height: 1.2rem;
   border-radius: 50px;
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-  background-color: #cccccc;
+  background-color: ${(props) => props.isAgree? "#fa5a30;":"#cccccc;"};
   &:checked {
     border-color: transparent;
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
