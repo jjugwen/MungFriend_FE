@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { createMungAX } from "../redux/modules/mungSlice";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 function DogPlusModal(props) {
   //이미지를 한번 추가해볼게요
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ function DogPlusModal(props) {
     event.preventDefault();
     const fileReader = new FileReader();
     fileReader.readAsDataURL(event.target.files[0]);
-
     fileReader.onload = (e) => {
       setMungImage({
         image: event.target.files[0],
@@ -33,16 +33,56 @@ function DogPlusModal(props) {
   // 강아지 정보 input 입력값 넣어두기
   //나이는 숫자데이터 . if문 사용해서 숫자로 감싸주기
   const handleChange = (prop) => (e) => {
-    if (prop === "age") {
     
+    if (prop === "age") {
+      setDogAge(true);
       setpuppy({ ...puppy, [prop]: Number(e.target.value) });
     } else {
+      if(prop ==="name"){
+        setDogName(true);
+      }if(prop ==="size"){
+        setDogSize(true);
+      }if(prop === "gender"){
+        setDogGender(true);
+      }if(prop ==="info"){
+        setDogInfo(true);
+      }
       setpuppy({ ...puppy, [prop]: e.target.value });
     }
     // console.log(puppy);
   };
-
-  const signUp = () => {
+  //밸리데이션 INPUT창 정보
+  const[dogAge, setDogAge]=useState();
+  const[dogGender, setDogGender]=useState();
+  const[dogSize, setDogSize]=useState();
+  const[dogName, setDogName]=useState();
+  const[dogInfo, setDogInfo]=useState();
+  const plusDog = () => {
+    if(puppy.age===undefined){
+      setDogAge(false);
+      window.addEventListener((event) => { 
+        event.preventDefault();
+    })}else if(puppy.gender===undefined){
+      setDogGender(false===undefined);
+      window.addEventListener((event) => { 
+        event.preventDefault();
+    })
+    }else if(puppy.size===undefined){
+      setDogSize(false);
+      window.addEventListener((event) => { 
+        event.preventDefault();
+    })
+    }else if(puppy.name===undefined){
+      setDogName(false);
+      window.addEventListener((event) => { 
+        event.preventDefault();
+    })
+    }else if(puppy.info===undefined){
+      setDogInfo(false);
+      window.addEventListener((event) => { 
+        event.preventDefault();
+    })
+    }
     const formData = new FormData();
     formData.append("image", mungImage.image);
     const json = JSON.stringify(puppy);
@@ -50,17 +90,13 @@ function DogPlusModal(props) {
     //infos 추가
     formData.append("infos", blob);
     // console.log(formData);
-    // for (const value of formData) console.log(value);
+
     dispatch(createMungAX(formData));
 
     // 에러 발생시 창이 닫기지 않아야 하므로 주석처리
     // props.setMungModal(!props.modal)
     // window.location.replace('/mypage')
-    //이미지 서버에 다 보내고 나서 다시 초기값 만들기
-    // setMungImage({
-    //   image: "",
-    //   previewUrl: "",
-    // });
+
   };
 
   //글자수 세기
@@ -106,6 +142,7 @@ function DogPlusModal(props) {
             <div className="row-box">
               <b>이름</b>
               {nameCheck.test(puppy.name) ? "":<ValidationText>이름은 한글과 영어만 가능해요!</ValidationText>}
+              {dogName=== false? <ValidationText>이름을 입력해 주세요</ValidationText>:""}
             </div>
             
             <input
@@ -115,7 +152,10 @@ function DogPlusModal(props) {
             />
           </div>
           <div className="column-box">
+            <div className="row-box">
             <b>성별</b>
+            {dogGender=== false? <ValidationText>성별을 선택해 주세요</ValidationText>:""}
+            </div>
             <select className="box-size" onChange={handleChange("gender")}>
               <option value="no">성별을 선택해 주세요</option>
               <option value="남">남</option>
@@ -128,6 +168,7 @@ function DogPlusModal(props) {
             <div className="row-box">
             <b>나이</b>
             {ageCheck.test(puppy.age) && puppy.age !== undefined? <ValidationText>숫자만 입력 가능해요</ValidationText>:""}
+            {dogAge=== false? <ValidationText>나이를 입력해 주세요</ValidationText>:""}
             {puppy.age > 30 ? <ValidationText >나이는 최대 30살 이에요!</ValidationText>:""}
             </div>
             <input
@@ -139,7 +180,10 @@ function DogPlusModal(props) {
             />
           </div>
           <div className="column-box">
+            <div className="row-box">
             <b>사이즈</b>
+            {dogSize=== false? <ValidationText>사이즈를 선택해 주세요</ValidationText>:""}
+            </div>
             <select className="box-size" onChange={handleChange("size")}>
               <option value="no">크기를 선택해 주세요</option>
               <option value="소형">소형</option>
@@ -162,7 +206,7 @@ function DogPlusModal(props) {
         <div className="row-box">
         
           <b>견종이나 유의사항 등 추가할 정보</b>
-        
+        {dogInfo===false? <ValidationText>강아지 정보를 입력해주세요!</ValidationText>:""}
         {puppy?.info?.length===255?<ValidationText> 최대 글자 수는 255자에요!</ValidationText>:""}
         </div>
         <textarea
@@ -181,7 +225,7 @@ function DogPlusModal(props) {
         >
           취소
         </button>
-        <button className="okbutton" type="button" onClick={signUp}>
+        <button className="okbutton" type="button" onClick={plusDog}>
           확인
         </button>
       </div>
