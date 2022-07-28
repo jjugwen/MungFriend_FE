@@ -36,12 +36,13 @@ function Footer() {
                   target="blank"
                   style={{
                     color: "black",
+                    fontWeight: 800,
                     textDecoration: "none",
                     zIndex: 3,
                   }}
                   href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
                 >
-                  개인정보취급방침
+                  개인정보처리방침
                 </a>
               </span>
             </div>

@@ -395,7 +395,6 @@ function Signup() {
             }}
           >
             <span>
-              멍친구{" "}
               <a
                 target="blank"
                 style={{
@@ -404,7 +403,7 @@ function Signup() {
                 }}
                 href="https://protective-iodine-bc7.notion.site/bbd8abbf735140109899396c1c87dc61"
               >
-                이용약관
+                멍친구 이용약관
               </a>
               ,{" "}
               <a
@@ -415,7 +414,7 @@ function Signup() {
                 }}
                 href="https://protective-iodine-bc7.notion.site/78bef62511ef4254bfaa1638d1550fe0"
               >
-                개인정보취급방침
+                개인정보 수집 및 이용
               </a>
               에 모두 동의합니다.
             </span>

@@ -48,6 +48,13 @@ function WriteModal(props) {
       {open ? (
         <Reviewmodal>
           <ModalTitle>{children}</ModalTitle>
+          <Button
+            top="16px"
+            closeBtn
+            _onClick={() => {
+              close();
+            }}
+          />
           <hr
             style={{
               width: "90%",
@@ -144,6 +151,13 @@ const ModalInput = styled.textarea`
   padding: 3% 1%;
   outline: none;
   resize: none;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #fa5a30;
+    border-radius: 15px;
+  }
 `;
 
 const ModalTitle = styled.h1`
@@ -184,7 +198,15 @@ const Reviewmodal = styled.div`
   width: 100%;
   max-width: 640px;
   height: 645px;
-
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    /* background-color: #fa5a30; */
+    /* border-radius: 15px; */
+  }
   span {
     margin-left: 78%;
     font-weight: 400;

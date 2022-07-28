@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import closebutton from "../assets/images/Modal/closeButton.svg";
 
 const Button = (props) => {
   const {
@@ -10,6 +11,7 @@ const Button = (props) => {
     padding,
     position,
     bottom,
+    top,
     font_size,
     _disabled,
     _onClick,
@@ -22,6 +24,7 @@ const Button = (props) => {
     white_large,
     grey_small,
     MatchingBtn,
+    closeBtn,
   } = props;
 
   const styles = {
@@ -32,6 +35,7 @@ const Button = (props) => {
     font_size,
     position,
     bottom,
+    top,
   };
 
   if (is_circle) {
@@ -104,6 +108,14 @@ const Button = (props) => {
       </BlueBtn65>
     );
   }
+
+  if (closeBtn) {
+    return (
+      <XBtn {...styles} disabled={_disabled} onClick={_onClick}>
+        <img src={closebutton} alt="closebutton" />
+      </XBtn>
+    );
+  }
   return (
     <OrangeBtn {...styles} disabled={_disabled} onClick={_onClick}>
       {children}
@@ -114,6 +126,7 @@ const Button = (props) => {
 Button.defaultProps = {
   children: null,
   width: "100%",
+  top: 0,
   margin: false,
   padding: false,
   position: "relative",
@@ -360,6 +373,19 @@ const PlusBtn = styled.button`
   :hover .origin {
     opacity: 0;
   }
+`;
+
+const XBtn = styled.button`
+  border: none;
+  background: none;
+  font-size: 25px;
+  font-weight: 500;
+  position: fixed;
+  right: 8%;
+  /* top: 2.25em; */
+  top: ${(props) => props.top};
+  /* width: 24px; */
+  /* height: 24px; */
 `;
 
 export default Button;

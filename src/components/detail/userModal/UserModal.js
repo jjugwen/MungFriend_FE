@@ -14,6 +14,13 @@ function UserModal(props) {
       {open ? (
         <UserModalStyle>
           <ModalTitle style={{ textAlign: "center" }}>{children}</ModalTitle>
+          <Button
+            top="2.25em"
+            closeBtn
+            _onClick={() => {
+              close();
+            }}
+          />
           <p>닉네임</p>
           <div className="userNickname">{userInfo?.nickname}</div>
           <p>자기소개</p>
@@ -63,6 +70,7 @@ function UserModal(props) {
 }
 
 const UserModalStyle = styled.div`
+  box-sizing: border-box;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -70,8 +78,17 @@ const UserModalStyle = styled.div`
   background-color: #fff;
   display: wrap;
   /* align-items: flex-start; */
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
   border-radius: 20px;
   padding: 2.5em;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    /* background-color: #fa5a30; */
+    /* border-radius: 15px; */
+  }
 
   & p {
     font-family: "Pretendard";
@@ -147,6 +164,12 @@ const UserModalStyle = styled.div`
     width: 100%;
     max-width: 335px;
     max-height: 486px;
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+    border-radius: 20px;
+    ::-webkit-scrollbar {
+      display: none;
+    }
 
     .profileForBtn {
       margin: 5% 27.5%;
@@ -154,12 +177,12 @@ const UserModalStyle = styled.div`
 
     .userNickname {
       width: 100%;
-      max-width: 300px;
+      max-width: 230px;
       padding: 16px;
     }
     .userIntroduce {
       width: 100%;
-      max-width: 300px;
+      max-width: 230px;
       padding: 16px;
     }
     .reviewList {
