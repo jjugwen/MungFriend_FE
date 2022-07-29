@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import instance from "../redux/modules/instance";
+import instance from "../shared/API/instance";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
 import { useNavigate } from "react-router-dom";
 import { createPostAX } from "../redux/modules/postSlice";
@@ -23,9 +23,9 @@ function PostCreate() {
   // console.log(dogList)
   const [updatePost, setUpdatePost] = useState(null);
   // console.log(updatePost);
-  const [myInfo,setMyInfo]=useState(null);
+  const [myInfo, setMyInfo] = useState(null);
   // console.log(myInfo.userRole);
-  const [userModal, setUserModal]= useState(false);
+  const [userModal, setUserModal] = useState(false);
 
   const dateRef = useRef();
   const time = {
@@ -50,36 +50,33 @@ function PostCreate() {
 
   // const[ dogValue, setDogValue]=useState(false);
   const dogClick = (dogId) => {
-    setSelectDog(
-      (current) => {
-        const arr = [...current];
+    setSelectDog((current) => {
+      const arr = [...current];
 
-        let index = arr.indexOf(Number(dogId));
-        if (arr.includes(Number(dogId)) === true) {
-          arr.splice(index, 1)
-        } else {
-          arr.push(Number(dogId));
-        }
-        return arr;
+      let index = arr.indexOf(Number(dogId));
+      if (arr.includes(Number(dogId)) === true) {
+        arr.splice(index, 1);
+      } else {
+        arr.push(Number(dogId));
       }
-    );
+      return arr;
+    });
   };
   // 필수 정보 입력한 유저가 아니라면, 마이페이지로 돌려보내기!
   // React.useEffect(()=>{
-  
+
   // if(myInfo.userRole==="USER"){
   //   console.log(myInfo)
   //  setUserModal(true);}
   // },[])
-  
-  const navigatePage=(e)=>{
-   if(e.target.name === "yes"){
-    navigate(`/mypage`)
-   }else if(e.target.name ==="no"){
-    navigate(`/posts`)
-   }
-  }
 
+  const navigatePage = (e) => {
+    if (e.target.name === "yes") {
+      navigate(`/mypage`);
+    } else if (e.target.name === "no") {
+      navigate(`/posts`);
+    }
+  };
 
   //작성버튼
   const click = () => {
@@ -122,12 +119,10 @@ function PostCreate() {
         // axios.get(`http://localhost:5002/detail/${params.id}`).then((res) => {
         setUpdatePost(res.data);
       });
-    }else if(isNew){
-      instance.get(`/myinfo`).then((res)=>{
-        setMyInfo(res.data)
-      })
-
-      
+    } else if (isNew) {
+      instance.get(`/myinfo`).then((res) => {
+        setMyInfo(res.data);
+      });
     }
   }, []);
 
@@ -200,22 +195,29 @@ function PostCreate() {
     backgroundColor: "#fa5a30",
   };
 
-
-
   return (
     <Container>
-      {myInfo?.userRole==="USER" && <Test></Test>}
-      {myInfo?.userRole==="USER" && <UserModal>
-        <ModalText>아직 필수 정보를 입력하지 않으셨네요!<br/>
-        게시글 작성은 <b>주소</b>와 
-        <b> 휴대폰 번호 인증</b>을 해야만 가능해요.<br/>
-        마이페이지로 이동하시겠어요?
-        </ModalText>
-        <RowBox>
-        <NoBtn name="no" onClick={navigatePage}>아니요. 뒤로 가겠습니다.</NoBtn>
-        <YesBtn name="yes" onClick={navigatePage}>네! 마이페이지로 이동할게요.</YesBtn>
-        </RowBox>
-        </UserModal>}
+      {myInfo?.userRole === "USER" && <Test></Test>}
+      {myInfo?.userRole === "USER" && (
+        <UserModal>
+          <ModalText>
+            아직 필수 정보를 입력하지 않으셨네요!
+            <br />
+            게시글 작성은 <b>주소</b>와<b> 휴대폰 번호 인증</b>을 해야만
+            가능해요.
+            <br />
+            마이페이지로 이동하시겠어요?
+          </ModalText>
+          <RowBox>
+            <NoBtn name="no" onClick={navigatePage}>
+              아니요. 뒤로 가겠습니다.
+            </NoBtn>
+            <YesBtn name="yes" onClick={navigatePage}>
+              네! 마이페이지로 이동할게요.
+            </YesBtn>
+          </RowBox>
+        </UserModal>
+      )}
       <Title>게시글 작성</Title>
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
@@ -224,12 +226,17 @@ function PostCreate() {
           type="radio"
           name="test"
           withMe={withMe}
-          onClick={()=>{setWithMe(true)}}
+          onClick={() => {
+            setWithMe(true);
+          }}
         />
-        <WithMeTextBox withMe={withMe}
-         onClick={()=>{setWithMe(true)}}
-          style={withMe? {color:"#FA5A30"}:{}}
-         >
+        <WithMeTextBox
+          withMe={withMe}
+          onClick={() => {
+            setWithMe(true);
+          }}
+          style={withMe ? { color: "#FA5A30" } : {}}
+        >
           같이해요
         </WithMeTextBox>
         <CheckBox
@@ -239,11 +246,13 @@ function PostCreate() {
           value=""
           style={withMe ? {} : checkStyle}
         />
-        <WithMeTextBox withMe={withMe}
-         onClick={()=>{
-          setWithMe(false) }}
-          style={withMe? {}:{color:"#FA5A30"}}
-          >
+        <WithMeTextBox
+          withMe={withMe}
+          onClick={() => {
+            setWithMe(false);
+          }}
+          style={withMe ? {} : { color: "#FA5A30" }}
+        >
           부탁해요
         </WithMeTextBox>
         {withMe ? (
@@ -259,18 +268,26 @@ function PostCreate() {
 
       <RowBox>
         {dogList?.map((dog, index) => {
-        
           return (
-            <Listbox key={index}
-             onClick={()=>{dogClick(dog.id)}}
+            <Listbox
+              key={index}
+              onClick={() => {
+                dogClick(dog.id);
+              }}
               length={index}
-             style={selectDog.includes(Number(dog.id)) ? {border:"2px solid #fa5a30"}:{}}
+              style={
+                selectDog.includes(Number(dog.id))
+                  ? { border: "2px solid #fa5a30" }
+                  : {}
+              }
             >
               <CheckBox
                 type="checkbox"
                 name="isRepresentative"
                 style={
-                  selectDog.includes(Number(dog.id)) ? {backgroundColor:"#fa5a30"}:{}
+                  selectDog.includes(Number(dog.id))
+                    ? { backgroundColor: "#fa5a30" }
+                    : {}
                 }
                 // style={{backgroundColor: "#fa5a30"}}
               />
@@ -413,16 +430,15 @@ const Container = styled.div`
 `;
 
 const Test = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-bottom: 0;
-right: 0;
-background: rgba(0,0,0,0.8);
-overflow: hidden;
-z-index: 2;
-`
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  z-index: 2;
+`;
 
 const UserModal = styled.div`
   background-color: white;
@@ -434,19 +450,19 @@ const UserModal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-`
-const ModalText =styled.div`
-margin-top: 15px;
-font-size: 21px;
-font-weight: 700;
-padding: 20px;
-text-align: center;
-b{
-  color:#fa5a30;
-}
-`
-const NoBtn =styled.button`
- position: absolute;
+`;
+const ModalText = styled.div`
+  margin-top: 15px;
+  font-size: 21px;
+  font-weight: 700;
+  padding: 20px;
+  text-align: center;
+  b {
+    color: #fa5a30;
+  }
+`;
+const NoBtn = styled.button`
+  position: absolute;
   bottom: 5%;
   left: 2%;
   width: 47%;
@@ -454,9 +470,9 @@ const NoBtn =styled.button`
   border: none;
   border-radius: 4px;
   font-size: 16px;
-`
-const YesBtn =styled.button`
- position: absolute;
+`;
+const YesBtn = styled.button`
+  position: absolute;
   bottom: 5%;
   right: 2%;
   width: 47%;
@@ -467,7 +483,7 @@ const YesBtn =styled.button`
   border: none;
   border-radius: 4px;
   font-size: 16px;
-`
+`;
 
 const Title = styled.div`
   font-weight: 600;
@@ -486,8 +502,8 @@ const WithMeTextBox = styled.div`
   font-weight: 600;
   font-size: 16px;
   margin-bottom: 50px;
-  /* color: ${(props) => (props.withMe ?  "#FA5A30": "black")}; */
-`
+  /* color: ${(props) => (props.withMe ? "#FA5A30" : "black")}; */
+`;
 
 const InfoBox = styled.div`
   color: gray;
@@ -510,7 +526,7 @@ const RowBox = styled.div`
   .radiotype {
     margin: 18px 18px 18px 0px;
   }
- 
+
   display: flex;
   flex-direction: row;
 `;
@@ -522,7 +538,7 @@ const Listbox = styled.div`
   align-items: center;
   margin-bottom: 80px;
   /* margin-left: 15px; */
-  margin-left: ${props=> props.length >= 1?"10px;":""};
+  margin-left: ${(props) => (props.length >= 1 ? "10px;" : "")};
   cursor: pointer;
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
@@ -535,7 +551,7 @@ const CheckBox = styled.input`
   height: 1.2rem;
   border-radius: 50px;
   background-image: url("data:image/svg+xml,%3csvg   viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-  background-color:${props=> props.withMe? "#fa5a30;":"#cccccc;"};
+  background-color: ${(props) => (props.withMe ? "#fa5a30;" : "#cccccc;")};
   &:checked {
     border-color: transparent;
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");

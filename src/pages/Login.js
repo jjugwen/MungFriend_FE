@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginDB } from "../redux/modules/loginAxios";
+import { loginDB } from "../shared/API/loginApi";
 
 //css
 import styled from "styled-components";

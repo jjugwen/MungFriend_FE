@@ -7,9 +7,8 @@ import MyApplyPost from "../components/MyApplyPost";
 import MyPageComponent from "../components/MyPageComponent";
 import MyPostList from "../components/MyPostList";
 import MyReviewList from "../components/MyReviewList";
-import instance from "../redux/modules/instance";
+import instance from "../shared/API/instance";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
-
 
 const Mypage = () => {
   const dispatch = useDispatch();
@@ -25,67 +24,67 @@ const Mypage = () => {
     });
   }, []);
   let [change, setChange] = useState(<MyPageComponent />);
-  const[id, setId] = useState("1")
+  const [id, setId] = useState("1");
   const pageRef = useRef();
 
   const [post, setPost] = useState(false);
-  const allPostRef= useRef();
+  const allPostRef = useRef();
 
   const [review, setReview] = useState(false);
-  const allReviewRef =useRef();
-  
-  React.useEffect(()=>{
+  const allReviewRef = useRef();
+
+  React.useEffect(() => {
     if (id === "1") {
       setChange(<MyPageComponent />);
-      setPost(false)
-      setReview(false)
+      setPost(false);
+      setReview(false);
       pageRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2)`;
       allPostRef.current.style = "";
-      allReviewRef.current.style ="";
+      allReviewRef.current.style = "";
     } else if (id === "2") {
       setChange(<MyPostList />);
-      setPost(true)
-      setReview(false)
+      setPost(true);
+      setReview(false);
       pageRef.current.style = "";
       allPostRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      allReviewRef.current.style ="";
-    }  else if (id === "3") {
+      allReviewRef.current.style = "";
+    } else if (id === "3") {
       setChange(<MyApplyPost />);
-      setPost(true)
-      setReview(false)
+      setPost(true);
+      setReview(false);
       pageRef.current.style = "";
       allPostRef.current.style = `color :white; 
       background :#FA5A30; 
       boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-      allReviewRef.current.style ="";
+      allReviewRef.current.style = "";
     } else if (id === "4") {
       setChange(<MyReviewList />);
-      setPost(false)
-      setReview(true)
+      setPost(false);
+      setReview(true);
       pageRef.current.style = "";
-      allPostRef.current.style = ""; 
-      allReviewRef.current.style =`color :white; 
+      allPostRef.current.style = "";
+      allReviewRef.current.style = `color :white; 
         background :#FA5A30; 
         boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
-    }else {
+    } else {
       setChange(<GiverReview />);
-      setPost(false)
-      setReview(true)
+      setPost(false);
+      setReview(true);
       pageRef.current.style = "";
       allPostRef.current.style = "";
       allReviewRef.current.style = `color :white; 
       background :#FA5A30; 
       boxShadow :4px 4px 20px rgba(250, 90, 48, 0.2);`;
     }
-  },[id])
+  }, [id]);
 
-// console.log(firstStyle)
+  // console.log(firstStyle)
   const getClick = (e) => {
-    setId(e.target.id) ;
+    setId(e.target.id);
   };
 
   //헤더 모달창 컴포넌트 연결
@@ -111,27 +110,51 @@ const Mypage = () => {
   return (
     <Container>
       <ListBar>
-        <button id="1" onClick={getClick} ref={pageRef} >
+        <button id="1" onClick={getClick} ref={pageRef}>
           마이페이지
         </button>
         <button id="2" onClick={getClick} ref={allPostRef}>
-           내 게시글
+          내 게시글
         </button>
-        {post && <><SubBtn id="2" onClick={getClick} style={id==="2"?{color:'#FA5A30'}:{}}>
-          작성한 게시글</SubBtn>
-        <SubBtn id="3" onClick={getClick} style={id==="3"?{color:'#FA5A30'}:{}}>
-           신청한 게시글
-        </SubBtn></>}
+        {post && (
+          <>
+            <SubBtn
+              id="2"
+              onClick={getClick}
+              style={id === "2" ? { color: "#FA5A30" } : {}}
+            >
+              작성한 게시글
+            </SubBtn>
+            <SubBtn
+              id="3"
+              onClick={getClick}
+              style={id === "3" ? { color: "#FA5A30" } : {}}
+            >
+              신청한 게시글
+            </SubBtn>
+          </>
+        )}
         <button id="4" onClick={getClick} ref={allReviewRef}>
-           후기
+          후기
         </button>
-        {review && <><SubBtn id ="4" onClick={getClick} style={id==="4"?{color:'#FA5A30'}:{}}>
-          받은 후기
-        </SubBtn>
-        <SubBtn id="5" onClick={getClick} style={id==="5"?{color:'#FA5A30'}:{}}>
-           작성한 후기
-        </SubBtn></>}
-        
+        {review && (
+          <>
+            <SubBtn
+              id="4"
+              onClick={getClick}
+              style={id === "4" ? { color: "#FA5A30" } : {}}
+            >
+              받은 후기
+            </SubBtn>
+            <SubBtn
+              id="5"
+              onClick={getClick}
+              style={id === "5" ? { color: "#FA5A30" } : {}}
+            >
+              작성한 후기
+            </SubBtn>
+          </>
+        )}
       </ListBar>
       {change}
       <PageBox></PageBox>
@@ -150,12 +173,12 @@ const Container = styled.div`
     width: 90%;
   }
 `;
-const SubBtn= styled.button`
-font-weight: 500;
-margin-left: 10px;
-font-size: 16px;
-color: #B8BBC0;
-`
+const SubBtn = styled.button`
+  font-weight: 500;
+  margin-left: 10px;
+  font-size: 16px;
+  color: #b8bbc0;
+`;
 const ListBar = styled.div`
   display: flex;
   flex-direction: column;

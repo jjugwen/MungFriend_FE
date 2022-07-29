@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { deleteMyMungAX, loadMyMungAX } from "../redux/modules/mungSlice";
-import instance from "../redux/modules/instance";
+import instance from "../shared/API/instance";
 
 function DogList(props) {
   const dispatch = useDispatch();

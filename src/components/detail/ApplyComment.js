@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators as matchActions } from "../../redux/modules/matchingSlice";
+import { actionCreators as matchActions } from "../../shared/API/matchingApi";
 import { actionCreators as userActions } from "../../redux/modules/userInfoSlice";
 import { useParams } from "react-router-dom";
 import UserModal from "../../components/detail/userModal/UserModal";

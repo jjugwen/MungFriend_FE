@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import DaumPostCode from "react-daum-postcode";
-import instance from "../redux/modules/instance";
+import instance from "../shared/API/instance";
 import { useNavigate } from "react-router-dom";
 import checkblue from "../assets/images/Signup/check_blue.svg";
 import checkred from "../assets/images/Signup/check_no_red.svg";
