@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import instance from "./instance";
+import instance from "../../shared/API/instance";
 
 //axios
 export const createApplyDB = (data) => {

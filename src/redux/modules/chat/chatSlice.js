@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // API
-import { chatAPI } from "../../../shared/chatApi";
+import { chatAPI } from "../../../shared/API/chatApi";
 
 // redux Toolkit
 const chatSlice = createSlice({

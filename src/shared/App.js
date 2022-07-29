@@ -12,11 +12,8 @@ import SignupSuccess from "../pages/SignupSuccess";
 import PostCreate from "../pages/PostCreate";
 
 //컴포넌트
-import Test from "../components/Test";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
-import DogPlusModal from "../components/DogPlusModal";
-import ProfileUpdate from "../components/ProfileUpdate";
 import ReviewDetailModal from "../components/detail/review/ReviewDetailModal";
 import HeaderModal from "../components/shared/HeaderModal";
 
@@ -72,7 +69,6 @@ function App() {
           <Route path="/posts/:id" element={<PostDetail />} />
           <Route path="/oauth" element={<KakaoLoginRedirect />} />
           <Route path="/oauth" element={<GoogleLoginRedirect />} />
-          <Route path="/test" element={<Test />} />
           <Route path="/reviews/:id" element={<ReviewDetailModal />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/chat/:id" element={<Chat />} />

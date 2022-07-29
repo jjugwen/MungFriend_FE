@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadMyMungAX } from "../redux/modules/mungSlice";
 import { loadPostListAX } from "../redux/modules/postSlice";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
-import instance from "../redux/modules/instance";
+import instance from "../shared/API/instance";
 import Sppiner from "../components/shared/Spinner";
 import styled from "styled-components";
 import Ing from "../assets/images/IsComplete/모집중.svg";

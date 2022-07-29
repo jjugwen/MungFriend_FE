@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import instance from "../redux/modules/instance";
+import instance from "../shared/API/instance";
 import { loadMyPageAX } from "../redux/modules/myPageSlice";
 
 function ProfileUpdate(props) {
@@ -171,14 +171,17 @@ function ProfileUpdate(props) {
             </a>{" "}
             에 모두 동의합니다.
           </TextBox>
-          <RowBox onClick={() => {
-                setIsAgree(!isAgree);
-              }}>
-              <CheckInput
+          <RowBox
+            onClick={() => {
+              setIsAgree(!isAgree);
+            }}
+          >
+            <CheckInput
               type="checkbox"
               defaultValue={isAgree}
-              required 
-              isAgree={isAgree}/>
+              required
+              isAgree={isAgree}
+            />
             <TextBox>동의함</TextBox>
           </RowBox>
         </>
@@ -258,7 +261,7 @@ const Title = styled.div`
   margin-bottom: 10px;
 `;
 const TextBox = styled.div`
-cursor: pointer;
+  cursor: pointer;
   font-weight: 600;
   font-size: 16px;
   margin-top: 17px;
@@ -301,7 +304,6 @@ const RowBox = styled.div`
   flex-direction: row;
 `;
 
-
 const CheckInput = styled.input`
   margin: 18px;
   appearance: none;
@@ -309,7 +311,7 @@ const CheckInput = styled.input`
   height: 1.2rem;
   border-radius: 50px;
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-  background-color: ${(props) => props.isAgree? "#fa5a30;":"#cccccc;"};
+  background-color: ${(props) => (props.isAgree ? "#fa5a30;" : "#cccccc;")};
   &:checked {
     border-color: transparent;
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");

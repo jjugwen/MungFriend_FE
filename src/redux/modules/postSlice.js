@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import axios from "axios";
-import instance from "./instance";
+import instance from "../../shared/API/instance";
 
 //axios
 //나중에 멤버 아이디값 받아와서 넘겨주기

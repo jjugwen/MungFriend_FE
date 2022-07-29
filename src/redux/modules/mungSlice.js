@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-import instance from "./instance";
+import instance from "../../shared/API/instance";
 
 //axios
 //나중에 멤버 아이디값 받아와서 넘겨주기
@@ -33,12 +32,11 @@ export const loadMyMungAX = () => {
 
 export const deleteMyMungAX = (id) => {
   return async function (dispatch) {
-   try{ await instance.delete(`/api/dogs/${id}`)
-        dispatch(deleteMyMung(id));
-        window.location.reload();
-      }catch(err){
-
-      }
+    try {
+      await instance.delete(`/api/dogs/${id}`);
+      dispatch(deleteMyMung(id));
+      window.location.reload();
+    } catch (err) {}
   };
 };
 //툴킷
