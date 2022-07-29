@@ -206,9 +206,9 @@ function PostCreate() {
     <Container>
       {myInfo?.userRole==="USER" && <Test></Test>}
       {myInfo?.userRole==="USER" && <UserModal>
-        <ModalText>아직 필수 정보를 입력 하지 않으셨네요!<br/>
-        게시글 작성은 <b>주소</b>와
-        <b>휴대폰 번호 인증</b>을 해야만 가능해요.<br/>
+        <ModalText>아직 필수 정보를 입력하지 않으셨네요!<br/>
+        게시글 작성은 <b>주소</b>와 
+        <b> 휴대폰 번호 인증</b>을 해야만 가능해요.<br/>
         마이페이지로 이동하시겠어요?
         </ModalText>
         <RowBox>
