@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -7,7 +7,6 @@ import { loadMyMungAX } from "../redux/modules/mungSlice";
 import { useNavigate } from "react-router-dom";
 import { createPostAX } from "../redux/modules/postSlice";
 
-const selectDog = [];
 function PostCreate() {
   const params = useParams();
   //id값으로 게시글 판별
@@ -39,18 +38,28 @@ function PostCreate() {
   const endMinuteRef = useRef(null);
 
   const [withMe, setWithMe] = useState(false);
-  const clickCategory = (e)=> {
-    setWithMe(e.target.value)
+  const clickCategory = (e) => {
+    setWithMe(Boolean(e.target.value));
+    // console.log(Boolean(e.target.value))
+  };
 
-  }  
+  const [selectDog, setSelectDog] = useState([]);
 
-  const dogClick = (e) => {
-    let index = selectDog.indexOf(Number(e.target.value));
-    if (selectDog.includes(Number(e.target.value)) === true) {
-      selectDog.splice(index, 1);
-    } else {
-      selectDog.push(Number(e.target.value));
-    }
+  // const[ dogValue, setDogValue]=useState(false);
+  const dogClick = (dogId) => {
+    setSelectDog(
+      (current) => {
+        const arr = [...current];
+
+        let index = arr.indexOf(Number(dogId));
+        if (arr.includes(Number(dogId)) === true) {
+          arr.splice(index, 1)
+        } else {
+          arr.push(Number(dogId));
+        }
+        return arr;
+      }
+    );
   };
 
   //작성버튼
@@ -82,7 +91,7 @@ function PostCreate() {
       requestStartDate:
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
-      withMe:Boolean(withMe)
+      withMe: withMe,
     };
     // console.log(post)
     dispatch(createPostAX(post));
@@ -118,7 +127,7 @@ function PostCreate() {
         e.preventDefault();
       });
     }
-    
+
     let startHour = startHourRef.current.value;
     if (startHour.length === 1) {
       startHour = 0 + startHour;
@@ -139,7 +148,7 @@ function PostCreate() {
       title: titleRef.current.value,
       content: contentRef.current.value,
       dogIdList: selectDog,
-      withMe:Boolean(withMe),
+      withMe: withMe,
       requestStartDate:
         dateRef.current.value + "T" + startHour + ":" + startMinute,
       requestEndDate: dateRef.current.value + "T" + endHour + ":" + endMinute,
@@ -153,31 +162,56 @@ function PostCreate() {
       .catch((error) => {
         alert(error.data.message);
       });
- 
+
     // console.log(newUpdatePost);
   };
-  
 
-  const checkStyle={
+  const checkStyle = {
     borderColor: "transparent",
     backgroundImage: `url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e")`,
     backgroundSize: "100% 100%",
     backgroundPosition: "50%",
     backgroundRepeat: "no-repeat",
-    backgroundColor: "#fa5a30"
-  }
-
+    backgroundColor: "#fa5a30",
+  };
 
   return (
     <Container>
       <Title>게시글 작성</Title>
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
-        <CheckBox className="radiotype" type="radio" name="test" onClick={clickCategory} value={true} />
-        <WithMeTextBox style={withMe? {color:"#FA5A30"}:{}}>같이해요</WithMeTextBox>
-      <CheckBox type="radio" name="test" onClick={clickCategory} value=""  style={withMe? {}:checkStyle}/>
-      <WithMeTextBox style={withMe? {}:{color:"#FA5A30"}} >부탁해요</WithMeTextBox>
-      {withMe?<InfoBox>산책을 같이 할 멍친구를 모집합니다.</InfoBox>:<InfoBox> 멍멍이를 산책시켜줄 멍친구를 모집합니다.</InfoBox>}
+        <CheckBox
+          className="radiotype"
+          type="radio"
+          name="test"
+          withMe={withMe}
+          onClick={()=>{setWithMe(true)}}
+        />
+        <WithMeTextBox withMe={withMe}
+         onClick={()=>{setWithMe(true)}}
+          style={withMe? {color:"#FA5A30"}:{}}
+         >
+          같이해요
+        </WithMeTextBox>
+        <CheckBox
+          type="radio"
+          name="test"
+          onClick={clickCategory}
+          value=""
+          style={withMe ? {} : checkStyle}
+        />
+        <WithMeTextBox withMe={withMe}
+         onClick={()=>{
+          setWithMe(false) }}
+          style={withMe? {}:{color:"#FA5A30"}}
+          >
+          부탁해요
+        </WithMeTextBox>
+        {withMe ? (
+          <InfoBox>산책을 같이 할 멍친구를 모집합니다.</InfoBox>
+        ) : (
+          <InfoBox> 멍멍이를 산책시켜줄 멍친구를 모집합니다.</InfoBox>
+        )}
       </RowBox>
       <RowBox>
         <SubText>멍 프로필 선택</SubText>
@@ -186,13 +220,20 @@ function PostCreate() {
 
       <RowBox>
         {dogList?.map((dog, index) => {
+        
           return (
-            <Listbox key={index} >
+            <Listbox key={index}
+             onClick={()=>{dogClick(dog.id)}}
+              length={index}
+             style={selectDog.includes(Number(dog.id)) ? {border:"2px solid #fa5a30"}:{}}
+            >
               <CheckBox
-                onClick={dogClick}
-                value={dog.id}
                 type="checkbox"
                 name="isRepresentative"
+                style={
+                  selectDog.includes(Number(dog.id)) ? {backgroundColor:"#fa5a30"}:{}
+                }
+                // style={{backgroundColor: "#fa5a30"}}
               />
               <DogImg src={dog.dogImageFiles[0].imageUrl} alt="" />
               <div>
@@ -305,9 +346,13 @@ function PostCreate() {
           취소
         </button>
         {isNew ? (
-          <AddButton onClick={click} type="button">등록</AddButton>
+          <AddButton onClick={click} type="button">
+            등록
+          </AddButton>
         ) : (
-          <AddButton onClick={updateClick} type="button">수정</AddButton>
+          <AddButton onClick={updateClick} type="button">
+            수정
+          </AddButton>
         )}
       </ButtonBox>
     </Container>
@@ -333,24 +378,25 @@ const Title = styled.div`
   margin-bottom: 50px;
 `;
 const WithMeBox = styled.div`
- font-weight: 600;
+  font-weight: 600;
   font-size: 20px;
   margin-right: 13px;
-`
+`;
 const WithMeTextBox = styled.div`
-box-sizing: border-box;
-padding-top: 17px;
-font-weight: 600;
-font-size: 16px;
-margin-bottom: 50px;
-/* color: ${(props)=>props.withMe? "black":"#FA5A30"} */
+  cursor: pointer;
+  box-sizing: border-box;
+  padding-top: 17px;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 50px;
+  /* color: ${(props) => (props.withMe ?  "#FA5A30": "black")}; */
 `
 
-const InfoBox= styled.div`
-color: gray;
-font-size: 14px;
-padding: 18px;
-`
+const InfoBox = styled.div`
+  color: gray;
+  font-size: 14px;
+  padding: 18px;
+`;
 const SubText = styled.div`
   font-weight: 600;
   font-size: 20px;
@@ -364,9 +410,10 @@ const MiniText = styled.div`
 `;
 
 const RowBox = styled.div`
-  .radiotype{
+  .radiotype {
     margin: 18px 18px 18px 0px;
   }
+ 
   display: flex;
   flex-direction: row;
 `;
@@ -377,30 +424,27 @@ const Listbox = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: 80px;
-  :hover {
-    border: 2px solid #fa5a30;
-  }
-
+  /* margin-left: 15px; */
+  margin-left: ${props=> props.length >= 1?"10px;":""};
+  cursor: pointer;
   border-radius: 12px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.04);
 `;
 
 const CheckBox = styled.input`
-
   margin: 18px;
   appearance: none;
   width: 1.2rem;
   height: 1.2rem;
   border-radius: 50px;
   background-image: url("data:image/svg+xml,%3csvg   viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-  background-color: #cccccc;
+  background-color:${props=> props.withMe? "#fa5a30;":"#cccccc;"};
   &:checked {
     border-color: transparent;
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
     background-size: 100% 100%;
     background-position: 50%;
     background-repeat: no-repeat;
-    background-color: #fa5a30;
   }
 `;
 
@@ -438,7 +482,7 @@ const InputBox = styled.div`
     font-size: 16px;
     width: 48%;
     height: 48px;
-    border: 1px solid #E3E5E9;
+    border: 1px solid #e3e5e9;
   }
 
   select {
@@ -446,7 +490,7 @@ const InputBox = styled.div`
     font-size: 16px;
     width: 12.5%;
     height: 52px;
-    border: 1px solid #E3E5E9;
+    border: 1px solid #e3e5e9;
   }
 `;
 const CoulmnBox = styled.div`
