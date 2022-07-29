@@ -28,9 +28,10 @@ const Chatting = (props) => {
   const dispatch = useDispatch();
 
   // 소켓 통신 객체 // 백엔드서버
-  const sock = new SockJS("https://hjkim-sparta.shop/chatting");
+  const sock = new SockJS(`${process.env.REACT_APP_API_URL}/chatting`);
   // const sock = new SockJS('http://localhost:8080/chatting');
   const ws = Stomp.over(sock);
+  ws.debug = () => {}; //콘솔로그 기록 안 보이게
 
   // 토큰
   const token = sessionStorage.getItem("token");

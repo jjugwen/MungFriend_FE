@@ -109,7 +109,21 @@ const Container = styled.div`
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   ::-webkit-scrollbar {
-    display: none;
+    width: 4px; //스크롤 폭
+  }
+  ::-webkit-scrollbar-track {
+    // 스크롤이 움직이는 영역
+    background-color: #e3e5e9;
+  }
+  ::-webkit-scrollbar-button {
+    //  스크롤의 화살표가 포함된 영역
+    display: block;
+    height: 40px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #fa5a30;
+    border-radius: 15px;
   }
   /* position: absolute;
 left: 460px;

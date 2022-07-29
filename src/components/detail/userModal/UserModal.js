@@ -26,33 +26,43 @@ function UserModal(props) {
           <p>자기소개</p>
           <div className="userIntroduce">{userInfo?.introduce}</div>
           <p className="reviewTitle">후기리스트</p>
-          <div className="reviewListBox">
-            {userInfo?.reviewList?.slice(0, 2).map((value) => {
-              return (
-                <div key={value.id}>
-                  <div className="reviewList">
-                    <div className="clickUsermodal">
-                      <div
-                        className="MungProfileImgCircle"
-                        style={{
-                          backgroundImage: `url(${value.giverDogProfileImgUrl})`,
-                        }}
-                      />
-                      <div className="NickAndDistanceAndDate">
-                        <span className="nicknameText">
-                          {value.giverNickname}
-                        </span>
-                        <span className="writeTimeText">
-                          {value.createdAt?.slice(0, 10).replace(/\-/g, ".")}
-                        </span>
+          {userInfo?.reviewList?.length === 0 ? ( //후기 없으면 문구 추가
+            <span style={{ marginLeft: "3%", color: "#B8BBC0" }}>
+              등록된 후기가 없습니다.
+            </span>
+          ) : (
+            <>
+              <div className="reviewListBox">
+                {userInfo?.reviewList?.slice(0, 2).map((value) => {
+                  return (
+                    <div key={value.id}>
+                      <div className="reviewList">
+                        <div className="clickUsermodal">
+                          <div
+                            className="MungProfileImgCircle"
+                            style={{
+                              backgroundImage: `url(${value.giverDogProfileImgUrl})`,
+                            }}
+                          />
+                          <div className="NickAndDistanceAndDate">
+                            <span className="nicknameText">
+                              {value.giverNickname}
+                            </span>
+                            <span className="writeTimeText">
+                              {value.createdAt
+                                ?.slice(0, 10)
+                                .replace(/\-/g, ".")}
+                            </span>
+                          </div>
+                        </div>
+                        <p>{value.comment.slice(0, 52)}</p>
                       </div>
                     </div>
-                    <p>{value.comment.slice(0, 52)}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
           <div className="profileForBtn">
             <Button
               orange_large
@@ -82,12 +92,32 @@ const UserModalStyle = styled.div`
   overflow-y: auto;
   border-radius: 20px;
   padding: 2.5em;
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     display: none;
+  } */
+  ::-webkit-scrollbar {
+    width: fit-content;
+    max-width: 4px; //스크롤 폭
+  }
+  ::-webkit-scrollbar-track {
+    // 스크롤이 움직이는 영역
+    background-color: #e3e5e9;
+  }
+  ::-webkit-scrollbar-button:start {
+    //  스크롤의 화살표가 포함된 영역
+    display: block;
+    height: 40px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-button:end {
+    //  스크롤의 화살표가 포함된 영역
+    display: block;
+    height: 60px;
+    background-color: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    /* background-color: #fa5a30; */
-    /* border-radius: 15px; */
+    background-color: #fa5a30;
+    border-radius: 15px;
   }
 
   & p {
