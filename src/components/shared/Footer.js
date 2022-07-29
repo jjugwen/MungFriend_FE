@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import logoBlack from "../../assets/images/Footer/logoBlack.svg";
+import instagramlogo from "../../assets/images/Footer/instagramlogo.svg";
+import facebooklogo from "../../assets/images/Footer/facebook.svg";
 
 function Footer() {
   return (
@@ -49,6 +51,20 @@ function Footer() {
             <span style={copyright}>
               Copyright ⓒ 2022 (주)멍친구 All Rights Reserved.
             </span>
+            <SocialLine>
+              <a
+                target="blank"
+                href="https://www.instagram.com/mung_friend_official"
+              >
+                <img src={instagramlogo} alt="instagram" />
+              </a>
+              <a
+                target="blank"
+                href="https://www.facebook.com/mungfriendOfficial"
+              >
+                <img src={facebooklogo} alt="facebook" />
+              </a>
+            </SocialLine>
           </div>
         </FooterBox>
       </FooterOutterBox>
@@ -97,4 +113,11 @@ const sitePromise = {
   lineHeight: "100%",
   color: "#000000",
 };
+
+const SocialLine = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3%;
+  gap: 2%;
+`;
 export default Footer;
