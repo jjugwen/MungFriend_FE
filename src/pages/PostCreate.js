@@ -23,6 +23,9 @@ function PostCreate() {
   // console.log(dogList)
   const [updatePost, setUpdatePost] = useState(null);
   // console.log(updatePost);
+  const [myInfo,setMyInfo]=useState(null);
+  // console.log(myInfo.userRole);
+  const [userModal, setUserModal]= useState(false);
 
   const dateRef = useRef();
   const time = {
@@ -61,6 +64,22 @@ function PostCreate() {
       }
     );
   };
+  // 필수 정보 입력한 유저가 아니라면, 마이페이지로 돌려보내기!
+  // React.useEffect(()=>{
+  
+  // if(myInfo.userRole==="USER"){
+  //   console.log(myInfo)
+  //  setUserModal(true);}
+  // },[])
+  
+  const navigatePage=(e)=>{
+   if(e.target.name === "yes"){
+    navigate(`/mypage`)
+   }else if(e.target.name ==="no"){
+    navigate(`/posts`)
+   }
+  }
+
 
   //작성버튼
   const click = () => {
@@ -103,6 +122,12 @@ function PostCreate() {
         // axios.get(`http://localhost:5002/detail/${params.id}`).then((res) => {
         setUpdatePost(res.data);
       });
+    }else if(isNew){
+      instance.get(`/myinfo`).then((res)=>{
+        setMyInfo(res.data)
+      })
+
+      
     }
   }, []);
 
@@ -175,8 +200,22 @@ function PostCreate() {
     backgroundColor: "#fa5a30",
   };
 
+
+
   return (
     <Container>
+      {myInfo?.userRole==="USER" && <Test></Test>}
+      {myInfo?.userRole==="USER" && <UserModal>
+        <ModalText>아직 필수 정보를 입력 하지 않으셨네요!<br/>
+        게시글 작성은 <b>주소</b>와
+        <b>휴대폰 번호 인증</b>을 해야만 가능해요.<br/>
+        마이페이지로 이동하시겠어요?
+        </ModalText>
+        <RowBox>
+        <NoBtn name="no" onClick={navigatePage}>아니요. 뒤로 가겠습니다.</NoBtn>
+        <YesBtn name="yes" onClick={navigatePage}>네! 마이페이지로 이동할게요.</YesBtn>
+        </RowBox>
+        </UserModal>}
       <Title>게시글 작성</Title>
       <WithMeBox> 카테고리 선택</WithMeBox>
       <RowBox>
@@ -372,6 +411,64 @@ const Container = styled.div`
     width: 90%;
   }
 `;
+
+const Test = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+background: rgba(0,0,0,0.8);
+overflow: hidden;
+z-index: 2;
+`
+
+
+const UserModal = styled.div`
+  background-color: white;
+  width: 550px;
+  height: 215px;
+  border-radius: 14px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+`
+const ModalText =styled.div`
+margin-top: 15px;
+font-size: 21px;
+font-weight: 700;
+padding: 20px;
+text-align: center;
+b{
+  color:#fa5a30;
+}
+`
+const NoBtn =styled.button`
+ position: absolute;
+  bottom: 5%;
+  left: 2%;
+  width: 47%;
+  height: 48px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+`
+const YesBtn =styled.button`
+ position: absolute;
+  bottom: 5%;
+  right: 2%;
+  width: 47%;
+  margin-left: 2%;
+  height: 48px;
+  color: white;
+  background-color: #fa5a30;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+`
+
 const Title = styled.div`
   font-weight: 600;
   font-size: 30px;
