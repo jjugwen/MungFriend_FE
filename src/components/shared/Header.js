@@ -38,25 +38,25 @@ function Header(props) {
     } else if (id === "posts") {
       mainRef.current.style = "";
       postsRef.current.style = `
-      color : #FA5A30;
-      font-weight: 600;`;
+        color : #FA5A30;
+        font-weight: 600;`;
       communityRef.current.style = "";
     } else if (id === "preparing") {
       mainRef.current.style = "";
       postsRef.current.style = "";
       communityRef.current.style = `
-      color : #FA5A30;
-      font-weight: 600;`;
+        color : #FA5A30;
+        font-weight: 600;`;
     } else if (id === "login" || id === "signup" || id === "chat") {
       mainRef.current.style = `
-      color : black;
-      font-weight: 500;`;
+        color : black;
+        font-weight: 500;`;
       postsRef.current.style = "";
       communityRef.current.style = "";
     } else {
       mainRef.current.style = `
-      color : black;
-      font-weight: 500;`;
+        color : black;
+        font-weight: 500;`;
       postsRef.current.style = "";
       communityRef.current.style = "";
     }

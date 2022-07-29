@@ -39,6 +39,9 @@ function Login() {
     }
   };
 
+  const googleURL = `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`;
+  const kakaoURL = `${process.env.REACT_APP_API_URL}/oauth2/authorization/kakao`;
+
   return (
     <>
       <LoginOutterBox>
@@ -77,13 +80,14 @@ function Login() {
             </Link>
           </RequestSignupText>
         </div>
-        <a href="https://hjkim-sparta.shop/oauth2/authorization/kakao">
+        <a href={kakaoURL}>
           <KakaoLoginBtn>
             <img src={kakaoIcon} alt="kakaoIcon" />
             <span>카카오 아이디로 로그인 하기</span>
           </KakaoLoginBtn>
         </a>
-        <a href="https://hjkim-sparta.shop/oauth2/authorization/google">
+
+        <a href={googleURL}>
           <GoogleLoginBtn>
             <img src={googleIcon} alt="googleIcon" />
             <span>구글 아이디로 로그인 하기</span>

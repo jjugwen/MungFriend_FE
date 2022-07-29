@@ -252,7 +252,13 @@ function PostDetail() {
           //모집 완료(isComplete가 false)면 매칭 프로필 보이기
           <>
             {/* 매칭된 닉네임이 있을 때만 매칭 프로필 보이기 */}
-            {detailList?.matchedNickname !== null ? <MatchingProfile /> : ""}
+            {detailList?.matchedNickname !== null ? (
+              <div style={{ marginBottom: "3%" }}>
+                <MatchingProfile />
+              </div>
+            ) : (
+              ""
+            )}
             <div className="DetailBodyBox">
               <ApplyComment />
             </div>

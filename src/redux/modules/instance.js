@@ -41,7 +41,7 @@ instance.interceptors.response.use(
       const refreshToken = sessionStorage.getItem("refreshToken");
       axios
         .post(
-          `https://hjkim-sparta.shop/member/reissue`,
+          `${process.env.REACT_APP_API_URL}/member/reissue`,
           {
             accessToken: token,
             refreshToken: refreshToken,

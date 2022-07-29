@@ -3,10 +3,11 @@ import axios from "axios";
 //axios
 export const loginDB = (username, password) => {
   // console.log(username, password);
+
   return async function () {
     try {
       const response = await axios.post(
-        `https://hjkim-sparta.shop/member/login`,
+        `${process.env.REACT_APP_API_URL}/member/login`,
         { username, password },
         {
           headers: {
