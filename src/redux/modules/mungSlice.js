@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+
 import instance from "./instance";
 
 //axios
@@ -12,8 +12,6 @@ export const createMungAX = (mung) => {
     // for (const value of mung) console.log(value);
     try {
       const res = await instance.post(`/api/dogs`, mung);
-      // await axios
-      // .post(`http://localhost:5001/dogList`, mung);
       dispatch(loadMyMungAX());
       alert(res.data.message);
       window.location.reload("/mypage");
@@ -26,8 +24,6 @@ export const loadMyMungAX = () => {
   return async function (dispatch) {
     try {
       const res = await instance.get(`/api/dogs`);
-      // await axios
-      // .get(`http://localhost:5001/dogList`)
       dispatch(loadMyMung(res.data));
     } catch (err) {
       // console.log(err)
@@ -37,16 +33,12 @@ export const loadMyMungAX = () => {
 
 export const deleteMyMungAX = (id) => {
   return async function (dispatch) {
-    await instance
-      .delete(`/api/dogs/${id}`)
-      // await axios
-      // .delete(`http://localhost:5001/dogList/${id}`)
-      .then(() => {
+   try{ await instance.delete(`/api/dogs/${id}`)
         dispatch(deleteMyMung(id));
         window.location.reload();
-      });
-    // 삭제리듀서는 mypageSlice에
-    // dispatch(deleteMyMung(id))
+      }catch(err){
+
+      }
   };
 };
 //툴킷
