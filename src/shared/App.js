@@ -38,14 +38,14 @@ import theme from "./theme";
 
 function App() {
   const token = sessionStorage.getItem("token");
-
+  const imgURL = process.env.REACT_APP_IMAGE_URL;
   const [headerModal, setHeaderModal] = useState(false);
   // const outSection = useRef();
 
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Header modal={headerModal} setModal={setHeaderModal} />
+        <Header modal={headerModal} setModal={setHeaderModal} imgURL={imgURL} />
         {headerModal && (
           <HeaderModal modal={headerModal} setModal={setHeaderModal} />
         )}
@@ -63,7 +63,13 @@ function App() {
           <Route path="/signupsuccess" element={<SignupSuccess />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<Mypage />} />
-          <Route path="/posts" element={token ? <Posts /> : <NeedLogin />} />
+          <Route
+            path="/posts"
+            element={
+              // token ? <Posts imgURL={imgURL} /> : <NeedLogin imgURL={imgURL} />
+              <Posts />
+            }
+          />
           <Route path="/postcreate" element={<PostCreate />} />
           <Route path="/postcreate/:id" element={<PostCreate />} />
           <Route path="/posts/:id" element={<PostDetail />} />
@@ -73,7 +79,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/chat/:id" element={<Chat />} />
           {/* 에러페이지 */}
-          <Route path="/needlogin" element={<NeedLogin />} />
+          <Route path="/needlogin" element={<NeedLogin imgURL={imgURL} />} />
           <Route path="/error" element={<ErrorPage />} /> {/* 500 */}
           <Route path="/noaccess" element={<ErrorNoAccess />} /> {/* 403 */}
           <Route path="/preparing" element={<Preparing />} />

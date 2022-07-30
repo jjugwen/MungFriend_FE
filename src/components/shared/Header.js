@@ -1,15 +1,11 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import chatting from "../../assets/images/Header/chatIcon.svg";
-import logo from "../../assets/images/Header/logo.svg";
-import mymenu from "../../assets/images/Header/mymenu.svg";
-import noticeicon from "../../assets/images/Header/noticeicon.svg";
-import openmenuarrow from "../../assets/images/Header/openmenuarrow.svg";
 
 function Header(props) {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
+  const imgURL = props.imgURL;
 
   // const [opened, setOpened] = useState(false);
   // const modalClose = useCallback(() => {
@@ -72,7 +68,7 @@ function Header(props) {
               window.location.reload();
             }}
           >
-            <img src={logo} alt={logo} />
+            <img src={`${imgURL}/Header/logo.svg`} alt="logo" />
           </HeaderLogo>
           <div
             style={{
@@ -109,7 +105,7 @@ function Header(props) {
           ) : (
             <AfterLogin>
               <img
-                src={chatting}
+                src={`${imgURL}/Header/chatIcon.svg`}
                 alt="chatting"
                 id="chat"
                 onClick={GetClick}
@@ -117,7 +113,7 @@ function Header(props) {
                 style={{ marginRight: "5%" }}
               />
               <img
-                src={noticeicon}
+                src={`${imgURL}/Header/noticeicon.svg`}
                 alt="noticeicon"
                 id="preparing"
                 onClick={GetClick}
@@ -137,8 +133,11 @@ function Header(props) {
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "3%" }}
                 >
-                  <img src={mymenu} alt="mymenu" />
-                  <img src={openmenuarrow} alt="openmenuarrow" />
+                  <img src={`${imgURL}/Header/mymenu.svg`} alt="mymenu" />
+                  <img
+                    src={`${imgURL}/Header/openmenuarrow.svg`}
+                    alt="openmenuarrow"
+                  />
                 </div>
               </HeadButton>
             </AfterLogin>

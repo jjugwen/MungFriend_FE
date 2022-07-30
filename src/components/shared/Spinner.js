@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import loadingGIF from "../../assets/images/Errors/Mungloading.gif";
 
-function Sppiner() {
+function Sppiner(props) {
   return (
     <Container>
-      <MungFriendloading src={loadingGIF} alt="loading" />
+      <MungFriendloading
+        src={`${props.imgURL}/Errors/Mungloading.gif`}
+        alt="loading"
+      />
     </Container>
   );
 }
