@@ -29,9 +29,11 @@ jobs:
         run: |
           echo "REACT_APP_KAKAOMAP_KEY=$REACT_APP_KAKAOMAP_KEY" >> .env
           echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env
+          echo "REACT_APP_IMAGE_URL=$REACT_APP_IMAGE_URL" >> .env
         env:
           REACT_APP_KAKAOMAP_KEY: ${{ secrets.REACT_APP_KAKAOMAP_KEY }}
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_IMAGE_URL: ${{ secrets.REACT_APP_IMAGE_URL }}
           
    # 모듈을 설치합니다.
       - name: Install Dependencies
