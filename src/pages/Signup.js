@@ -15,9 +15,11 @@ function Signup() {
     return _reg.test(username);
   };
 
-  // 비밀번호 제한 조건 : 8자리 이상 20자리 이하 영문대소문자, 특수문자 !@#$%^&.* 가능
+  // 비밀번호 제한 조건 : 8자리 이상 20자리 이하 영문대문자, 영문소문자, 숫자, 특수문자 !@#$%^&.* 조합해야!
   const is_password = (password) => {
     let _reg = /^[0-9a-zA-Z!@#$%^&.*]{8,20}$/;
+    // let _reg =
+    //   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&.*]).{8,20}$/;
     return _reg.test(password);
   };
 
@@ -43,7 +45,17 @@ function Signup() {
   const [emailcheck, setEmailCheck] = useState(false);
   const [nicknamecheck, setNicknameCheck] = useState(false);
 
-  //비밀번호 체크 (비어있는지 && 크로스체크 확인)
+  // 비밀번호 체크
+  // const passwordCheck = (e) => {
+  //   console.log(e.target.value);
+  //   if (!is_password(e.target.value)) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // };
+
+  //비밀번호 더블 체크 (비어있는지 && 크로스체크 확인)
   const pwDubleCheck = () => {
     if (password === "" || pwcheck === "") {
       return false;
@@ -244,10 +256,23 @@ function Signup() {
             type="password"
             onChange={(e) => {
               setPassword(e.target.value);
+              // passwordCheck(e);
             }}
             placeholder="비밀번호(8~20자리)를 입력해주세요"
             required
           />
+          {password ? (
+            <>
+              {/* <Check>
+                {passwordCheck
+                  ? ""
+                  : "*비밀번호는 8자리 이상 20자리 이하 영어대문자, 영어소문자, 숫자, 특수문자(!@#$%^&.*) 조합입니다."}
+              </Check>
+              <Check2>{passwordCheck ? "사용가능한 형식입니다" : ""}</Check2> */}
+            </>
+          ) : (
+            <p />
+          )}
           <p />
           <p />
           <SignupText htmlFor="passwordCheck">비밀번호 확인</SignupText>

@@ -58,7 +58,7 @@ instance.interceptors.response.use(
           window.location.reload();
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           sessionStorage.clear();
           window.location.replace("/needlogin");
         });

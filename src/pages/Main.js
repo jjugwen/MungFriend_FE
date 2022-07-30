@@ -15,7 +15,7 @@ import Button from "../elements/Button";
 import eventGiftBtn from "../assets/images/Main/event_gift.svg";
 import eventCoffeeBtn from "../assets/images/Main/event_coffee.svg";
 
-function Main() {
+function Main(props) {
   return (
     <div style={{ margin: "0" }}>
       <MainBox1

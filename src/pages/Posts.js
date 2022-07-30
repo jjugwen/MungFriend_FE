@@ -13,14 +13,16 @@ import WithmeTrue from "../assets/images/Withme/같이해요.svg";
 import WithmeFalse from "../assets/images/Withme/부탁해요.svg";
 import DogPlusModal from "../components/DogPlusModal";
 
-function Posts() {
+function Posts(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const token = sessionStorage.getItem("token");
   useEffect(() => {
-    dispatch(loadMyMungAX());
     dispatch(loadPostListAX());
-    dispatch(userActions.myinfoDB());
+    if (token) {
+      dispatch(loadMyMungAX());
+      dispatch(userActions.myinfoDB());
+    }
   }, [dispatch]);
 
   const myMung = useSelector((state) => state.mungSlice.mung);
@@ -93,7 +95,7 @@ function Posts() {
   const [mung, setMung] = useState(false);
   return (
     <All>
-      {isLoding && <Sppiner />}
+      {isLoding && <Sppiner imgURL={props.imgURL} />}
       {isLoding && <SppinerOutsession />}
       {mung && <DogPlusModal modal={mung} setMungModal={setMung} />}
       {mung && (
@@ -106,7 +108,7 @@ function Posts() {
       <Box>
         <h1 className="name">
           {myinfo?.nickname}
-          <span>님의</span> <br />
+          {token ? <span>님의</span> : <span>멍친9함..ㅎ</span>} <br />
           {myMung?.length !== 0 ? (
             <div
               style={{
@@ -125,19 +127,52 @@ function Posts() {
             </div>
           ) : (
             <>
-              <span>멍멍이를 등록해주세요!</span>
-              <br />
-              <RowBox>
-                <AddMungFBtn
-                  className="mungfalse"
-                  onClick={() => {
-                    setMung(!mung);
-                  }}
-                >
-                  <img src="https://ifh.cc/g/h0kWOv.png" alt="" />
-                </AddMungFBtn>
-                <AddText>등록하기</AddText>
-              </RowBox>
+              {token ? (
+                <>
+                  <span>멍멍이를 등록해주세요!</span>
+                  <br />
+                  <RowBox>
+                    <AddMungFBtn
+                      className="mungfalse"
+                      onClick={() => {
+                        setMung(!mung);
+                      }}
+                    >
+                      <img src="https://ifh.cc/g/h0kWOv.png" alt="" />
+                    </AddMungFBtn>
+                    <AddText>등록하기</AddText>
+                  </RowBox>{" "}
+                </>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <span style={{ marginBottom: "2%" }}>
+                      <span
+                        style={{
+                          border: "none",
+                          cursor: "pointer",
+                          textDecoration: "2px underline",
+                        }}
+                        onClick={() => {
+                          navigate("/login");
+                        }}
+                      >
+                        로그인
+                      </span>
+                      하고 산책 친구 만나요!
+                    </span>
+                    <span style={{ fontSize: "14px" }}>
+                      * 게시글 작성 및 자세히 보기, 거리순 조회는 로그인 후 이용
+                      가능합니다.
+                    </span>
+                  </div>
+                </>
+              )}
             </>
           )}
         </h1>

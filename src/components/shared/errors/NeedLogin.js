@@ -3,14 +3,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import needlogin from "../../../assets/images/Errors/img-login.png";
 import Button from "../../../elements/Button";
 
-function NeedLogin() {
+function NeedLogin(props) {
   const navigate = useNavigate();
   return (
     <Wrap>
-      <Img src={needlogin} alt="needlogin" />
+      <Img src={`${props.imgURL}/Errors/img-login.png`} alt="needlogin" />
       <ErrorTextArea>
         <h2>로그인 해주세요.</h2>
         <span>현재 페이지는 로그인 후 이용 가능합니다.</span>
