@@ -59,17 +59,11 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup imgURL={imgURL} />} />
           <Route path="/signupsuccess" element={<SignupSuccess />} />
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<Mypage />} />
-          <Route
-            path="/posts"
-            element={
-              // token ? <Posts imgURL={imgURL} /> : <NeedLogin imgURL={imgURL} />
-              <Posts />
-            }
-          />
+          <Route path="/posts" element={<Posts />} />
           <Route path="/postcreate" element={<PostCreate />} />
           <Route path="/postcreate/:id" element={<PostCreate />} />
           <Route path="/posts/:id" element={<PostDetail />} />
