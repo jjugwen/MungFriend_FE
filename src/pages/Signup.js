@@ -3,11 +3,10 @@ import styled from "styled-components";
 import DaumPostCode from "react-daum-postcode";
 import instance from "../shared/API/instance";
 import { useNavigate } from "react-router-dom";
-import checkblue from "../assets/images/Signup/check_blue.svg";
-import checkred from "../assets/images/Signup/check_no_red.svg";
 import Button from "../elements/Button";
 
-function Signup() {
+function Signup(props) {
+  const imgURL = props.imgURL;
   const navigate = useNavigate();
   // 아이디 제한 조건 : 3자리 이상 15자리 이하 영문소문자/숫자
   const is_username = (username) => {
@@ -17,9 +16,8 @@ function Signup() {
 
   // 비밀번호 제한 조건 : 8자리 이상 20자리 이하 영문대문자, 영문소문자, 숫자, 특수문자 !@#$%^&.* 조합해야!
   const is_password = (password) => {
-    let _reg = /^[0-9a-zA-Z!@#$%^&.*]{8,20}$/;
-    // let _reg =
-    //   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&.*]).{8,20}$/;
+    let _reg =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&.*]).{8,20}$/;
     return _reg.test(password);
   };
 
@@ -46,14 +44,13 @@ function Signup() {
   const [nicknamecheck, setNicknameCheck] = useState(false);
 
   // 비밀번호 체크
-  // const passwordCheck = (e) => {
-  //   console.log(e.target.value);
-  //   if (!is_password(e.target.value)) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // };
+  const passwordCheck = () => {
+    if (!is_password(password)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   //비밀번호 더블 체크 (비어있는지 && 크로스체크 확인)
   const pwDubleCheck = () => {
@@ -253,22 +250,22 @@ function Signup() {
           <SignupText htmlFor="password">비밀번호</SignupText>
           <br />
           <SignupInputBox
+            name="password"
             type="password"
             onChange={(e) => {
               setPassword(e.target.value);
-              // passwordCheck(e);
             }}
-            placeholder="비밀번호(8~20자리)를 입력해주세요"
+            placeholder="비밀번호를 입력해주세요."
             required
           />
           {password ? (
             <>
-              {/* <Check>
-                {passwordCheck
+              <Check>
+                {passwordCheck()
                   ? ""
-                  : "*비밀번호는 8자리 이상 20자리 이하 영어대문자, 영어소문자, 숫자, 특수문자(!@#$%^&.*) 조합입니다."}
+                  : "*비밀번호는 8~20자리 영어 대/소문자, 숫자, 특수문자 조합입니다."}
               </Check>
-              <Check2>{passwordCheck ? "사용가능한 형식입니다" : ""}</Check2> */}
+              <Check2>{passwordCheck() ? "사용가능한 형식입니다" : ""}</Check2>
             </>
           ) : (
             <p />
@@ -279,6 +276,7 @@ function Signup() {
           <br />
           <div style={{ display: "flex", gap: "2%" }}>
             <SignupInputBox
+              name="passwordCheck"
               type="password"
               onChange={(e) => {
                 setPwcheck(e.target.value);
@@ -297,12 +295,16 @@ function Signup() {
                       position: "relative",
                       right: "40px",
                     }}
-                    src={checkred}
-                    alt=""
+                    src={`${imgURL}/Signup/check_no_red.svg`}
+                    alt="checkred"
                   />
                 )}
                 {pwDubleCheck() ? (
-                  <img width="20px" src={checkblue} alt="" />
+                  <img
+                    width="20px"
+                    src={`${imgURL}/Signup/check_blue.svg`}
+                    alt="checkblue"
+                  />
                 ) : (
                   ""
                 )}
@@ -356,7 +358,7 @@ function Signup() {
               setNickname(e.target.value);
               nickCheck(e);
             }}
-            placeholder="닉네임(3~9자리)을 입력해주세요."
+            placeholder="닉네임을 입력해주세요."
             required
           />
           {nickname ? (
@@ -391,7 +393,7 @@ function Signup() {
                 width: "128px",
                 height: "52px",
                 borderRadius: "8px",
-                backgroundColor: "#B8BBC0",
+                backgroundColor: "#4E4E56",
               }}
             >
               <p
