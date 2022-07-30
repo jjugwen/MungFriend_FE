@@ -79,7 +79,7 @@ function DogList(props) {
           * 대표 멍프로필을 선택해주세요. 최대 3마리까지 등록가능합니다.
         </TextBox14>
         <AddButton onClick={modal}>
-          <img src="https://ifh.cc/g/NL36Wc.png" alt="" />
+          <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/AddBtn.png`} alt="" />
           추가하기
         </AddButton>
       </RowBox>
@@ -92,7 +92,7 @@ function DogList(props) {
                 ? { border: "2px solid #fa5a30" }
                 : {}
             }
-          >
+          > 
             <CheckBox
               onClick={ChoiceRep}
               value={dog.id}
@@ -110,9 +110,9 @@ function DogList(props) {
                 <TextBox16>
                   {dog.name}
                   {dog.gender === "여" ? (
-                    <img src="https://ifh.cc/g/1DDK9D.png" alt="" />
+                    <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/girl.png`} alt="" />
                   ) : (
-                    <img src="https://ifh.cc/g/WP9vdy.png" alt="" />
+                    <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/boy.png`} alt="" />
                   )}
                 </TextBox16>
               </RowBox>
@@ -193,9 +193,11 @@ const TextBox16 = styled.div`
   font-weight: 600;
   font-size: 16px;
   img {
-    margin-left: 5px;
-    width: 17px;
-    height: 17px;
+    position: relative;
+    left: 12%;
+    top: 10%;
+    width: 18px;
+    height: 18px;
   }
 `;
 
@@ -238,8 +240,11 @@ const AddButton = styled.button`
   border: 1px solid #e5e5e5;
   border-radius: 4px;
   img {
-    width: 12px;
-    height: 12px;
+    position: relative;
+    bottom: -7%;
+    right: 3%;
+    width: 16px;
+    height: 16px;
   }
 `;
 //모달창 css
