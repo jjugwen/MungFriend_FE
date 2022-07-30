@@ -107,7 +107,12 @@ function PostDetail() {
                     <div className="NickAndDistanceAndDate">
                       <div className="betweenNickAndDistance">
                         <span className="nicknameText">
-                          {detailList?.nickname}
+                          {/* {detailList?.nickname} */}
+                          {detailList?.nickname?.slice(0, 11) +
+                            detailList?.nickname
+                              ?.slice(11)
+                              .replace(/[^]/gi, "..")
+                              .slice(0, 2)}
                         </span>
                         {/* 소수점 첫째자리까지 반올림 */}
                         <span className="distanceText">

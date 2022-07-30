@@ -32,7 +32,7 @@ function DogList() {
             <Listbox key={dog.id}>
               <BetweenDogPicAndDogInfo>
                 <DogImg src={dog.dogImageFiles[0].imageUrl} alt="dogUrl" />
-                <div style={{ width: "100%", minWidth: "80px" }}>
+                <div style={{ width: "200px", minWidth: "80px" }}>
                   <div className="WithDogsDogName">
                     {dog.name}{" "}
                     {dog.gender === "여" ? (
@@ -87,7 +87,7 @@ const BetweenDogPicAndDogInfo = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 3%;
-  width: max-content;
+  width: fit-content;
   box-sizing: content-box;
 `;
 
