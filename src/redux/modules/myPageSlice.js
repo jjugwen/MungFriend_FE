@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import instance from "../../shared/API/instance";
 
 //axios
-//나중에 멤버 아이디값 받아와서 넘겨주기
 export const loadMyPageAX = () => {
   return async function (dispatch) {
-    await instance
-      // await axios.get(`http://localhost:5001/mypage`)
-      // await instance
-      .get(`/mypage`)
-      .then((response) => {
-        dispatch(loadMyPage(response.data));
-      });
+   try{
+    const response = await instance.get(`/mypage`)
+      dispatch(loadMyPage(response.data))
+  } 
+  catch(err){
+
+  }
   };
 };
+
+
 
 //툴킷
 const myPageSlice = createSlice({
@@ -23,10 +23,10 @@ const myPageSlice = createSlice({
   reducers: {
     loadMyPage(state, action) {
       state.mypage = action.payload;
-    },
+    }
   },
 });
 
-export const { loadMyPage, patchIntroduce, patchPhoneNum, deleteMyMung } =
+export const { loadMyPage } =
   myPageSlice.actions;
 export default myPageSlice.reducer;
