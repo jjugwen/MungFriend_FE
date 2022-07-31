@@ -1,3 +1,4 @@
+import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -132,6 +133,11 @@ function DogList(props) {
           </Listbox>
         );
       })}
+
+      {info?.length === 0 ? <NoMungDiv>
+        <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/noProfile.png`} alt=""/>
+        <div> 등록된 멍프로필이 없습니다.</div>
+      </NoMungDiv>:""}
     </Container>
   );
 }
@@ -200,6 +206,21 @@ const TextBox16 = styled.div`
     height: 18px;
   }
 `;
+
+const NoMungDiv =styled.div`
+box-sizing: border-box;
+margin-top: 60px;
+text-align: center;
+font-weight: 500;
+font-size: 16px;
+div{
+  margin-top: 20px;
+}
+img{
+  width:160px;
+  height: 160px;
+}
+`
 
 const Listbox = styled.div`
   height: 80px;
