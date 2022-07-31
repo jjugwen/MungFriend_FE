@@ -110,7 +110,7 @@ function MyPageComponent() {
         </UpdateButton>
       </RowBox>
 
-      <IntroduceDiv readOnly>{info?.introduce}</IntroduceDiv>
+      <IntroduceDiv value={info?.introduce} readOnly/>
       <DogList setMungModal={setMungModal} modal={mungModal} />
     </Container>
   );
