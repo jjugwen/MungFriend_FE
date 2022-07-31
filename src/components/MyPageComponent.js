@@ -91,8 +91,7 @@ function MyPageComponent() {
           src={
             info?.dogProfileImgUrl
               ? info?.dogProfileImgUrl
-              : "https://ifh.cc/g/rsQtyQ.png"
-          }
+              : `${process.env.REACT_APP_IMAGE_URL}/Yebin/profileImg.png`}
           alt=""
         />
         <div>
@@ -106,12 +105,12 @@ function MyPageComponent() {
             setProfileModal(!profileModal);
           }}
         >
-          <img src="https://ifh.cc/g/S046Ot.png" alt="" />
+          <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/profileBtn.png`} alt="" />
           프로필 수정
         </UpdateButton>
       </RowBox>
 
-      <IntroduceDiv>{info?.introduce}</IntroduceDiv>
+      <IntroduceDiv readOnly>{info?.introduce}</IntroduceDiv>
       <DogList setMungModal={setMungModal} modal={mungModal} />
     </Container>
   );
@@ -143,20 +142,33 @@ const SubText = styled.div`
   color: #7a7a80;
 `;
 
-const IntroduceDiv = styled.div`
+const IntroduceDiv = styled.textarea`
+  cursor: Default;
   box-sizing: border-box;
   background-color: #f5f5f5;
+  width: 100%;
+  border: none;
+  font-family: 'pretendard';
+  
+  font-size: 16px;
   height: 160px;
   padding: 15px;
+  line-height: 24px;
   border-radius: 12px;
   margin-bottom: 50px;
+  resize : none;
+  :focus {
+  outline: none;
+}
 `;
 
 const UpdateButton = styled.button`
   img {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
+    position: relative;
+    right: 6%;
+    top: 8%;
+    width: 15px;
+    height: 15px;
   }
   position: absolute;
   right: 0%;
@@ -167,7 +179,7 @@ const UpdateButton = styled.button`
   height: 40px;
   font-size: 14px;
   font-weight: 500;
-`;
+  padding-left: 13px;`
 
 const Test = styled.div`
   position: fixed;

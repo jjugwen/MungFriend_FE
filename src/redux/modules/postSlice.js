@@ -6,24 +6,25 @@ import instance from "../../shared/API/instance";
 //나중에 멤버 아이디값 받아와서 넘겨주기
 export const createPostAX = (post) => {
   return async function (dispatch) {
-    await instance
+   try{await instance
       .post(`/api/posts`, post)
-      // await axios
-      //   .post(`http://localhost:5001/post`, post)
-      .then(() => {
-        dispatch(createPost(post));
+    dispatch(createPost(post));
         window.location.replace("/posts");
-      });
+    } catch(err){
+
+    }  
   };
 };
 
 export const loadPostListAX = () => {
   return async function (dispatch) {
-    // await axios
-    //   .get(`http://localhost:5001/post`)
-    await instance.get(`/api/posts`).then((response) => {
-      dispatch(loadPost(response.data));
-    });
+try{
+  const res =await instance.get(`/api/posts`)
+  dispatch(loadPost(res.data));
+
+}catch(err){
+  
+}
   };
 };
 

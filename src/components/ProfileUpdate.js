@@ -186,15 +186,16 @@ function ProfileUpdate(props) {
           </RowBox>
         </>
       )}
-
+      
       <textarea
         placeholder="자기소개 255자"
         defaultValue={info?.introduce ? info?.introduce : ""}
         ref={introduceRef}
         onChange={onChangeText}
-        maxLength="255" //255자 제한
+        maxLength="255"
       />
       <CountText>{text.length}/255</CountText>
+     
       <RowBox>
         <CancleBtn
           onClick={() => {
@@ -245,6 +246,9 @@ const Container = styled.div`
   z-index: 3;
   //
   textarea {
+    box-sizing: border-box;
+    line-height: 24px;
+    padding: 15px;
     resize: none;
     border: 1px solid #e3e5e9;
     border-radius: 4px;
@@ -294,7 +298,7 @@ const TwoButton = styled.button`
   width: 30%;
   margin-left: 5%;
   margin-top: 10px;
-  background: #b8bbc0;
+  background: #4E4E56;
   font-weight: 500;
   font-size: 16px;
   color: #ffffff;
@@ -343,10 +347,11 @@ const UpdateBtn = styled.button`
   color: #ffffff;
 `;
 
-const CountText = styled.span`
-  position: absolute;
-  right: 5%;
-  bottom: 12%;
+
+const CountText = styled.div`
+  position: fixed;
+  left: 85%;
+  bottom: 13%;
   font-weight: 400;
   font-size: 16px;
   color: #7a7a80;

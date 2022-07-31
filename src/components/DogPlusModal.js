@@ -119,13 +119,13 @@ function DogPlusModal(props) {
         src={
           mungImage.previewUrl
             ? mungImage.previewUrl
-            : "https://ifh.cc/g/LTOpv8.png"
+            : `${process.env.REACT_APP_IMAGE_URL}/Yebin/addProfile.png`
         }
         alt=""
       />
       <PreviewBtn>
         <label className="input-button" htmlFor="input-file">
-          <img src="https://ifh.cc/g/ZfSpJc.png" alt="" />
+          <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`} alt="" />
         </label>
         <input
           type="file"
@@ -236,8 +236,21 @@ const Container = styled.div`
   box-sizing: border-box;
   padding: 20px;
   width: 520px;
+
+  ::-webkit-scrollbar-button:start{
+    display:block;
+  height:20px;  
+  background-color: transparent;
+  } 
+  ::-webkit-scrollbar-button:end {
+  display:block;
+  height:20px;  
+  background-color: transparent;
+} 
+
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
+  
   }
   ::-webkit-scrollbar-thumb {
     background-color: #FA5A30;

@@ -138,7 +138,7 @@ function Posts(props) {
                         setMung(!mung);
                       }}
                     >
-                      <img src="https://ifh.cc/g/h0kWOv.png" alt="" />
+                      <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`} alt="" />
                     </AddMungFBtn>
                     <AddText>등록하기</AddText>
                   </RowBox>{" "}
@@ -187,7 +187,7 @@ function Posts(props) {
           {myMung?.length !== 0 ? (
             <Kingimg src={firstMung} alt="firstMung" />
           ) : (
-            <Kingimg src="https://ifh.cc/g/X36LNp.png" alt="" />
+            <Kingimg src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/addProfile.png`} alt="" />
           )}
         </div>
         <SSub>
@@ -204,7 +204,7 @@ function Posts(props) {
                 setMung(!mung);
               }}
             >
-              <img src="https://ifh.cc/g/h0kWOv.png" alt="" />
+              <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`} alt="" />
             </AddMungBtn>
           ) : (
             ""
@@ -420,7 +420,7 @@ function Posts(props) {
             navigate("/postcreate");
           }}
         >
-          <img src="https://ifh.cc/g/nW36zN.png" alt="" />
+          <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`} alt="" />
         </AddPostButton>
         <div>게시글을 작성합니다.</div>
       </UpBox>
