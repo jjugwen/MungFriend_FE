@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import imgUpload from "../../../assets/images/Modal/imgUpload.svg";
 import { reviewImgCreate } from "../../../redux/modules/reviewSlice";
 
 function ReviewImgUpload() {
@@ -46,7 +45,7 @@ function ReviewImgUpload() {
         htmlFor="input-file"
         onChange={uploadImage}
         style={{
-          backgroundImage: `url(${imgUpload})`,
+          backgroundImage: `url(${process.env.REACT_APP_IMAGE_URL}/Modal/imgUpload.svg)`,
           width: "104px",
           height: "40px",
         }}

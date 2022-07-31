@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import logoBlack from "../../assets/images/Footer/logoBlack.svg";
-import instagramlogo from "../../assets/images/Footer/instagramlogo.svg";
-import facebooklogo from "../../assets/images/Footer/facebook.svg";
 
-function Footer() {
+function Footer(props) {
+  const imgURL = props.imgURL;
   return (
     <>
       <FooterOutterBox>
         <FooterBox>
-          <FooterLogo src={logoBlack} alt="logoBlack" />
+          <FooterLogo src={`${imgURL}/Footer/logoBlack.svg`} alt="logoBlack" />
           <div
             style={{
               display: "flex",
@@ -56,13 +54,16 @@ function Footer() {
                 target="blank"
                 href="https://www.instagram.com/mung_friend_official"
               >
-                <img src={instagramlogo} alt="instagram" />
+                <img
+                  src={`${imgURL}/Footer/instagramlogo.svg`}
+                  alt="instagram"
+                />
               </a>
               <a
                 target="blank"
                 href="https://www.facebook.com/mungfriendOfficial"
               >
-                <img src={facebooklogo} alt="facebook" />
+                <img src={`${imgURL}/Footer/facebook.svg`} alt="facebook" />
               </a>
             </SocialLine>
           </div>

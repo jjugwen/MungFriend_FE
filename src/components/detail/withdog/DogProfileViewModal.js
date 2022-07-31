@@ -30,7 +30,7 @@ function DogProfileViewModal(props) {
             src={
               mung?.dogImageFiles[0]?.imageUrl
                 ? mung?.dogImageFiles[0]?.imageUrl
-                : "https://ifh.cc/g/87kbto.png"
+                : `${process.env.REACT_APP_IMAGE_URL}/Yebin/addProfile.png`
             }
             alt=""
           />

@@ -1,37 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import Textrotate from "../elements/textrotate";
-import MungFootPrint from "../assets/images/Main/MungFootPrint.svg";
-import MainTopImg from "../assets/images/Main/main2.png";
-import Step1 from "../assets/images/Main/step1.svg";
-import Step2 from "../assets/images/Main/step2.svg";
-import Step3 from "../assets/images/Main/step3.svg";
-import Step4 from "../assets/images/Main/step4.svg";
-import bannerHeart from "../assets/images/Main/img-banner-heart.png";
-import bannerWalk from "../assets/images/Main/img-dog-sad.png";
-import bannerhands from "../assets/images/Main/img-hands.png";
-import together from "../assets/images/Main/함께.png";
 import Button from "../elements/Button";
-import eventGiftBtn from "../assets/images/Main/event_gift.svg";
-import eventCoffeeBtn from "../assets/images/Main/event_coffee.svg";
+import Textrotate from "../elements/textrotate";
 
 function Main(props) {
+  const imgURL = props.imgURL;
   return (
     <div style={{ margin: "0" }}>
       <MainBox1
         style={{
-          backgroundImage: `url(${MainTopImg})`,
+          backgroundImage: `url(${imgURL}/Main/main2.png)`,
           zIndex: "-1",
           top: "-4.5em",
         }}
       >
-        <div
-          style={{
-            marginBottom: "80px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
+        <SpaceBetween>
           <div
             style={{
               margin: "10em 0 0 17.36%",
@@ -43,17 +26,11 @@ function Main(props) {
             </h1>
             <span>반려견 산책을 도와주는 산책 매칭 서비스</span>
           </div>
-        </div>
+        </SpaceBetween>
       </MainBox1>
-      <div style={{ minWidth: "1440px" }}>
+      <DesktopWidth>
         <MainBox2>
-          <div
-            style={{
-              marginBottom: "80px",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
+          <SpaceBetween>
             <div
               style={{
                 display: "flex",
@@ -70,53 +47,57 @@ function Main(props) {
             <TextCircle>
               <Textrotate />
               <img
-                src={MungFootPrint}
+                src={`${imgURL}/Main/MungFootPrint.svg`}
                 alt="MungFootPrint"
                 style={{ position: "absolute" }}
               />
             </TextCircle>
-          </div>
+          </SpaceBetween>
           <CardBox>
             <CardOne>
-              <Stepbox style={{ backgroundImage: `url(${Step4})` }} />
+              <Stepbox
+                style={{ backgroundImage: `url(${imgURL}/Main/step4.svg)` }}
+              />
               <p>STEP 1</p>
               <span style={{ marginBottom: "2%" }}>마이페이지에서</span>
               <span>본인 인증, 멍프로필 등록하기</span>
             </CardOne>
             <CardOne>
-              <Stepbox style={{ backgroundImage: `url(${Step2})` }} />
+              <Stepbox
+                style={{ backgroundImage: `url(${imgURL}/Main/step2.svg)` }}
+              />
               <p>STEP 2</p>
               <span style={{ marginBottom: "2%" }}>산책 페이지에서</span>
               <span>모집글 작성하기</span>
             </CardOne>
             <CardOne>
-              <Stepbox style={{ backgroundImage: `url(${Step3})` }} />
+              <Stepbox
+                style={{ backgroundImage: `url(${imgURL}/Main/step3.svg)` }}
+              />
               <p>STEP 3</p>
               <span style={{ marginBottom: "2%" }}>신청한 멍친구 중</span>
               <span>한 명과 매칭하기</span>
             </CardOne>
             <CardOne>
-              <Stepbox style={{ backgroundImage: `url(${Step1})` }} />
+              <Stepbox
+                style={{ backgroundImage: `url(${imgURL}/Main/step1.svg)` }}
+              />
               <p>STEP 4</p>
               <span style={{ marginBottom: "2%" }}>매칭된 멍친구와</span>
               <span>채팅으로 시간/장소 조율하기</span>
             </CardOne>
           </CardBox>
         </MainBox2>
-      </div>
-      <div style={{ minWidth: "1440px" }}>
-        <Banner style={{ backgroundImage: `url(${bannerHeart})` }} />
-      </div>
-      <MainBox3>
-        <div
+      </DesktopWidth>
+      <DesktopWidth>
+        <Banner
           style={{
-            display: "flex",
-            gap: "6.5em",
-            alignItems: "center",
-            justifyContent: "space-between",
-            margin: "0% 17.36%",
+            backgroundImage: `url(${imgURL}/Main/img-banner-heart.png)`,
           }}
-        >
+        />
+      </DesktopWidth>
+      <MainBox3>
+        <SpaceBetweenBoxThreeAndFive>
           <div>
             <h1>주인아 월!른 산책 나가개!</h1>
             <span>
@@ -125,33 +106,45 @@ function Main(props) {
             <br />
             <span>매일 산책을 나가기 힘들다면, 멍친구에게 부탁해 보세요!</span>
           </div>
-          <img src={bannerWalk} alt="sadDog" style={{ width: "30em" }} />
-        </div>
+          <img
+            src={`${imgURL}/Main/img-dog-sad.png`}
+            alt="sadDog"
+            style={{ width: "30em" }}
+          />
+        </SpaceBetweenBoxThreeAndFive>
       </MainBox3>
-      <MainBox4 style={{ backgroundImage: `url(${together})` }} />
+      <MainBox4
+        style={{
+          backgroundImage: `url(${imgURL}/Main/%E1%84%92%E1%85%A1%E1%86%B7%E1%84%81%E1%85%A6.png)`,
+        }}
+      />
       <MainBox5>
-        <div
-          style={{
-            display: "flex",
-            gap: "6.5em",
-            alignItems: "center",
-            justifyContent: "space-between",
-            margin: "0% 17.36%",
-          }}
-        >
+        <SpaceBetweenBoxThreeAndFive>
           <div>
             <h1>멍친구는</h1>
             <h1>반려견, 반려인들의 행복을</h1>
             <h1>위해 함께합니다.</h1>
           </div>
-          <img src={bannerhands} alt="hands" style={{ width: "29.4em" }} />
-        </div>
+          <img
+            src={`${imgURL}/Main/img-hands.png`}
+            alt="hands"
+            style={{ width: "29.4em" }}
+          />
+        </SpaceBetweenBoxThreeAndFive>
       </MainBox5>
       <UpBox>
         <a target="blank" href="https://forms.gle/Hhwau4RGSA3c1Mt38">
           <Button is_circle type="button">
-            <img src={eventGiftBtn} alt="eventgift" className="origin" />
-            <img src={eventCoffeeBtn} alt="eventcoffee" className="hover" />
+            <img
+              src={`${imgURL}/Main/event_gift.svg`}
+              alt="eventgift"
+              className="origin"
+            />
+            <img
+              src={`${imgURL}/Main/event_coffee.svg`}
+              alt="eventcoffee"
+              className="hover"
+            />
           </Button>
         </a>
         <div>설문조사 이벤트 참여</div>
@@ -378,5 +371,23 @@ const UpBox = styled.div`
     color: white;
     background: rgba(0, 0, 0, 0.75);
   }
+`;
+
+const SpaceBetween = styled.div`
+  margin-bottom: 80px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const SpaceBetweenBoxThreeAndFive = styled.div`
+  display: flex;
+  gap: 6.5em;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0% 17.36%;
+`;
+
+const DesktopWidth = styled.div`
+  min-width: 1440px;
 `;
 export default Main;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import noticeIcon from "../assets/images/Chatting/noticeIcon.svg";
 
 const CautionButton = (props) => {
   const {
@@ -31,7 +30,10 @@ const CautionButton = (props) => {
         target="blank"
       >
         <CautionBtn {...styles} disabled={_disabled} onClick={_onClick}>
-          <img src={noticeIcon} alt="noticeIcon" />
+          <img
+            src={`${process.env.REACT_APP_IMAGE_URL}/Chatting/noticeIcon.svg`}
+            alt=""
+          />
           유의사항
         </CautionBtn>
       </a>

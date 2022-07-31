@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import closebutton from "../assets/images/Modal/closeButton.svg";
 
 const Button = (props) => {
   const {
@@ -112,7 +111,10 @@ const Button = (props) => {
   if (closeBtn) {
     return (
       <XBtn {...styles} disabled={_disabled} onClick={_onClick}>
-        <img src={closebutton} alt="closebutton" />
+        <img
+          src={`${process.env.REACT_APP_IMAGE_URL}/Modal/closeButton.svg`}
+          alt=""
+        />
       </XBtn>
     );
   }

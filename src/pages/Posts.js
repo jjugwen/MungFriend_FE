@@ -7,13 +7,10 @@ import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
 import instance from "../shared/API/instance";
 import Sppiner from "../components/shared/Spinner";
 import styled from "styled-components";
-import Ing from "../assets/images/IsComplete/모집중.svg";
-import Done from "../assets/images/IsComplete/모집종료.svg";
-import WithmeTrue from "../assets/images/Withme/같이해요.svg";
-import WithmeFalse from "../assets/images/Withme/부탁해요.svg";
 import DogPlusModal from "../components/DogPlusModal";
 
 function Posts(props) {
+  const imgURL = props.imgURL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
@@ -95,7 +92,7 @@ function Posts(props) {
   const [mung, setMung] = useState(false);
   return (
     <All>
-      {isLoding && <Sppiner imgURL={props.imgURL} />}
+      {isLoding && <Sppiner imgURL={imgURL} />}
       {isLoding && <SppinerOutsession />}
       {mung && <DogPlusModal modal={mung} setMungModal={setMung} />}
       {mung && (
@@ -138,7 +135,10 @@ function Posts(props) {
                         setMung(!mung);
                       }}
                     >
-                      <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`} alt="" />
+                      <img
+                        src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`}
+                        alt=""
+                      />
                     </AddMungFBtn>
                     <AddText>등록하기</AddText>
                   </RowBox>{" "}
@@ -187,7 +187,10 @@ function Posts(props) {
           {myMung?.length !== 0 ? (
             <Kingimg src={firstMung} alt="firstMung" />
           ) : (
-            <Kingimg src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/addProfile.png`} alt="" />
+            <Kingimg
+              src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/addProfile.png`}
+              alt=""
+            />
           )}
         </div>
         <SSub>
@@ -204,7 +207,10 @@ function Posts(props) {
                 setMung(!mung);
               }}
             >
-              <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`} alt="" />
+              <img
+                src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`}
+                alt=""
+              />
             </AddMungBtn>
           ) : (
             ""
@@ -281,9 +287,15 @@ function Posts(props) {
                       </div>
                     </div>
                     {post.withMe ? (
-                      <img src={WithmeTrue} alt="withmetrue" />
+                      <img
+                        src={`${imgURL}/Withme/%EA%B0%99%EC%9D%B4%ED%95%B4%EC%9A%94.svg`}
+                        alt="withmetrue"
+                      />
                     ) : (
-                      <img src={WithmeFalse} alt="withmefalse" />
+                      <img
+                        src={`${imgURL}/Withme/%EB%B6%80%ED%83%81%ED%95%B4%EC%9A%94.svg`}
+                        alt="withmefalse"
+                      />
                     )}
                   </div>
 
@@ -313,16 +325,22 @@ function Posts(props) {
                       >
                         <img
                           className="applyCountImg"
-                          src="https://ifh.cc/g/dHor7J.png"
+                          src={`${imgURL}/Yebin/peopleIcon.png`}
                           alt=""
                         />
                         신청자 {post.applyCount}
                       </div>
                       <div>
                         {post.isComplete ? (
-                          <img src={Done} alt="" />
+                          <img
+                            src={`${imgURL}/IsComplete/%EB%AA%A8%EC%A7%91%EC%A2%85%EB%A3%8C.svg`}
+                            alt=""
+                          />
                         ) : (
-                          <img src={Ing} alt="" />
+                          <img
+                            src={`${imgURL}/IsComplete/%EB%AA%A8%EC%A7%91%EC%A4%91.svg`}
+                            alt=""
+                          />
                         )}
                       </div>
                     </div>
@@ -362,9 +380,15 @@ function Posts(props) {
                       </div>
                     </div>
                     {post.withMe ? (
-                      <img src={WithmeTrue} alt="withmetrue" />
+                      <img
+                        src={`${imgURL}/Withme/%EA%B0%99%EC%9D%B4%ED%95%B4%EC%9A%94.svg`}
+                        alt="withmetrue"
+                      />
                     ) : (
-                      <img src={WithmeFalse} alt="withmefalse" />
+                      <img
+                        src={`${imgURL}/Withme/%EB%B6%80%ED%83%81%ED%95%B4%EC%9A%94.svg`}
+                        alt="withmefalse"
+                      />
                     )}
                   </div>
 
@@ -394,16 +418,22 @@ function Posts(props) {
                       >
                         <img
                           className="applyCountImg"
-                          src="https://ifh.cc/g/dHor7J.png"
+                          src={`${imgURL}/Yebin/peopleIcon.png`}
                           alt=""
                         />
                         신청자 {post.applyCount}
                       </div>
                       <div>
                         {post.isComplete ? (
-                          <img src={Done} alt="" />
+                          <img
+                            src={`${imgURL}/IsComplete/%EB%AA%A8%EC%A7%91%EC%A2%85%EB%A3%8C.svg`}
+                            alt=""
+                          />
                         ) : (
-                          <img src={Ing} alt="" />
+                          <img
+                            src={`${imgURL}/IsComplete/%EB%AA%A8%EC%A7%91%EC%A4%91.svg`}
+                            alt=""
+                          />
                         )}
                       </div>
                     </div>
@@ -420,7 +450,10 @@ function Posts(props) {
             navigate("/postcreate");
           }}
         >
-          <img src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`} alt="" />
+          <img
+            src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/previewBtn.png`}
+            alt=""
+          />
         </AddPostButton>
         <div>게시글을 작성합니다.</div>
       </UpBox>

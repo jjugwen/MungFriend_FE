@@ -11,8 +11,6 @@ import { deleteChannel } from "../../redux/modules/chat/channelSlice";
 
 // 스타일
 import styled from "styled-components";
-import chatroomOut from "../../assets/images/Chatting/chatroomOut.svg";
-import airplain from "../../assets/images/Chatting/airplain.svg";
 import CautionButton from "../../elements/CautionButton";
 
 const Chatting = (props) => {
@@ -202,7 +200,10 @@ const Chatting = (props) => {
               dispatch(deleteChannel(channel_data[0]));
             }}
           >
-            <img src={chatroomOut} alt="chatroomOut" />
+            <img
+              src={`${process.env.REACT_APP_IMAGE_URL}/Chatting/chatroomOut.svg`}
+              alt="chatroomOut"
+            />
             나가기
           </button>
         </div>
@@ -326,7 +327,10 @@ const Chatting = (props) => {
           />
           <ChatToolDown>
             <button type="button" onClick={messageOnClick}>
-              <img src={airplain} alt="Post" />
+              <img
+                src={`${process.env.REACT_APP_IMAGE_URL}/Chatting/airplain.svg`}
+                alt="Post"
+              />
             </button>
           </ChatToolDown>
         </form>

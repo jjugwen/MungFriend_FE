@@ -3,16 +3,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import dogError from "../../../assets/images/Errors/img-dog-error.png";
 import Button from "../../../elements/Button";
 
-function ErrorNotFound() {
+function ErrorNotFound(props) {
   const navigate = useNavigate();
   return (
     <Wrap>
       <Wrap2>
         <Body>
-          <Img src={dogError} alt="dogError" />
+          <Img
+            src={`${props.imgURL}/Errors/img-dog-error.png`}
+            alt="dogError"
+          />
           <ErrorTextArea>
             <h1>404</h1>
             <h2>페이지를 찾을 수 없습니다.</h2>

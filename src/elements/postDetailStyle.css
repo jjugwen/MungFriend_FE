@@ -135,7 +135,7 @@
 .MungProfileImgCircle {
   width: 48px;
   height: 48px;
-  background-image: url("../assets/images/Header/mymenu.svg");
+  background-image: url("../assets/images/mymenu.svg");
   background-size: cover;
   border-radius: 50%;
 }

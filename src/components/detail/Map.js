@@ -2,12 +2,11 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-// import markerImage from "../../assets/images/Main/MungFootPrint.svg";
-import markerImage from "../../assets/images/Map/Ellipse 41.png";
 
 const Map = () => {
+  const markerImage = `${process.env.REACT_APP_IMAGE_URL}/Map/Ellipse 41.png`;
   const { kakao } = window;
-  // 숙소 정보 가져오기
+  // 위치 정보 가져오기
   const detailList = useSelector((state) => state.postDetailSlice.list);
   const house = detailList?.address;
 
