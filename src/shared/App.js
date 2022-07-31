@@ -37,7 +37,6 @@ import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 
 function App() {
-  const token = sessionStorage.getItem("token");
   const imgURL = process.env.REACT_APP_IMAGE_URL;
   const [headerModal, setHeaderModal] = useState(false);
   // const outSection = useRef();
@@ -58,15 +57,15 @@ function App() {
         )}
 
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Main imgURL={imgURL} />} />
           <Route path="/signup" element={<Signup imgURL={imgURL} />} />
           <Route path="/signupsuccess" element={<SignupSuccess />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login imgURL={imgURL} />} />
           <Route path="/mypage" element={<Mypage />} />
-          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts" element={<Posts imgURL={imgURL} />} />
           <Route path="/postcreate" element={<PostCreate />} />
           <Route path="/postcreate/:id" element={<PostCreate />} />
-          <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/posts/:id" element={<PostDetail imgURL={imgURL} />} />
           <Route path="/oauth" element={<KakaoLoginRedirect />} />
           <Route path="/oauth" element={<GoogleLoginRedirect />} />
           <Route path="/reviews/:id" element={<ReviewDetailModal />} />
@@ -74,12 +73,12 @@ function App() {
           <Route path="/chat/:id" element={<Chat />} />
           {/* 에러페이지 */}
           <Route path="/needlogin" element={<NeedLogin imgURL={imgURL} />} />
-          <Route path="/error" element={<ErrorPage />} /> {/* 500 */}
-          <Route path="/noaccess" element={<ErrorNoAccess />} /> {/* 403 */}
-          <Route path="/preparing" element={<Preparing />} />
-          <Route path="*" element={<ErrorNotFound />} />
+          <Route path="/error" element={<ErrorPage imgURL={imgURL} />} />
+          <Route path="/noaccess" element={<ErrorNoAccess imgURL={imgURL} />} />
+          <Route path="/preparing" element={<Preparing imgURL={imgURL} />} />
+          <Route path="*" element={<ErrorNotFound imgURL={imgURL} />} />
         </Routes>
-        <Footer />
+        <Footer imgURL={imgURL} />
       </ThemeProvider>
     </div>
   );

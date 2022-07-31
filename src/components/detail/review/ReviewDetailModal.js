@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 // style
 import styled from "styled-components";
 import Button from "../../../elements/Button";
-import closeBtn from "../../../assets/images/Mypage/reviewDetailModal_closeBtn.svg";
+
 function ReviewDetailModal(props) {
   const { open, close } = props;
   // const dispatch = useDispatch();
@@ -34,7 +34,10 @@ function ReviewDetailModal(props) {
                   border: "none",
                 }}
               >
-                <img src={closeBtn} alt="closeBtn" />
+                <img
+                  src={`${process.env.REACT_APP_IMAGE_URL}/Modal/closeButton.svg`}
+                  alt=""
+                />
               </button>
             </RevieweDetailTitle>
             <>

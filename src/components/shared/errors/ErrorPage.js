@@ -3,16 +3,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import dogError from "../../../assets/images/Errors/img-dog-error.png";
 import Button from "../../../elements/Button";
 
-function ErrorPage() {
+function ErrorPage(props) {
   const navigate = useNavigate();
   return (
     <Wrap>
       <Wrap2>
         <Body>
-          <Img src={dogError} alt="dogError" />
+          <Img
+            src={`${props.imgURL}/Errors/img-dog-error.png`}
+            alt="dogError"
+          />
           <ErrorTextArea>
             <h1>500</h1>
             <h2>페이지 오류</h2>

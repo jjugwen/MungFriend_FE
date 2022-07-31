@@ -297,9 +297,15 @@ function PostCreate() {
                   <TextBox16>
                     {dog.name}
                     {dog.gender === "여" ? (
-                      <img src="https://ifh.cc/g/1DDK9D.png" alt="" />
+                      <img
+                        src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/girl.png`}
+                        alt=""
+                      />
                     ) : (
-                      <img src="https://ifh.cc/g/WP9vdy.png" alt="" />
+                      <img
+                        src={`${process.env.REACT_APP_IMAGE_URL}/Yebin/boy.png`}
+                        alt=""
+                      />
                     )}
                   </TextBox16>
                 </RowBox>

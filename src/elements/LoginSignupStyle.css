@@ -9,17 +9,6 @@
   margin: auto;
 }
 
-.SignupCircleImg {
-  width: 140px;
-  height: 140px;
-  left: 650px;
-  top: 337px;
-  border-radius: 50%;
-  margin-bottom: 40px;
-  background-image: url("../assets/images/signupsuccess/회원가입완료.jpg");
-  background-size: cover;
-}
-
 .SignupSuccessText1 {
   font-family: "Pretendard";
   font-style: normal;
@@ -80,7 +69,7 @@
   margin-bottom: 1%;
 }
 :checked {
-  background-image: url("../assets/images/Signup/checkbox_icon.svg");
+  background-image: url("../assets/images/checkbox_icon.svg");
   background-size: 135%;
   background-repeat: no-repeat;
   background-position: center;

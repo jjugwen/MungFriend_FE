@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../elements/LoginSignupStyle.css";
-import joinCompleteImg from "../assets/images/Main/step1.svg";
 import Button from "../elements/Button";
 
 function SignupSuccess() {
@@ -10,7 +9,7 @@ function SignupSuccess() {
     <>
       <div className="SignupSuccessOutterBox">
         <img
-          src={joinCompleteImg}
+          src={`${process.env.REACT_APP_IMAGE_URL}/Main/step1.svg`}
           alt="SignupSuccessImg"
           style={{ width: "133.82px" }}
         />
