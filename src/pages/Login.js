@@ -2,15 +2,10 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { loginDB } from "../shared/API/loginApi";
-
-//css
 import styled from "styled-components";
-import kakaoIcon from "../assets/images/login/kakao_icon.svg";
-import googleIcon from "../assets/images/login/google_icon.svg";
-import Logo from "../assets/images/login/mungfreindLogo.svg";
-import MungImg from "../assets/images/login/login_Mung_img.svg";
 
-function Login() {
+function Login(props) {
+  const imgURL = props.imgURL;
   const dispatch = useDispatch();
   const username = useRef(null);
   const password = useRef(null);
@@ -45,7 +40,7 @@ function Login() {
   return (
     <>
       <LoginOutterBox>
-        <LogoImg src={Logo} alt="logo" />
+        <LogoImg src={`${imgURL}/login/mungfreindLogo.svg`} alt="logo" />
         <div
           style={{
             display: "flex",
@@ -82,18 +77,18 @@ function Login() {
         </div>
         <a href={kakaoURL}>
           <KakaoLoginBtn>
-            <img src={kakaoIcon} alt="kakaoIcon" />
+            <img src={`${imgURL}/login/kakao_icon.svg`} alt="kakaoIcon" />
             <span>카카오 아이디로 로그인 하기</span>
           </KakaoLoginBtn>
         </a>
 
         <a href={googleURL}>
           <GoogleLoginBtn>
-            <img src={googleIcon} alt="googleIcon" />
+            <img src={`${imgURL}/login/google_icon.svg`} alt="googleIcon" />
             <span>구글 아이디로 로그인 하기</span>
           </GoogleLoginBtn>
         </a>
-        <Img src={MungImg} alt="MungImg" />
+        <Img src={`${imgURL}/login/login_Mung_img.svg`} alt="MungImg" />
       </LoginOutterBox>
     </>
   );

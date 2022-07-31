@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// image
-import chatDog from "../../assets/images/Chatting/img-dog-chat.png";
 import { ChannelTitle, CautionButton } from "./Chatting";
+
 const NoRoom = (props) => {
   return (
     <Container>
@@ -22,7 +21,7 @@ const NoRoom = (props) => {
       {/* noRoom view */}
       <NoroomBox>
         <img
-          src={chatDog}
+          src={`${process.env.REACT_APP_IMAGE_URL}/Chatting/img-dog-chat.png`}
           width="16.6%" //220px
           alt="chatDog"
         />

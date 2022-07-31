@@ -13,19 +13,15 @@ import Map from "../components/detail/Map";
 import styled from "styled-components";
 import "../elements/postDetailStyle.css";
 import Button from "../elements/Button";
-import applyIng from "../assets/images/IsComplete/모집중.svg";
-import applyEnd from "../assets/images/IsComplete/모집종료.svg";
 //미들웨어
 import { actionCreators as postActions } from "../redux/modules/postDetailSlice";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
 import { actionCreators as applyActions } from "../redux/modules/applySlice";
-import WithmeTrue from "../assets/images/Withme/같이해요.svg";
-import WithmeFalse from "../assets/images/Withme/부탁해요.svg";
 
-function PostDetail() {
+function PostDetail(props) {
   const params = useParams();
   const postId = Number(params.id); //숫자로 변환해야 읽힘.
-  // console.log(postId);
+  const imgURL = props.imgURL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const detailList = useSelector((state) => state.postDetailSlice.list);
@@ -76,14 +72,26 @@ function PostDetail() {
         <div className="DetailTitleBox">
           <div style={{ display: "flex", gap: "4px" }}>
             {detailList?.isComplete ? (
-              <img src={applyEnd} alt="applyEnd" />
+              <img
+                src={`${imgURL}/IsComplete/%EB%AA%A8%EC%A7%91%EC%A2%85%EB%A3%8C.svg`}
+                alt="applyEnd"
+              />
             ) : (
-              <img src={applyIng} alt="applyIng" />
+              <img
+                src={`${imgURL}/IsComplete/%EB%AA%A8%EC%A7%91%EC%A4%91.svg`}
+                alt="applyIng"
+              />
             )}
             {detailList.withMe ? (
-              <img src={WithmeTrue} alt="withmetrue" />
+              <img
+                src={`${imgURL}/Withme/%EA%B0%99%EC%9D%B4%ED%95%B4%EC%9A%94.svg`}
+                alt="withmetrue"
+              />
             ) : (
-              <img src={WithmeFalse} alt="withmefalse" />
+              <img
+                src={`${imgURL}/Withme/%EB%B6%80%ED%83%81%ED%95%B4%EC%9A%94.svg`}
+                alt="withmefalse"
+              />
             )}
           </div>
           <h1 className="DetailTitle">{detailList?.title}</h1>

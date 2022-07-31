@@ -34,7 +34,7 @@ instance.interceptors.response.use(
   function (error) {
     // 응답 오류가 있는 작업 수행
     if (error.response.status === 400) {
-      // console.log(error.response.data);
+      // console.error(error.response.data);
       window.alert(error.response.data.errorMessage);
     } else if (error.response.status === 401) {
       //악시오스를 보낸다
@@ -58,7 +58,7 @@ instance.interceptors.response.use(
           window.location.reload();
         })
         .catch((error) => {
-          // console.log(error);
+          // console.error(error);
           sessionStorage.clear();
           window.location.replace("/needlogin");
         });
