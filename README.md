@@ -184,7 +184,7 @@ README
         
 
 # :tv: 데모영상
-<a href="https://www.youtube.com/embed/1ap-UItobNo"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=YouTube&logoColor=white"/></a>
+<a target="_blank" href="https://www.youtube.com/embed/1ap-UItobNo"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=YouTube&logoColor=white"/></a>
 
 [![미리보기](https://i.ytimg.com/vi/1ap-UItobNo/maxresdefault.jpg)](https://www.youtube.com/embed/1ap-UItobNo)
 
