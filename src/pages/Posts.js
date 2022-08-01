@@ -20,7 +20,7 @@ function Posts(props) {
       dispatch(loadMyMungAX());
       dispatch(userActions.myinfoDB());
     }
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const myMung = useSelector((state) => state.mungSlice.mung);
   // console.log(myMung);
@@ -645,7 +645,7 @@ const PostBox = styled.div`
   border-radius: 12px;
   cursor: pointer;
   :hover {
-    border: 2px solid #FA5A30;
+    border: 2px solid #fa5a30;
     box-shadow: 4px 4px 20px rgba(250, 90, 48, 0.2);
     transform: translateY(-10px);
   }

@@ -15,13 +15,11 @@ function HeaderModal(props) {
 
   const Logout = () => {
     sessionStorage.clear();
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
+    navigate("/");
   };
   useEffect(() => {
     dispatch(userActions.myinfoDB());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
