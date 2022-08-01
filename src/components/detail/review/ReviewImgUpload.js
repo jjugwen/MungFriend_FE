@@ -40,14 +40,12 @@ function ReviewImgUpload() {
   }, [dispatch, image]);
 
   return (
-    <div className="addPicture" style={{ display: "flex", width: "560px" }}>
-      <label
+    <AddPicture>
+      <ImgLabel
         htmlFor="input-file"
         onChange={uploadImage}
         style={{
           backgroundImage: `url(${process.env.REACT_APP_IMAGE_URL}/Modal/imgUpload.svg)`,
-          width: "104px",
-          height: "40px",
         }}
       >
         <input
@@ -63,7 +61,7 @@ function ReviewImgUpload() {
             }
           }}
         />
-      </label>
+      </ImgLabel>
 
       {/* // 저장해둔 이미지들을 순회하면서 화면에 이미지 출력 */}
       <div style={{ display: "flex" }}>
@@ -88,11 +86,29 @@ function ReviewImgUpload() {
             </div>
           ))}
       </div>
-    </div>
+    </AddPicture>
   );
 }
 const Img = styled.img`
   height: 40px;
   width: 50px;
+  cursor: pointer;
+`;
+
+const AddPicture = styled.div`
+  display: flex;
+  width: 570px;
+  @media ${({ theme }) => theme.device.tabletV} {
+    max-width: 420px;
+  }
+  @media ${({ theme }) => theme.device.mobile} {
+    max-width: 300px;
+  }
+`;
+
+const ImgLabel = styled.label`
+  width: 104px;
+  height: 40px;
+  cursor: pointer;
 `;
 export default ReviewImgUpload;

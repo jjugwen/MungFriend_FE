@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 //컴포넌트
 import ApplyComment from "../components/detail/ApplyComment";
+import Map from "../components/detail/Map";
+import MatchingProfile from "../components/detail/MatchingProfile";
+import { betweenTime } from "../components/detail/TimeCalculator";
+import UserModal from "../components/detail/userModal/UserModal";
 import WithDogs from "../components/detail/withdog/WithDogs";
 import WriteModal from "../components/detail/WriteModal";
-import MatchingProfile from "../components/detail/MatchingProfile";
-import UserModal from "../components/detail/userModal/UserModal";
-import { betweenTime } from "../components/detail/TimeCalculator";
-import Map from "../components/detail/Map";
 //CSS
 import styled from "styled-components";
-import "../elements/postDetailStyle.css";
 import Button from "../elements/Button";
+import "../elements/postDetailStyle.css";
 //미들웨어
+import { actionCreators as applyActions } from "../redux/modules/applySlice";
 import { actionCreators as postActions } from "../redux/modules/postDetailSlice";
 import { actionCreators as userActions } from "../redux/modules/userInfoSlice";
-import { actionCreators as applyActions } from "../redux/modules/applySlice";
 
 function PostDetail(props) {
   const params = useParams();
@@ -62,9 +62,6 @@ function PostDetail(props) {
   useEffect(() => {
     dispatch(userActions.myinfoDB());
   }, [dispatch]);
-
-  //모달창 밖 영역 클릭 시 닫기
-  const outSection = useRef();
 
   return (
     <>
