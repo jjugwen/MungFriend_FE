@@ -7,6 +7,7 @@ function Header(props) {
   const token = sessionStorage.getItem("token");
   const imgURL = props.imgURL;
 
+
   // const [opened, setOpened] = useState(false);
   // const modalClose = useCallback(() => {
   //   setOpened(!opened);
@@ -21,9 +22,45 @@ function Header(props) {
   const chatRef = useRef();
   const noticeRef = useRef();
 
+  // console.log(window.location.pathname);
+  
+const id = window.location.pathname;
+  React.useEffect(()=>{
+    if (id === "/") {
+      mainRef.current.style = `
+        color : #FA5A30;
+        font-weight: 600;`;
+      postsRef.current.style = "";
+      communityRef.current.style = "";
+    } else if (id === "/posts") {
+      mainRef.current.style = "";
+      postsRef.current.style = `
+        color : #FA5A30;
+        font-weight: 600;`;
+      communityRef.current.style = "";
+    } else if (id === "/preparing") {
+      mainRef.current.style = "";
+      postsRef.current.style = "";
+      communityRef.current.style = `
+        color : #FA5A30;
+        font-weight: 600;`;
+    } else if (id === "/login" || id === "/signup" || id === "/node_moduleschat") {
+      mainRef.current.style = `
+        color : black;
+        font-weight: 500;`;
+      postsRef.current.style = "";
+      communityRef.current.style = "";
+    } else {
+      mainRef.current.style = `
+        color : black;
+        font-weight: 500;`;
+      postsRef.current.style = "";
+      communityRef.current.style = "";
+    }
+  },[id])
+
   const GetClick = (e) => {
-    // console.log(e.target.id);
-    const id = e.target.id;
+    const id= e.target.id
     navigate(`${id}`);
     if (id === "/") {
       mainRef.current.style = `
@@ -43,7 +80,7 @@ function Header(props) {
       communityRef.current.style = `
         color : #FA5A30;
         font-weight: 600;`;
-    } else if (id === "login" || id === "signup" || id === "chat") {
+    } else if (id === "login" || id === "signup" || id === "node_moduleschat") {
       mainRef.current.style = `
         color : black;
         font-weight: 500;`;
