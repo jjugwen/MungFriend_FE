@@ -8,7 +8,7 @@ export const getDetailDB = (id) => {
       const response = await instance.get(`/api/posts/${id}`);
       dispatch(loadPostDetail(response.data));
     } catch (error) {
-      // console.log(error);
+      // console.error(error);
     }
   };
 };
@@ -19,7 +19,6 @@ export const deleteDetailDB = (id) => {
       const response = await instance.delete(`/api/posts/${id}`);
       if (response.data.status === "true") {
         // console.log(response);
-        dispatch(deletePostDetail(response.data));
         setTimeout(() => {
           window.location.replace("/posts");
         }, 100);
@@ -27,7 +26,7 @@ export const deleteDetailDB = (id) => {
         // console.log(response.data.status, response.data.message);
       }
     } catch (error) {
-      // console.log(error);
+      // console.error(error);
     }
   };
 };
@@ -40,9 +39,6 @@ export const postDetailSlice = createSlice({
   },
   reducers: {
     loadPostDetail(state, action) {
-      state.list = action.payload;
-    },
-    deletePostDetail(state, action) {
       state.list = action.payload;
     },
   },
