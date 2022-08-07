@@ -133,7 +133,7 @@ function Main(props) {
         </SpaceBetweenBoxThreeAndFive>
       </MainBox5>
       <UpBox>
-        <a target="blank" href="https://forms.gle/Hhwau4RGSA3c1Mt38">
+        <a target="blank" href="https://www.instagram.com/mung_friend_official">
           <Button is_circle type="button">
             <img
               src={`${imgURL}/Main/event_gift.svg`}
@@ -147,7 +147,7 @@ function Main(props) {
             />
           </Button>
         </a>
-        <div>설문조사 이벤트 참여</div>
+        <div>설문조사 당첨자 발표</div>
       </UpBox>
     </div>
   );
