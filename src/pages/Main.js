@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../elements/Button";
+// import Button from "../elements/Button";
 import Textrotate from "../elements/textrotate";
 
 function Main(props) {
@@ -132,7 +132,8 @@ function Main(props) {
           />
         </SpaceBetweenBoxThreeAndFive>
       </MainBox5>
-      <UpBox>
+      {/* 이벤트 플로팅 버튼 */}
+      {/* <UpBox>
         <a target="blank" href="https://www.instagram.com/mung_friend_official">
           <Button is_circle type="button">
             <img
@@ -148,7 +149,7 @@ function Main(props) {
           </Button>
         </a>
         <div>설문조사 당첨자 발표</div>
-      </UpBox>
+      </UpBox> */}
     </div>
   );
 }
@@ -342,36 +343,36 @@ const MainBox5 = styled.div`
   }
 `;
 
-const UpBox = styled.div`
-  position: fixed;
-  bottom: 40%;
-  right: 8%;
+// const UpBox = styled.div`
+//   position: fixed;
+//   bottom: 40%;
+//   right: 8%;
 
-  :hover {
-    & div {
-      opacity: 100;
-      transition: 0.5s;
-    }
-  }
+//   :hover {
+//     & div {
+//       opacity: 100;
+//       transition: 0.5s;
+//     }
+//   }
 
-  & div {
-    :hover {
-      opacity: 0;
-    }
-    opacity: 0;
-    position: fixed;
-    right: 9%;
-    bottom: 33%;
-    height: 50px;
-    width: 170px;
-    border-radius: 12px;
-    text-align: center;
-    box-sizing: border-box;
-    padding: 15px;
-    color: white;
-    background: rgba(0, 0, 0, 0.75);
-  }
-`;
+//   & div {
+//     :hover {
+//       opacity: 0;
+//     }
+//     opacity: 0;
+//     position: fixed;
+//     right: 9%;
+//     bottom: 33%;
+//     height: 50px;
+//     width: 170px;
+//     border-radius: 12px;
+//     text-align: center;
+//     box-sizing: border-box;
+//     padding: 15px;
+//     color: white;
+//     background: rgba(0, 0, 0, 0.75);
+//   }
+// `;
 
 const SpaceBetween = styled.div`
   margin-bottom: 80px;

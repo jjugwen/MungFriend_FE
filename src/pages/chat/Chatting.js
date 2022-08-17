@@ -15,7 +15,6 @@ import CautionButton from "../../elements/CautionButton";
 
 const Chatting = (props) => {
   const chat_data = useSelector((state) => state.chat.list);
-
   // console.log(`chat_data: ${chat_data[props.id]}`);
   const channel_data = useSelector((state) =>
     state.channel.list.filter((v) => v.id === Number(props.id))
@@ -31,16 +30,12 @@ const Chatting = (props) => {
   const ws = Stomp.over(sock);
   ws.debug = () => {}; //콘솔로그 기록 안 보이게
 
-  // 토큰
+  // 토큰, sender, MemberId   정보 가져오기
   const token = sessionStorage.getItem("token");
-
-  // sender 정보 가져오기
   const sender = sessionStorage.getItem("nickname");
+  const memberId = sessionStorage.getItem("memberId");
   // console.log(`token: ${token}`);
   // console.log(`sender: ${sender}`);
-
-  // MemberId 정보 가져오기. 편도랑 2022-07-07
-  const memberId = sessionStorage.getItem("memberId");
   // console.log("memberId" + memberId);
 
   // 렌더링 될 때마다 연결, 구독 다른 방으로 옮길 때 연결, 구독 해제
@@ -49,6 +44,7 @@ const Chatting = (props) => {
     return () => {
       wsDisConnectUnsubscribe();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.id]); //channelId
 
   // 웹소켓 연결, 구독
@@ -110,6 +106,7 @@ const Chatting = (props) => {
   }
 
   // 메시지 보내기
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function sendMessage() {
     try {
       // token이 없으면 로그인 페이지로 이동
@@ -122,13 +119,11 @@ const Chatting = (props) => {
         type: "TALK",
         roomId: props.id,
         sender: sender,
-        memberId: memberId, // 2022-07-07 추가 편도랑.
+        memberId: memberId,
         // message: message_ref,
         message: message_ref.current.value,
       };
-
       // console.log("send할 데이터" + JSON.stringify(data));
-
       // console.log("chat_data"+JSON.stringify(chat_data));
       // 빈문자열이면 리턴
       if (message_ref === "") {
@@ -142,7 +137,6 @@ const Chatting = (props) => {
           JSON.stringify(data)
         );
         // console.log(ws.ws.readyState);
-
         // 메세지 전송 후 다시 메세지 목록 조회하는 요청? 필요 없음!! 지우니까 401 에러 사라짐
         // dispatch(postChat(data.roomId, data.message));
       });
@@ -172,7 +166,7 @@ const Chatting = (props) => {
     scrollToBottom();
   }, [sendMessage]);
 
-  //엔터로 메시지 보내기 (새로고침되는 문제;)
+  //엔터로 메시지 보내기
   const onKeyPress = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
