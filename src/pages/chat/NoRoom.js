@@ -40,7 +40,7 @@ const Container = styled.div`
   z-index: 6;
   background-color: white;
   text-align: center;
-  min-width: 1100px;
+  /* min-width: 1100px; */
   /* width: 1240px; */
   height: 600px;
   width: 100%;
@@ -67,7 +67,7 @@ const NoroomBox = styled.div`
   padding: 18.8% 0%;
   z-index: 7;
   width: 100%;
-  min-width: 1166px;
+  /* min-width: 1166px; */
   background-color: white;
 `;
 

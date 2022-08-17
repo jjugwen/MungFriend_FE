@@ -97,7 +97,7 @@ const Container = styled.div`
   position: relative;
   z-index: 2;
   height: 610px;
-  width: 99%;
+  /* width: 99%; */
 `;
 
 const LineupLeftAndRightContainer = styled.div`
@@ -110,8 +110,12 @@ const LineupLeftAndRightContainer = styled.div`
 const LeftContainer = styled.div`
   position: relative;
   background: #f2f3f6;
-  min-width: 274px; //19.05%
+  min-width: 19.05%; //19.05%
   overflow-y: scroll;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 
   /* 스크롤바 설정*/
   ::-webkit-scrollbar {
@@ -143,7 +147,8 @@ const ChannelList = styled.div`
 
 const ChannelListBox = styled.div`
   width: 100%;
-  min-width: 205px;
+  /* min-width: 205px; */
+  min-width: 80%;
   max-width: 15%;
   margin: 4% 8%;
   height: 50px;
@@ -184,7 +189,7 @@ const ChatList = styled.div`
   bottom: 0;
   width: 100%;
   box-sizing: border-box;
-  min-width: 1166px;
+  /* min-width: 1166px; */
   height: 600px;
 
   & p {

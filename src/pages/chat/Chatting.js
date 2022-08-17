@@ -345,7 +345,7 @@ const ChatListContainer = styled.div`
   position: relative;
   z-index: 6;
   background-color: white;
-  width: 100%;
+  /* width: 100%; */
   max-height: 105%;
   overflow-y: auto !important;
   overflow-x: hidden;
@@ -378,7 +378,7 @@ const ChatList = styled.div`
 `;
 
 const ChatContent = styled.div`
-  width: 100%;
+  /* width: 100%; */
   background-color: #ffffff;
   flex-direction: column;
   margin: 5px 0;
@@ -401,9 +401,9 @@ const ChatPost = styled.div`
   box-shadow: 2px 2px 20px rgba(184, 187, 192, 0.24);
   display: grid;
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
   box-sizing: border-box;
-  min-width: 1140px;
+  /* min-width: 1140px; */
   & form {
     margin: 1% 0;
     display: flex;
@@ -413,7 +413,7 @@ const ChatPost = styled.div`
   & input {
     margin: 0 10px;
     width: 100%;
-    max-width: 660%;
+    /* max-width: 660%; */
     height: 40px;
     border: 1px solid #e3e5e9;
     border-radius: 4px;
@@ -443,7 +443,7 @@ const ChannelTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 99%;
+  /* width: 99%; */
   height: 100px;
   border-top: 1px solid #e3e5e9;
   border-bottom: 1px solid #e3e5e9;
@@ -454,6 +454,7 @@ const ChannelTitle = styled.div`
     font-size: 20px;
     line-height: 100%;
     margin: 0 4%;
+    min-width: 20%;
   }
   & button {
     width: 104px;
