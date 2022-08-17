@@ -23,7 +23,7 @@ const Chat = (props) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const chatroom = useRef("");
-  // state에 axiso get한 데이터 불러오기
+  // state에 axios get한 데이터 불러오기
   const channel_data = useSelector((state) => state.channel.list);
 
   // 첫 렌더링

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ChannelTitle, CautionButton } from "./Chatting";
 
-const NoRoom = (props) => {
+const NoRoom = () => {
   return (
     <Container>
       {/* 우측 상단 화면 */}
