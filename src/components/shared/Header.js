@@ -1,7 +1,8 @@
-import React, { Fragment, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import burgerMenu from "../../assets/images/burgerMenu.svg";
+import HeaderNavBar from "./HeaderNavBar";
 
 function Header(props) {
   const navigate = useNavigate();
@@ -98,6 +99,8 @@ function Header(props) {
       communityRef.current.style = "";
     }
   };
+  //모바일버전 메뉴바
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
     <>
@@ -185,11 +188,15 @@ function Header(props) {
               </AfterLogin>
             )}
           </RightBox>
+          {/* 모바일버전 헤더 메뉴 */}
+          {toggleMenu && (
+            <HeaderNavBar setToggleMenu={setToggleMenu} modal={toggleMenu} />
+          )}
           <Burger
             src={burgerMenu}
             alt=""
             onClick={() => {
-              window.alert("준비중");
+              setToggleMenu(!toggleMenu);
             }}
           />
         </HeaderBox>
@@ -214,11 +221,19 @@ const HeaderBox = styled.div`
   /* min-width: 940px; */
   height: 72px;
   margin: 0% 17.36%;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 0% 5%;
+  }
 `;
 
 const HeaderLogo = styled.div`
   min-width: 23%;
   cursor: pointer;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 25%;
+  }
 `;
 
 const Burger = styled.img`

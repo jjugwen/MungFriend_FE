@@ -90,12 +90,19 @@ const FooterBox = styled.div`
   height: 170px;
   margin: 0% 17.36%;
   align-items: center;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    margin: 0% 5%;
+  }
 `;
 
 const FooterLogo = styled.img`
   position: relative;
   width: 134px;
   height: 48px;
+  @media ${({ theme }) => theme.device.mobile} {
+    width: 25%;
+  }
 `;
 
 const copyright = {
@@ -120,5 +127,9 @@ const SocialLine = styled.div`
   justify-content: flex-end;
   margin-top: 3%;
   gap: 2%;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 export default Footer;

@@ -41,12 +41,12 @@ const Wrap = styled.div`
   /* width: 100%; */
   margin: auto;
   text-align: center;
-  min-width: 1440px;
+  /* min-width: 1440px; */
 `;
 
 const Img = styled.img`
-  width: 15.3%;
-  /* width: 220px; */
+  /* width: 15.3%; */
+  width: 220px;
 `;
 
 const ErrorTextArea = styled.div`

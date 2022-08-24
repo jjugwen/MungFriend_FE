@@ -15,7 +15,7 @@ function UserModal(props) {
         <UserModalStyle>
           <ModalTitle style={{ textAlign: "center" }}>{children}</ModalTitle>
           <Button
-            top="2.25em"
+            top="8%"
             closeBtn
             _onClick={() => {
               close();
@@ -210,11 +210,13 @@ const UserModalStyle = styled.div`
       max-width: 230px;
       padding: 16px;
     }
+
     .userIntroduce {
       width: 100%;
       max-width: 230px;
       padding: 16px;
     }
+
     .reviewList {
       display: none;
     }

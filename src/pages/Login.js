@@ -97,7 +97,7 @@ const LoginOutterBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 1440px;
+  /* min-width: 1440px; */
   height: fit-content;
   margin-bottom: -120px;
 
@@ -193,6 +193,9 @@ const GoogleLoginBtn = styled.button`
     line-height: 24px;
     text-align: center;
   }
+  @media ${({ theme }) => theme.device.mobile} {
+    margin-bottom: 65%;
+  }
 `;
 
 const Img = styled.img`
@@ -202,6 +205,10 @@ const Img = styled.img`
   z-index: -1;
   bottom: 120px;
   right: -30%;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 export default Login;
