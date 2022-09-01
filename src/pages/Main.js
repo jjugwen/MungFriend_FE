@@ -169,6 +169,11 @@ const MainBox1 = styled.div`
   /* margin-bottom: 115px; */
   margin-bottom: 7.5%;
 
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+    background-position: bottom;
+  }
+
   h1 {
     font-style: normal;
     font-weight: 600;
@@ -190,6 +195,7 @@ const MainBox2 = styled.div`
   min-width: 940px;
   box-sizing: border-box;
   background-position: center;
+
   h1 {
     font-style: normal;
     font-weight: 600;
@@ -204,6 +210,19 @@ const MainBox2 = styled.div`
     font-size: 20px;
     line-height: 100%;
     color: #4e4e56;
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+    h1 {
+      font-size: 24px;
+      line-height: 32px;
+    }
+    span {
+      text-align: left;
+      font-size: 16px;
+      line-height: 22px;
+    }
   }
 `;
 const TextCircle = styled.div`
@@ -231,6 +250,16 @@ const TextCircle = styled.div`
       }
       to {
         transform: rotate(360deg);
+      }
+    }
+  }
+
+  @media ${({ theme }) => theme.device.mobile} {
+    svg {
+      height: 120px;
+      text {
+        font-size: 25px;
+        letter-spacing: 17px;
       }
     }
   }
@@ -284,6 +313,10 @@ const Banner = styled.div`
   margin: 7.5% 0;
   min-width: 940px;
   background-position: center;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: none;
+  }
 `;
 
 const MainBox3 = styled.div`
@@ -297,6 +330,11 @@ const MainBox3 = styled.div`
   background-color: #f2f3f6;
   box-sizing: border-box;
   display: block;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+    background-position: bottom;
+  }
 
   h1 {
     font-style: normal;
@@ -321,6 +359,10 @@ const MainBox4 = styled.div`
   background-repeat: no-repeat;
   margin: 7.5% 0;
   min-width: 1440px;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+  }
 `;
 
 const MainBox5 = styled.div`
@@ -332,6 +374,11 @@ const MainBox5 = styled.div`
   min-width: 1440px;
   box-sizing: border-box;
   display: block;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+    background-position: bottom;
+  }
 
   h1 {
     font-style: normal;
@@ -386,9 +433,16 @@ const SpaceBetweenBoxThreeAndFive = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0% 17.36%;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    display: block;
+  }
 `;
 
 const DesktopWidth = styled.div`
   min-width: 1440px;
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+  }
 `;
 export default Main;

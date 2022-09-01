@@ -384,16 +384,9 @@ function Signup(props) {
               value={address}
               required
             />
-            <div
+            <PostCodeBtn
               onClick={() => {
                 modalClose();
-              }}
-              style={{
-                border: "2px solid #EEEEEE",
-                width: "128px",
-                height: "52px",
-                borderRadius: "8px",
-                backgroundColor: "#4E4E56",
               }}
             >
               <p
@@ -405,7 +398,7 @@ function Signup(props) {
               >
                 우편번호 찾기
               </p>
-            </div>
+            </PostCodeBtn>
           </div>
           {opened ? (
             <div>
@@ -508,6 +501,8 @@ const SignupText = styled.label`
 `;
 
 const SignupInputBox = styled.input`
+  /* width: 90%; */
+  /* min-width: 400px; */
   width: 400px;
   height: 48px;
   background: #ffffff;
@@ -516,6 +511,10 @@ const SignupInputBox = styled.input`
   margin: 6px 0px;
   padding-left: 3%;
   box-sizing: border-box;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    /* min-width: 335px; */
+  }
 `;
 
 const Check = styled.div`
@@ -541,5 +540,13 @@ const postCodeStyle = {
   position: "absolute",
   zIndex: "3",
 };
+
+const PostCodeBtn = styled.div`
+  border: 2px solid #eeeeee;
+  width: 128px;
+  height: 52px;
+  border-radius: 8px;
+  background-color: #4e4e56;
+`;
 
 export default Signup;

@@ -111,13 +111,18 @@ const LogoImg = styled.img`
 `;
 
 const LoginInputBox = styled.input`
-  width: 400px;
+  width: 90%;
+  min-width: 400px;
   height: 52px;
   background: #ffffff;
   border: 2px solid #eeeeee;
   border-radius: 8px;
   margin: 6px 0px;
   padding-left: 1%;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+  }
 `;
 
 const LoginButton = styled.button`
@@ -156,7 +161,8 @@ const RequestSignupText = styled.div`
 `;
 
 const KakaoLoginBtn = styled.button`
-  width: 400px;
+  width: 90%;
+  min-width: 400px;
   height: 60px;
   margin: 6px;
   background: #ffe600;
@@ -167,6 +173,10 @@ const KakaoLoginBtn = styled.button`
   justify-content: center;
   gap: 1%;
 
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+  }
+
   span {
     font-weight: 500;
     font-size: 20px;
@@ -176,7 +186,8 @@ const KakaoLoginBtn = styled.button`
 `;
 
 const GoogleLoginBtn = styled.button`
-  width: 400px;
+  width: 90%;
+  min-width: 400px;
   height: 60px;
   margin: 6px;
   background: #ffffff;
@@ -186,6 +197,10 @@ const GoogleLoginBtn = styled.button`
   align-items: center;
   justify-content: center;
   gap: 1%;
+
+  @media ${({ theme }) => theme.device.mobile} {
+    min-width: 335px;
+  }
 
   span {
     font-weight: 500;
