@@ -13,8 +13,15 @@ function DogProfileViewModal(props) {
   //   console.log(mung[index]);
 
   return (
-    <div className={open ? "openModalcss" : null}>
+    <div>
       {open ? (
+        <>
+          <div
+            className={open ? "openModalcss" : null}
+            onClick={() => {
+              close();
+            }}
+          />
         <Container>
           <p className="font-24">
             <b>멍프로필</b>
@@ -87,10 +94,12 @@ function DogProfileViewModal(props) {
             </Button>
           </div>
         </Container>
+        </>
       ) : null}
     </div>
   );
 }
+
 const Container = styled.div`
   box-sizing: border-box;
   padding: 20px;

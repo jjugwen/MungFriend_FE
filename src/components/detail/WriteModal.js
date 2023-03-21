@@ -44,96 +44,104 @@ function WriteModal(props) {
   };
 
   return (
-    <div className={open ? "openModalcss" : null}>
+    <div>
       {open ? (
-        <Reviewmodal>
-          <ModalTitle>{children}</ModalTitle>
-          <Button
-            top="16px"
-            closeBtn
-            _onClick={() => {
+        <>
+          <div
+            className={open ? "openModalcss" : null}
+            onClick={() => {
               close();
             }}
           />
-          <hr
-            style={{
-              width: "90%",
-              backgroundColor: "black",
-              border: "none",
-              height: "3px",
-            }}
-          />
-          {children === "신청하기" ? (
-            <>
-              <CautionButton margin="0 0 0 -225%" />
-              <HrSecond />
-            </>
-          ) : null}
-          {children === "후기작성" ? (
-            <>
-              <ReviewImgUpload />
-              <Hr />
-            </>
-          ) : null}
-          <ModalInput
-            type="text"
-            placeholder="내용을 입력해주세요."
-            ref={applyText}
-            onChange={onChangeText}
-            maxLength="255" //255자 제한
-          />
-          <span>{text.length}/255</span>
-          <Hr />
-          <div style={{ display: "flex", gap: "12px", padding: "40px" }}>
+          <Reviewmodal>
+            <ModalTitle>{children}</ModalTitle>
             <Button
-              white_large
-              className="close"
-              _onClick={(e) => {
-                e.preventDefault();
-                close(e);
+              top="16px"
+              closeBtn
+              _onClick={() => {
+                close();
               }}
-            >
-              취소
-            </Button>
-            <Button
-              orange_large
-              _onClick={(e) => {
-                // console.log(applyText.current.value);
-                if (children === "신청하기") {
-                  if (applyText.current.value === "") {
-                    window.alert("신청 글을 간단히 작성해 주세요.");
-                  } else {
-                    dispatch(
-                      applyActions.createApplyDB({
-                        comment: applyText.current.value,
-                        id: postId,
-                      })
-                    );
-                    setTimeout(() => {
+            />
+            <hr
+              style={{
+                width: "90%",
+                backgroundColor: "black",
+                border: "none",
+                height: "3px",
+              }}
+            />
+            {children === "신청하기" ? (
+              <>
+                <CautionButton margin="0 0 0 -225%" />
+                <HrSecond />
+              </>
+            ) : null}
+            {children === "후기작성" ? (
+              <>
+                <ReviewImgUpload />
+                <Hr />
+              </>
+            ) : null}
+            <ModalInput
+              type="text"
+              placeholder="내용을 입력해주세요."
+              ref={applyText}
+              onChange={onChangeText}
+              maxLength="255" //255자 제한
+            />
+            <span>{text.length}/255</span>
+            <Hr />
+            <div style={{ display: "flex", gap: "12px", padding: "40px" }}>
+              <Button
+                white_large
+                className="close"
+                _onClick={(e) => {
+                  e.preventDefault();
+                  close(e);
+                }}
+              >
+                취소
+              </Button>
+              <Button
+                orange_large
+                _onClick={(e) => {
+                  // console.log(applyText.current.value);
+                  if (children === "신청하기") {
+                    if (applyText.current.value === "") {
+                      window.alert("신청 글을 간단히 작성해 주세요.");
+                    } else {
+                      dispatch(
+                        applyActions.createApplyDB({
+                          comment: applyText.current.value,
+                          id: postId,
+                        })
+                      );
                       setTimeout(() => {
-                        window.location.reload();
-                      }, 200);
-                      close();
-                    }, 400);
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 200);
+                        close();
+                      }, 400);
+                    }
                   }
-                }
-                if (children === "후기작성") {
-                  if (applyText.current.value === "") {
-                    window.alert("후기를 작성해 주세요.");
-                  } else {
-                    addReview();
-                    setTimeout(() => {
-                      window.alert("후기 작성이 완료되었습니다.");
-                      close();
-                    }, 300);
+                  if (children === "후기작성") {
+                    if (applyText.current.value === "") {
+                      window.alert("후기를 작성해 주세요.");
+                    } else {
+                      addReview();
+                      setTimeout(() => {
+                        window.alert("후기 작성이 완료되었습니다.");
+                        close();
+                      }, 300);
+                    }
                   }
-                }
-              }}
-            >
-              확인
-            </Button>
-          </div>
-        </Reviewmodal>
+                }}
+              >
+                확인
+              </Button>
+            </div>
+          </Reviewmodal>
+        </>
       ) : null}
     </div>
   );
@@ -185,6 +193,7 @@ const HrSecond = styled.hr`
 `;
 
 const Reviewmodal = styled.div`
+  z-index: 3;  
   position: fixed;
   top: 50%;
   left: 50%;

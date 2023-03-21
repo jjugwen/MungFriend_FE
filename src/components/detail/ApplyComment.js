@@ -18,13 +18,13 @@ function ApplyComment() {
   const detailList = useSelector((state) => state.postDetailSlice.list);
   // console.log(detailList);
 
-  //신청하기 모달창
-  const [applyModal, setApplyModal] = useState(false);
-  const openApplyModal = () => {
-    setApplyModal(true);
+  //유정정보 모달창 여닫기
+  const [userModal, setUserModal] = useState(false);
+  const openUserModal = () => {
+    setUserModal(true);
   };
-  const closeApplyModal = () => {
-    setApplyModal(false);
+  const closeUserModal = () => {
+    setUserModal(false);
   };
 
   const loginNickname = useSelector(
@@ -60,7 +60,7 @@ function ApplyComment() {
                   onClick={() => {
                     dispatch(userActions.userinfoDB(value.nickname));
                     setTimeout(() => {
-                      openApplyModal();
+                      openUserModal();
                     }, 500);
                   }}
                 >
@@ -84,11 +84,11 @@ function ApplyComment() {
                     </div>
                   </div>
                 </UserModalBtn>
-                <UserModal
+                {UserModal && <UserModal
                   children="프로필"
-                  open={applyModal}
-                  close={closeApplyModal}
-                />
+                  open={userModal}
+                  close={closeUserModal}
+                />}
 
                 <p className="ApplyCommentText">{value.comment}</p>
               </div>
