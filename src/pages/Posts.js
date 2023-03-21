@@ -708,8 +708,6 @@ const PostImg = styled.img`
 const AddPostButton = styled.button`
   /* position: fixed; */
   z-index: 5;
-  /* margin-right: 8%;
-  margin-bottom: 1%; */
   transform: translateY(30%);
   transition: 0.5s;
   :hover {
@@ -728,8 +726,8 @@ const AddPostButton = styled.button`
 
 const UpBox = styled.div`
   position: sticky;
-  bottom: 0;
-  left: 68%;
+  bottom: 1%;
+  left: 69%;
   z-index: 5;
   width: 300px;
   height: 110px;
