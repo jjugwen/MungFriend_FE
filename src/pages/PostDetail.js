@@ -96,6 +96,11 @@ function PostDetail(props) {
             <div className="DetailTitleBottom">
               <div className="clickUsermodal">
                 <UserModalBtn
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 27) {
+                      closeUserModal();
+                    }
+                  }}
                   onClick={() => {
                     dispatch(userActions.userinfoDB(detailList?.nickname));
                     setTimeout(() => {
@@ -133,11 +138,13 @@ function PostDetail(props) {
                     </div>
                   </div>
                 </UserModalBtn>
-                {UserModal && <UserModal
-                  children="프로필"
-                  open={userModal}
-                  close={closeUserModal}
-                />}
+                {UserModal && (
+                  <UserModal
+                    children="프로필"
+                    open={userModal}
+                    close={closeUserModal}
+                  />
+                )}
               </div>
 
               <div className="DetailTitleBottomEnd">
@@ -227,11 +234,13 @@ function PostDetail(props) {
                     신청하기
                   </Button>
                 ) : null}
-                {WriteModal &&<WriteModal
-                  children="신청하기"
-                  open={applyModal}
-                  close={closeApplyModal}
-                />}
+                {WriteModal && (
+                  <WriteModal
+                    children="신청하기"
+                    open={applyModal}
+                    close={closeApplyModal}
+                  />
+                )}
               </div>
               <div className="DetailBodyBox">
                 <ApplyComment />

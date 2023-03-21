@@ -51,85 +51,93 @@ function ApplyComment() {
         총 <span style={{ color: "#FA5A30" }}>{detailList?.applyCount}</span>개
       </span>
       <hr style={{ border: "1px solid black" }} />
-      {moreApply?.map((value) => {
-        return (
-          <div key={value.id}>
-            <div className="ApplyCommentBox">
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <UserModalBtn
-                  onClick={() => {
-                    dispatch(userActions.userinfoDB(value.nickname));
-                    setTimeout(() => {
-                      openUserModal();
-                    }, 500);
-                  }}
-                >
-                  <div className="clickUsermodal">
-                    <div
-                      className="MungProfileImgCircle"
-                      style={{
-                        backgroundImage: `url(${value.dogProfileImgUrl})`,
-                      }}
-                    />
-                    <div className="NickAndDistanceAndDate">
-                      {/* 닉네임 길면 뒤에 ..으로 대체 */}
-                      <p>
-                        {value.nickname?.slice(0, 11) +
-                          value.nickname
-                            ?.slice(11)
-                            .replace(/[^]/gi, "..")
-                            .slice(0, 2)}
-                      </p>
-                      <span>{timeForToday(value.createdAt)}</span>
+      {moreApply &&
+        moreApply?.map((value) => {
+          return (
+            <div key={value.id}>
+              <div className="ApplyCommentBox">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <UserModalBtn
+                    onKeyDown={(e) => {
+                      if (e.keyCode === 27) {
+                        closeUserModal();
+                      }
+                    }}
+                    onClick={() => {
+                      dispatch(userActions.userinfoDB(value.nickname));
+                      setTimeout(() => {
+                        openUserModal();
+                      }, 500);
+                    }}
+                  >
+                    <div className="clickUsermodal">
+                      <div
+                        className="MungProfileImgCircle"
+                        style={{
+                          backgroundImage: `url(${value.dogProfileImgUrl})`,
+                        }}
+                      />
+                      <div className="NickAndDistanceAndDate">
+                        {/* 닉네임 길면 뒤에 ..으로 대체 */}
+                        <p>
+                          {value.nickname?.slice(0, 11) +
+                            value.nickname
+                              ?.slice(11)
+                              .replace(/[^]/gi, "..")
+                              .slice(0, 2)}
+                        </p>
+                        <span>{timeForToday(value.createdAt)}</span>
+                      </div>
                     </div>
-                  </div>
-                </UserModalBtn>
-                {UserModal && <UserModal
-                  children="프로필"
-                  open={userModal}
-                  close={closeUserModal}
-                />}
-
-                <p className="ApplyCommentText">{value.comment}</p>
-              </div>
-              {loginNickname === detailList?.nickname ? (
-                <>
-                  {/* isComplete가 false면 매칭하기 버튼 활성화 / true면 비활성화 */}
-                  {detailList?.isComplete ? (
-                    <Button MatchingBtn _disabled>
-                      매칭하기
-                    </Button>
-                  ) : (
-                    <Button
-                      MatchingBtn
-                      _onClick={() => {
-                        // console.log(value.id);
-                        dispatch(
-                          matchActions.createMatchingDB(value.id, postId)
-                        );
-                        dispatch(
-                          createChannel({
-                            nickname: value.nickname,
-                          })
-                        );
-                        setTimeout(() => {
-                          window.alert(
-                            "매칭이 완료되었습니다. 웹사이트 상단 메뉴의 말풍선 아이콘 버튼을 눌러, 매칭된 신청자와 이야기를 나눠보세요."
-                          );
-                          window.location.reload();
-                        }, 300);
-                      }}
-                    >
-                      매칭하기
-                    </Button>
+                  </UserModalBtn>
+                  {UserModal && (
+                    <UserModal
+                      children="프로필"
+                      open={userModal}
+                      close={closeUserModal}
+                    />
                   )}
-                </>
-              ) : null}
+
+                  <p className="ApplyCommentText">{value.comment}</p>
+                </div>
+                {loginNickname === detailList?.nickname ? (
+                  <>
+                    {/* isComplete가 false면 매칭하기 버튼 활성화 / true면 비활성화 */}
+                    {detailList?.isComplete ? (
+                      <Button MatchingBtn _disabled>
+                        매칭하기
+                      </Button>
+                    ) : (
+                      <Button
+                        MatchingBtn
+                        _onClick={() => {
+                          // console.log(value.id);
+                          dispatch(
+                            matchActions.createMatchingDB(value.id, postId)
+                          );
+                          dispatch(
+                            createChannel({
+                              nickname: value.nickname,
+                            })
+                          );
+                          setTimeout(() => {
+                            window.alert(
+                              "매칭이 완료되었습니다. 웹사이트 상단 메뉴의 말풍선 아이콘 버튼을 눌러, 매칭된 신청자와 이야기를 나눠보세요."
+                            );
+                            window.location.reload();
+                          }, 300);
+                        }}
+                      >
+                        매칭하기
+                      </Button>
+                    )}
+                  </>
+                ) : null}
+              </div>
+              <Hr />
             </div>
-            <Hr />
-          </div>
-        );
-      })}
+          );
+        })}
       {detailList.applyList?.length > 5 ? (
         <div
           style={{
