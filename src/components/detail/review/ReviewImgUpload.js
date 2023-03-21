@@ -15,12 +15,14 @@ function ReviewImgUpload() {
   });
 
   const [image, setImage] = useState([defaulfileImg]); //디폴프 파일 기본값으로 넣기
+  if(image.length === 0) {
+    setImage([defaulfileImg])
+  }
 
   const uploadImage = (e) => {
     let imagelist = [];
     let filelist = [];
     for (let i = 0; i < e.target.files.length; i++) {
-      // console.log(e.target.files[i]);
       filelist[i] = e.target.files[i];
       let reader = new FileReader(); // 이미지 미리보기!!!
       reader.readAsDataURL(e.target.files[i]);
@@ -32,10 +34,8 @@ function ReviewImgUpload() {
     setImage([...image.filter((v) => Number(v.size) !== 0), ...filelist]); //이미지 업로드 시 기본이미지(size===0) 배열에서 삭제
     e.target.value = "";
   };
-  // console.log(image);
 
   useEffect(() => {
-    // console.log(image.filter((v) => Number(v.size) !== 0));
     dispatch(reviewImgCreate(image));
   }, [dispatch, image]);
 
@@ -75,9 +75,8 @@ function ReviewImgUpload() {
               <button
                 style={{ background: "none", border: "none" }}
                 onClick={() => {
-                  // handleDeleteImage(id);
                   setPreview(preview.filter((value, index) => index !== id));
-                  setImage(image.filter((value, index) => index !== id + 1));
+                  setImage([...image.filter((value, index) => index !== id)]);
                 }}
               >
                 {/*이미지 누르면 삭제되도록 */}
