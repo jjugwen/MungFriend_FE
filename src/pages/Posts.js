@@ -707,7 +707,10 @@ const PostImg = styled.img`
   height: 48px;
 `;
 const AddPostButton = styled.button`
-  position: fixed;
+  /* position: fixed; */
+  z-index: 5;
+  /* margin-right: 8%;
+  margin-bottom: 1%; */
   transform: translateY(30%);
   transition: 0.5s;
   :hover {
@@ -723,25 +726,29 @@ const AddPostButton = styled.button`
     height: 40px;
   }
 `;
+
 const UpBox = styled.div`
-  position: fixed;
-  bottom: 40%;
-  right: 8%;
+  position: sticky;
+  bottom: 0;
+  left: 68%;
+  z-index: 5;
+  width: 300px;
+  height: 110px;
+  display: flex;
+  flex-direction: row-reverse;
 
   :hover {
-    div {
+    div{
       opacity: 100;
       transition: 0.5s;
     }
-  }
-  div {
-    :hover {
-      opacity: 0;
     }
+
+  div {
+    position: relative;
     opacity: 0;
-    position: fixed;
-    right: 9%;
-    bottom: 33%;
+    right: 4px;
+    bottom: -12px;
     height: 50px;
     width: 170px;
     border-radius: 12px;
