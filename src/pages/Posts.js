@@ -45,10 +45,9 @@ function Posts(props) {
   const donePosts = useSelector((state) =>
     state.postSlice.post
       .filter((v) => v.isComplete === true)
-      .slice(0)
       .reverse()
+      .slice(0, 21) //Container에 overflow-y: 'scroll' 설정하면 UI가 틀어짐. 우선 limit를 21개로 지정하고 추후 페이지네이션이나 UI 변경 등의 조치가 필요
   );
-
   //게시글 정렬
   const [selected, setSelected] = useState(Posts);
   //스타일
@@ -90,6 +89,7 @@ function Posts(props) {
 
   // 멍프로필 등록모달
   const [mung, setMung] = useState(false);
+
   return (
     <All>
       {isLoding && <Sppiner imgURL={imgURL} />}
@@ -633,7 +633,6 @@ const Container = styled.div`
   gap: 2%;
   min-width: 940px;
   margin: 40px 17.36% 200px 17.36%;
-
   /* width: 66%; */
 `;
 const PostBox = styled.div`
@@ -707,7 +706,10 @@ const PostImg = styled.img`
   height: 48px;
 `;
 const AddPostButton = styled.button`
-  position: fixed;
+  /* position: fixed; */
+  z-index: 5;
+  /* margin-right: 8%;
+  margin-bottom: 1%; */
   transform: translateY(30%);
   transition: 0.5s;
   :hover {
@@ -723,25 +725,29 @@ const AddPostButton = styled.button`
     height: 40px;
   }
 `;
+
 const UpBox = styled.div`
-  position: fixed;
-  bottom: 40%;
-  right: 8%;
+  position: sticky;
+  bottom: 0;
+  left: 68%;
+  z-index: 5;
+  width: 300px;
+  height: 110px;
+  display: flex;
+  flex-direction: row-reverse;
 
   :hover {
-    div {
+    div{
       opacity: 100;
       transition: 0.5s;
     }
-  }
-  div {
-    :hover {
-      opacity: 0;
     }
+
+  div {
+    position: relative;
     opacity: 0;
-    position: fixed;
-    right: 9%;
-    bottom: 33%;
+    right: 4px;
+    bottom: -12px;
     height: 50px;
     width: 170px;
     border-radius: 12px;

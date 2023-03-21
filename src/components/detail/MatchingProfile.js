@@ -63,11 +63,11 @@ function Matching(props) {
                   >
                     후기작성
                   </CancleReviewBtn>
-                  <WriteModal
+                  {WriteModal && <WriteModal
                     children="후기작성"
                     open={Modal}
                     close={closeModal}
-                  />
+                  />}
                 </div>
               ) : (
                 <div>

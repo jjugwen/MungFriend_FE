@@ -7,7 +7,6 @@ function Header(props) {
   const token = sessionStorage.getItem("token");
   const imgURL = props.imgURL;
 
-
   // const [opened, setOpened] = useState(false);
   // const modalClose = useCallback(() => {
   //   setOpened(!opened);
@@ -97,7 +96,9 @@ const id = window.location.pathname;
 
   return (
     <>
-      <HeaderOutterBox>
+      <HeaderOutterBox onKeyDown={(e)=>{
+            if(e.keyCode === 27){props.setModal(false)}
+          }}>
         <HeaderBox>
           <HeaderLogo
             onClick={() => {

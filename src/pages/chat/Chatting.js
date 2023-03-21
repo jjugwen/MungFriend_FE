@@ -208,8 +208,8 @@ const Chatting = (props) => {
           {chat_data &&
             chat_data?.map((list, index) => {
               return (
-                <ChatContent key={list.id}>
-                  <p style={{ padding: "0.5%" }}>
+                <ChatContent key={index}>
+                  <div style={{ padding: "0.5%" }}>
                     {list.sender === "[알림]" ? (
                       <div style={{ textAlign: "center" }}>
                         <span style={{ color: "#7A7A80" }}>
@@ -302,7 +302,7 @@ const Chatting = (props) => {
                         )}
                       </>
                     )}
-                  </p>
+                  </div>
                 </ChatContent>
               );
             })}

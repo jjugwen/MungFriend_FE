@@ -10,76 +10,85 @@ function UserModal(props) {
   // console.log(userInfo);
 
   return (
-    <div className={open ? "openModalcss" : null}>
-      {open ? (
-        <UserModalStyle>
-          <ModalTitle style={{ textAlign: "center" }}>{children}</ModalTitle>
-          <Button
-            top="2.25em"
-            closeBtn
-            _onClick={() => {
-              close();
-            }}
-          />
-          <p>닉네임</p>
-          <div className="userNickname">{userInfo?.nickname}</div>
-          <p>자기소개</p>
-          <div className="userIntroduce">{userInfo?.introduce}</div>
-          <p className="reviewTitle">후기리스트</p>
-          {userInfo?.reviewList?.length === 0 ? ( //후기 없으면 문구 추가
-            <span style={{ marginLeft: "3%", color: "#B8BBC0" }}>
-              등록된 후기가 없습니다.
-            </span>
-          ) : (
-            <>
-              <div className="reviewListBox">
-                {userInfo?.reviewList?.slice(0, 2).map((value) => {
-                  return (
-                    <div key={value.id}>
-                      <div className="reviewList">
-                        <div className="clickUsermodal">
-                          <div
-                            className="MungProfileImgCircle"
-                            style={{
-                              backgroundImage: `url(${value.giverDogProfileImgUrl})`,
-                            }}
-                          />
-                          <div className="NickAndDistanceAndDate">
-                            <span className="nicknameText">
-                              {value.giverNickname}
-                            </span>
-                            <span className="writeTimeText">
-                              {value.createdAt
-                                ?.slice(0, 10)
-                                .replace(/\-/g, ".")}
-                            </span>
-                          </div>
-                        </div>
-                        <p>{value.comment.slice(0, 52)}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </>
-          )}
-          <div className="profileForBtn">
+    <div>
+    {open ? (
+      <>
+        <div
+          className={open ? "openModalcss" : null}
+          onClick={() => {
+            close();
+          }}
+        />
+          <UserModalStyle>
+            <ModalTitle style={{ textAlign: "center" }}>{children}</ModalTitle>
             <Button
-              orange_large
+              top="2.25em"
+              closeBtn
               _onClick={() => {
                 close();
               }}
-            >
-              확인
-            </Button>
-          </div>
-        </UserModalStyle>
+            />
+            <p>닉네임</p>
+            <div className="userNickname">{userInfo?.nickname}</div>
+            <p>자기소개</p>
+            <div className="userIntroduce">{userInfo?.introduce}</div>
+            <p className="reviewTitle">후기리스트</p>
+            {userInfo?.reviewList?.length === 0 ? ( //후기 없으면 문구 추가
+              <span style={{ marginLeft: "3%", color: "#B8BBC0" }}>
+                등록된 후기가 없습니다.
+              </span>
+            ) : (
+              <>
+                <div className="reviewListBox">
+                  {userInfo?.reviewList?.slice(0, 2).map((value) => {
+                    return (
+                      <div key={value.id}>
+                        <div className="reviewList">
+                          <div className="clickUsermodal">
+                            <div
+                              className="MungProfileImgCircle"
+                              style={{
+                                backgroundImage: `url(${value.giverDogProfileImgUrl})`,
+                              }}
+                            />
+                            <div className="NickAndDistanceAndDate">
+                              <span className="nicknameText">
+                                {value.giverNickname}
+                              </span>
+                              <span className="writeTimeText">
+                                {value.createdAt
+                                  ?.slice(0, 10)
+                                  .replace(/\-/g, ".")}
+                              </span>
+                            </div>
+                          </div>
+                          <p>{value.comment.slice(0, 52)}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            <div className="profileForBtn">
+              <Button
+                orange_large
+                _onClick={() => {
+                  close();
+                }}
+              >
+                확인
+              </Button>
+            </div>
+          </UserModalStyle>
+        </>
       ) : null}
     </div>
   );
 }
 
 const UserModalStyle = styled.div`
+  z-index: 3;
   box-sizing: border-box;
   position: fixed;
   top: 50%;

@@ -48,6 +48,11 @@ function DogList() {
               </BetweenDogPicAndDogInfo>
               <div>
                 <MungProfileBtn
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 27) {
+                      closeMungModal();
+                    }
+                  }}
                   onClick={() => {
                     setIdx(index);
                     setTimeout(() => {
