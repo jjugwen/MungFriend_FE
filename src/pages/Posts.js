@@ -45,10 +45,9 @@ function Posts(props) {
   const donePosts = useSelector((state) =>
     state.postSlice.post
       .filter((v) => v.isComplete === true)
-      .slice(0)
       .reverse()
+      .slice(0, 21) //Container에 overflow-y: 'scroll' 설정하면 UI가 틀어짐. 우선 limit를 21개로 지정하고 추후 페이지네이션이나 UI 변경 등의 조치가 필요
   );
-
   //게시글 정렬
   const [selected, setSelected] = useState(Posts);
   //스타일
@@ -90,6 +89,7 @@ function Posts(props) {
 
   // 멍프로필 등록모달
   const [mung, setMung] = useState(false);
+
   return (
     <All>
       {isLoding && <Sppiner imgURL={imgURL} />}
@@ -633,7 +633,6 @@ const Container = styled.div`
   gap: 2%;
   min-width: 940px;
   margin: 40px 17.36% 200px 17.36%;
-
   /* width: 66%; */
 `;
 const PostBox = styled.div`
